@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     protected $guarded = [];
+
+    public function dispatch(){
+        return $this->belongsTo(Dispatch::class);
+    }
 }

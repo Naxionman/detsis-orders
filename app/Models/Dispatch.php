@@ -13,7 +13,7 @@ class Dispatch extends Model
         return $this->hasOne(Vehicle::class);
     }
 
-    public function employee(){
+    public function employees(){
         return $this->hasMany(Employee::class);
     }
 }

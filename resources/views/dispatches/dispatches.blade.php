@@ -53,6 +53,7 @@
                             </tr>
                         @empty
                             <strong> Δεν υπάρχουν καταχωρημένες κινήσεις στην βάση δεδομένων.</strong>
+                            <hr>
                         @endforelse
                         </tbody>
                     </table>

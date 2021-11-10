@@ -40,4 +40,10 @@ class PageController extends Controller
     public function add_vehicle(){
         return view ('vehicles.add_vehicle');
     }
+    public function add_dispatch(){
+        $vehicles = \App\Models\Vehicle::all();
+        $employees = \App\Models\Employee::all();
+
+        return view ('dispatches.add_dispatch', compact('vehicles','employees'));
+    }
 }
