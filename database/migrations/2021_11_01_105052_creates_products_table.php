@@ -16,6 +16,7 @@ class CreatesProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('detsis_code')->nullable();
+            $table->string('last_supplier')->nullable();
             $table->string('product_code')->nullable();
             $table->string('product_name')->nullable();
             $table->string('stock_level')->nullable();

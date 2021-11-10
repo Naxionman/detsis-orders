@@ -17,8 +17,25 @@ class CreatesOrdersTable extends Migration
             $table->id();
             $table->date('order_date');
             $table->unsignedBigInteger('product_id');
-            $table->timestamps();
+            $table->unsignedBigInteger('supplier_id');
+            $table->unsignedBigInteger('order_shipment_id')->nullable();
+
+            $table->float('order_discount')->nullable();
+            $table->float('order_price')->nullable(); 
+            $table->boolean('pending')->default(1);
+            $table->string('notes')->nullable();
+
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
+            //$table->foreign('order_shipment_id')->references('id')->on('order_shipments')->onDelete('cascade');
+            $table->timestamps();
+
+            /*
+                Just because it is impossible to ALTER TABLE for a table that has not been 
+                created through a migration (in this case it is the order_shipment table)
+                we need to add the commented-out line to the migration of create_order_shipments_table
+
+            */
         });
     }
 

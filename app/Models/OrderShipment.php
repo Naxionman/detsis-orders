@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class OrderShipment extends Model
 {
     protected $guarded = [];
+
+    public function shippers()
+    {
+        return $this->hasMany(Shipper::class);
+    }
 }

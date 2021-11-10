@@ -8,10 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $guarded = [];
-
-    public function products(){
-
-        return $this->belongsToMany(Product::class,'orders_products');
-    }
+  
     
 }

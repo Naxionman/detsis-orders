@@ -35,7 +35,7 @@
                             </tr>
                         </tfoot>
                         <tbody>
-                        @forelse ($dispatchs as $dispatch)
+                        @forelse ($dispatches as $dispatch)
                             <tr>
                                 <td><strong>{{$dispatch->name }}</strong></td>
                                 

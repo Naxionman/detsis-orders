@@ -9,12 +9,20 @@ class Order extends Model
 {
     protected $guarded = [];
 
-
     // Defining One-To-Many relationship of Order->Products
-    public function products()
+    public function orderDetails()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->hasMany(OrderDetails::class);
     }
 
+    public function supplier()
+    {
+        return $this->hasOne(Supplier::class);
+    }
+
+    public function orderShipments()
+    {
+        return $this->hasOne(OrderShipment::class);
+    }
 
 }

@@ -17,11 +17,13 @@ class CreateDispatchesTable extends Migration
             $table->id();
             $table->date('dispatch_date');
             $table->unsignedBigInteger('employee_id');
-            
+            $table->unsignedBigInteger('vehicle_id');
             $table->string('client')->nullable();
+            $table->string('notes')->nullable();
             $table->timestamps();
 
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
+            $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
         });
     }
 
