@@ -27,15 +27,22 @@
                         </div>
                     </div>
                     
-                    <script type='text/javascript'>
-                        function addInputField(){
+                    <script type="text/javascript">
+                        function addInputField(count){
+                            var count;
+                            count = count +1;
                             var divToPlace = document.getElementById('inputCrew');
                             var fragment = document.createElement('fragment');
                             var oldButton = document.getElementById('addVehicleEmployee');
                             oldButton.parentNode. removeChild(oldButton);
-                            fragment.innerHTML = '<select class="form-control" id="inputCrew"> @forelse ($employees as $employee)<option name="employee_id" value="{{ $employee->id }}">{{ $employee->surname }}</option> @empty<option value="">Δεν υπάρχουν εργαζόμενοι στην βάση!</option> @endforelse</select><button type="button" id="addVehicleEmployee" onclick="addInputField()" class="btn btn-warning btn-sm m-1"> + Προσθήκη εργαζομένου στο όχημα</button>';
-                            
+                            fragment.innerHTML = '<select class="form-control" id="inputCrew"> @foreach ($employees as $employee)<option name="employee_id" value="{{ $employee->id }}">{{ $employee->surname }}</option> </option> @endforeach</select><button type="button" id="addVehicleEmployee" onclick="addInputField('+count+')" class="btn btn-warning btn-sm m-1"> + Προσθήκη εργαζομένου στο όχημα</button><button class="btn btn-danger btn-sm" type="button">X</button>';
+    
                             document.getElementById('divToPlace').appendChild(fragment);
+                            
+                        }
+
+                        function removeInputField(){
+                            
                         }
                     </script>
 
@@ -50,7 +57,7 @@
                                     <option value="">Δεν υπάρχουν εργαζόμενοι στην βάση!</option>
                                 @endforelse
                             </select>
-                            <button type="button" id="addVehicleEmployee" onclick="addInputField()" class="btn btn-warning btn-sm m-1"> + Προσθήκη εργαζομένου στο όχημα</button>
+                            <button type="button" id="addVehicleEmployee" onclick="addInputField(0)" class="btn btn-warning btn-sm m-1"> + Προσθήκη εργαζομένου στο όχημα</button>
                         </div>
                     </div>
 
