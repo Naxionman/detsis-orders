@@ -8,25 +8,22 @@
         <div class="card-header"><h3 class="text-center font-weight-light my-2 ">Προσθήκη νέας κίνησης οχήματος</h3></div>
             <div class="card-body bg-light">
                 <form action="add_dispatch" id="addDispatch" method="POST">
-                    
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputDispatchDate">Ημερομηνία</label></div>
                         <div class="col-sm-4"><input class="form-control" value="{{ date("2021-11-11")}}" type="date" id="inputDispatchDate" name="dispatch_date"></div>
                     </div>
-
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputVehicle">Όχημα</label></div>
                         <div class="col-sm-4">
-                            <select class="form-control" id="inputVehicle">
+                            <select class="form-control" id="inputVehicle" name="vehicle_id">
                                 @forelse ($vehicles as $vehicle)
-                                    <option  name="vehicle_id" value="{{ $vehicle->id }}">{{ $vehicle->name }}</option>
+                                    <option   type="text" value="{{ $vehicle->id }}">{{ $vehicle->name }}</option>
                                 @empty
-                                    <option value="">Δεν υπάρχουν οχήματα στην βάση!</option>
+                                    <option>Δεν υπάρχουν οχήματα στην βάση!</option>
                                 @endforelse
                             </select>
                         </div>
                     </div>
-                    
                     <script type="text/javascript">
                         function addInputField(count){
                             var count;
@@ -35,7 +32,7 @@
                             var fragment = document.createElement('fragment');
                             var oldButton = document.getElementById('addVehicleEmployee');
                             oldButton.parentNode. removeChild(oldButton);
-                            fragment.innerHTML = '<select class="form-control" id="inputCrew"> @foreach ($employees as $employee)<option name="employee_id" value="{{ $employee->id }}">{{ $employee->surname }}</option> </option> @endforeach</select><button type="button" id="addVehicleEmployee" onclick="addInputField('+count+')" class="btn btn-warning btn-sm m-1"> + Προσθήκη εργαζομένου στο όχημα</button><button class="btn btn-danger btn-sm" type="button">X</button>';
+                            fragment.innerHTML = '<select class="form-control" name="employee'+count+'"> @foreach ($employees as $employee)<option value="{{ $employee->id }}">{{ $employee->surname }}</option> </option> @endforeach</select><button type="button" id="addVehicleEmployee" onclick="addInputField('+count+')" class="btn btn-warning btn-sm m-1"> + Προσθήκη εργαζομένου στο όχημα</button><button class="btn btn-danger btn-sm" type="button">X</button><input type="hidden" name="count" value="'+count+'">';
     
                             document.getElementById('divToPlace').appendChild(fragment);
                             
@@ -50,9 +47,9 @@
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputCrew">Εργαζόμενοι</label></div>
                         <div class="col-sm-4" id="divToPlace">
-                            <select class="form-control" id="inputCrew">
+                            <select class="form-control" id="inputCrew" name="employee0">
                                 @forelse ($employees as $employee)
-                                    <option  name="employee_id" value="{{ $employee->id }}">{{ $employee->surname }}</option>
+                                    <option value="{{ $employee->id }}">{{ $employee->surname }}</option>
                                 @empty
                                     <option value="">Δεν υπάρχουν εργαζόμενοι στην βάση!</option>
                                 @endforelse
@@ -60,7 +57,7 @@
                             <button type="button" id="addVehicleEmployee" onclick="addInputField(0)" class="btn btn-warning btn-sm m-1"> + Προσθήκη εργαζομένου στο όχημα</button>
                         </div>
                     </div>
-
+                    
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputClient">Πελάτης</label></div>
                         <div class="col-sm-4"><input class="form-control" autocomplete="nope" type="text" id="inputClient" name="client" placeholder="Πελάτης"></div>
@@ -68,15 +65,15 @@
                     
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-10">
-                            <label for="inputDescription">Σημειώσεις</label>
-                            <input class="form-control" autocomplete="nope" type="text" id="inputDescription" name="description" placeholder="Σημειώσεις">
+                            <label for="inputNotes">Σημειώσεις</label>
+                            <input class="form-control" autocomplete="nope" type="text" id="inputNotes" name="notes" placeholder="Σημειώσεις">
                         </div>
                     </div>
                     @csrf
                 </form>
             </div>
             <div class="card-footer text-center py-2">
-                <button class="btn btn-danger" type="submit" form="addSupplier">  Αποθήκευση  </button>
+                <button class="btn btn-danger" type="submit" form="addDispatch">  Αποθήκευση  </button>
             </div>
         </div>
 

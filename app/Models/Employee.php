@@ -9,7 +9,16 @@ class Employee extends Model
 {
     protected $guarded = [];
 
-    public function dispatch(){
-        return $this->belongsTo(Dispatch::class);
+    protected $dates = [
+        'date_of_birth',
+        'contract_expiring',
+        'date_joined',
+        'date_left',
+
+    ];
+
+    public function dispatches(){
+        return $this->belongsToMany(Dispatch::class);
     }
+   
 }

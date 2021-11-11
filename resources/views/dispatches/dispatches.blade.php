@@ -23,7 +23,8 @@
                             <tr>
                                 <th>Ημερομηνία</th>
                                 <th>Όχημα</th>
-                                
+                                <th>Πελάτης</th>
+                                <th>Πλήρωμα</th>
                                 <th>Στοιχεία Ελέγχου</th>
                             </tr>
                         </thead>
@@ -31,14 +32,21 @@
                             <tr>
                                 <th>Ημερομηνία</th>
                                 <th>Όχημα</th>
+                                <th>Πελάτης</th>
+                                <th>Πλήρωμα</th>
                                 <th>Στοιχεία Ελέγχου</th>
                             </tr>
                         </tfoot>
                         <tbody>
                         @forelse ($dispatches as $dispatch)
                             <tr>
-                                <td><strong>{{$dispatch->name }}</strong></td>
-                                
+                                <td><strong>{{$dispatch->dispatch_date->format('d-m-Y') }}</strong></td>                                <td>{{$dispatch->vehicle_id}}</td>
+                                <td>{{$dispatch->client}}</td>
+                                <td>@foreach ($dispatch->employees as $employee)
+                                    {{$employee->surname}},
+
+                                    
+                                @endforeach</td>
                                 <td style="width:15%" >
                                     <div class="d-flex justify-content-evenly">
                                         <a href="/edit_dispatch/{{ $dispatch->id }}" class="btn btn-warning flex-fill">

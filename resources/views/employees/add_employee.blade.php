@@ -36,7 +36,7 @@
                                     <label for="inputFatherName" class="align-middle">Όνομα Πατρός</label>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input class="form-control" autocomplete="nope" type="text" id="inputFatherName" name="father_name" placeholder="Όνομα Μητρός"  required="required">
+                                    <input class="form-control" autocomplete="nope" type="text" id="inputFatherName" name="father_name" placeholder="Όνομα Πατρός"  required="required">
                                 </div>
                             </div>
 
@@ -54,7 +54,7 @@
                                     <label for="inputDateOfBirth" class="align-middle">Ημερομηνία γέννησης</label>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input class="form-control" autocomplete="nope" type="date" value="1990-01-01" id="inputDateOfBirth" name="date_of_birth" placeholder="Ημερομηνία γέννησης"  required="required">
+                                    <input class="form-control" autocomplete="nope" type="date" value="01-01-2000" id="inputDateOfBirth" name="date_of_birth" placeholder="Ημερομηνία γέννησης"  required="required">
                                 </div>
                             </div>
 

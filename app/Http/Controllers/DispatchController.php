@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dispatch;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class DispatchController extends Controller
@@ -13,14 +15,25 @@ class DispatchController extends Controller
         return view('dispatches.dispatches', compact('dispatches'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $data = request()->validate([
-            'name' => 'required|unique:dispatches|min:4'
-            
-        ]);
+        $number_of_employees = $request->input('count');
 
-        \App\Models\Dispatch::create($data);
+        //Creating a new dispatch without employees...
+        $dispatch = Dispatch::create([
+                'dispatch_date' => $request->input('dispatch_date'),
+                'vehicle_id'    => $request->input('vehicle_id'),
+                'client'        => $request->input('client'),
+                'notes'        => $request->input('notes'),
+            ]);
+        
+        for ($i=0; $i < $number_of_employees+1 ; $i++) { 
+            
+            $employeeDispatched = Employee::find($request->input('employee'.$i));
+            $dispatch->employees()->attach($employeeDispatched); 
+        }
+
+        //\App\Models\Dispatch::create($data);
         
         return redirect()->back()->with('message', 'Επιτυχής αποθήκευση κίνησης!');
     }

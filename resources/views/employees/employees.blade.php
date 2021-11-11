@@ -47,8 +47,8 @@
                                 <td>{{$employee->surname }}</td>
                                 <td>{{$employee->first_name }}</td>
                                 <td>{{$employee->mobile }}</td>
-                                <td>{{$employee->date_of_birth }}</td>
-                                <td>{{$employee->date_joined }}</td>
+                                <td>{{$employee->date_of_birth->format('d-m-Y') }}</td>
+                                <td>{{$employee->date_joined->format('d-m-Y') }}</td>
                                 <td>0</td>
                                 <td style="width:15%" >
                                     <div class="d-flex justify-content-evenly">

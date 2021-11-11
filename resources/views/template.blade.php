@@ -51,11 +51,15 @@
                                 Αρχική σελίδα
                             </a>
                             <a class="nav-link" href="/dispatches">
-                                <div class="sb-nav-link-icon"><i class="fas fa-car-alt"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-car"></i></div>
                                 Κινήσεις
                             </a>
+                            <a class="nav-link" href="/orders">
+                                <div class="sb-nav-link-icon"><i class="fas fa-money-check"></i></div>
+                                Παραγγελίες
+                            </a>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-edit"></i></div>
                                 Διαχείριση
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>

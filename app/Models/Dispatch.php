@@ -7,13 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dispatch extends Model
 {
-    use HasFactory;
+    protected $guarded = [];
+
+    protected $dates = [
+        'dispatch_date',
+        'updated_at',
+        'deleted_at'
+    ];
 
     public function vehicle(){
         return $this->hasOne(Vehicle::class);
     }
 
     public function employees(){
-        return $this->hasMany(Employee::class);
+        return $this->belongsToMany(Employee::class);
     }
 }
