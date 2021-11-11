@@ -1,6 +1,6 @@
 @extends('template')
 
-@section('title', 'DetsisOrders - Εργαζόμενοι')
+@section('title', 'Εργαζόμενοι - Detsis Orders')
 
 @section('content')
     <div class="container-fluid px-4">
