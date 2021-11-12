@@ -13,6 +13,10 @@ class ShipperController extends Controller
         return view('shippers.shippers', compact('shippers'));
     }
 
+    public function add_shipper(){
+        return view ('shippers.add_shipper');
+    }
+
     public function store()
     {
         $data = request()->validate([

@@ -13,6 +13,10 @@ class OrderController extends Controller
         return view('orders.orders', compact('orders'));
     }
 
+    public function add_order(){
+        return view ('orders.add_order');
+    }
+
     public function store()
     {
         $data = request()->validate([

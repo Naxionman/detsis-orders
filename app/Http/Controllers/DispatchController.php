@@ -15,6 +15,13 @@ class DispatchController extends Controller
         return view('dispatches.dispatches', compact('dispatches'));
     }
 
+    public function add_dispatch(){
+        $vehicles = \App\Models\Vehicle::all();
+        $employees = \App\Models\Employee::all();
+
+        return view ('dispatches.add_dispatch', compact('vehicles','employees'));
+    }
+
     public function store(Request $request)
     {
         $number_of_employees = $request->input('count');

@@ -13,6 +13,10 @@ class VehicleController extends Controller
         return view('vehicles.vehicles', compact('vehicles'));
     }
 
+    public function add_vehicle(){
+        return view ('vehicles.add_vehicle');
+    }
+    
     public function store()
     {
         $data = request()->validate([

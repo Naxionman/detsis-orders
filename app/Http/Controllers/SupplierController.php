@@ -13,6 +13,10 @@ class SupplierController extends Controller
         return view('suppliers.suppliers', compact('suppliers'));
     }
 
+    public function add_supplier(){
+        return view ('suppliers.add_supplier');
+    }
+    
     public function store()
     {
         $data = request()->validate([

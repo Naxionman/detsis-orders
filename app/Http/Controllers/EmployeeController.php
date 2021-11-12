@@ -13,6 +13,10 @@ class EmployeeController extends Controller
         return view('employees.employees', compact('employees'));
     }
 
+    public function add_employee(){
+        return view ('employees.add_employee');
+    }
+
     public function store(){
 
         $data = request()->validate([

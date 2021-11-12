@@ -31,12 +31,12 @@ Route::get('/dispatches', [DispatchController::class, 'index']);
 Route::get('/orders', [OrderController::class, 'index']);
 
 
-Route::get('/add_supplier', [PageController::class, 'add_supplier']);
-Route::get('/add_employee', [PageController::class, 'add_employee']);
-Route::get('/add_shipper', [PageController::class, 'add_shipper']);
-Route::get('/add_vehicle', [PageController::class, 'add_vehicle']);
-Route::get('/add_dispatch', [PageController::class, 'add_dispatch']);
-Route::get('/add_order', [PageController::class, 'add_order']);
+Route::get('/add_supplier', [SupplierController::class, 'add_supplier']);
+Route::get('/add_employee', [EmployeeController::class, 'add_employee']);
+Route::get('/add_shipper', [ShipperController::class, 'add_shipper']);
+Route::get('/add_vehicle', [VehicleController::class, 'add_vehicle']);
+Route::get('/add_dispatch', [DispatchController::class, 'add_dispatch']);
+Route::get('/add_order', [OrderController::class, 'add_order']);
 
 Route::post('/add_supplier', [SupplierController::class, 'store']);
 Route::post('/add_employee', [EmployeeController::class, 'store']);
