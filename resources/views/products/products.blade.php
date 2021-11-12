@@ -1,57 +1,61 @@
 @extends ('template')
 
-@section('title', 'Μεταφορικές')
+@section('title', 'Προϊόντα')
+
 
 @section('content')
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Μεταφορικές εταιρείες</h1>
+        <h1 class="mt-4">Προϊόντα</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item"><a href="/">Αρχική σελίδα</a></li>
-                <li class="breadcrumb-item active">Μεταφορικές</li>
+                <li class="breadcrumb-item active">Προϊόντα</li>
             </ol>
                 <div class="card mb-4">
-                    <a href="/add_shipper" class="btn btn-warning" >Προσθήκη Μεταφορικής</a>    
+                    <a href="/add_product" class="btn btn-success" >Προσθήκη προϊόντος</a>    
                 </div>
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-table me-1"></i>
-                        Πίνακας Μεταφορικών
+                    Προϊόντα
                 </div>
                 <div class="card-body">
                     <table id="myTable" class="cell-border display compact">
                         <thead>
                             <tr>
-                                <th>Ονομασία</th>
-                                <th>Τηλέφωνο</th>
-                                <th>Παραγγελίες</th>
-                                <th>Αυτό το μήνα</th>
-                                <th>Σύνολο €</th>
+                                <th>DCode</th>
+                                <th>SupCode</th>
+                                <th>Ονομασία προϊόντος</th>
+                                <th><strong>Ποσότητα</strong> </th>
+                                <th>Όριο</th>
+                                <th>Προμηθευτής</th>
                                 <th>Στοιχεία Ελέγχου</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Ονομασία</th>
-                                <th>Τηλέφωνο</th>
-                                <th>Παραγγελίες</th>
-                                <th>Αυτό το μήνα</th>
-                                <th>Σύνολο €</th>
+                                <th>DCode</th>
+                                <th>SupCode</th>
+                                <th>Ονομασία προϊόντος</th>
+                                <th><strong>Ποσότητα</strong> </th>
+                                <th>Όριο</th>
+                                <th>Προμηθευτής</th>
                                 <th>Στοιχεία Ελέγχου</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                        @forelse ($shippers as $shipper)
+                        @forelse ($products as $product)
                             <tr>
-                                <td><strong>{{$shipper->name }}</strong></td>
-                                <td>{{$shipper->phone }}</td>
-                                <td>Δεν έχει υλοποιηθεί ακόμα</td>
-                                <td>Δεν έχει υλοποιηθεί ακόμα</td>
-                                <td>0</td>
+                                <td><strong>{{$product->detsis_code }}</strong></td>
+                                <td>{{$product->product_code }}</td>
+                                <td>{{$product->product_name }}</td>
+                                <td>{{$product->stock_level }}</td>
+                                <td>{{$product->min_level }}</td>
+                                <td>{{$product->last_supplier }}</td>
                                 <td style="width:15%" >
                                     <div class="d-flex justify-content-evenly">
-                                        <a href="/edit_shipper/{{ $shipper->id }}" class="btn btn-warning flex-fill">
+                                        <a href="/edit_product/{{ $product->id }}" class="btn btn-warning flex-fill">
                                             <i class="far fa-edit"></i>Edit</a>
-                                            <form action="/edit_shipper/{{ $shipper->id }}" method="POST">
+                                            <form action="/edit_product/{{ $product->id }}" method="POST">
                                             @method('DELETE')
                                             @csrf
                                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
@@ -60,7 +64,7 @@
                                 </td>
                             </tr>
                         @empty
-                            Δεν υπάρχουν καταχωρημένες μεταφορικές στην βάση δεδομένων.
+                            No products added in the database.
                         @endforelse
                         </tbody>
                     </table>

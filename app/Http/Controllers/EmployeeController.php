@@ -55,7 +55,7 @@ class EmployeeController extends Controller
     {
         $employee = \App\Models\Employee::findOrFail($employeeId);
         //dd($employee);
-        return view('edit_employee', compact('employee'));
+        return view('employees.edit_employee', compact('employee'));
     }
 
     public function update(\App\Models\Employee $employee)

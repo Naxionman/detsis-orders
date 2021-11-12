@@ -19,7 +19,7 @@ class Order extends Model
 
     public function supplier()
     {
-        return $this->hasOne(Supplier::class);
+        return $this->belongsTo(Supplier::class);
     }
 
     public function orderShipments()

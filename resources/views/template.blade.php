@@ -59,30 +59,30 @@
                                 Παραγγελίες
                             </a>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-edit"></i></div>
-                                Διαχείριση
+                                <div class="sb-nav-link-icon"><i class="fas fa-edit"></i></div>Διαχείριση
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-									<a class="nav-link" href="/suppliers">
-                                <div class="sb-nav-link-icon"><i class="fas fa-industry"></i></div>
-                                Προμηθευτές
-                            </a>
-                            <a class="nav-link" href="/employees">
-                                <div class="sb-nav-link-icon"><i class="fas fa-address-card"></i></div>
-                                Εργαζόμενοι
-                            </a>
-                            <a class="nav-link" href="/shippers">
-                                <div class="sb-nav-link-icon"><i class="fas fa-truck"></i></div>
-                                Μεταφορικές
-                            </a>
-                            <a class="nav-link" href="/vehicles">
-                                <div class="sb-nav-link-icon"><i class="fas fa-car"></i></div>
-                                Οχήματα
-                            </a>
-									
-									
+                                    <a class="nav-link" href="/products">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-box-open"></i></div>
+                                        Προϊόντα
+                                    </a>
+                                    <a class="nav-link" href="/suppliers">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-industry"></i></div>
+                                        Προμηθευτές
+                                    </a>
+                                    <a class="nav-link" href="/employees">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-address-card"></i></div>
+                                        Εργαζόμενοι
+                                    </a>
+                                    <a class="nav-link" href="/shippers">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-shipping-fast"></i></div>
+                                        Μεταφορικές
+                                    </a>
+                                    <a class="nav-link" href="/vehicles">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-car"></i></div>
+                                        Οχήματα
+                                    </a>
                                 </nav>
                             </div>
                         </div>
@@ -100,7 +100,7 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
+                            <div class="text-muted">made by Naxionman in 2021</div>
                             <div>
                                 <a href="#">Privacy Policy</a>
                                 &middot;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -14,10 +15,15 @@ class OrderController extends Controller
     }
 
     public function add_order(){
-        return view ('orders.add_order');
+
+        $suppliers = \App\Models\Supplier::all();
+        $products = \App\Models\Product::all();
+        $shippers = \App\Models\Shipper::all();
+
+        return view ('orders.add_order', compact('suppliers','products','shippers'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
         $data = request()->validate([
             'order_date' => 'required',
@@ -31,8 +37,23 @@ class OrderController extends Controller
         ]);
 
         \App\Models\Order::create($data);
+
+        $details = request()->all();
+
+        $products_count = request()->input('count');
         
-        return redirect()->back()->with('message', 'Επιτυχής αποθήκευση Μεταφορικής!');
+        for ($i=0; $i < $products_count +1 ; $i++){
+
+            $product_to_add = Product::find($request->input('$product'.$i));
+
+            \App\Models\OrderDetails::create([
+                'product_id' => $product_to_add,
+            ]);
+
+        }
+
+         
+        return redirect()->back()->with('message', 'Επιτυχής αποθήκευση παραγγελίας!');
     }
 
     public function show($orderId)

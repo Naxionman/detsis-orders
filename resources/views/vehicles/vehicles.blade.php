@@ -41,7 +41,7 @@
                                 <td style="width:15%" >
                                     <div class="d-flex justify-content-evenly">
                                         <a href="/edit_vehicle/{{ $vehicle->id }}" class="btn btn-warning flex-fill">
-                                            <i class="far fa-edit"></i>Επεξεργασία</a>
+                                            <i class="far fa-edit"></i>Edit</a>
                                             <form action="/edit_vehicle/{{ $vehicle->id }}" method="POST">
                                             @method('DELETE')
                                             @csrf

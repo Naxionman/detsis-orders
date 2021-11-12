@@ -16,9 +16,10 @@ class CreatesOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->date('order_date');
-            $table->date('arrival_date');
+            $table->date('arrival_date')->nullable();
             $table->unsignedBigInteger('supplier_id');
             $table->unsignedBigInteger('shipment_id')->nullable();
+            $table->string('order_invoice_number')->nullable();
             $table->float('order_discount')->nullable();
             $table->float('order_price')->nullable(); 
             $table->boolean('pending')->default(1);

@@ -42,7 +42,7 @@ class SupplierController extends Controller
     {
         $supplier = \App\Models\Supplier::findOrFail($supplierId);
         //dd($supplier);
-        return view('edit_supplier', compact('supplier'));
+        return view('suppliers.edit_supplier', compact('supplier'));
     }
 
     public function update(\App\Models\Supplier $supplier)

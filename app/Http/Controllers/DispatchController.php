@@ -11,6 +11,7 @@ class DispatchController extends Controller
     // Show all records of dispatches table
     public function index()
     {
+        
         $dispatches = \App\Models\Dispatch::all();
         return view('dispatches.dispatches', compact('dispatches'));
     }

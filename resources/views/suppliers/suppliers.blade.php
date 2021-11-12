@@ -53,8 +53,8 @@
                                 <td>0 €</td>
                                 <td style="width:15%" >
                                     <div class="d-flex justify-content-evenly">
-                                        <a href="/edit_supplier/{{ $supplier->id }}" class="btn btn-warning flex-fill">
-                                            <i class="far fa-edit"></i>Επεξεργασία</a>
+                                        <a href="/edit_supplier/{{ $supplier->id }}" class="btn btn-warning ">
+                                            <i class="far fa-edit"></i>Edit</a>
                                             <form action="/edit_supplier/{{ $supplier->id }}" method="POST">
                                             @method('DELETE')
                                             @csrf
