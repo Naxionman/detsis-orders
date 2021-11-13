@@ -39,11 +39,11 @@
                             <tbody id="tableBody">
                                 <tr>
                                     <td style="width:5%">1</td>
-                                    <td style="width:5%"><input class="form-control" type="number"name="quantity"></td>
+                                    <td style="width:5%"><input class="form-control" type="number" name="quantity0" required="required"></td>
                                     <td><input type="text" class="form-control"  name="product0" list="inputProduct">
                                         <datalist id="inputProduct">
                                             @foreach ($products as $product)
-                                                <option value="{{ $product->product_name }}"></option>
+                                                <option value="{{ $product->id }}">{{ $product->product_name }}</option>
                                             @endforeach
                                         </datalist>
                                     </td>
@@ -103,7 +103,7 @@
         count = count +1;
         var fragment = document.createElement('tr');
 
-        fragment.innerHTML = '<td style="width:5%">'+(count+1)+'</td><td style="width:5%"><input class="form-control" type="number"name="quantity"></td><td><select class="form-control" id="inputProduct" name="product'+count+'">@foreach ($products as $product)<option value="{{ $product->id }}">{{ $product->product_name }}</option>@endforeach</select></td><td style="width:10%"><button type="button" id="addProduct" onclick="addInputField(0)" class="btn btn-warning btn-sm m-1"> + </button><button type="button" id="removeProduct" onclick="removeInputField(0)" class="btn btn-danger btn-sm m-1"> - </button></td><input type="hidden" name="count" value="'+count+'">';
+        fragment.innerHTML = '<td style="width:5%">'+(count+1)+'</td><td style="width:5%"><input class="form-control" type="number"name="quantity'+count+'" required="required"></td><td><input type="text" class="form-control"  name="product'+count+'" list="inputProduct"><datalist id="inputProduct">@foreach ($products as $product)<option value="{{ $product->id }}">{{ $product->product_name }}</option>@endforeach</datalist></td><td style="width:10%"><button type="button" id="addProduct" onclick="addInputField('+count+')" class="btn btn-warning btn-sm m-1"> + </button><button type="button" id="removeProduct" onclick="removeInputField(0)" class="btn btn-danger btn-sm m-1"> - </button></td><input type="hidden" name="count" value="'+count+'">';
 
         document.getElementById('tableBody').appendChild(fragment);
     }

@@ -36,18 +36,21 @@ class OrderController extends Controller
             'arrival_date' => 'nullable'
         ]);
 
-        \App\Models\Order::create($data);
+        $new_order = \App\Models\Order::create($data);
 
         $details = request()->all();
-
+        
         $products_count = request()->input('count');
         
         for ($i=0; $i < $products_count +1 ; $i++){
-
-            $product_to_add = Product::find($request->input('$product'.$i));
-
+            
+            $product_to_add = Product::find($request->input('product'.$i));
+     
             \App\Models\OrderDetails::create([
-                'product_id' => $product_to_add,
+                'order_id' => $new_order->id,
+                
+                'quantity' => $request->input('quantity'.$i),
+                'product_id' => $product_to_add->id,
             ]);
 
         }
@@ -59,8 +62,11 @@ class OrderController extends Controller
     public function show($orderId)
     {
         $order = \App\Models\Order::findOrFail($orderId);
-        //dd($order);
-        return view('orders.edit_order', compact('order'));
+        
+        $order_details = \App\Models\OrderDetails::where('order_id', $orderId)->get();
+        //dd($models);
+
+        return view('orders.edit_order', compact('order','order_details'));
     }
 
     public function update(\App\Models\Order $order)
@@ -85,10 +91,10 @@ class OrderController extends Controller
         return view('orders', compact('orders'));
     }
 
-    public function destroy(\App\Models\Order $order)
+    public function destroy(\App\Models\Order $order) 
     {
         $order->delete();
 
-        return redirect('orders');
+        return redirect('/orders');
     }
 }

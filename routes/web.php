@@ -68,16 +68,16 @@ Route::patch('/edit_employee/{employee}',[EmployeeController::class, 'update']);
 Route::patch('/edit_shipper/{shipper}',[ShipperController::class, 'update']);
 Route::patch('/edit_vehicle/{vehicle}',[VehicleController::class, 'update']);
 Route::patch('/edit_dispatch/{dispatch}',[DispatchController::class, 'update']);
-Route::patch('/edit_order/{order}',[DispatchController::class, 'update']);
+Route::patch('/edit_order/{order}',[OrderController::class, 'update']);
 Route::patch('/edit_shipment/{shipment}',[ShipmentController::class, 'update']);
 Route::patch('/edit_product/{product}',[ProductController::class, 'update']);
 
 //Delete actions
-Route::delete('/edit_supplier/{supplier}',[SupplierController::class, 'destroy']);
-Route::delete('/edit_employee/{employee}',[EmployeeController::class, 'destroy']);
-Route::delete('/edit_shipper/{shipper}',[ShipperController::class, 'destroy']);
-Route::delete('/edit_vehicle/{vehicle}',[VehicleController::class, 'destroy']);
-Route::delete('/edit_dispatch/{vehicle}',[DispatchController::class, 'destroy']);
-Route::delete('/edit_order/{order}',[DispatchController::class, 'destroy']);
-Route::delete('/edit_shipment/{shipment}',[ShipmentController::class, 'destroy']);
-Route::delete('/edit_product/{product}',[ProductController::class, 'destroy']);
+Route::delete('/suppliers/{supplier}',[SupplierController::class, 'destroy']);
+Route::delete('/employees/{employee}',[EmployeeController::class, 'destroy']);
+Route::delete('/shippers/{shipper}',[ShipperController::class, 'destroy']);
+Route::delete('/vehicles/{vehicle}',[VehicleController::class, 'destroy']);
+Route::delete('/dispatches/{dispatch}',[DispatchController::class, 'destroy']);
+Route::delete('/orders/{order}',[OrderController::class, 'destroy']);
+Route::delete('/shipments/{shipment}',[ShipmentController::class, 'destroy']);
+Route::delete('/products/{product}',[ProductController::class, 'destroy']);

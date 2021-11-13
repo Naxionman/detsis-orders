@@ -57,7 +57,7 @@
                                     <div class="d-flex justify-content-evenly">
                                         <a href="/edit_order/{{ $order->id }}" class="btn btn-warning flex-fill">
                                             <i class="far fa-edit"></i>Edit</a>
-                                            <form action="/edit_order/{{ $order->id }}" method="POST">
+                                            <form action="/orders/{{ $order->id }}" method="POST">
                                             @method('DELETE')
                                             @csrf
                                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
