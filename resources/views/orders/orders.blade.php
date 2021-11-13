@@ -28,7 +28,6 @@
                                 <th>Έκπτωση</th>
                                 <th>Σύνολο</th>
                                 <th>Άφιξη</th>
-                                
                                 <th>Στοιχεία Ελέγχου</th>
                             </tr>
                         </thead>
@@ -40,7 +39,6 @@
                                 <th>Έκπτωση</th>
                                 <th>Σύνολο</th>
                                 <th>Άφιξη</th>
-                                
                                 <th>Στοιχεία Ελέγχου</th>
                             </tr>
                         </tfoot>
@@ -62,9 +60,6 @@
                                             @csrf
                                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                             </form>
-                                        
-
-
                                     </div>
                                 </td>
                             </tr>

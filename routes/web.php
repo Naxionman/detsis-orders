@@ -62,6 +62,8 @@ Route::get('/edit_order/{orderId}',[OrderController::class, 'show']);
 Route::get('/edit_shipment/{shipmentId}',[ShipmentController::class, 'show']);
 Route::get('/edit_product/{productId}',[ProductController::class, 'show']);
 
+Route::get('/view_order/{orderId}',[OrderController::class, 'showDetails']);
+
 //Patch/put actions
 Route::patch('/edit_supplier/{supplier}',[SupplierController::class, 'update']);
 Route::patch('/edit_employee/{employee}',[EmployeeController::class, 'update']);
