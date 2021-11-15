@@ -69,6 +69,22 @@ class OrderController extends Controller
         return view('orders.edit_order', compact('order','order_details'));
     }
 
+    public function showDetails($orderId)
+    {
+        $order = \App\Models\Order::findOrFail($orderId);
+
+        $order_details = \App\Models\OrderDetails::where('order_id', $orderId)->get();
+        
+        $sum = 0;
+        foreach ($order_details as $detail) {
+            $sum = $detail->price + $sum;
+        }
+
+
+        return view('orders.view_order', compact('order','order_details', 'sum'));
+    }
+
+
     public function update(\App\Models\Order $order)
     {
         //dd($order);

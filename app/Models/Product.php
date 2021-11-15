@@ -9,5 +9,7 @@ class Product extends Model
 {
     protected $guarded = [];
   
-    
+    public function details(){
+        return $this->belongsToMany(OrderDetails::class);
+    }
 }

@@ -44,7 +44,7 @@
                         </tfoot>
                         <tbody>
                         @forelse ($orders as $order)
-                            <tr>
+                            <tr data-href="view_order/{{ $order->id}}">
                                 <td>{{ $order->id }}</td>
                                 <td>{{ $order->order_date->format('d-m-Y') }}</td>
                                 <td>{{ $order->supplier->company_name }}</td>

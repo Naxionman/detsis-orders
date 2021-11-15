@@ -18,9 +18,11 @@ class CreatesOrderDetailsTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('order_id');
             $table->integer('quantity');
-            $table->string('package_type')->nullable();
+            $table->string('measurement_unit')->nullable();
             $table->integer('items_per_package')->nullable();
             $table->float('product_discount')->default(0);
+            $table->float('net_value')->nullable();
+            $table->float('tax_rate')->nullable();
             $table->float('price')->nullable();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
