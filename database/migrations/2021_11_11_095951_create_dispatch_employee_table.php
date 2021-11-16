@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatesDispatchEmployeeTable extends Migration
+class CreateDispatchEmployeeTable extends Migration
 {
     /**
      * The Joint table of Dispatches and Employees

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatesOrdersTable extends Migration
+class CreateOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -20,7 +20,8 @@ class CreatesOrdersTable extends Migration
             $table->unsignedBigInteger('supplier_id');
             $table->unsignedBigInteger('shipment_id')->nullable();
             $table->string('order_invoice_number')->nullable();
-            $table->float('order_discount')->nullable();
+            $table->float('order_discount')->default('0.00');
+            $table->float('tax_rate')->default('0.24');
             $table->float('order_price')->nullable(); 
             $table->boolean('pending')->default(1);
             $table->string('notes')->nullable();

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatesProductsTable extends Migration
+class CreateProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -21,6 +21,7 @@ class CreatesProductsTable extends Migration
             $table->string('product_name')->nullable();
             $table->string('stock_level')->nullable();
             $table->string('min_level')->nullable();
+            $table->string('notes');
             $table->timestamps();
         });
     }

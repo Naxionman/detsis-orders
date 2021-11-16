@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatesDispatchesTable extends Migration
+class CreateDispatchesTable extends Migration
 {
     /**
      * Run the migrations.

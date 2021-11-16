@@ -12,4 +12,8 @@ class Product extends Model
     public function details(){
         return $this->belongsToMany(OrderDetails::class);
     }
+
+    public function prices(){
+        return $this->belongsToMany(Price::class);
+    }
 }

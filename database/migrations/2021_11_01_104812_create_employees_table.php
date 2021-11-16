@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use phpDocumentor\Reflection\Types\Nullable;
 
-class CreatesEmployeesTable extends Migration
+class CreateEmployeesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -28,7 +28,7 @@ class CreatesEmployeesTable extends Migration
             $table->date('date_left')->nullable();
             $table->string('amka')->nullable();
             $table->string('ama')->nullable();
-            $table->integer('afm')->nullable();
+            $table->string('afm')->nullable();
             $table->string('adt')->nullable();
             $table->string('citinzenship')->nullable();
             $table->string('contract_type')->nullable();

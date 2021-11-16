@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             EmployeesTableSeeder::class,
             ShippersTableSeeder::class,
             SuppliersTableSeeder::class,
+            ProductsSeeder::class
         ]);
     }
 }

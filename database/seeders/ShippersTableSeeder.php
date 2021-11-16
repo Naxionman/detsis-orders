@@ -14,6 +14,10 @@ class ShippersTableSeeder extends Seeder
     public function run()
     {
         \App\Models\Shipper::create([
+            'name' => 'Απ ευθείας παραλαβή',
+        ]);
+
+        \App\Models\Shipper::create([
             'name' => 'Dionysos Cargo',
             'phone' => '22850 26420',
             'website' => 'https://www.dionysoscargo.gr',
@@ -25,6 +29,13 @@ class ShippersTableSeeder extends Seeder
             'phone' => '210-346511, 2310-752211',
             'website' => 'http://metafores-oikonomiki.gr/',
             'email' => 'info@metafores-oikonomiki.gr',
+        ]);
+
+        \App\Models\Shipper::create([
+            'name' => 'Άγιος Χριστόφορος',
+            'phone' => '22850-22589',
+            'website' => 'http://efan-naxou.gr',
+            'email' => 'efan.naxou@gmail.com',
         ]);
 
 

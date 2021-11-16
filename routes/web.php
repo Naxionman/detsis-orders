@@ -24,6 +24,8 @@ use App\Http\Controllers\ProductController;
 */
 
 Route::get('/', [PageController::class, 'index']);
+
+
 Route::get('/suppliers', [SupplierController::class, 'index']);
 Route::get('/employees', [EmployeeController::class, 'index']);
 Route::get('/shippers', [ShipperController::class, 'index']);
