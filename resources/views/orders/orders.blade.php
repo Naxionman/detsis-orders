@@ -50,7 +50,16 @@
                                 <td>{{ $order->supplier->company_name }}</td>
                                 <td>{{ $order->discount }}</td>
                                 <td>{{ $order->price }}</td>
-                                <td>{{ $order->arrival_date }}</td>
+                                <td>
+                                    <?php  
+                                    if($order->arrival_date == null){
+                                       echo '<a href="/edit_order/1"><button class="btn-primary btn-sm" > Άφιξη</button></a>';
+                                    } else {
+                                       echo $order->arrival_date;
+                                    }
+                                 ?> 
+
+                                 </td>
                                 <td style="width:15%" >
                                     <div class="d-flex justify-content-evenly">
                                         <a href="/edit_order/{{ $order->id }}" class="btn btn-warning flex-fill">

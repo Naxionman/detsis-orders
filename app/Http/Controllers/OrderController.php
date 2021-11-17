@@ -62,11 +62,11 @@ class OrderController extends Controller
     public function show($orderId)
     {
         $order = \App\Models\Order::findOrFail($orderId);
-        
+        $shippers = \App\Models\Shipper::all();
         $order_details = \App\Models\OrderDetails::where('order_id', $orderId)->get();
         //dd($models);
 
-        return view('orders.edit_order', compact('order','order_details'));
+        return view('orders.edit_order', compact('order','order_details', 'shippers'));
     }
 
     public function showDetails($orderId)

@@ -13,7 +13,7 @@
                         <h6>Αριθμός παραγγελίας : {{ $order->id }}</h6>
                         <h6>Προμηθευτής : {{ $order->supplier->company_name }}</h6>
                         <h6>Ημερομηνία παραγγελίας : {{ $order->order_date->format('d-m-Y') }}</h6>
-                        <h6>Ημερομηνία άφιξης : {{ $order->arrival_date }}->format('d-m-Y')</h6>
+                        <h6>Ημερομηνία άφιξης : {{ $order->arrival_date }}format('d-m-Y')</h6>
                     </div>
 
                     <div class="col">
@@ -23,7 +23,7 @@
                 </div>
                 <!-- List of ordered goods -->
                 <div class="row">
-                    <table id="myTable" class="cell-border display compact">
+                    <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>α/α</th>
@@ -34,6 +34,7 @@
                                 <th>Περιγραφή προϊόντος</th>
                                 <th>Καθαρή αξία</th>
                                 <th>Έκπτωση %</th>
+                                <th>Μετά έκπτωσης</th>
                                 <th>ΦΠΑ %</th>
                                 <th>Τιμή</th>
                             </tr>
@@ -49,33 +50,52 @@
                                 <td>{{ $detail->product->product_code }}</td>
                                 <td>{{ $detail->product->product_name }}</td>
                                 <td>{{ $detail->net_value }}</td>
-                                <td>{{ $detail->discount }}</td>
+                                <td>{{ ($detail->discount * 100) }}</td>
                                 <td>{{ $detail->net_value - ($detail->net_value * $detail->discount) }}</td>
-                                <td>{{ $detail->tax_rate }}</td>
+                                <td>{{ ($detail->tax_rate *100)}}</td>
                                 <td>{{ $detail->price}}</td>
                             </tr>
                         
                         @endforeach
                         </tbody>
                     </table>
+                </div>
+                <div class="row m-2">
+                    <div class="col-7 border rounded">
+                        <div class="m-2">Σημειώσεις :</div>
+                        <span>{{ $order->notes}}</span>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-2 border rounded-start">
+                        <div class="row">
+                            <div class="text-end">Συνολική καθαρή αξία :</div>
+                        </div>
+                        <div class="row">
+                            <div class="text-end">Έκπτωση παραγγελίας :</div>
+                        </div>
+                        <div class="row">
+                            <div class="text-end">ΦΠΑ :</div>
+                        </div>
+                        <div class="row">
+                            <div class="text-end">Σύνολο :</div>
+                        </div>
+                    </div>
+                    <div class="col-2 border rounded-end">
+                        <div class="row">
+                            <div class="text-end">{{ $sum }} €</div>    
+                        </div>
+                        <div class="row">
+                            <div class="text-end">{{ $order->order_discount }} %</div>    
+                        </div>
+                        <div class="row">
+                            <div class="text-end">{{ $sum * 0.24 }} € </div>
+                        </div>
+                        <div class="row">
+                            <div class="text-end">{{ $sum * 1.24 }} €</div>                            
+                        </div>
 
-                </div>
-                <div class="row">
-                    <div class="col-8">
-                        <div>{{ $order->notes }}</div>
-                    </div>
-                    <div class="col-sm-4">
-                        
-                        <div class="row flex-row-reverse">Συνολική καθαρή αξία : {{  $sum }} €</div>
-                        <h6 class="row">Έκπτωση παραγγελίας : {{ $order->order_discount }} %</h6>
-                        <h6 class="row">ΦΠΑ : {{ $sum * 0.24 }} € </h6>
-                        <h6 class="row"><strong>Σύνολο : {{ $sum * 1.24 }} €</strong></h6>
-                        
-                        
                     </div>
                 </div>
-                    
-                   
             </div>
             <div class="card-footer text-center py-2">
                  

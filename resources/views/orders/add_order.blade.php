@@ -16,11 +16,9 @@
                         <div class="col-sm-2"><label for="inputSupplier">Προμηθευτής</label></div>
                         <div class="col-sm-4">
                             <select class="form-control" id="inputSupplier" name="supplier_id">
-                                @forelse ($suppliers as $supplier)
+                                @foreach ($suppliers as $supplier)
                                     <option   type="text" value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
-                                @empty
-                                    <option>Δεν υπάρχουν προμηθευτές στην βάση!</option>
-                                @endforelse
+                                @endforeach
                             </select>
                         </div>
                     </div>

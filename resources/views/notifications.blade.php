@@ -1,6 +1,7 @@
-<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+<ul class="navbar-nav ms-auto me-5 mb-2 mb-lg-0">
+    <span class="badge p1 fa-stack fa-5x has-badge bg-danger">4</span>
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-fw"></i></a>
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell fa-fw "></i></a>
         <ul class="dropdown-menu dropdown-menu-md-end" aria-labelledby="navbarDropdown">
             @foreach ($shortages as $product)
                 <li class="dropdown-item"><a href="/orders"></a>
