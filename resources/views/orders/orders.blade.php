@@ -43,6 +43,8 @@
                             </tr>
                         </tfoot>
                         <tbody>
+
+                            
                         @forelse ($orders as $order)
                             <tr data-href="view_order/{{ $order->id}}">
                                 <td>{{ $order->id }}</td>
@@ -51,23 +53,23 @@
                                 <td>{{ $order->discount }}</td>
                                 <td>{{ $order->price }}</td>
                                 <td>
-                                    <?php  
+                                    @php
                                     if($order->arrival_date == null){
-                                       echo '<a href="/edit_order/1"><button class="btn-primary btn-sm" > Άφιξη</button></a>';
-                                    } else {
-                                       echo $order->arrival_date;
-                                    }
-                                 ?> 
-
+                                        $id = $order->id;
+                                        echo "<a href='/edit_order/$id'><button class='btn btn-primary btn-sm' >Άφιξη</button></a>";
+                                    }else{
+                                        echo $order->arrival_date;
+                                    } 
+                                    @endphp
                                  </td>
                                 <td style="width:15%" >
                                     <div class="d-flex justify-content-evenly">
-                                        <a href="/edit_order/{{ $order->id }}" class="btn btn-warning flex-fill">
+                                        <a href="/edit_order/{{ $order->id }}" class="btn btn-sm btn-warning">
                                             <i class="far fa-edit"></i>Edit</a>
                                             <form action="/orders/{{ $order->id }}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                                <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                                                <button class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i></button>
                                             </form>
                                     </div>
                                 </td>

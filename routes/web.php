@@ -73,6 +73,7 @@ Route::patch('/edit_shipper/{shipper}',[ShipperController::class, 'update']);
 Route::patch('/edit_vehicle/{vehicle}',[VehicleController::class, 'update']);
 Route::patch('/edit_dispatch/{dispatch}',[DispatchController::class, 'update']);
 Route::patch('/edit_order/{order}',[OrderController::class, 'update']);
+Route::patch('/edit_order/{order}',[OrderController::class, 'updateDetails']);
 Route::patch('/edit_shipment/{shipment}',[ShipmentController::class, 'update']);
 Route::patch('/edit_product/{product}',[ProductController::class, 'update']);
 

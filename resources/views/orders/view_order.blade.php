@@ -13,13 +13,19 @@
                         <h6>Αριθμός παραγγελίας : {{ $order->id }}</h6>
                         <h6>Προμηθευτής : {{ $order->supplier->company_name }}</h6>
                         <h6>Ημερομηνία παραγγελίας : {{ $order->order_date->format('d-m-Y') }}</h6>
-                        <h6>Ημερομηνία άφιξης : {{ $order->arrival_date }}format('d-m-Y')</h6>
+                        <h6>Ημερομηνία άφιξης : 
+                            @php
+                                if($order->arrival_date == null){
+                                    echo "Δεν έχει παραδοθεί";
+                                } else {
+                                    echo $order->arrival_date->format('d-m-Y');
+                                }
+                            @endphp
+                        </h6>    
                     </div>
-
                     <div class="col">
                         <h6>Τιμολόγιο Μεταφορικής</h6>
                     </div>
-                    
                 </div>
                 <!-- List of ordered goods -->
                 <div class="row">

@@ -48,14 +48,10 @@ class OrderController extends Controller
      
             \App\Models\OrderDetails::create([
                 'order_id' => $new_order->id,
-                
                 'quantity' => $request->input('quantity'.$i),
                 'product_id' => $product_to_add->id,
             ]);
-
         }
-
-         
         return redirect()->back()->with('message', 'Επιτυχής αποθήκευση παραγγελίας!');
     }
 
@@ -105,6 +101,19 @@ class OrderController extends Controller
         
         $orders = \App\Models\Order::all();
         return view('orders', compact('orders'));
+    }
+
+    /*
+     * This function update both Order and OrderDetails models respectively
+     * It should be triggered when an actual order has been shipped and arrived.
+     * 
+    */
+
+    public function updateDetails(Request $request){
+
+        $data = request()->all();
+        dd($data);
+
     }
 
     public function destroy(\App\Models\Order $order) 

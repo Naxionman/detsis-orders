@@ -327,7 +327,8 @@ th {
   border-color: inherit;
   border-style: solid;
   border-width: 0;
-  text-align: center
+  text-align: center;
+  letter-spacing: -1px;
 }
 
 label {
@@ -2208,6 +2209,14 @@ progress {
     transition: none;
   }
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
 .form-control[type=file], [type=file].dataTable-input {
   overflow: hidden;
 }
