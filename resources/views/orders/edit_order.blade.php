@@ -107,28 +107,8 @@
                                     $count +=1;
                                 @endphp
 
-                                <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js">
-                                    $(document).ready(function(){
-                                            updatePrice();
-                                            $('#net_value1').change(function(){
-                                                updatePrice();  
-                                            });
-                                            $('#tax_rate1').change(function(){
-                                                updatePrice();  
-                                            });
-                                            $('#product_discount1').change(function(){
-                                                updatePrice();  
-                                            });
-                                        });
-                                        
-                                        function updatePrice() 
-                                        {
-                                            var discount_price = $("#net_value1").val() - ($("#net_value1").val() * $("#product_dicount1").val());
-                                            var price = discount_price + ($("#tax_rate1").val() * discount_price);
-                                            $("#price1").val(price);
-                                        }
-                                </script>
-                                <input type="hidden" name="count" value="{{$count}}">
+                                
+                                <input type="hidden" name="count" id="count" value="{{$count}}">
                                 <input type="hidden" name="order_id" value="{{$detail->order_id}}">
                                 <tr>
                                     <tr>
@@ -145,16 +125,16 @@
                                         <td style="width: 10%" class="p-0">{{ $detail->product->product_code }}</td>
                                         <td style="width: 20%" class="p-0">{{ $detail->product->product_name }}</td>
                                         <td style="width: 10%" class="p-0">
-                                            <input type="number" step="0.01"  class="form-control p-0 pe-2 text-end" name="net_value{{$count}}" id="net_value{{$count}}" required>
+                                            <input type="number" step="0.01"  class="form-control p-0 pe-2 text-end" name="net_value{{$count}}" id="net_value{{$count}}" min="0" required>
                                         </td>
                                         <td style="width: 5%" class="p-0">
-                                            <input type="number" step="0.01"  class="form-control p-0 pe-2 text-end" name="product_discount{{$count}}" id="product_discount{{$count}}">
+                                            <input type="number" step="0.01"  class="form-control p-0 pe-2 text-end" name="product_discount{{$count}}" value="0.00"min="0" max="100" id="product_discount{{$count}}">
                                         </td>
                                         <td style="width: 5%" class="p-0">
-                                            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end" name="tax_rate{{$count}}" value="24" id="tax_rate{{$count}}">
+                                            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end" name="tax_rate{{$count}}" value="24.00" min="0" max="100" id="tax_rate{{$count}}">
                                         </td>
                                         <td style="width: 10%" class="p-0">
-                                            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end" readonly="readonly" name="price{{$count}}" id="price{{$count}}" required>
+                                            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end" readonly="readonly" name="price{{$count}}" min="0" id="price{{$count}}" required>
                                         </td>
                                     </tr>
                                 </tr>
@@ -168,6 +148,35 @@
                             <span>{{ $order->notes}}</span>
                         </div>
                         <div class="col-1"></div>
+                        <div class="col-2 border rounded-start">
+                            <div class="row">
+                                <div class="text-end">Συνολική καθαρή αξία :</div>
+                            </div>
+                            <div class="row">
+                                <div class="text-end">Έκπτωση παραγγελίας :</div>
+                            </div>
+                            <div class="row">
+                                <div class="text-end">ΦΠΑ :</div>
+                            </div>
+                            <div class="row">
+                                <div class="text-end">Σύνολο :</div>
+                            </div>
+                        </div>
+                        <div class="col-2 border rounded-end">
+                            <div class="row">
+                                <input type="number" step="0.01" readonly="readonly" class="form-control p-0 pe-2 text-end" min="0" id="orderNetValue">
+                            </div>
+                            <div class="row">
+                                <input type="number" step="0.01" class="form-control p-0 pe-2 text-end" name="order_discount" min="0" id="orderDiscount" value="{{ $order->order_discount }}">
+                            </div>
+                            <div class="row">
+                                <input type="number" step="0.01" readonly="readonly" class="form-control p-0 pe-2 text-end" min="0" id="tax">
+                            </div>
+                            <div class="row">
+                                <input type="number" step="0.01" class="form-control p-0 pe-2 text-end" name="order_price" value="{{ $order->order_price}}" min="0" id="orderPrice">
+                            </div>
+    
+                        </div>
                     </div>
                     @csrf
                 </form> 
@@ -195,4 +204,15 @@
         </div>
     @endif
 </div>
+<script type="text/javascript">
+
+            
+   
+   
+</script>
+
+
+
 @endsection
+
+
