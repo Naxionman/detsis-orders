@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      *
      * @return void
-     */
+    */
     public function boot()
     {
         //Birthdays
@@ -44,4 +44,5 @@ class AppServiceProvider extends ServiceProvider
         View::share('birthdays', $birthdays);
 
     }
+    
 }

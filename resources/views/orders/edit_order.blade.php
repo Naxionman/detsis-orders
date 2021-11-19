@@ -14,15 +14,25 @@
                     <div class="row">
                         <div class="col-5">
                             <h6>Αριθμός παραγγελίας : {{ $order->id }}</h6>
-                            <h6>Προμηθευτής : {{ $order->supplier->company_name }}</h6>
+                            <h6>Προμηθευτής : <strong>{{ $order->supplier->company_name }}</strong></h6>
                             <h6>Ημερομηνία παραγγελίας : {{ $order->order_date->format('d-m-Y') }}</h6>
+                            <div class="row">
+                                <div class="col-4 text-end justify-content-center">
+                                    <label for="inputArrivalDate" class="align-middle"><strong>Ημερομηνία άφιξης</strong></label>
+                                </div>
+                                <div class="col-8">
+                                    <input class="form-control" name="arrival_date" type="date" id="inputArrivalDate" required="required">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-end justify-content-center">
+                                    <label for="inputInvoiceNumber">Αριθμός Τιμολογίου Προμηθευτή</label>
+                                </div>
+                                <div class="col-8">
+                                    <input class="form-control" name="order_invoice_number" type="text" id="inputInvoiceNumber" required="required">
+                                </div>
+                            </div>
                             
-                            <div class="col-4 text-end justify-content-center">
-                                <label for="inputArrivalDate" class="align-middle"><strong>Ημερομηνία άφιξης</strong></label>
-                            </div>
-                            <div class="col-8">
-                                <input class="form-control" name="arrival_date" type="date" id="inputArrivalDate" required="required">
-                            </div>
                         </div>
 
                         <div class="col">
@@ -85,16 +95,19 @@
                             <thead>
                                 <tr>
                                     <th style="width: 5%">α/α</th>
+                                    <th>DCode</th>
+                                    <th>Κωδ.Προμηθευτή</th>
                                     <th>Ποσότητα</th>
                                     <th>Μ/Μ</th>
                                     <th>Ανά συσκ.</th>
-                                    <th>DCode</th>
-                                    <th>Κωδ.Προμηθευτή</th>
-                                    <th style="letter-spacing: -1px">Περιγραφή προϊόντος</th>
+                                    <th>Περιγραφή προϊόντος</th>
+                                    <th>Τιμή μονάδας</th>
                                     <th>Καθαρή αξία</th>
                                     <th>Έκπτωση %</th>
+                                    <th>Αξία</th>
                                     <th>ΦΠΑ %</th>
-                                    <th>Τιμή</th>
+                                    <th>ΦΠΑ</th>
+                                    <th>Τελική Τιμή</th>
                                 </tr>
                             </thead>
                             
@@ -106,46 +119,75 @@
                                 @php
                                     $count +=1;
                                 @endphp
-
-                                
-                                <input type="hidden" name="count" id="count" value="{{$count}}">
-                                <input type="hidden" name="order_id" value="{{$detail->order_id}}">
+            <!-- 
+                Explaining terms:
+            
+                quantity = The quantity of the ordered product by its measurment unit
+                measurment unit = It can be sets, (single) items, packages
+                items_per_package = In case someone ships and charges for packages, we need to regulate the quantities in our stock
+                                    by multiplying items per package times the quasntity 
+                                    (e.g. 10 packages. Each contain 16 bottles => we have 16*10 bottles for our stock)
+                net_value = The net value of a single unit 
+                sum_net_value = net value multiplied by quantity
+                product_discount = It's apllied to the sum_net_value and produces the value (not saved to the database, as it's 
+                                    only used for the rest of the calculations)
+                value = The value AFTER the discount. This is important! It's the sum of the net values AFTER the discount.
+                tax_rate = Not likely, but it may alwasy change. It's percentage. This is applied to the value (not net_value, nor sum_net_value)
+                tax = value * tax_rate. Just to show the taxes and add the all together
+                price = This is the fianl price of the product (net_value-> sum_net_value->discount->tax_rate->price).
+                        
+                
+            
+            -->
                                 <tr>
                                     <tr>
-                                        <td style="width: 5%" class="p-0">{{ $count }}</td>
-                                        <td class="form-control p-0 pe-2 text-end">{{ $detail->quantity }}</td>
-                                        <td class="p-0">
-                                            <input type="text" class="form-control p-0 pe-2 text-end" name="measurement_unit{{$count}}" placeholder="Μονάδα μέτρησης">
+                                        <td style="width: 5%" class="p-0 order-font">{{ $count }}</td>
+                                        <td style="width: 10%" class="p-0 order-font">{{ $detail->product->detsis_code }}</td>
+                                        <td style="width: 10%" class="p-0 order-font">{{ $detail->product->product_code }}</td>
+                                        <td style="width: 5%" class="p-0 order-font">
+                                            <input type="number" class="form-control p-0 pe-2 text-end order-font" name="quantity" value="{{ $detail->quantity }}" id="quantity{{$count}}">
                                         </td>
                                         <td class="p-0">
-                                            <input type="number" class="form-control p-0 pe-2 text-end" name="items_per_package{{$count}}">
+                                            <input type="text" class="form-control p-0 pe-2 text-end order-font" name="measurement_unit{{$count}}" placeholder="M/M">
                                         </td>
-                                        
-                                        <td style="width: 10%" class="p-0">{{ $detail->product->detsis_code }}</td>
-                                        <td style="width: 10%" class="p-0">{{ $detail->product->product_code }}</td>
-                                        <td style="width: 20%" class="p-0">{{ $detail->product->product_name }}</td>
-                                        <td style="width: 10%" class="p-0">
-                                            <input type="number" step="0.01"  class="form-control p-0 pe-2 text-end" name="net_value{{$count}}" id="net_value{{$count}}" min="0" required>
+                                        <td class="p-0">
+                                            <input type="number" class="form-control p-0 pe-2 text-end order-font" name="items_per_package{{$count}}">
+                                        </td>
+                                        <td style="width: 20%" class="p-0 order-font" >{{ $detail->product->product_name }}</td>
+                                        <td style="width: 5%" class="p-0">
+                                            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="net_value{{$count}}" id="net_value{{$count}}" min="0" required>
                                         </td>
                                         <td style="width: 5%" class="p-0">
-                                            <input type="number" step="0.01"  class="form-control p-0 pe-2 text-end" name="product_discount{{$count}}" value="0.00"min="0" max="100" id="product_discount{{$count}}">
+                                            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="sum_net_value{{$count}}" id="sum_net_value{{$count}}" min="0" required>
                                         </td>
                                         <td style="width: 5%" class="p-0">
-                                            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end" name="tax_rate{{$count}}" value="24.00" min="0" max="100" id="tax_rate{{$count}}">
+                                            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="product_discount{{$count}}" value="0.00"min="0" max="100" id="product_discount{{$count}}">
+                                        </td>
+                                        <td style="width: 5%" class="p-0">
+                                            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="value{{$count}}" value="0.00"min="0" max="100" id="value{{$count}}">
+                                        </td>
+                                        <td style="width: 5%" class="p-0">
+                                            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="tax_rate{{$count}}" value="24.00" min="0" max="100" id="tax_rate{{$count}}">
+                                        </td>
+                                        <td style="width: 5%" class="p-0">
+                                            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="tax{{$count}}" min="0" max="100" id="tax{{$count}}">
                                         </td>
                                         <td style="width: 10%" class="p-0">
-                                            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end" readonly="readonly" name="price{{$count}}" min="0" id="price{{$count}}" required>
+                                            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="price{{$count}}" min="0" id="price{{$count}}" readonly="readonly">
                                         </td>
                                     </tr>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
+                        <input type="hidden" name="count" id="count" value="{{$count}}">
+                        <input type="hidden" name="order_id" value="{{$detail->order_id}}">
+                        <input type="hidden" name="pending" value="0">
                     </div>
                     <div class="row m-2">
                         <div class="col-7 border rounded">
                             <div class="m-2">Σημειώσεις :</div>
-                            <span>{{ $order->notes}}</span>
+                            <input type="textarea" value=" {{ $order->notes }}" name="notes" class="order-font">
                         </div>
                         <div class="col-1"></div>
                         <div class="col-2 border rounded-start">
@@ -164,16 +206,16 @@
                         </div>
                         <div class="col-2 border rounded-end">
                             <div class="row">
-                                <input type="number" step="0.01" readonly="readonly" class="form-control p-0 pe-2 text-end" min="0" id="orderNetValue">
+                                <input type="number" step="0.01" readonly="readonly" class="form-control p-0 pe-2 text-end order-font" min="0" id="orderNetValue">
                             </div>
                             <div class="row">
-                                <input type="number" step="0.01" class="form-control p-0 pe-2 text-end" name="order_discount" min="0" id="orderDiscount" value="{{ $order->order_discount }}">
+                                <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="order_discount" min="0" id="orderDiscount" value="{{ $order->order_discount }}">
                             </div>
                             <div class="row">
-                                <input type="number" step="0.01" readonly="readonly" class="form-control p-0 pe-2 text-end" min="0" id="tax">
+                                <input type="number" step="0.01" readonly="readonly" class="form-control p-0 pe-2 text-end order-font" min="0" id="tax">
                             </div>
                             <div class="row">
-                                <input type="number" step="0.01" class="form-control p-0 pe-2 text-end" name="order_price" value="{{ $order->order_price}}" min="0" id="orderPrice">
+                                <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="order_price" value="{{ $order->order_price}}" min="0" id="orderPrice">
                             </div>
     
                         </div>

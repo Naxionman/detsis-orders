@@ -11720,6 +11720,11 @@ body {
   color: #fff;
 }
 
+.order-font {
+  font-family:'Arial Narrow', Arial, sans-serif;
+  letter-spacing: -1px;
+}
+
 .bg-c-blue {
   background: linear-gradient(45deg,#4099ff,#73b4ff);
 }

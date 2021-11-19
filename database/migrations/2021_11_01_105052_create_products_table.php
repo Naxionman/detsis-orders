@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('product_name')->nullable();
             $table->string('stock_level')->nullable();
             $table->string('min_level')->nullable();
-            $table->string('notes');
+            $table->string('notes')->nullable();
             $table->timestamps();
         });
     }
