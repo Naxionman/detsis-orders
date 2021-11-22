@@ -26,6 +26,9 @@ class AppServiceProvider extends ServiceProvider
     */
     public function boot()
     {
+        /*
+         * In case of database changes you need to comment out the whole function in order for artisan to work.
+         */
         //Birthdays
         $birthdays = array();
         $employees = Employee::all();
@@ -42,7 +45,7 @@ class AppServiceProvider extends ServiceProvider
 
         View::share('shortages', $shortages);
         View::share('birthdays', $birthdays);
-
+       
     }
     
 }

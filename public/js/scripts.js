@@ -37,27 +37,30 @@ jQuery(function() {
     console.log("count = "+ count);
     updateFields();
     for (let i = 1; i < count+1; i++) {
-        $('#net_value'+i).on('keyup', function() {
+        $('#netValue'+i).on('keyup', function() {
             updatePrice(i);
         });
 
-        $('#tax_rate'+i).on('keyup', function() {
+        $('#taxRate'+i).on('keyup', function() {
             updatePrice(i);
         });
 
-        $('#product_discount'+i).on('keyup', function() {
+        $('#productDiscount'+i).on('keyup', function() {
+            updatePrice(i);
+        });
+        $('#orderDiscount'+i).on('keyup', function() {
             updatePrice(i);
         });
 
-        $('#net_value'+i).on('focusout', function() {
+        $('#netValue'+i).on('focusout', function() {
             this.value = parseFloat(this.value).toFixed(2);
         });
 
-        $('#tax_rate'+i).on('focusout', function() {
+        $('#taxRate'+i).on('focusout', function() {
             this.value = parseFloat(this.value).toFixed(2);
         });
 
-        $('#product_discount'+i).on('focusout', function() {
+        $('#productDiscount'+i).on('focusout', function() {
             this.value = parseFloat(this.value).toFixed(2);
         });
 
@@ -66,31 +69,41 @@ jQuery(function() {
 
     function updatePrice(x){
         //sum_net_value = the net value of the unit multiplied by quantity
-        var sum_net_value_raw = $('#net_value'+x).val() * $('#quantity'+x).val();
-        var value_raw = $('#sum_net_value'+x).val() - ($('#sum_net_value'+x).val() * $('#product_discount'+x).val()/100);
-        var tax_raw = value_raw * $('#tax_rate'+x).val()/100;
-        var price_raw = value_raw * $('#tax_rate'+x).val()/100 + value_raw;
+        var sum_net_value = $('#netValue'+x).val() * $('#quantity'+x).val();
+        sum_net_value = Math.round(sum_net_value*100)/100;
+        sum_net_value = parseFloat(sum_net_value).toFixed(2);
         
-        // rounding the numbers
-        var sum_net_value = Math.round(sum_net_value_raw*100)/100;
-        var value = Math.round(value_raw*100)/100;
-        var tax = Math.round(tax_raw*100)/100;
-        var price = Math.round(price_raw*100)/100;
-        
-        // formatting
-        var sum_net_value_formatted = parseFloat(sum_net_value).toFixed(2);
-        var value_formatted = parseFloat(value).toFixed(2);
-        var tax_formatted = parseFloat(tax).toFixed(2);        
-        var price_formatted = parseFloat(price).toFixed(2);
+        //value = the value of the quantity after the discount
+        var value = $('#sumNetValue'+x).val() - ($('#sumNetValue'+x).val() * $('#productDiscount'+x).val()/100);
+        value = Math.round(value*100)/100;
+        value = parseFloat(value).toFixed(2);
+                
+        var tax = value * $('#taxRate'+x).val()/100;
+        tax = Math.round(tax*100)/100;
+        tax = parseFloat(tax).toFixed(2);
+
+        var price = value * $('#taxRate'+x).val()/100 + Number(value);
+        price = Math.round(price*100)/100;
+        price = parseFloat(price).toFixed(2);
+
+        var shipmentPrice = $('#inputShipmentPrice').val();
+        shipmentPrice = parseFloat(shipmentPrice).toFixed(2);
+
+        var extraPrice = $('#inputExtraPrice').val();
+        extraPrice = parseFloat(extraPrice).toFixed(2);
+
+        var order_discount = $('#orderDiscount').val();
+        order_discount = parseFloat(order_discount).toFixed(2);
 
         // updating fields of product details
-        $('#sum_net_value'+x).val(sum_net_value_formatted);
-        $('#value'+x).val(value_formatted);
-        $('#tax'+x).val(tax_formatted);
-        $('#price'+x).val(price_formatted);
-        
+        $('#inputShipmentPrice').val(shipmentPrice);
+        $('#inputExtraPrice').val(extraPrice);
+        $('#sumNetValue'+x).val(sum_net_value);
+        $('#value'+x).val(value);
+        $('#orderDiscount').val(order_discount);
+        $('#tax'+x).val(tax);
+        $('#price'+x).val(price);
     }
-    
 });
 
 function updateFields(){
@@ -101,26 +114,37 @@ function updateFields(){
     var order_price = 0;
     
     for (let i = 0; i < count+1; i++) {
-        if($('#sum_net_value'+i).val() != null){
+        if($('#sumNetValue'+i).val() != null){
             order_net_value += Number($('#value'+i).val()) ;
-            
-            total_tax = $('#value'+i).val() * $('#tax_rate'+i).val()/100 + total_tax;
-            order_price = order_net_value + total_tax;
+            total_tax = $('#value'+i).val() * $('#taxRate'+i).val()/100 + total_tax;
+            order_price = Number(order_net_value) + Number(total_tax);
+            tax_rate = $('#orderTaxRate').val();
         }
     }
     // formatting and outputing total net value
-    net_value_formatted = parseFloat(order_net_value).toFixed(2);
-    $('#orderNetValue').val(net_value_formatted);
+    order_net_value = Math.round(order_net_value*100)/100;
+    order_net_value = parseFloat(order_net_value).toFixed(2);
+    $('#orderNetValue').val(order_net_value);
 
     // Getting the order discount (irrelevant to the product discount) and outputing it
+    $order_discount = $('#orderDiscount').val()/100;
     
+    order_net_value_final = order_net_value - order_net_value * $order_discount;
+    order_net_value_final = Math.round(order_net_value_final*100)/100;
+    order_net_value_final = parseFloat(order_net_value_final).toFixed(2)
+    total_tax = order_net_value_final * tax_rate/100;
+    total_tax = Math.round(total_tax*100)/100;
+    total_tax = parseFloat(total_tax).toFixed(2)
+    
+    order_price_final = Number(order_net_value_final) + Number(total_tax);
 
-    tax_formatted = parseFloat(total_tax).toFixed(2);
-    $('#tax').val(tax_formatted);
-    order_price_formatted = parseFloat(order_price).toFixed(2);
-    $('#orderPrice').val(order_price_formatted);
+    order_price_final = Math.round(order_price_final*100)/100;
+    order_price_final = parseFloat(order_price_final).toFixed(2)
+        
+    $('#tax').val(total_tax);
+    
+    $('#orderPrice').val(order_price_final);
+
     setTimeout(function() { updateFields(); }, 1500);
-    
-    
-    
 }
+

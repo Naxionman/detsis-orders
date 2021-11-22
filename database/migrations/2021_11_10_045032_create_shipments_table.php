@@ -21,7 +21,7 @@ class CreateShipmentsTable extends Migration
             $table->unsignedBigInteger('extra_shipper_id')->nullable();
             $table->string('invoice_number');
             $table->float('shipment_price');  //includes extra_price
-            $table->float('extra_price');
+            $table->float('extra_price')->nullable();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('shipper_id')->references('id')->on('shippers')->onDelete('cascade');
             $table->foreign('extra_shipper_id')->references('id')->on('shippers')->onDelete('cascade');

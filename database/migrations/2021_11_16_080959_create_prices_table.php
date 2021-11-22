@@ -17,6 +17,8 @@ class CreatePricesTable extends Migration
             $table->id();
             $table->date('price_date');
             $table->float('history_price');
+            $table->float('history_discount');
+            $table->float('history_tax_rate');
             $table->unsignedBigInteger('supplier_id');
             $table->unsignedBigInteger('product_id');
             $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');

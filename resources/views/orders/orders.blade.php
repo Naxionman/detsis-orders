@@ -25,7 +25,7 @@
                                 <th>α/α</th>
                                 <th>Ημερομηνία</th>
                                 <th>Προμηθευτής</th>
-                                <th>Έκπτωση</th>
+                                <th>Αφορά</th>
                                 <th>Σύνολο</th>
                                 <th>Άφιξη</th>
                                 <th>Στοιχεία Ελέγχου</th>
@@ -36,7 +36,7 @@
                                 <th>α/α</th>
                                 <th>Ημερομηνία</th>
                                 <th>Προμηθευτής</th>
-                                <th>Έκπτωση</th>
+                                <th>Αφορά</th>
                                 <th>Σύνολο</th>
                                 <th>Άφιξη</th>
                                 <th>Στοιχεία Ελέγχου</th>
@@ -50,15 +50,24 @@
                                 <td>{{ $order->id }}</td>
                                 <td>{{ $order->order_date->format('d-m-Y') }}</td>
                                 <td>{{ $order->supplier->company_name }}</td>
-                                <td>{{ $order->discount }}</td>
-                                <td>{{ $order->price }}</td>
+                                <td>
+                                    @php
+                                        $detail = $order->orderDetails()->first();
+                                        if($detail->product_id == 1){
+                                            echo "Έμπόριο";
+                                        } else{
+                                            echo "Εγοστάσιο";
+                                        }
+                                    @endphp
+                                </td>
+                                <td class="text-end">{{ $order->order_price }} €</td>
                                 <td>
                                     @php
                                     if($order->arrival_date == null){
                                         $id = $order->id;
                                         echo "<a href='/edit_order/$id'><button class='btn btn-primary btn-sm' >Άφιξη</button></a>";
                                     }else{
-                                        echo $order->arrival_date;
+                                        echo $order->arrival_date->format('d-m-Y');
                                     } 
                                     @endphp
                                  </td>
