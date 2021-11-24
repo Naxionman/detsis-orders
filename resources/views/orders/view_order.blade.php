@@ -32,17 +32,20 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>α/α</th>
-                                <th>Ποσότητα</th>
-                                <th>Μ/Μ</th>
+                                <th style="width: 5%">α/α</th>
                                 <th>DCode</th>
                                 <th>Κωδ.Προμηθευτή</th>
+                                <th>Ποσότητα</th>
+                                <th>Μ/Μ</th>
+                                <th>Ανά συσκ.</th>
                                 <th>Περιγραφή προϊόντος</th>
+                                <th>Τιμή μονάδας</th>
                                 <th>Καθαρή αξία</th>
                                 <th>Έκπτωση %</th>
-                                <th>Μετά έκπτωσης</th>
+                                <th>Αξία</th>
                                 <th>ΦΠΑ %</th>
-                                <th>Τιμή</th>
+                                <th>ΦΠΑ</th>
+                                <th>Τελική Τιμή</th>
                             </tr>
                         </thead>
                         
@@ -50,16 +53,19 @@
                         @foreach ($order_details as $detail)
                             <tr>
                                 <td>{{ $detail->id }}</td>
-                                <td>{{ $detail->quantity }}</td>
-                                <td>{{ $detail->measurement_unit }}</td>
                                 <td>{{ $detail->product->detsis_code }}</td>
                                 <td>{{ $detail->product->product_code }}</td>
+                                <td>{{ $detail->quantity }}</td>
+                                <td>{{ $detail->measurement_unit }}</td>
+                                <td>{{ $detail->items_per_package }}</td>
                                 <td>{{ $detail->product->product_name }}</td>
-                                <td>{{ $detail->net_value }}</td>
-                                <td>{{ ($detail->discount * 100) }}</td>
-                                <td>{{ $detail->net_value - ($detail->net_value * $detail->discount) }}</td>
-                                <td>{{ ($detail->tax_rate *100)}}</td>
-                                <td>{{ $detail->price}}</td>
+                                <td>{{ number_format($detail->net_value, 2, ",", ".") }}</td>
+                                <td>{{ number_format($detail->net_value * $detail->quantity, 2, ",", ".") }}</td>
+                                <td>{{ number_format($detail->product_discount, 2, ",", ".") }}</td>
+                                <td>{{ number_format($detail->net_value * $detail->quantity - $detail->net_value * $detail->quantity * $detail->product_discount/100 , 2, ",", ".") }}</td>
+                                <td>{{ number_format($detail->tax_rate,2, ",", ".") }}</td>
+                                <td>{{ number_format(($detail->net_value * $detail->quantity - $detail->net_value * $detail->quantity * $detail->product_discount/100)* $detail->tax_rate /100 ,2, ",", ".") }}</td>
+                                <td>{{ number_format($detail->price, 2, ",", ".") }}</td>
                             </tr>
                         
                         @endforeach
@@ -69,7 +75,7 @@
                 <div class="row m-2">
                     <div class="col-7 border rounded">
                         <div class="m-2">Σημειώσεις :</div>
-                        <span>{{ $order->notes}}</span>
+                        <textarea rows = "4" cols = "92">{{ $order->notes}}</textarea>
                     </div>
                     <div class="col-1"></div>
                     <div class="col-2 border rounded-start">
@@ -80,24 +86,36 @@
                             <div class="text-end">Έκπτωση παραγγελίας :</div>
                         </div>
                         <div class="row">
-                            <div class="text-end">ΦΠΑ :</div>
+                            <div class="text-end">Επιβαρύνσεις :</div>
+                        </div>
+                        <div class="row">
+                            <div class="text-end">ΦΠΑ (%) :</div>
+                        </div>
+                        <div class="row">
+                            <div class="text-end">ΦΠΑ (€):</div>
                         </div>
                         <div class="row">
                             <div class="text-end">Σύνολο :</div>
                         </div>
                     </div>
                     <div class="col-2 border rounded-end">
-                        <div class="row">
-                            <div class="text-end">{{ $sum }} €</div>    
+                        <div class="row"> <!-- Σύνολο αξιών μετά έκπτωσης (προ φόρου) -->
+                            <div class="text-end">{{ number_format($order->order_price /(1 + $order->tax_rate/100) + $order->order_price /(1 + $order->tax_rate/100)* $order->order_discount/100 - $order->order_charges  ,2, ",", ".") }} €</div>    
                         </div>
-                        <div class="row">
-                            <div class="text-end">{{ $order->order_discount }} %</div>    
+                        <div class="row"> <!-- Η έκπτωση της παραγγελίας συνολικά (όχι επι μέρους εκπτώσεις προϊόντων -->
+                            <div class="text-end">{{ number_format($order->order_discount,2, ",", ".") }} %</div>    
                         </div>
-                        <div class="row">
-                            <div class="text-end">{{ $sum * 0.24 }} € </div>
+                        <div class="row"> <!-- Τυχούσες επιπλέον επιβαρύνσεις -->
+                            <div class="text-end">{{ number_format($order->order_charges,2, ",", ".") }} %</div>    
                         </div>
-                        <div class="row">
-                            <div class="text-end">{{ $sum * 1.24 }} €</div>                            
+                        <div class="row"> <!-- Ποσοστό του φόρου -->
+                            <div class="text-end">{{ number_format($order->tax_rate,2, ",", ".") }} %</div>    
+                        </div>
+                        <div class="row"> <!-- Συνολικός φόρος σε € -->
+                            <div class="text-end">{{ number_format( $order->order_price - $order->order_price /(1 + $order->tax_rate/100) ,2, ",", ".") }} € </div>
+                        </div>
+                        <div class="row"> <!-- Τελικό σύνολο, πληρωτέο ποσό-->
+                            <div class="text-end">{{ number_format( $order->order_price ,2, ",", ".") }} €</div>                            
                         </div>
 
                     </div>

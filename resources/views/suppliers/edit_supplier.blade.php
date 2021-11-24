@@ -55,7 +55,7 @@
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-10">
                             <label for="inputDescription">Περιγραφή ή άλλες παρατηρήσεις</label>
-                            <input class="form-control" value="{{ $supplier->notes }}" autocomplete="nope" type="text" id="inputDescription" name="description" placeholder="Σημειώσεις">
+                            <input class="form-control" value="{{ $supplier->description }}" autocomplete="nope" type="text" id="inputDescription" name="description" placeholder="Σημειώσεις">
                         </div>
                     </div>
                     @csrf

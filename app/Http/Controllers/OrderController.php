@@ -26,13 +26,15 @@ class OrderController extends Controller
         return view ('orders.add_order', compact('suppliers','products','shippers'));
     }
 
-    public function store(Request $request)
+    //New order. We need to distinguish if it is about the Showroom or the factory.
+    public function store(Request $request) 
     {
         $data = request()->validate([
             'order_date' => 'required',
             'supplier_id' => 'required',
             'shipper_id' => 'nullable',
             'order_discount' => 'nullable',
+            'order_charges' => 'nullable',
             'order_price' => 'nullable',
             'pending' => 'required',
             'notes' => 'nullable',
@@ -74,13 +76,7 @@ class OrderController extends Controller
 
         $order_details = \App\Models\OrderDetails::where('order_id', $orderId)->get();
         
-        $sum = 0;
-        foreach ($order_details as $detail) {
-            $sum = $detail->price + $sum;
-        }
-
-
-        return view('orders.view_order', compact('order','order_details', 'sum'));
+        return view('orders.view_order', compact('order','order_details'));
     }
 
 
@@ -93,6 +89,7 @@ class OrderController extends Controller
             'supplier_id' => 'required',
             'shipper_id' => 'nullable',
             'order_discount' => 'nullable',
+            'order_charges' => 'nullable',
             'order_price' => 'nullable',
             'pending' => 'required',
             'notes' => 'nullable',
@@ -177,6 +174,7 @@ class OrderController extends Controller
             'shipment_id' => $shipment_id,
             'order_invoice_number' => $request->input('order_invoice_number'),
             'order_discount' => $request->input('order_discount'),
+            'order_charges' => $request->input('order_charges'),
             'tax_rate' => $request->input('order_tax_rate'),
             'order_price' => $request->input('order_price'),
             'pending' => $request->input('pending'),

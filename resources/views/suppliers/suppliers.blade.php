@@ -15,13 +15,26 @@
                 </div>
             <div class="card mb-4">
                 <div class="card-header">
-                    <i class="fas fa-table me-1"></i>
-                        Πίνακας προμηθευτών
+                    <div class="row">
+                        <div class="col-5">
+                            <i class="fas fa-table me-1"></i>Πίνακας προμηθευτών
+                        </div>
+                        <div class="form-check form-switch col">
+                            <label class="form-check-label" for="switchShowroom">Μόνο Εμπορίου</label>
+                            <input class="form-check-input" type="checkbox" id="switchShowroom">
+                        </div>
+                        <div class="form-check form-switch col">
+                            <label class="form-check-label" for="switchFactory">Μόνο Εργοστασίου</label>
+                            <input class="form-check-input" type="checkbox" id="switchFactory">
+                        </div>    
+                    </div>
+                    
                 </div>
                 <div class="card-body">
                     <table id="myTable" class="cell-border display compact">
                         <thead>
                             <tr>
+                                <th>Notes</th>
                                 <th>Ονομασία</th>
                                 <th>email</th>
                                 <th>Τηλέφωνο</th>
@@ -33,6 +46,7 @@
                         </thead>
                         <tfoot>
                             <tr>
+                                <th>Notes</th>
                                 <th>Ονομασία</th>
                                 <th>email</th>
                                 <th>Τηλέφωνο</th>
@@ -45,6 +59,7 @@
                         <tbody>
                         @forelse ($suppliers as $supplier)
                             <tr>
+                                <td>{{ $supplier->description }}</td>
                                 <td><strong>{{$supplier->company_name }}</strong></td>
                                 <td>{{$supplier->email }}</td>
                                 <td>{{$supplier->phone1 }}</td>

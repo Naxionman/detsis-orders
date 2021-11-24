@@ -68,7 +68,8 @@ class SupplierController extends Controller
         //dd($supplier->company_name);
         
         $suppliers = \App\Models\Supplier::all();
-        return view('suppliers', compact('suppliers'));
+        
+        return redirect('/suppliers');
     }
 
     public function destroy(\App\Models\Supplier $supplier)

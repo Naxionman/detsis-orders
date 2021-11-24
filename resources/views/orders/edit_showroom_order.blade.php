@@ -1,14 +1,13 @@
 @extends('template')
 
-@section('title', 'DetsisOrders - Επεξεργασία Παραγγελίας')
-
+@section('title', 'Παραγγελία Εμπορίου')
 
 @section('content')
 <div class="container">
     <div class="card bg-warning bg-opacity-25 shadow-lg border-0 rounded-3 mt-3 ">
         <div class="card-header"><h3 class="text-center font-weight-light my-2 ">Λεπτομέρειες παραγγελίας</h3></div>
             <div class="card-body bg-light">
-                <form action="/edit_order/{{ $order->id }}" id="editOrderDetails" method="post">
+                <form action="/edit_showroom_order/{{ $order->id }}" id="editOrderDetails" method="post">
                     @method('PATCH')
                     <!-- General details of order -->
                     <div class="row">
@@ -119,26 +118,7 @@
                                 @php
                                     $count +=1;
                                 @endphp
-            <!-- 
-                Explaining terms:
-            
-                quantity = The quantity of the ordered product by its measurment unit
-                measurment unit = It can be sets, (single) items, packages
-                items_per_package = In case someone ships and charges for packages, we need to regulate the quantities in our stock
-                                    by multiplying items per package times the quasntity 
-                                    (e.g. 10 packages. Each contain 16 bottles => we have 16*10 bottles for our stock)
-                net_value = The net value of a single unit 
-                sum_net_value = net value multiplied by quantity
-                product_discount = It's apllied to the sum_net_value and produces the value (not saved to the database, as it's 
-                                    only used for the rest of the calculations)
-                value = The value AFTER the discount. This is important! It's the sum of the net values AFTER the discount.
-                tax_rate = Not likely, but it may alwasy change. It's percentage. This is applied to the value (not net_value, nor sum_net_value)
-                tax = value * tax_rate. Just to show the taxes and add the all together
-                price = This is the fianl price of the product (net_value-> sum_net_value->discount->tax_rate->price).
-                        
-                
-            
-            -->
+           
                                 <tr>
                                     <tr>
                                         <input type="hidden" name="product_id{{$count}}" value="{{ $detail->product->id }}">
@@ -202,9 +182,6 @@
                                 <div class="text-end">Έκπτωση παραγγελίας :</div>
                             </div>
                             <div class="row">
-                                <div class="text-end">Επιβαρύνσεις :</div>
-                            </div>
-                            <div class="row">
                                 <div class="text-end">ΦΠΑ (%) :</div>
                             </div>
                             <div class="row">
@@ -216,23 +193,19 @@
                         </div>
                         <div class="col-2 border rounded-end">
                             <div class="row">
-                                <input type="number" step="0.01" readonly="readonly" class="form-control p-0 pe-2 text-end order-font" min="0" id="orderNetValue" 
-                                value="{{ $order->order_price - ($order->order_price * $order->tax_rate/100) - ($order->order_price * $order->order_discount/100) }}">
+                                <input type="number" step="0.01" readonly="readonly" class="form-control p-0 pe-2 text-end order-font" min="0" id="orderNetValue">
                             </div>
                             <div class="row">
-                                <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="order_discount" min="0" id="orderDiscount" value="{{  $order->order_discount }}">
+                                <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="order_discount" min="0" id="orderDiscount" value="{{ $order->order_discount }}">
                             </div>
                             <div class="row">
-                                <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="order_charges" min="0" id="orderCharges" value="{{  $order->order_charges }}">
+                                <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="order_tax_rate" value="24.00" min="0" id="orderTaxRate">
                             </div>
                             <div class="row">
-                                <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="order_tax_rate" min="0" id="orderTaxRate"value="{{  $order->tax_rate }}"  >
+                                <input type="number" step="0.01" readonly="readonly" class="form-control p-0 pe-2 text-end order-font" min="0" id="tax">
                             </div>
                             <div class="row">
-                                <input type="number" step="0.01" readonly="readonly" class="form-control p-0 pe-2 text-end order-font" min="0" id="tax" value="{{  $order->order_price * $order->tax_rate/100 }}">
-                            </div>
-                            <div class="row">
-                                <input type="number" step="0.01" readonly="readonly" class="form-control p-0 pe-2 text-end order-font" name="order_price" value="{{  $order->order_price  }}" min="0" id="orderPrice">
+                                <input type="number" step="0.01" readonly="readonly" class="form-control p-0 pe-2 text-end order-font" name="order_price" value="{{ number_format($sum - ($sum * $order->order_discount/100),2, ",", ".") }}" min="0" id="orderPrice">
                             </div>
     
                         </div>
@@ -263,6 +236,13 @@
         </div>
     @endif
 </div>
+<script type="text/javascript">
+
+            
+   
+   
+</script>
+
+
+
 @endsection
-
-
