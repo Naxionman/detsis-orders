@@ -4,27 +4,32 @@ namespace App\Http\Controllers;
 
 use App\Models\Dispatch;
 use App\Models\Employee;
+use App\Models\Vehicle;
 use Illuminate\Http\Request;
 
 class DispatchController extends Controller
 {
     // Show all records of dispatches table
-    public function index()
-    {
-        
+    public function index() {
         $dispatches = \App\Models\Dispatch::all();
         return view('dispatches.dispatches', compact('dispatches'));
     }
 
-    public function add_dispatch(){
+    public function log() {
+        $employees = \App\Models\Employee::all();
+        $vehicles = \App\Models\Vehicle::all();
+
+        return view('dispatches.dispatch_log', compact('vehicles','employees'));
+    }
+
+    public function add_dispatch() {
         $vehicles = \App\Models\Vehicle::all();
         $employees = \App\Models\Employee::all();
 
         return view ('dispatches.add_dispatch', compact('vehicles','employees'));
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $number_of_employees = $request->input('count');
 
         //Creating a new dispatch without employees...

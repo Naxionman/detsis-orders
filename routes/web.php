@@ -31,6 +31,7 @@ Route::get('/employees', [EmployeeController::class, 'index']);
 Route::get('/shippers', [ShipperController::class, 'index']);
 Route::get('/vehicles', [VehicleController::class, 'index']);
 Route::get('/dispatches', [DispatchController::class, 'index']);
+Route::get('/dispatch_log', [DispatchController::class, 'log']);
 Route::get('/orders', [OrderController::class, 'index']);
 Route::get('/shipments', [ShipmentController::class, 'index']);
 Route::get('/products', [ProductController::class, 'index']);

@@ -22,9 +22,9 @@ class Order extends Model
         return $this->belongsTo(Supplier::class);
     }
 
-    public function orderShipments()
+    public function shipment()
     {
-        return $this->hasOne(OrderShipment::class);
+        return $this->belongsTo(Shipment::class);
     }
 
 }

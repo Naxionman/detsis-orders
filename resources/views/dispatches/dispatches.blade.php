@@ -16,6 +16,8 @@
                 <div class="card-header">
                     <i class="fas fa-car me-1"></i>
                         Ημερολόγιο κινήσεων
+                        <i class="fas fa-print ms-5"></i>
+                        <a href="/dispatch_log">Εκτύπωση δελτίου απόσπασης</a>
                 </div>
                 <div class="card-body">
                     <table id="myTable" class="cell-border display compact">
@@ -24,6 +26,7 @@
                                 <th>Ημερομηνία</th>
                                 <th>Όχημα</th>
                                 <th>Πελάτης</th>
+                                <th>Διεύθυνση</th>
                                 <th>Πλήρωμα</th>
                                 <th>Στοιχεία Ελέγχου</th>
                             </tr>
@@ -33,6 +36,7 @@
                                 <th>Ημερομηνία</th>
                                 <th>Όχημα</th>
                                 <th>Πελάτης</th>
+                                <th>Διεύθυνση</th>
                                 <th>Πλήρωμα</th>
                                 <th>Στοιχεία Ελέγχου</th>
                             </tr>
@@ -43,6 +47,7 @@
                                 <td><strong>{{ $dispatch->dispatch_date->format('d-m-Y') }}</strong></td>                                
                                 <td>{{ $dispatch->vehicle->name }}</td>
                                 <td>{{ $dispatch->client }}</td>
+                                <td>{{ $dispatch->address }}</td>
                                 <td>@foreach ($dispatch->employees as $employee)
                                     {{ $employee->surname }},
                                 @endforeach</td>

@@ -60,7 +60,11 @@
                     
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputClient">Πελάτης</label></div>
-                        <div class="col-sm-4"><input class="form-control" autocomplete="nope" type="text" id="inputClient" name="client" placeholder="Πελάτης"></div>
+                        <div class="col-sm-4"><input class="form-control" type="text" id="inputClient" name="client" placeholder="Πελάτης"></div>
+                    </div>
+                    <div class="row mt-3 justify-content-center">
+                        <div class="col-sm-2"><label for="inputAddress">Διεύθυνση</label></div>
+                        <div class="col-sm-4"><input class="form-control" type="text" id="inputAddress" name="address" placeholder="Διεύθυνση"></div>
                     </div>
                     
                     <div class="row mt-3 justify-content-center">

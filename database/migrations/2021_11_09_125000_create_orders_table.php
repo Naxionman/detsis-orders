@@ -20,9 +20,9 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('supplier_id');
             $table->unsignedBigInteger('shipment_id')->nullable();
             $table->string('order_invoice_number')->nullable();
-            $table->float('order_discount')->default('0,00');
-            $table->float('order_charges')->default('0,00');
-            $table->float('tax_rate')->default('24,00');
+            $table->float('order_discount')->default('0.00');
+            $table->float('order_charges')->default('0.00');
+            $table->float('tax_rate')->default('24.00');
             $table->float('order_price')->nullable(); 
             $table->boolean('pending')->default(1);
             $table->string('notes')->nullable();

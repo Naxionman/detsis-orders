@@ -9,7 +9,7 @@
             <div class="card-body bg-light">
                 <!-- General details of order -->
                 <div class="row">
-                    <div class="col">
+                    <div class="col m-3 border rounded">
                         <h6>Αριθμός παραγγελίας : {{ $order->id }}</h6>
                         <h6>Προμηθευτής : {{ $order->supplier->company_name }}</h6>
                         <h6>Ημερομηνία παραγγελίας : {{ $order->order_date->format('d-m-Y') }}</h6>
@@ -23,9 +23,32 @@
                             @endphp
                         </h6>    
                     </div>
-                    <div class="col">
-                        <h6>Τιμολόγιο Μεταφορικής</h6>
+                    <div class="col m-3">
+                        <div class="card">
+                            <h5 class="card-header">Τιμολόγιο Μεταφορικής</h5>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col border-end">
+                                        <h6>Μεταφορική : </h6>
+                                        <h6>Αριθμός εγγράφου : </h6>
+                                        <h6>Χρέωση :</h6>
+                                        <h6>Επιπλέον Μεταφορική : </h6>
+                                        <h6>Επιπλέον χρέωση : </h6>
+                                    </div>
+                                    
+                                    <div class="col">
+                                        <h6>{{ $order->shipment->shipper->name ?? "" }}</h6>
+                                        <h6>{{ $order->shipment->invoice_number ?? " " }}</h6>
+                                        <h6>{{ number_format($order->shipment->shipment_price ?? '0', 2, ",", ".") }} €</h6>
+                                        <h6>{{ $order->shipment->extraShipper->name ?? " " }}</h6>
+                                        <h6>{{ number_format($order->shipment->extra_price ?? '0', 2, ",", ".")  }} €</h6>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
                     </div>
+                    
                 </div>
                 <!-- List of ordered goods -->
                 <div class="row">

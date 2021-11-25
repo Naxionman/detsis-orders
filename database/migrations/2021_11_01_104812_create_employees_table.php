@@ -38,6 +38,7 @@ class CreateEmployeesTable extends Migration
             $table->string('speciality')->nullable();
             $table->string('marital_status')->nullable();
             $table->integer('children')->nullable();
+            $table->integer('leave_days')->nullable();
             $table->string('notes')->nullable();
             $table->timestamps();
         });

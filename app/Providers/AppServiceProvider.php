@@ -28,6 +28,8 @@ class AppServiceProvider extends ServiceProvider
     {
         /*
          * In case of database changes you need to comment out the whole function in order for artisan to work.
+         * 
+         * delete/add space before slash to comment out
          */
         //Birthdays
         $birthdays = array();
@@ -45,7 +47,7 @@ class AppServiceProvider extends ServiceProvider
 
         View::share('shortages', $shortages);
         View::share('birthdays', $birthdays);
-       
+        //        */
     }
     
 }

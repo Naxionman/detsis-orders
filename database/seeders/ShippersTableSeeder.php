@@ -38,6 +38,12 @@ class ShippersTableSeeder extends Seeder
             'email' => 'efan.naxou@gmail.com',
         ]);
 
+        \App\Models\Shipper::create([
+            'name' => 'ΣΦΑΙΡΑ',
+            'phone' => '2310 785 100',
+            'website' => 'https://sferatrans.gr/index.php/el/',
+            'email' => 'sfairatrans@gmail.com',
+        ]);
 
     }
 }
