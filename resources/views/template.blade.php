@@ -131,10 +131,7 @@
         <script type = "text/javascript">
             $(document).ready( function () {
                                 //Unfortunately every table must be written separately...
-                                var table = $('#myTable').DataTable({
-                                    columnDefs: [{ 'targets': '4', type: 'date-eu' }],
-                                    
-                                });
+                                $('#myTable').DataTable();
             });
         </script>
     </body>
