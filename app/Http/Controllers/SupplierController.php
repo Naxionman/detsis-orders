@@ -61,6 +61,7 @@ class SupplierController extends Controller
             'address' => 'nullable',
             'zipcode' => 'nullable|digits:5',
             'city' => 'nullable',
+            'iban'=>'nullable',
             'description' => 'nullable'
         ]);
 

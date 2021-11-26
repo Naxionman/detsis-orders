@@ -25,6 +25,7 @@ class CreateSuppliersTable extends Migration
             $table->string('address')->nullable();
             $table->integer('zipcode')->nullable();
             $table->string('city')->nullable();
+            $table->string('iban')->nullable();
             $table->longtext('description')->nullable();
             $table->timestamps();
         });

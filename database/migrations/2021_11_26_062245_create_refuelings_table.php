@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVehiclesTable extends Migration
+class CreateRefuelingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateVehiclesTable extends Migration
      */
     public function up()
     {
-        Schema::create('vehicles', function (Blueprint $table) {
+        Schema::create('refuelings', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('fuel_type');
-            
-            //Τι άλλο πρέπει να διατηρούμε ως πληροφορίες οχήματος
-            
+            $table->date('refuel_date');
+            $table->unsignedBigInteger('vehicle_id');
+            $table->float('amount');
+            $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateVehiclesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vehicles');
+        Schema::dropIfExists('refuelings');
     }
 }
