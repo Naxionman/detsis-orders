@@ -18,7 +18,7 @@
                         Πίνακας εργαζομένων
                 </div>
                 <div class="card-body">
-                    <table id="myTable" class="cell-border display compact">
+                    <table id="EmployeesTable" class="cell-border display compact">
                         <thead>
                             <tr>
                                 <th>Επώνυμο</th>
@@ -70,4 +70,8 @@
                 </div>
             </div>
     </div>
+
+    <script type = "text/javascript">
+        $(document).ready( function () {$('#EmployeesTable').DataTable();});
+    </script>
 @endsection

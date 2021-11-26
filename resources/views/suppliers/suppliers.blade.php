@@ -2,7 +2,6 @@
 
 @section('title', 'Προμηθευτές')
 
-
 @section('content')
     <div class="container-fluid px-4">
         <h1 class="mt-4">Προμηθευτές</h1>
@@ -89,6 +88,11 @@
                 </div>
             </div>
     </div>
-
+    <script type = "text/javascript">
+        $(document).ready( function () {
+                            //Unfortunately every table must be written separately...
+                            $('#myTable').DataTable();
+        });
+    </script>
     
 @endsection

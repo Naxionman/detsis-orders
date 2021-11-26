@@ -120,6 +120,11 @@
                 </div>
             </div>
     </div>
-
+    <script type = "text/javascript">
+        $(document).ready( function () {
+                            //Unfortunately every table must be written separately...
+                            $('#myTable').DataTable();
+        });
+    </script>
     
 @endsection
