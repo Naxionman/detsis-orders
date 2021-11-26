@@ -41,6 +41,8 @@ class EmployeeController extends Controller
             'speciality' => 'nullable',
             'marital_status' => 'nullable',
             'children' => 'nullable',
+            'leave_days_entitled' => 'nullable',
+            'leave_days_taken' => 'nullable',
             'notes' => 'nullable'
         ]);
 
@@ -85,13 +87,15 @@ class EmployeeController extends Controller
             'speciality' => 'nullable',
             'marital_status' => 'nullable',
             'children' => 'nullable',
+            'leave_days_entitled' => 'nullable',
+            'leave_days_taken' => 'nullable',
             'notes' => 'nullable'
         ]);
 
         $employee->update($data);
                 
         $employees = \App\Models\Employee::all();
-        return view('employees', compact('employees'));
+        return view('employees.employees', compact('employees'));
     }
 
     public function destroy(\App\Models\Employee $employee)

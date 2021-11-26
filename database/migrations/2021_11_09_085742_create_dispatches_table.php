@@ -18,7 +18,6 @@ class CreateDispatchesTable extends Migration
             $table->date('dispatch_date');
             $table->unsignedBigInteger('vehicle_id');
             $table->unsignedBigInteger('client_id');
-            $table->string('client')->nullable();
             $table->string('address')->nullable();
             $table->string('notes')->nullable();
             $table->timestamps();

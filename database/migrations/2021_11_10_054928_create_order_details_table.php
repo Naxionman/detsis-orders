@@ -18,8 +18,8 @@ class CreateOrderDetailsTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('order_id');
             $table->integer('quantity');
-            $table->string('measurement_unit')->nullable();
-            $table->integer('items_per_package')->nullable();
+            $table->string('measurement_unit')->default('ΤΕΜ');
+            $table->integer('items_per_package')->default('1');
             $table->float('product_discount')->default('0.00');
             $table->float('net_value')->nullable();
             $table->float('tax_rate')->default('24.00');    //We need to have this stored in case of change

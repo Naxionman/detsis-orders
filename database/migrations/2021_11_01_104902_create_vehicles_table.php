@@ -17,6 +17,7 @@ class CreateVehiclesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('fuel_type');
+            $table->string('notes')->nullable();
             
             //Τι άλλο πρέπει να διατηρούμε ως πληροφορίες οχήματος
             

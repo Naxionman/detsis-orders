@@ -16,7 +16,6 @@ class Employee extends Model
         'contract_expiring',
         'date_joined',
         'date_left',
-
     ];
 
     public function dispatches(){

@@ -120,15 +120,22 @@
                 </footer>
             </div>
         </div>
-        <!--
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-        -->
+        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         
         <script src="/js/scripts.js"></script>
         <script type="text/javascript" src="https:////cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.11/sorting/date-eu.js"></script>
 
-        <script type = "text/javascript">$(document).ready( function () {$('#myTable').DataTable();} );</script>
+        <script type = "text/javascript">
+            $(document).ready( function () {
+                                //Unfortunately every table must be written separately...
+                                var table = $('#myTable').DataTable({
+                                    columnDefs: [{ 'targets': '4', type: 'date-eu' }],
+                                    
+                                });
+            });
+        </script>
     </body>
 </html>

@@ -30,7 +30,7 @@ class CreateEmployeesTable extends Migration
             $table->string('ama')->nullable();
             $table->string('afm')->nullable();
             $table->string('adt')->nullable();
-            $table->string('citinzenship')->nullable();
+            $table->string('citizenship')->nullable();
             $table->string('contract_type')->nullable();
             $table->date('contract_expiring')->nullable();
             $table->integer('working_days')->nullable();
@@ -38,7 +38,8 @@ class CreateEmployeesTable extends Migration
             $table->string('speciality')->nullable();
             $table->string('marital_status')->nullable();
             $table->integer('children')->nullable();
-            $table->integer('leave_days')->nullable();
+            $table->integer('leave_days_entitled')->nullable();
+            $table->integer('leave_days_taken')->nullable();
             $table->string('notes')->nullable();
             $table->timestamps();
         });

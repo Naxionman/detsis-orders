@@ -37,7 +37,7 @@
                                     </div>
                                     
                                     <div class="col">
-                                        <h6>{{ $order->shipment->shipper->name ?? "" }}</h6>
+                                        <h6>{{ $order->shipment->shipper->name ?? " " }}</h6>
                                         <h6>{{ $order->shipment->invoice_number ?? " " }}</h6>
                                         <h6>{{ number_format($order->shipment->shipment_price ?? '0', 2, ",", ".") }} €</h6>
                                         <h6>{{ $order->shipment->extraShipper->name ?? " " }}</h6>
