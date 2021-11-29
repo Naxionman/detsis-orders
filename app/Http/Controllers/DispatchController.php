@@ -58,24 +58,19 @@ class DispatchController extends Controller
         return view('dispatches.edit_dispatch', compact('dispatch'));
     }
 
-    public function update(\App\Models\Dispatch $dispatch)
-    {
-        //dd($dispatch);
-
+    public function update(\App\Models\Dispatch $dispatch) {
         $data = request()->validate([
-            'name' => 'required|min:4',
-            
+            'dispatch_date' => 'required',
+                'vehicle_id' => 'required',
+                'client' => 'required',
+                'notes'  => 'nullable'        
         ]);
 
         $dispatch->update($data);
-        //dd($dispatch->name);
-        
-        $dispatchs = \App\Models\Dispatch::all();
-        return view('dispatches', compact('dispatches'));
+        return redirect('dispatches');
     }
 
-    public function destroy(\App\Models\Dispatch $dispatch)
-    {
+    public function destroy(\App\Models\Dispatch $dispatch) {
         $dispatch->delete();
 
         return redirect('dispatches');

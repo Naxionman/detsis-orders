@@ -5,81 +5,59 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use Illuminate\Http\Request;
 
-class ClientController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+class ClientController extends Controller {
+
+    // Show all records of client table
+    public function index() {
+        $clients = \App\Models\Client::all();
+        return view('clients.clients', compact('clients'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function add_client() {
+        return view ('clients.add_client');
+    }
+    public function store() {
+        $data = request()->validate([
+            'surname' => 'required',
+            'name' => 'required',
+            'email' => 'nullable',
+            'mobile' => 'nullable',
+            'phone2' => 'nullable',
+            'address' => 'nullable',
+            'notes' => 'nullable'
+        ]);
+
+        \App\Models\Client::create($data);
+
+        return redirect()->back()->with('message', 'Επιτυχής αποθήκευση Πελάτη!');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function show($clientId) {
+        $client = \App\Models\Client::findOrFail($clientId);
+        
+        return view('clients.edit_client', compact('client'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Client  $client
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Client $client)
-    {
-        //
-    }
+    public function update(\App\Models\Client $client) {
+      
+        $data = request()->validate([
+            'surname' => 'required',
+            'name' => 'required',
+            'email' => 'nullable',
+            'mobile' => 'nullable',
+            'phone2' => 'nullable',
+            'address' => 'nullable',
+            'notes' => 'nullable'
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Client  $client
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Client $client)
-    {
-        //
+        $client->update($data);
+                
+        return redirect('client');
     }
+    
+    public function destroy(\App\Models\Client $client) {
+        $client->delete();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Client  $client
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Client $client)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Client  $client
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Client $client)
-    {
-        //
+        return redirect('clients');
     }
 }

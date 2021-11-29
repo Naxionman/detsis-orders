@@ -4,21 +4,19 @@ namespace App\Http\Controllers;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 
-class SupplierController extends Controller
-{
+class SupplierController extends Controller {
+    
     // Show all records of suppliers table
-    public function index()
-    {
+    public function index() {
         $suppliers = \App\Models\Supplier::all();
         return view('suppliers.suppliers', compact('suppliers'));
     }
 
-    public function add_supplier(){
+    public function add_supplier() {
         return view ('suppliers.add_supplier');
     }
     
-    public function store()
-    {
+    public function store() {
         $data = request()->validate([
             'company_name' => 'required|unique:suppliers|min:4',
             'salesman' => 'nullable',
@@ -38,18 +36,14 @@ class SupplierController extends Controller
         return redirect()->back()->with('message', 'Επιτυχής αποθήκευση Προμηθευτή!');
     }
 
-    public function show($supplierId)
-    {
+    public function show($supplierId) {
         $supplier = \App\Models\Supplier::findOrFail($supplierId);
         //dd($supplier);
         return view('suppliers.edit_supplier', compact('supplier'));
     }
 
-    public function update(\App\Models\Supplier $supplier)
-    {
+    public function update(\App\Models\Supplier $supplier) {
        
-        //dd($supplier);
-
         $data = request()->validate([
             'company_name' => 'required|min:4',
             'salesman' => 'nullable',
@@ -66,15 +60,11 @@ class SupplierController extends Controller
         ]);
 
         $supplier->update($data);
-        //dd($supplier->company_name);
         
-        $suppliers = \App\Models\Supplier::all();
-        
-        return redirect('/suppliers');
+        return redirect('suppliers');
     }
 
-    public function destroy(\App\Models\Supplier $supplier)
-    {
+    public function destroy(\App\Models\Supplier $supplier) {
         $supplier->delete();
 
         return redirect('/suppliers');

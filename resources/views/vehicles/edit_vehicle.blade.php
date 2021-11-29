@@ -1,25 +1,27 @@
 @extends('template')
 
-@section('title', 'Προσθήκη Οχήματος - Detsis Orders')
+@section('title', 'Επεξεργασία Οχήματος - Detsis Orders')
 
 @section('content')
 <div class="container">
     <div class="card bg-success bg-opacity-25 shadow-lg border-0 rounded-3 mt-3 ">
-        <div class="card-header"><h3 class="text-center font-weight-light my-2 ">Εγγραφή οχήματος</h3></div>
+        <div class="card-header"><h3 class="text-center font-weight-light my-2 ">Επεξεργασία οχήματος</h3></div>
             <div class="card-body bg-light">
-                <form action="add_vehicle" id="addVehicle" method="POST">
+                <form action="/edit_vehicle/{{$vehicle->id}}" id="editVehicle" method="POST">
+                    @method('PATCH')
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputName">Ονομασία οχήματος</label></div>
-                        <div class="col-sm-4"><input class="form-control" autocomplete="nope" type="text" id="inputName" name="name" placeholder="Το όνομα του οχήματος"  required="required" autofocus></div>
+                        <div class="col-sm-4"><input class="form-control" autocomplete="nope" type="text" id="inputName" name="name" value="{{ $vehicle->name }}" required="required" autofocus></div>
                     </div>
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputPlate">Πινακίδα οχήματος</label></div>
-                        <div class="col-sm-4"><input class="form-control" autocomplete="nope" type="text" id="inputPlate" name="plate" placeholder="Η πινακίδα οχήματος"  required="required"></div>
+                        <div class="col-sm-4"><input class="form-control" autocomplete="nope" type="text" id="inputPlate" name="plate"  value="{{ $vehicle->plate }}" required="required"></div>
                     </div>
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputFuelType">Είδος καυσίμου</label></div>
                         <div class="col-sm-4">
                             <select class="form-control" autocomplete="nope" type="text" id="inputFuelType" name="fuel_type" >
+                                <option value="{{ $vehicle->fuel_type }}" selected>{{ $vehicle->fuel_type }}</option>
                                 <option value="Πετρέλαιο (Diesel)">Πετρέλαιο (Diesel)</option>
                                 <option value="Βενζίνη (Αμόλυβδη)">Βενζίνη (Αμόλυβδη)</option>
                                 <option value="Υγραέριο LPG">Υγραέριο LPG</option>
@@ -30,13 +32,13 @@
                     </div>
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputNotes">Σημειώσεις</label></div>
-                        <div class="col-sm-4"><input class="form-control" autocomplete="nope" type="text" id="inputNotes" name="notes" placeholder="Εδώ σημειώστε επιπλέον πληροφορίες για το όχημα"></div>
+                        <div class="col-sm-4"><input class="form-control" autocomplete="nope" type="text" id="inputNotes" name="notes" value="{{ $vehicle->notes }}" placeholder="Εδώ σημειώστε επιπλέον πληροφορίες για το όχημα"></div>
                     </div>
                     @csrf
                 </form>
             </div>
             <div class="card-footer text-center py-2">
-                <button class="btn btn-danger" type="submit" form="addVehicle">  Αποθήκευση  </button>
+                <button class="btn btn-danger" type="submit" form="editVehicle">  Αποθήκευση  </button>
             </div>
         </div>
 

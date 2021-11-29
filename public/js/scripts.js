@@ -31,7 +31,11 @@ $('tr[data-href]').on("click", function() {
 });
 
 
+
 jQuery(function() {
+
+    $('.js-example-basic-single').select2();
+
     if (top.location.pathname.match(/^\/edit_order\//)) {
         
         //determining the count of details

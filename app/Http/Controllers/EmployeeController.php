@@ -4,20 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class EmployeeController extends Controller
-{
+class EmployeeController extends Controller {
+    
     // Show all records of employees table
-    public function index()
-    {
+    public function index() {
         $employees = \App\Models\Employee::all();
         return view('employees.employees', compact('employees'));
     }
 
-    public function add_employee(){
+    public function add_employee() {
         return view ('employees.add_employee');
     }
 
-    public function store(){
+    public function store() {
 
         $data = request()->validate([
             'surname' => 'required',
@@ -53,18 +52,14 @@ class EmployeeController extends Controller
         return redirect()->back()->with('message', 'Επιτυχής αποθήκευση Εργαζόμενου!');
     }
 
-    public function show($employeeId)
-    {
+    public function show($employeeId) {
         $employee = \App\Models\Employee::findOrFail($employeeId);
         //dd($employee);
         return view('employees.edit_employee', compact('employee'));
     }
 
-    public function update(\App\Models\Employee $employee)
-    {
-       
-        //dd($employee);
-
+    public function update(\App\Models\Employee $employee) {
+      
         $data = request()->validate([
             'surname' => 'required',
             'first_name' => 'required',
@@ -94,14 +89,12 @@ class EmployeeController extends Controller
 
         $employee->update($data);
                 
-        $employees = \App\Models\Employee::all();
-        return view('employees.employees', compact('employees'));
+        return redirect('employees');
     }
 
-    public function destroy(\App\Models\Employee $employee)
-    {
+    public function destroy(\App\Models\Employee $employee) {
         $employee->delete();
 
-        return redirect('/employees');
+        return redirect('employees');
     }
 }

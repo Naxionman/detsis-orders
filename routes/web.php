@@ -10,6 +10,7 @@ use App\Http\Controllers\DispatchController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ClientController;
 
 
 /*
@@ -26,6 +27,7 @@ use App\Http\Controllers\ProductController;
 Route::get('/', [PageController::class, 'index']);
 
 
+Route::get('/clients', [ClientController::class, 'index']);
 Route::get('/suppliers', [SupplierController::class, 'index']);
 Route::get('/employees', [EmployeeController::class, 'index']);
 Route::get('/shippers', [ShipperController::class, 'index']);
@@ -38,6 +40,7 @@ Route::get('/products', [ProductController::class, 'index']);
 
 
 Route::get('/add_supplier', [SupplierController::class, 'add_supplier']);
+Route::get('/add_client', [ClientController::class, 'add_client']);
 Route::get('/add_employee', [EmployeeController::class, 'add_employee']);
 Route::get('/add_shipper', [ShipperController::class, 'add_shipper']);
 Route::get('/add_vehicle', [VehicleController::class, 'add_vehicle']);
@@ -47,6 +50,7 @@ Route::get('/add_shipment', [ShipmentController::class, 'add_shipment']);
 Route::get('/add_product', [ProductController::class, 'add_product']);
 
 Route::post('/add_supplier', [SupplierController::class, 'store']);
+Route::post('/add_client', [ClientController::class, 'store']);
 Route::post('/add_employee', [EmployeeController::class, 'store']);
 Route::post('/add_shipper', [ShipperController::class, 'store']);
 Route::post('/add_vehicle', [VehicleController::class, 'store']);
@@ -57,6 +61,7 @@ Route::post('/add_product', [ProductController::class, 'store']);
 
 //Show actions (for editing records)
 Route::get('/edit_supplier/{supplierId}',[SupplierController::class, 'show']);
+Route::get('/edit_client/{clientId}',[ClientController::class, 'show']);
 Route::get('/edit_employee/{employeeId}',[EmployeeController::class, 'show']);
 Route::get('/edit_shipper/{shipperId}',[ShipperController::class, 'show']);
 Route::get('/edit_vehicle/{vehicleId}',[VehicleController::class, 'show']);
@@ -67,9 +72,11 @@ Route::get('/edit_shipment/{shipmentId}',[ShipmentController::class, 'show']);
 Route::get('/edit_product/{productId}',[ProductController::class, 'show']);
 
 Route::get('/view_order/{orderId}',[OrderController::class, 'showDetails']);
+Route::get('/view_vehicle/{vehicleId}',[VehicleController::class, 'showDetails']);
 
 //Patch/put actions
 Route::patch('/edit_supplier/{supplier}',[SupplierController::class, 'update']);
+Route::patch('/edit_client/{client}',[ClientController::class, 'update']);
 Route::patch('/edit_employee/{employee}',[EmployeeController::class, 'update']);
 Route::patch('/edit_shipper/{shipper}',[ShipperController::class, 'update']);
 Route::patch('/edit_vehicle/{vehicle}',[VehicleController::class, 'update']);
@@ -81,6 +88,7 @@ Route::patch('/edit_product/{product}',[ProductController::class, 'update']);
 
 //Delete actions
 Route::delete('/suppliers/{supplier}',[SupplierController::class, 'destroy']);
+Route::delete('/clients/{client}',[ClientController::class, 'destroy']);
 Route::delete('/employees/{employee}',[EmployeeController::class, 'destroy']);
 Route::delete('/shippers/{shipper}',[ShipperController::class, 'destroy']);
 Route::delete('/vehicles/{vehicle}',[VehicleController::class, 'destroy']);

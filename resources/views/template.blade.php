@@ -8,10 +8,14 @@
         <meta name="author" content="" />
         <title>@yield('title')</title>
         <link href="\css\styles.css" rel="stylesheet" />
-        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <!--  CDN to datables -->
         <link rel="stylesheet" type="text/css" href="https:////cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"/>
-        
-        
+        <!--  CDN to select2 -->
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>  
+        <!--  CDN to font-awesome -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
@@ -67,9 +71,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-money-check"></i></div>
                                 Παραγγελίες
                             </a>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <a class="nav-link collapsed" href="#"  data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-edit"></i></div>Διαχείριση
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="/products">
@@ -79,6 +84,10 @@
                                     <a class="nav-link" href="/suppliers">
                                         <div class="sb-nav-link-icon"><i class="fas fa-industry"></i></div>
                                         Προμηθευτές
+                                    </a>
+                                    <a class="nav-link" href="/clients">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-industry"></i></div>
+                                        Πελάτες
                                     </a>
                                     <a class="nav-link" href="/employees">
                                         <div class="sb-nav-link-icon"><i class="fas fa-address-card"></i></div>
@@ -121,8 +130,7 @@
             </div>
         </div>
         
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"type="text/javascript"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        
         
         <script src="/js/scripts.js"></script>
         <script type="text/javascript" src="https:////cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>

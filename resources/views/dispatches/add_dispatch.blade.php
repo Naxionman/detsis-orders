@@ -30,16 +30,25 @@
                             count = count +1;
                             var divToPlace = document.getElementById('inputCrew');
                             var fragment = document.createElement('fragment');
+                            fragment.id = 'fragment'+count;
                             var oldButton = document.getElementById('addVehicleEmployee');
                             oldButton.parentNode. removeChild(oldButton);
-                            fragment.innerHTML = '<select class="form-control" name="employee'+count+'"> @foreach ($employees as $employee)<option value="{{ $employee->id }}">{{ $employee->surname }}</option> </option> @endforeach</select><button type="button" id="addVehicleEmployee" onclick="addInputField('+count+')" class="btn btn-warning btn-sm m-1"> + Προσθήκη εργαζομένου στο όχημα</button><button class="btn btn-danger btn-sm" type="button">X</button><input type="hidden" name="count" value="'+count+'">';
-    
+                            fragment.innerHTML = '<select id="fragment'+count+'" class="form-control js-example-basic-single" name="employee'+count+'"> @foreach ($employees as $employee)<option value="{{ $employee->id }}">{{ $employee->surname }} {{ $employee->first_name }}</option> </option> @endforeach</select><button type="button" id="addVehicleEmployee" onclick="addInputField('+count+')" class="btn btn-warning btn-sm m-1"> + Προσθήκη εργαζομένου στο όχημα</button><button class="btn btn-danger btn-sm" onclick="removeInputField('+count+')" type="button">Αφαίρεση</button><input type="hidden" name="count" value="'+count+'">';    
                             document.getElementById('divToPlace').appendChild(fragment);
                             
                         }
-
-                        function removeInputField(){
-                            
+                        
+                        function removeInputField(count){
+                            var fragmentToRemove = document.getElementById('fragment'+count);
+                            console.log("$('[id^=addVehicleEmployee]').length is :" + $('[id^=addVehicleEmployee]').length);
+                            var oldButton = document.createElement('div');
+                            fragmentToRemove.parentNode.removeChild(fragmentToRemove);
+                            if($('[id^=addVehicleEmployee]').length < 1){
+                                console.log("It is < 1 ...");
+                                var oldButton = document.createElement('div');
+                                oldButton.innerHTML = '<button type="button" id="addVehicleEmployee" onclick="addInputField('+count+')" class="btn btn-warning btn-sm m-1"> + Προσθήκη εργαζομένου στο όχημα</button>';
+                                document.getElementById('divToPlace'). appendChild(oldButton);
+                            }
                         }
                     </script>
 
@@ -47,9 +56,9 @@
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputCrew">Εργαζόμενοι</label></div>
                         <div class="col-sm-4" id="divToPlace">
-                            <select class="form-control" id="inputCrew" name="employee0">
+                            <select class="form-control js-example-basic-single" id="inputCrew" name="employee0">
                                 @forelse ($employees as $employee)
-                                    <option value="{{ $employee->id }}">{{ $employee->surname }}</option>
+                                    <option value="{{ $employee->id }}">{{ $employee->surname }} {{ $employee->first_name }}</option>
                                 @empty
                                     <option value="">Δεν υπάρχουν εργαζόμενοι στην βάση!</option>
                                 @endforelse

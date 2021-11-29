@@ -38,10 +38,8 @@ class ShipperController extends Controller
         return view('shippers.edit_shipper', compact('shipper'));
     }
 
-    public function update(\App\Models\Shipper $shipper)
-    {
-        //dd($shipper);
-
+    public function update(\App\Models\Shipper $shipper) {
+        
         $data = request()->validate([
             'name' => 'required|min:4',
             'email' => 'nullable',
@@ -50,10 +48,8 @@ class ShipperController extends Controller
         ]);
 
         $shipper->update($data);
-        //dd($shipper->name);
         
-        $shippers = \App\Models\Shipper::all();
-        return view('shippers', compact('shippers'));
+        return redirect('shippers');
     }
 
     public function destroy(\App\Models\Shipper $shipper)

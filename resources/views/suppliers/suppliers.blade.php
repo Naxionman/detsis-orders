@@ -74,9 +74,6 @@
                                             @csrf
                                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                             </form>
-                                        
-
-
                                     </div>
                                 </td>
                             </tr>
@@ -88,11 +85,5 @@
                 </div>
             </div>
     </div>
-    <script type = "text/javascript">
-        $(document).ready( function () {
-                            //Unfortunately every table must be written separately...
-                            $('#myTable').DataTable();
-        });
-    </script>
     
 @endsection
