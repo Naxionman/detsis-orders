@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
@@ -36,12 +37,25 @@ class VehicleController extends Controller
 
     public function showDetails($vehicleId) {
         $vehicle = \App\Models\Vehicle::findOrFail($vehicleId);
-        $kteos = \App\Models\Kteo::where('vehicle_id','=','$vehicleId');
-        $car_services = \App\Models\CarService::where('vehicle_id','=','$vehicleId');
-        $insurances = \App\Models\Insurance::where('vehicle_id','=','$vehicleId');
-        $refuelings = \App\Models\Refueling::where('vehicle_id','=','$vehicleId');
+        $kteo_expiring = DB::table('kteos')
+                            ->select('next_kteo_date')
+                            ->where('vehicle_id','=',$vehicleId)
+                            ->latest()
+                            ->first();
+        $insurance_expiring = DB::table('insurances')
+                            ->select('expiry_date')
+                            ->where('vehicle_id','=',$vehicleId)
+                            ->latest()
+                            ->first();
+        $last_service = DB::table('car_services')
+                            ->select('service_date')
+                            ->where('vehicle_id','=',$vehicleId)
+                            ->latest()
+                            ->first();
 
-        return view('vehicles.view_vehicle', compact('vehicle','kteos', 'car_services', 'insurances', 'refuelings'));
+        $refuelings = DB::table('refuelings')->where('vehicle_id','=',$vehicleId)->get();
+
+        return view('vehicles.view_vehicle', compact('vehicle','kteo_expiring', 'insurance_expiring','last_service', 'refuelings'));
     }
 
     public function update(\App\Models\Vehicle $vehicle) {

@@ -10,12 +10,12 @@
                 <form action="add_order" id="addOrder" method="POST">
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputOrderDate">Ημερομηνία</label></div>
-                        <div class="col-sm-4"><input class="form-control" autocomplete="nope" type="date" id="inputOrderDate" name="order_date" required="required" autofocus></div>
+                        <div class="col-sm-4"><input class="form-control" type="date" id="inputOrderDate" value="{{date('Y-m-d')}}" name="order_date" required="required" autofocus></div>
                     </div>
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputSupplier">Προμηθευτής</label></div>
                         <div class="col-sm-4">
-                            <select class="form-control" id="inputSupplier" name="supplier_id">
+                            <select class="js-example-basic-single form-control" id="inputSupplier" name="supplier_id">
                                 @foreach ($suppliers as $supplier)
                                     <option   type="text" value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
                                 @endforeach
@@ -35,15 +35,15 @@
                                 </tr>
                             </thead>
                             <tbody id="tableBody">
-                                <tr>
+                                <tr id="trToPlace">
                                     <td style="width:5%">1</td>
-                                    <td style="width:5%"><input class="form-control" type="number" name="quantity0" required="required"></td>
-                                    <td><input type="text" class="form-control"  name="product0" list="inputProduct">
-                                        <datalist id="inputProduct">
+                                    <td style="width:5%"><input class="form-control" type="number" name="quantity0" value="1" required="required"></td>
+                                    <td>
+                                        <select class="form-control js-example-basic-single" name="product0" id="product0">
                                             @foreach ($products as $product)
-                                                <option value="{{ $product->id }}">{{ $product->product_name }}</option>
+                                                <option value="{{ $product->id }}">{{ $product->product_name }} ({{ $product->detsis_code}})</option>
                                             @endforeach
-                                        </datalist>
+                                        </select>
                                     </td>
                                     <td style="width:10%"><button type="button" id="addProduct" onclick="addInputField(0)" class="btn btn-warning btn-sm m-1"> + </button>
                                     </td>
@@ -52,23 +52,13 @@
                                 
                             </tbody>
                         </table>
-
                         <div class="col-sm-4">
-                            
-                            
                         </div>
                     </div>
-
-
-
-
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputNotes">Σημειώσεις</label></div>
                         <div class="col-sm-4"><textarea rows="4" class="form-control" autocomplete="nope" type="text" id="inputNotes" name="notes" placeholder="Τα πεδία ημερομηνία άφιξης, μεταφορική εταιρεία, τιμή, έκπτωση και τιμολόγιο φορτωτικής συμπληρώνονται με την παραλαβή" ></textarea></div>
                     </div>
-
-                    
-                    
                     @csrf
                 </form>
             </div>
@@ -101,46 +91,24 @@
         count = count +1;
         var fragment = document.createElement('tr');
         fragment.id = 'fragment'+count;
-        fragment.innerHTML = '<td style="width:5%">'+(count+1)+'</td><td style="width:5%"><input class="form-control" type="number"name="quantity'+count+'" required="required"></td><td><input type="text" class="form-control"  name="product'+count+'" list="inputProduct"><datalist id="inputProduct">@foreach ($products as $product)<option value="{{ $product->id }}">{{ $product->product_name }}</option>@endforeach</datalist></td><td style="width:10%"><button type="button" id="addProduct" onclick="addInputField('+count+')" class="btn btn-warning btn-sm m-1"> + </button><button type="button" id="removeProduct" onclick="removeInputField(0)" class="btn btn-danger btn-sm m-1"> - </button></td><input type="hidden" name="count" value="'+count+'">';
+        var oldButton = document.getElementById('addProduct');
+        oldButton.parentNode. removeChild(oldButton);
+        fragment.innerHTML = '<td style="width:5%">'+(count+1)+'</td><td style="width:5%"><input class="form-control" value="1" type="number" name="quantity'+count+'" required="required"></td><td><select class="form-control js-example-basic-single" id="fragment'+count+'" name="product'+count+'">@foreach($products as $product)<option value="{{ $product->id }}">{{ $product->product_name }} ({{$product->detsis_code}})</option>@endforeach </select></td><td style="width:10%"><button type="button" id="addProduct" onclick="addInputField('+count+')" class="btn btn-warning btn-sm m-1"> + </button><button type="button" id="removeProduct" onclick="removeInputField('+count+')" class="btn btn-danger btn-sm m-1"> - </button></td><input type="hidden" name="count" value="'+count+'">';
         document.getElementById('tableBody').appendChild(fragment);
+        $('.js-example-basic-single').select2();
     }
  
-    function removeInputField(){
-        
-    }
-</script>
-<!--
-<script type="text/javascript">
-    function addInputField(count){
-        var count;
-        count = count +1;
-        var divToPlace = document.getElementById('inputCrew');
-        var fragment = document.createElement('fragment');
-        fragment.id = 'fragment'+count;
-        var oldButton = document.getElementById('addVehicleEmployee');
-        oldButton.parentNode. removeChild(oldButton);
-        fragment.innerHTML = '<select id="fragment'+count+'" class="form-control" name="employee'+count+'"> @foreach ($employees as $employee)<option value="{{ $employee->id }}">{{ $employee->surname }} {{ $employee->first_name }}</option> </option> @endforeach</select><button type="button" id="addVehicleEmployee" onclick="addInputField('+count+')" class="btn btn-warning btn-sm m-1"> + Προσθήκη εργαζομένου στο όχημα</button><button class="btn btn-danger btn-sm" onclick="removeInputField('+count+')" type="button">Αφαίρεση</button><input type="hidden" name="count" value="'+count+'">';    
-        document.getElementById('divToPlace').appendChild(fragment);
-        
-    }
-
     function removeInputField(count){
         var fragmentToRemove = document.getElementById('fragment'+count);
-        console.log("$('[id^=addVehicleEmployee]').length is :" + $('[id^=addVehicleEmployee]').length);
-        var oldButton = document.createElement('div');
+        var oldButton = document.createElement('td');
         fragmentToRemove.parentNode.removeChild(fragmentToRemove);
-        if($('[id^=addVehicleEmployee]').length < 1){
-            console.log("It is < 1 ...");
-            var oldButton = document.createElement('div');
-            oldButton.innerHTML = '<button type="button" id="addVehicleEmployee" onclick="addInputField('+count+')" class="btn btn-warning btn-sm m-1"> + Προσθήκη εργαζομένου στο όχημα</button>';
-            document.getElementById('divToPlace'). appendChild(oldButton);
+        if($('[id^=addProduct]').length < 1){
+            var oldButton = document.createElement('td');
+            oldButton.innerHTML = '<button type="button" id="addProduct" onclick="addInputField('+count+')" class="btn btn-warning btn-sm m-1"> + </button>';
+            document.getElementById('trToPlace'). appendChild(oldButton);
         }
     }
 </script>
--->
-
-
-
 @endsection
 
 

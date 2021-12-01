@@ -54,7 +54,7 @@
                                     <label for="inputDateOfBirth" class="align-middle">Ημερομηνία γέννησης</label>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input class="form-control" value = "{{ $employee->date_of_birth == null ?? $employee->date_of_birth->format('Y-m-d') }}" autocomplete="nope" type="date"  id="inputDateOfBirth" name="date_of_birth" placeholder="Ημερομηνία γέννησης"  required="required">
+                                    <input class="form-control" value = "{{ $employee->date_of_birth == null ?: $employee->date_of_birth->format("Y-m-d") }}" type="date"  id="inputDateOfBirth" name="date_of_birth" required="required">
                                 </div>
                             </div>
 
@@ -135,7 +135,7 @@
                                     <label for="inputContractType" class="align-middle">Τύπος Σύμβασης</label>
                                 </div>
                                 <div class="col-sm-6">
-                                    <select class="form-control" value = "{{ $employee->contract_type }}" autocomplete="nope" type="text" id="inputContractType" name="contract_type" >
+                                    <select class="form-control" value = "{{ $employee->contract_type }}" type="text" id="inputContractType" name="contract_type" >
                                         <option value="Αορίστου χρόνου">Αορίστου χρόνου</option>
                                         <option value="Ορισμένου χρόνου">Ορισμένου χρόνου</option>
                                     </select>
@@ -147,7 +147,7 @@
                                     <label for="inputContractExpiring" class="align-middle">Ημερομηνία λήξης</label>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input class="form-control" value = "{{ $employee->contract_expiring == null ?? $employee->contract_expiring->format('Y-m-d') }}" autocomplete="nope" type="date" id="inputContractExpiring" name="contract_expiring" placeholder="Ημερομηνία Λήξξης"">
+                                    <input class="form-control" value = "{{ $employee->contract_expiring == null ?: $employee->contract_expiring->format('Y-m-d') }}" type="date" id="inputContractExpiring" name="contract_expiring">
                                 </div>
                             </div>
 
@@ -156,7 +156,7 @@
                                     <label for="inputDateJoined" class="align-middle">Ημερομηνία Πρόσληψης</label>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input class="form-control" value = "{{ $employee->date_joined == null ?? $employee->date_joined->format('Y-m-d') }}" autocomplete="nope" type="date" id="inputDateJoined" name="date_joined" placeholder="Ημερομηνία Πρόσληψης"  required="required">
+                                    <input class="form-control" value = "{{ $employee->date_joined == null ?: $employee->date_joined->format('Y-m-d') }}" type="date" id="inputDateJoined" name="date_joined" required="required">
                                 </div>
                             </div>
 
@@ -165,7 +165,7 @@
                                     <label for="inputDateLeft" class="align-middle">Ημερομηνία Αποχώρησης</label>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input class="form-control" value = "{{ $employee->date_left == null ?? $employee->date_left->format(Y-m-d)  }}" autocomplete="nope" type="date" id="inputDateLeft" value="" name="date_left" placeholder="Ημερομηνία Αποχώρησης"">
+                                    <input class="form-control" value = "{{ $employee->date_left == null ?: $employee->date_left->format(Y-m-d)  }}" type="date" id="inputDateLeft" name="date_left" >
                                 </div>
                             </div>
                               

@@ -22,4 +22,8 @@ class Dispatch extends Model
     public function employees(){
         return $this->belongsToMany(Employee::class);
     }
+
+    public function client(){
+        return $this->belongsTo(Client::class);
+    }
 }

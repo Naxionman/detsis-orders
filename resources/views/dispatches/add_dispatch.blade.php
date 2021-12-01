@@ -10,7 +10,7 @@
                 <form action="add_dispatch" id="addDispatch" method="POST">
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputDispatchDate">Ημερομηνία</label></div>
-                        <div class="col-sm-4"><input class="form-control" value="{{ date("2021-11-11")}}" type="date" id="inputDispatchDate" name="dispatch_date"></div>
+                        <div class="col-sm-4"><input class="form-control" value="{{ date("Y-m-d")}}" type="date" id="inputDispatchDate" name="dispatch_date"></div>
                     </div>
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputVehicle">Όχημα</label></div>
@@ -69,7 +69,13 @@
                     
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputClient">Πελάτης</label></div>
-                        <div class="col-sm-4"><input class="form-control" type="text" id="inputClient" name="client" placeholder="Πελάτης"></div>
+                        <div class="col-sm-4">
+                            <select class="form-control js-example-basic-single" id="inputClient" name="client_id">
+                                @foreach ($clients as $client)
+                                    <option value="{{ $client->id }}">{{ $client->name }} {{ $client->surname }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputAddress">Διεύθυνση</label></div>

@@ -11,6 +11,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\RefuelingController;
 
 
 /*
@@ -54,10 +55,12 @@ Route::post('/add_client', [ClientController::class, 'store']);
 Route::post('/add_employee', [EmployeeController::class, 'store']);
 Route::post('/add_shipper', [ShipperController::class, 'store']);
 Route::post('/add_vehicle', [VehicleController::class, 'store']);
+Route::post('/add_fuel/{vehicleId}', [RefuelingController::class, 'store']);
 Route::post('/add_dispatch', [DispatchController::class, 'store']);
 Route::post('/add_order', [OrderController::class, 'store']);
 Route::post('/add_shipment', [ShipmentController::class, 'store']);
 Route::post('/add_product', [ProductController::class, 'store']);
+Route::get('/add_fuel/{vehicleId}', [RefuelingController::class, 'add_fuel']);
 
 //Show actions (for editing records)
 Route::get('/edit_supplier/{supplierId}',[SupplierController::class, 'show']);

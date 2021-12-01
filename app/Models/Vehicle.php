@@ -9,5 +9,16 @@ class Vehicle extends Model
 {
     protected $guarded = [];
 
-    
+    public function insurances(){
+        return $this->belongsToMany(Insurance::class);
+    }
+    public function refuelings(){
+        return $this->belongsToMany(Refueling::class);
+    }
+    public function kteos(){
+        return $this->belongsToMany(Kteo::class);
+    }
+    public function car_services(){
+        return $this->belongsToMany(CarService::class);
+    }
 }

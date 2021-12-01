@@ -2187,7 +2187,7 @@ progress {
   color: #6c757d;
 }
 
-.form-control, .dataTable-input {
+.form-control, .dataTable-input, .js-example-basic-single {
   display: block;
   width: 100%;
   padding: 0.375rem 0.75rem;
@@ -2205,7 +2205,7 @@ progress {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
-  .form-control, .dataTable-input {
+  .form-control, .dataTable-input, .js-example-basic-single {
     transition: none;
   }
 }
@@ -2414,7 +2414,7 @@ textarea.form-control-lg {
   border-radius: 0.25rem;
 }
 
-.form-select, .dataTable-selector {
+.form-select, .dataTable-selector, .js-example-basic-single {
   display: block;
   width: 100%;
   padding: 0.375rem 2.25rem 0.375rem 0.75rem;
@@ -11767,3 +11767,4 @@ body {
 .f-right {
   float: right;
 }
+

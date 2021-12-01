@@ -16,6 +16,7 @@ class CreateKteosTable extends Migration
         Schema::create('kteos', function (Blueprint $table) {
             $table->id();
             $table->date('kteo_date');
+            $table->date('next_kteo_date');
             $table->unsignedBigInteger('vehicle_id');
             $table->float('amount');
             $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');

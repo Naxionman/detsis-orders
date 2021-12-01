@@ -14,11 +14,17 @@
                 </div>
             <div class="card mb-4">
                 <div class="card-header">
-                    <i class="fas fa-car me-1"></i>
-                        Ημερολόγιο κινήσεων
-                        <i class="fas fa-print ms-5"></i>
-                        <a href="/dispatch_log">Εκτύπωση δελτίου απόσπασης</a>
+                    <div class="row">
+                        <div class="col-3">
+                            <i class="fas fa-car me-1"></i>
+                            Ημερολόγιο κινήσεων
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-secondary" href="/dispatch_log"><i class="fas fa-print ms-5"></i>Εκτύπωση δελτίου απόσπασης</a>
+                        </div>
+                    </div>
                 </div>
+                
                 <div class="card-body">
                     <table id="myTable" class="cell-border display compact">
                         <thead>
@@ -46,7 +52,7 @@
                             <tr>
                                 <td><strong>{{ $dispatch->dispatch_date->format('d-m-Y') }}</strong></td>                                
                                 <td>{{ $dispatch->vehicle->name }}</td>
-                                <td>{{ $dispatch->client }}</td>
+                                <td>{{ $dispatch->client->surname }} {{$dispatch->client->name}}</td>
                                 <td>{{ $dispatch->address }}</td>
                                 <td>@foreach ($dispatch->employees as $employee)
                                     {{ $employee->surname }},

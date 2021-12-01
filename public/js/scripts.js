@@ -33,9 +33,10 @@ $('tr[data-href]').on("click", function() {
 
 
 jQuery(function() {
+    $.fn.select2.defaults.set( "theme", "bootstrap" );
 
     $('.js-example-basic-single').select2();
-
+    
     if (top.location.pathname.match(/^\/edit_order\//)) {
         
         //determining the count of details
@@ -136,7 +137,7 @@ function updateFields(){
     order_tax_rate = parseFloat(order_tax_rate).toFixed(2);
     
     
-    order_net_value_final = order_net_value - order_net_value * order_discount + Number(order_charges);
+    order_net_value_final = order_net_value - order_net_value * order_discount/100 + Number(order_charges);
     order_net_value_final = Math.round(order_net_value_final*100)/100;
     order_net_value_final = parseFloat(order_net_value_final).toFixed(2);
     console.log("order net value final" + order_net_value_final);

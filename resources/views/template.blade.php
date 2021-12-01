@@ -14,7 +14,8 @@
         <link rel="stylesheet" type="text/css" href="https:////cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"/>
         <!--  CDN to select2 -->
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>  
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css" rel="stylesheet" > 
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> 
         <!--  CDN to font-awesome -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
@@ -86,7 +87,7 @@
                                         Προμηθευτές
                                     </a>
                                     <a class="nav-link" href="/clients">
-                                        <div class="sb-nav-link-icon"><i class="fas fa-industry"></i></div>
+                                        <div class="sb-nav-link-icon"><i class="fas fa-user-friends"></i></div>
                                         Πελάτες
                                     </a>
                                     <a class="nav-link" href="/employees">

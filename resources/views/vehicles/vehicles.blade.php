@@ -20,6 +20,7 @@
                     <a class="btn btn-dark" href="/kteo">KTEO</a>
                     <a class="btn btn-dark" href="/car_services">Βλάβες - Services</a>
                     <a class="btn btn-dark" href="/insurance">Ασφάλειες</a>
+                    <a class="btn btn-dark" href="/refuelings">Καύσιμα</a>
                 </div>
                 <div class="card-body">
                     <table id="myTable" class="cell-border display compact">

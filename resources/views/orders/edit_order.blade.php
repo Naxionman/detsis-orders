@@ -21,7 +21,7 @@
                                     <label for="inputArrivalDate" class="align-middle"><strong>Ημερομηνία άφιξης</strong></label>
                                 </div>
                                 <div class="col-8">
-                                    <input class="form-control" name="arrival_date" type="date" id="inputArrivalDate" required="required">
+                                    <input class="form-control" value="{{date('Y-m-d')}}"name="arrival_date" type="date" id="inputArrivalDate" required="required">
                                 </div>
                             </div>
                             <div class="row">
@@ -150,10 +150,10 @@
                                             <input type="number" class="form-control p-0 pe-2 text-end order-font" name="quantity{{$count}}" value="{{ $detail->quantity }}" id="quantity{{$count}}">
                                         </td>
                                         <td class="p-0">
-                                            <input type="text" class="form-control p-0 pe-2 text-end order-font" name="measurement_unit{{$count}}" placeholder="M/M">
+                                            <input type="text" class="form-control p-0 pe-2 text-end order-font" name="measurement_unit{{$count}}" value="{{ $detail->measurement_unit == null ?: 'ΤΕΜ'}}">
                                         </td>
                                         <td class="p-0">
-                                            <input type="number" class="form-control p-0 pe-2 text-end order-font" name="items_per_package{{$count}}">
+                                            <input type="number" class="form-control p-0 pe-2 text-end order-font" name="items_per_package{{$count}}" value="{{ $detail->items_per_package == null ?: '1'}}">
                                         </td>
                                         <td style="width: 20%" class="p-0 order-font" >{{ $detail->product->product_name }}</td>
                                         <td style="width: 5%" class="p-0">
