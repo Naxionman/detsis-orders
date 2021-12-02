@@ -48,6 +48,21 @@
             </div>
         </div>
 
+        <div aria-live="polite" aria-atomic="true" class="bg-dark position-relative bd-example-toasts">
+            <div class="toast-container position-absolute p-3" id="toastPlacement">
+              <div class="toast">
+                <div class="toast-header">
+                  <img src="..." class="rounded me-2" alt="...">
+                  <strong class="me-auto">Εγγραφή νέου πελάτη</strong>
+                  <small>11 mins ago</small>
+                </div>
+                <div class="toast-body">
+                  Η προσθήκη του πελάτη ήταν επιτυχής!
+                </div>
+              </div>
+            </div>
+          </div>
+
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

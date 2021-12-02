@@ -27,7 +27,6 @@ use App\Http\Controllers\RefuelingController;
 
 Route::get('/', [PageController::class, 'index']);
 
-
 Route::get('/clients', [ClientController::class, 'index']);
 Route::get('/suppliers', [SupplierController::class, 'index']);
 Route::get('/employees', [EmployeeController::class, 'index']);
@@ -38,7 +37,6 @@ Route::get('/dispatch_log', [DispatchController::class, 'log']);
 Route::get('/orders', [OrderController::class, 'index']);
 Route::get('/shipments', [ShipmentController::class, 'index']);
 Route::get('/products', [ProductController::class, 'index']);
-
 
 Route::get('/add_supplier', [SupplierController::class, 'add_supplier']);
 Route::get('/add_client', [ClientController::class, 'add_client']);

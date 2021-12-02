@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
+
+
 
 class EmployeeController extends Controller {
     
@@ -49,7 +52,7 @@ class EmployeeController extends Controller {
 
         \App\Models\Employee::create($data);
 
-        return redirect()->back()->with('message', 'Επιτυχής αποθήκευση Εργαζόμενου!');
+        return redirect('employees')->with('message', 'Επιτυχής αποθήκευση Εργαζόμενου!');
     }
 
     public function show($employeeId) {
@@ -88,8 +91,8 @@ class EmployeeController extends Controller {
         ]);
 
         $employee->update($data);
-                
-        return redirect('employees');
+          
+        return redirect('employees')->with('message', 'Επιτυχής επεξεργασία Εργαζόμενου!');
     }
 
     public function destroy(\App\Models\Employee $employee) {

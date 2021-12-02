@@ -165,7 +165,7 @@
                                     <label for="inputDateLeft" class="align-middle">Ημερομηνία Αποχώρησης</label>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input class="form-control" value = "{{ $employee->date_left == null ?: $employee->date_left->format(Y-m-d)  }}" type="date" id="inputDateLeft" name="date_left" >
+                                    <input class="form-control" value = "{{ $employee->date_left == null ?: $employee->date_left->format('Y-m-d')  }}" type="date" id="inputDateLeft" name="date_left" >
                                 </div>
                             </div>
                               
@@ -227,7 +227,6 @@
 
                         </div>
 
-
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-10">
                             <label for="inputNotes">Σημειώσεις</label>
@@ -243,22 +242,42 @@
                 <a href="/employees" class="btn btn-primary">  Ακύρωση - Επιστροφή </a>
             </div>
         </div>
-
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        <audio autoplay src="/sound/beep.mp3"/>
-    @endif
-
-    @if(session()->has('message'))
-        <div class="alert alert-success">
-            {{ session()->get('message') }}
-        </div>
-    @endif
-</div>
+        <script>
+            @if(Session::has('message'))
+            toastr.options =
+            {
+                "closeButton" : true,
+                "progressBar" : true
+            }
+                    toastr.success("{{ session('message') }}");
+            @endif
+          
+            @if(Session::has('error'))
+            toastr.options =
+            {
+                "closeButton" : true,
+                "progressBar" : true
+            }
+                    toastr.error("{{ session('error') }}");
+            @endif
+          
+            @if(Session::has('info'))
+            toastr.options =
+            {
+                "closeButton" : true,
+                "progressBar" : true
+            }
+                    toastr.info("{{ session('info') }}");
+            @endif
+          
+            @if(Session::has('warning'))
+            toastr.options =
+            {
+                "closeButton" : true,
+                "progressBar" : true
+            }
+                    toastr.warning("{{ session('warning') }}");
+            @endif
+          </script>
+{!! Toastr::message() !!}
 @endsection
