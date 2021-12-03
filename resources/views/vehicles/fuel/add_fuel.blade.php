@@ -25,22 +25,5 @@
                 <button class="btn btn-danger" type="submit" form="addFuel">  Αποθήκευση  </button>
             </div>
         </div>
-
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        <audio autoplay src="/sound/beep.mp3"/>
-    @endif
-
-    @if(session()->has('message'))
-        <div class="alert alert-success">
-            {{ session()->get('message') }}
-        </div>
-    @endif
 </div>
 @endsection

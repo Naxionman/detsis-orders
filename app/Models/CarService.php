@@ -2,10 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class CarService extends Model
 {
-    use HasFactory;
+    protected $guarded = [];
+
+    protected $dates = [
+        'service_date',
+    ];
+
+    public function vehicle(){
+        return $this->belongsTo(Vehicle::class);
+    }
 }

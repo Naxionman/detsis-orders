@@ -49,13 +49,13 @@ class ShipperController extends Controller
 
         $shipper->update($data);
         
-        return redirect('shippers');
+        return redirect('shippers')->with('message', 'Επιτυχής επεξεργασία Μεταφορικής!');
     }
 
     public function destroy(\App\Models\Shipper $shipper)
     {
         $shipper->delete();
 
-        return redirect('shippers');
+        return redirect('shippers')->with('message', 'Επιτυχής διαγραφή Μεταφορικής!');
     }
 }

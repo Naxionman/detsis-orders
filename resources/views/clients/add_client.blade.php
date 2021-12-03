@@ -43,8 +43,8 @@
                 </form>
             </div>
             <div class="card-footer text-center py-2">
-                <button class="btn btn-danger" type="submit" form="addClient">  Αποθήκευση  </button>
-                <a href="/clients" class="btn btn-primary">  Ακύρωση - Επιστροφή </a>
+                <button class="btn btn-danger shadow-sm" type="submit" form="addClient">  Αποθήκευση  </button>
+                <a href="/clients" class="btn btn-info shadow-sm">  Ακύρωση - Επιστροφή </a>
             </div>
         </div>
 

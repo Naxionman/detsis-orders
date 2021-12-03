@@ -12,6 +12,9 @@ use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\RefuelingController;
+use App\Http\Controllers\InsuranceController;
+use App\Http\Controllers\KteoController;
+use App\Http\Controllers\CarServiceController;
 
 
 /*
@@ -37,6 +40,10 @@ Route::get('/dispatch_log', [DispatchController::class, 'log']);
 Route::get('/orders', [OrderController::class, 'index']);
 Route::get('/shipments', [ShipmentController::class, 'index']);
 Route::get('/products', [ProductController::class, 'index']);
+Route::get('/refuelings', [RefuelingController::class, 'index']);
+Route::get('/insurances', [InsuranceController::class, 'index']);
+Route::get('/kteos', [KteoController::class, 'index']);
+Route::get('/car_services', [CarServiceController::class, 'index']);
 
 Route::get('/add_supplier', [SupplierController::class, 'add_supplier']);
 Route::get('/add_client', [ClientController::class, 'add_client']);
@@ -47,18 +54,24 @@ Route::get('/add_dispatch', [DispatchController::class, 'add_dispatch']);
 Route::get('/add_order', [OrderController::class, 'add_order']);
 Route::get('/add_shipment', [ShipmentController::class, 'add_shipment']);
 Route::get('/add_product', [ProductController::class, 'add_product']);
+Route::get('/add_fuel/{vehicleId}', [RefuelingController::class, 'add_fuel']);
+Route::get('/add_insurance/{vehicleId}', [InsuranceController::class, 'add_insurance']);
+Route::get('/add_kteo/{vehicleId}', [KteoController::class, 'add_kteo']);
+Route::get('/add_car_service/{vehicleId}', [CarServiceController::class, 'add_car_service']);
 
 Route::post('/add_supplier', [SupplierController::class, 'store']);
 Route::post('/add_client', [ClientController::class, 'store']);
 Route::post('/add_employee', [EmployeeController::class, 'store']);
 Route::post('/add_shipper', [ShipperController::class, 'store']);
 Route::post('/add_vehicle', [VehicleController::class, 'store']);
-Route::post('/add_fuel/{vehicleId}', [RefuelingController::class, 'store']);
 Route::post('/add_dispatch', [DispatchController::class, 'store']);
 Route::post('/add_order', [OrderController::class, 'store']);
 Route::post('/add_shipment', [ShipmentController::class, 'store']);
 Route::post('/add_product', [ProductController::class, 'store']);
-Route::get('/add_fuel/{vehicleId}', [RefuelingController::class, 'add_fuel']);
+Route::post('/add_fuel/{vehicleId}', [RefuelingController::class, 'store']);
+Route::post('/add_insurance/{vehicleId}', [InsuranceController::class, 'store']);
+Route::post('/add_kteo/{vehicleId}', [KteoController::class, 'store']);
+Route::post('/add_car_service/{vehicleId}', [CarServiceController::class, 'store']);
 
 //Show actions (for editing records)
 Route::get('/edit_supplier/{supplierId}',[SupplierController::class, 'show']);
@@ -86,6 +99,7 @@ Route::patch('/edit_order/{order}',[OrderController::class, 'update']);
 Route::patch('/edit_order/{order}',[OrderController::class, 'updateDetails']);
 Route::patch('/edit_shipment/{shipment}',[ShipmentController::class, 'update']);
 Route::patch('/edit_product/{product}',[ProductController::class, 'update']);
+Route::patch('/edit_insurance/{insurance}',[InsuranceController::class, 'update']);
 
 //Delete actions
 Route::delete('/suppliers/{supplier}',[SupplierController::class, 'destroy']);
@@ -97,3 +111,7 @@ Route::delete('/dispatches/{dispatch}',[DispatchController::class, 'destroy']);
 Route::delete('/orders/{order}',[OrderController::class, 'destroy']);
 Route::delete('/shipments/{shipment}',[ShipmentController::class, 'destroy']);
 Route::delete('/products/{product}',[ProductController::class, 'destroy']);
+Route::delete('/refuelings/{refueling}',[RefuelingController::class, 'destroy']);
+Route::delete('/insurances/{insurance}',[InsuranceController::class, 'destroy']);
+Route::delete('/kteos/{kteo}',[KteoController::class, 'destroy']);
+Route::delete('/car_services/{car_service}',[CarServiceController::class, 'destroy']);

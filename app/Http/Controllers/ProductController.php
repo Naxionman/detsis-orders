@@ -53,12 +53,12 @@ class ProductController extends Controller
 
         $product->update($data);
        
-        return redirect('products');
+        return redirect('products')->with('message', 'Επιτυχής επεξεργασία προϊόντος!');
     }
 
     public function destroy(\App\Models\Product $product) {
         $product->delete();
 
-        return redirect('products');
+        return redirect('products')->with('message', 'Επιτυχής διαγραφή προϊόντος!');
     }
 }

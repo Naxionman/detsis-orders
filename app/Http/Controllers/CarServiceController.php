@@ -5,81 +5,37 @@ namespace App\Http\Controllers;
 use App\Models\CarService;
 use Illuminate\Http\Request;
 
-class CarServiceController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+class CarServiceController extends Controller {
+
+    // Show all records of refuelings table
+    public function index() {
+        $car_services = \App\Models\CarService::all();
+        return view('vehicles.car_service.car_services', compact('car_services'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function add_car_service($vehicleId) {
+        $vehicle = \App\Models\Vehicle::findOrFail($vehicleId);
+        return view ('vehicles.car_service.add_car_service', compact('vehicle'));
+    }
+    
+    public function store() {
+
+        $data = request()->validate([
+            'vehicle_id' => 'required',
+            'service_date' => 'required',
+            'garage' => 'required',
+            'description' => 'required',
+            'amount' => 'required'
+        ]);
+        //dd($data);
+        \App\Models\CarService::create($data);
+        $id = request()->input('vehicle_id');
+        return redirect('view_vehicle/'.$id)->with('message', 'Επιτυχής προσθήκη service/επισκευής!');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function destroy(\App\Models\CarService $carService) {
+        $carService->delete();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\CarService  $carService
-     * @return \Illuminate\Http\Response
-     */
-    public function show(CarService $carService)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\CarService  $carService
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(CarService $carService)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\CarService  $carService
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, CarService $carService)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\CarService  $carService
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(CarService $carService)
-    {
-        //
+        return redirect('car_Services')->with('message', 'Επιτυχής διαγραφή services/επισκευής!');
     }
 }

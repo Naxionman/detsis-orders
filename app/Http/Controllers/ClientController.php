@@ -52,12 +52,12 @@ class ClientController extends Controller {
 
         $client->update($data);
                 
-        return redirect('client');
+        return redirect('client')->with('message', 'Τα στοιχεία του πελάτη επεξεργάσθηκαν με επιτυχία!');
     }
     
     public function destroy(\App\Models\Client $client) {
         $client->delete();
 
-        return redirect('clients');
+        return redirect('clients')->with('message', 'Επιτυχής διαγραφή Πελάτη!');
     }
 }

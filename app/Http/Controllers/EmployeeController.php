@@ -93,11 +93,12 @@ class EmployeeController extends Controller {
         $employee->update($data);
           
         return redirect('employees')->with('message', 'Επιτυχής επεξεργασία Εργαζόμενου!');
+        
     }
 
     public function destroy(\App\Models\Employee $employee) {
         $employee->delete();
 
-        return redirect('employees');
+        return redirect('employees')->with('message', 'Ο εργαζόμενος έχει διαγραφεί!');
     }
 }

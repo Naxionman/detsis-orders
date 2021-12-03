@@ -37,25 +37,34 @@ class VehicleController extends Controller
 
     public function showDetails($vehicleId) {
         $vehicle = \App\Models\Vehicle::findOrFail($vehicleId);
-        $kteo_expiring = DB::table('kteos')
-                            ->select('next_kteo_date')
+
+        $kteo = \App\Models\Kteo::select('next_kteo_date')
                             ->where('vehicle_id','=',$vehicleId)
                             ->latest()
                             ->first();
-        $insurance_expiring = DB::table('insurances')
-                            ->select('expiry_date')
-                            ->where('vehicle_id','=',$vehicleId)
-                            ->latest()
-                            ->first();
-        $last_service = DB::table('car_services')
-                            ->select('service_date')
+                            
+        $insurance = \App\Models\Insurance::select('expiry_date')
                             ->where('vehicle_id','=',$vehicleId)
                             ->latest()
                             ->first();
 
-        $refuelings = DB::table('refuelings')->where('vehicle_id','=',$vehicleId)->get();
+        $last_service = \App\Models\CarService::select('service_date')
+                            ->where('vehicle_id','=',$vehicleId)
+                            ->latest()
+                            ->first();
+        $today = Date('Y-m-d');
+        if($last_service == null){
+            $days = 0;
+        } else{
+            $days = $last_service->diff($today, $last_service);
+        }
+        
 
-        return view('vehicles.view_vehicle', compact('vehicle','kteo_expiring', 'insurance_expiring','last_service', 'refuelings'));
+        $car_refuelings = \App\Models\Refueling::where('vehicle_id','=',$vehicleId)->orderBy('id', 'ASC')->get();
+        
+        $car_services = \App\Models\CarService::where('vehicle_id','=',$vehicleId)->orderBy('id', 'ASC')->get();
+        
+        return view('vehicles.view_vehicle', compact('vehicle','kteo', 'insurance','days', 'car_refuelings','car_services'));
     }
 
     public function update(\App\Models\Vehicle $vehicle) {
@@ -68,13 +77,13 @@ class VehicleController extends Controller
 
         $vehicle->update($data);
         
-        return redirect('vehicles');
+        return redirect('vehicles')->with('message', 'Επιτυχής επεξεργασία βασικών στοιχείων οχήματος!');
         
     }
 
     public function destroy(\App\Models\Vehicle $vehicle) {
         $vehicle->delete();
 
-        return redirect('vehicles');
+        return redirect('vehicles')->with('message', 'Επιτυχής διαγραφή οχήματος!');
     }
 }

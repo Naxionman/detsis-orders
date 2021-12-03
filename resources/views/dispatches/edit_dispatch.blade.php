@@ -94,8 +94,8 @@
                 </form>
             </div>
             <div class="card-footer text-center py-2">
-                <button class="btn btn-danger" type="submit" form="editDispatch">  Αποθήκευση  </button>
-                <a href="/dispatches" class="btn btn-primary">  Ακύρωση - Επιστροφή </a>
+                <button class="btn btn-danger shadow-sm" type="submit" form="editDispatch">  Αποθήκευση  </button>
+                <a href="/dispatches" class="btn btn-info shadow-sm">  Ακύρωση - Επιστροφή </a>
             </div>
         </div>
 

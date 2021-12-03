@@ -29,7 +29,8 @@
                 </form>
             </div>
             <div class="card-footer text-center py-2">
-                <button class="btn btn-danger" type="submit" form="addShipper">  Αποθήκευση  </button>
+                <button class="btn btn-danger shadow-sm" type="submit" form="addShipper">  Αποθήκευση  </button>
+                <a href="/shippers" class="btn btn-info shadow-sm">  Ακύρωση - Επιστροφή </a>
             </div>
         </div>
 

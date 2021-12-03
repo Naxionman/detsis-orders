@@ -14,13 +14,18 @@
                 </div>
             <div class="card mb-4">
                 <div class="card-header">
-                    <i class="fas fa-table me-1"></i>
-                        Πίνακας Οχημάτων
-
-                    <a class="btn btn-dark" href="/kteo">KTEO</a>
-                    <a class="btn btn-dark" href="/car_services">Βλάβες - Services</a>
-                    <a class="btn btn-dark" href="/insurance">Ασφάλειες</a>
-                    <a class="btn btn-dark" href="/refuelings">Καύσιμα</a>
+                    <div class="row">
+                        <div class="col-4"> 
+                            <i class="fas fa-table me-1"></i>
+                            Πίνακας Οχημάτων
+                        </div>
+                        <div class="col-8">Συγκενρωτικοί πίνακες : 
+                            <a class="btn btn-dark" href="/kteos">KTEO</a>
+                            <a class="btn btn-dark" href="/car_services">Services - Επισκευές</a>
+                            <a class="btn btn-dark" href="/insurances">Ασφάλειες</a>
+                            <a class="btn btn-dark" href="/refuelings">Καύσιμα</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <table id="myTable" class="cell-border display compact">
@@ -49,7 +54,7 @@
                             <tr data-href="view_vehicle/{{ $vehicle->id}}">
                                 <td><strong>{{$vehicle->name }}</strong></td>
                                 <td>{{ $vehicle->plate }}</td>
-                                <td>insurance</td>
+                                <td></td>
                                 <td>service</td>
                                 <td>kteo</td>
                                 <td style="width:15%" >

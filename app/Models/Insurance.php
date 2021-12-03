@@ -2,10 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Insurance extends Model
 {
-    use HasFactory;
+    protected $guarded = [];
+
+    protected $dates = [
+        'insurance_date',
+        'expiry_date',
+    ];
+
+    public function vehicle(){
+        return $this->belongsTo(Vehicle::class);
+    }
 }

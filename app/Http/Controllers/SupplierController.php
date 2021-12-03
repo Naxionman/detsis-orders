@@ -61,12 +61,12 @@ class SupplierController extends Controller {
 
         $supplier->update($data);
         
-        return redirect('suppliers');
+        return redirect('suppliers')->with('message', 'Επιτυχής επεξεργασία Προμηθευτή!');
     }
 
     public function destroy(\App\Models\Supplier $supplier) {
         $supplier->delete();
 
-        return redirect('/suppliers');
+        return redirect('/suppliers')->with('message', 'Επιτυχής διαγραφή Προμηθευτή!');
     }
 }

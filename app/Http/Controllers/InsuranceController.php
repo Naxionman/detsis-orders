@@ -5,81 +5,40 @@ namespace App\Http\Controllers;
 use App\Models\Insurance;
 use Illuminate\Http\Request;
 
-class InsuranceController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+class InsuranceController extends Controller {
+
+    public function index() {
+        $insurances = \App\Models\Insurance::all();
+
+        return view('vehicles.insurance.insurances', compact('insurances'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function add_insurance($vehicleId) {
+        
+        $vehicle = \App\Models\Vehicle::findOrFail($vehicleId);
+        
+        return view ('vehicles.insurance.add_insurance', compact('vehicle'));
+    }
+    
+    public function store() {
+
+        $data = request()->validate([
+            'vehicle_id' => 'required',
+            'insurance_date' => 'required',
+            'expiry_date' => 'required',
+            'insurance_company' => 'required',
+            'amount' => 'required'
+        ]);
+        //dd($data);
+        \App\Models\Insurance::create($data);
+        $id = request()->input('vehicle_id');
+        return redirect('view_vehicle/'.$id)->with('message', 'Επιτυχής ανανέωση ασφάλισης!');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function destroy(\App\Models\Insurance $insurance) {
+        $insurance->delete();
+
+        return redirect('insurances')->with('message', 'Επιτυχής διαγραφή ασφάλισης!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Insurance  $insurance
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Insurance $insurance)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Insurance  $insurance
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Insurance $insurance)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Insurance  $insurance
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Insurance $insurance)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Insurance  $insurance
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Insurance $insurance)
-    {
-        //
-    }
 }

@@ -38,7 +38,7 @@ class DispatchController extends Controller
 
         $clients = \App\Models\Client::all();
 
-        return view ('dispatches.add_dispatch', compact('vehicles','employees','clients'));
+        return view ('dispatches.add_dispatch', compact('vehicles','employees','clients'))->with('message', 'Επιτυχής προσθήκη κίνησης!');
     }
 
     public function store(Request $request) {
@@ -104,12 +104,12 @@ class DispatchController extends Controller
             $dispatch->employees()->attach($employeeDispatched);
         }
 
-        return redirect('dispatches');
+        return redirect('dispatches')->with('message', 'Επιτυχής επεξεργασία κίνησης!');
     }
 
     public function destroy(\App\Models\Dispatch $dispatch) {
         $dispatch->delete();
 
-        return redirect('dispatches');
+        return redirect('dispatches')->with('message', 'Επιτυχής διαγραφή κίνησης!');
     }
 }

@@ -5,81 +5,36 @@ namespace App\Http\Controllers;
 use App\Models\Kteo;
 use Illuminate\Http\Request;
 
-class KteoController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+class KteoController extends Controller {
+    
+    // Show all records of ΚΤΕΟs table
+    public function index() {
+        $kteos = \App\Models\Kteo::all();
+        return view('vehicles.kteo.kteos', compact('kteos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function add_kteo($vehicleId) {
+        $vehicle = \App\Models\Vehicle::findOrFail($vehicleId);
+        return view ('vehicles.kteo.add_kteo', compact('vehicle'));
+    }
+    
+    public function store() {
+
+        $data = request()->validate([
+            'vehicle_id' => 'required',
+            'kteo_date' => 'required',
+            'next_kteo_date' => 'required',
+            'amount' => 'required'
+        ]);
+        //dd($data);
+        \App\Models\Kteo::create($data);
+        $id = request()->input('vehicle_id');
+        return redirect('view_vehicle/'.$id)->with('message', 'Επιτυχής προσθήκη KTEO!');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function destroy(\App\Models\Kteo $kteo) {
+        $kteo->delete();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Kteo  $kteo
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Kteo $kteo)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Kteo  $kteo
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Kteo $kteo)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Kteo  $kteo
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Kteo $kteo)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Kteo  $kteo
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Kteo $kteo)
-    {
-        //
+        return redirect('kteos')->with('message', 'Επιτυχής διαγραφή KTEO!');
     }
 }
