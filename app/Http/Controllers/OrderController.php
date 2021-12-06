@@ -17,33 +17,24 @@ class OrderController extends Controller
         return view('orders.orders', compact('orders'));
     }
 
-    public function add_order(){
+    public function add_order() {
 
         $suppliers = \App\Models\Supplier::all();
         $products = \App\Models\Product::all();
-        $shippers = \App\Models\Shipper::all();
-
-        return view ('orders.add_order', compact('suppliers','products','shippers'));
+        
+        return view ('orders.add_order', compact('suppliers','products'));
     }
 
-    //New order. We need to distinguish if it is about the Showroom or the factory.
-    public function store(Request $request) 
-    {
+    public function store(Request $request) {
         $data = request()->validate([
             'order_date' => 'required',
             'supplier_id' => 'required',
-            'shipper_id' => 'nullable',
-            'order_discount' => 'nullable',
-            'order_charges' => 'nullable',
-            'order_price' => 'nullable',
             'pending' => 'required',
             'notes' => 'nullable',
             'arrival_date' => 'nullable'
         ]);
 
         $new_order = \App\Models\Order::create($data);
-
-        $details = request()->all();
         
         $products_count = request()->input('count');
         
@@ -60,8 +51,7 @@ class OrderController extends Controller
         return redirect()->back()->with('message', 'Επιτυχής αποθήκευση παραγγελίας!');
     }
 
-    public function show($orderId)
-    {
+    public function show($orderId) {
         $order = \App\Models\Order::findOrFail($orderId);
         $shippers = \App\Models\Shipper::all();
         $order_details = \App\Models\OrderDetails::where('order_id', $orderId)->get();

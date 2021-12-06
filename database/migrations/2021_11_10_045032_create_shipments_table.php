@@ -16,31 +16,31 @@ class CreateShipmentsTable extends Migration
         Schema::create('shipments', function (Blueprint $table) {
             $table->id();
             $table->date('shipping_date');
-            $table->unsignedBigInteger('order_id');
+            $table->unsignedBigInteger('invoice_id');
             $table->unsignedBigInteger('shipper_id');
             $table->unsignedBigInteger('extra_shipper_id')->nullable();
             $table->string('invoice_number');
             $table->float('shipment_price');  //includes extra_price
             $table->float('extra_price')->nullable();
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
             $table->foreign('shipper_id')->references('id')->on('shippers')->onDelete('cascade');
             $table->foreign('extra_shipper_id')->references('id')->on('shippers')->onDelete('cascade');
             $table->timestamps();
         });
 
         /*
-            This method is used to just add the foreign key to the orders table, because 
-            order_shipments table had not been created when orders table was created.
-                - orders table is created
-                    orders  [requires foreign of order_shipment]
-                - order_shipments table is created 
-                    order_shipments [requires foreign of orders]
+            This method is used to just add the foreign key to the invoices table, because 
+            shipments table had not been created when invoices table was created.
+                - invoices table is created
+                    invoices  [requires foreign of order_shipment]
+                - shipments table is created 
+                    shipments [requires foreign of invoices]
 
             Thus, foreign keys cannot be inserted when creating the first table. 
 
         */
 
-        Schema::table('orders', function(Blueprint $table) {
+        Schema::table('invoices', function(Blueprint $table) {
             $table->foreign('shipment_id')->references('id')->on('shipments')->onDelete('cascade');
         });
 

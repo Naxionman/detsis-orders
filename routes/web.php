@@ -8,6 +8,7 @@ use App\Http\Controllers\ShipperController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\DispatchController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ClientController;
@@ -38,6 +39,7 @@ Route::get('/vehicles', [VehicleController::class, 'index']);
 Route::get('/dispatches', [DispatchController::class, 'index']);
 Route::get('/dispatch_log', [DispatchController::class, 'log']);
 Route::get('/orders', [OrderController::class, 'index']);
+Route::get('/invoices', [InvoiceController::class, 'index']);
 Route::get('/shipments', [ShipmentController::class, 'index']);
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/refuelings', [RefuelingController::class, 'index']);
@@ -59,6 +61,8 @@ Route::get('/add_insurance/{vehicleId}', [InsuranceController::class, 'add_insur
 Route::get('/add_kteo/{vehicleId}', [KteoController::class, 'add_kteo']);
 Route::get('/add_car_service/{vehicleId}', [CarServiceController::class, 'add_car_service']);
 
+Route::get('/add_invoice/{orderId}', [InvoiceController::class, 'add_invoice']);
+
 Route::post('/add_supplier', [SupplierController::class, 'store']);
 Route::post('/add_client', [ClientController::class, 'store']);
 Route::post('/add_employee', [EmployeeController::class, 'store']);
@@ -66,6 +70,7 @@ Route::post('/add_shipper', [ShipperController::class, 'store']);
 Route::post('/add_vehicle', [VehicleController::class, 'store']);
 Route::post('/add_dispatch', [DispatchController::class, 'store']);
 Route::post('/add_order', [OrderController::class, 'store']);
+Route::post('/add_invoice', [InvoiceController::class, 'store']);
 Route::post('/add_shipment', [ShipmentController::class, 'store']);
 Route::post('/add_product', [ProductController::class, 'store']);
 Route::post('/add_fuel/{vehicleId}', [RefuelingController::class, 'store']);

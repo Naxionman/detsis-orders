@@ -19,5 +19,12 @@ class ProductsSeeder extends Seeder
             'product_name'=> 'Παραγγελία από Έκθεση',
             'notes' => 'Κωδικός για να μπορούμε να καταγράφουμε τα ποσά και τις μεταφορικές'
         ]);
+
+        \App\Models\Product::create([
+            'detsis_code' => 'extra',
+            'product_code'=> 'extra',
+            'product_name'=> 'Άλλες χρεώσεις',
+            'notes' => 'Κωδικός για να μπορούμε να καταγράφουμε τις επιπλέον χρεώσεις που τοποθετούνται ως προϊόντα'
+        ]);
     }
 }

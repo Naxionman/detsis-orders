@@ -236,7 +236,7 @@ class SuppliersTableSeeder extends Seeder
         ]);
 
         \App\Models\Supplier::create ([
-            'company_name'  => '',
+            'company_name'  => 'Καριανάκης Κωνσταντίνος Greenroof',
             'salesman'      => '',
             'email'         => '',
             'phone1'        => '',
