@@ -87,7 +87,7 @@
                                 <td class="text-end">{{ number_format($order->order_price, 2,',','.') }} €</td>
                                 <td>
                                     @if ($order->arrival_date == null)
-                                        <a class="btn btn-primary" href="/add_invoice/{{$order->id}}">Άφιξη</a>
+                                        <a class="btn btn-primary shadow-sm btn-sm" href="/add_invoice/{{$order->id}}">Άφιξη</a>
                                     @else
                                         {{ $order->arrival_date->format('d-m-Y'); }} 
                                     @endif

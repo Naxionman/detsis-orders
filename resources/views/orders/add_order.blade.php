@@ -37,15 +37,15 @@
                             <tbody id="tableBody">
                                 <tr id="trToPlace">
                                     <td style="width:5%">1</td>
-                                    <td style="width:5%"><input class="form-control" type="number" name="quantity0" value="1" required="required"></td>
+                                    <td style="width:5%"><input class="form-control" type="number" name="quantity1" value="1" required="required"></td>
                                     <td>
-                                        <select class="form-control js-example-basic-single" name="product0" id="product0">
+                                        <select class="form-control js-example-basic-single" name="product1" id="product1">
                                             @foreach ($products as $product)
                                                 <option value="{{ $product->id }}">{{ $product->product_name }} ({{ $product->detsis_code}})</option>
                                             @endforeach
                                         </select>
                                     </td>
-                                    <td style="width:10%"><button type="button" id="addProduct" onclick="addInputField(0)" class="btn btn-warning btn-sm m-1"> + </button>
+                                    <td style="width:10%"><button type="button" id="addProduct" onclick="addInputField(1)" class="btn btn-warning btn-sm m-1"> + </button>
                                     </td>
                                 </tr>
                                 <input type="hidden" name="pending" value="1">
@@ -63,7 +63,8 @@
                 </form>
             </div>
             <div class="card-footer text-center py-2">
-                <button class="btn btn-danger" type="submit" form="addOrder">  Αποθήκευση  </button>
+                <button class="btn btn-danger shadow-sm" type="submit" form="addOrder">  Αποθήκευση  </button>
+                <a href="/orders" class="btn btn-info shadow-sm">  Ακύρωση - Επιστροφή </a>
             </div>
         </div>
 
@@ -82,12 +83,12 @@
 <script type="text/javascript">
     function addInputField(count){
         var count;
-        count = count +1;
+        count = count + 1;
         var fragment = document.createElement('tr');
         fragment.id = 'fragment'+count;
         var oldButton = document.getElementById('addProduct');
         oldButton.parentNode. removeChild(oldButton);
-        fragment.innerHTML = '<td style="width:5%">'+(count+1)+'</td><td style="width:5%"><input class="form-control" value="1" type="number" name="quantity'+count+'" required="required"></td><td><select class="form-control js-example-basic-single" id="fragment'+count+'" name="product'+count+'">@foreach($products as $product)<option value="{{ $product->id }}">{{ $product->product_name }} ({{$product->detsis_code}})</option>@endforeach </select></td><td style="width:10%"><button type="button" id="addProduct" onclick="addInputField('+count+')" class="btn btn-warning btn-sm m-1"> + </button><button type="button" id="removeProduct" onclick="removeInputField('+count+')" class="btn btn-danger btn-sm m-1"> - </button></td><input type="hidden" name="count" value="'+count+'">';
+        fragment.innerHTML = '<td style="width:5%">'+count+'</td><td style="width:5%"><input class="form-control" value="1" type="number" name="quantity'+count+'" required="required"></td><td><select class="form-control js-example-basic-single" id="fragment'+count+'" name="product'+count+'">@foreach($products as $product)<option value="{{ $product->id }}">{{ $product->product_name }} ({{$product->detsis_code}})</option>@endforeach </select></td><td style="width:10%"><button type="button" id="addProduct" onclick="addInputField('+count+')" class="btn btn-warning btn-sm m-1"> + </button><button type="button" id="removeProduct" onclick="removeInputField('+count+')" class="btn btn-danger btn-sm m-1"> - </button></td><input type="hidden" name="count" value="'+count+'">';
         document.getElementById('tableBody').appendChild(fragment);
         $('.js-example-basic-single').select2();
     }

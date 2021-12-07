@@ -5,22 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\OrderDetails;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Shipper;
+use App\Models\Supplier;
+use App\Models\Price;
 use App\Models\Shipment;
 use Illuminate\Http\Request;
 
-class OrderController extends Controller
-{
+class OrderController extends Controller {
     // Show all records of orders table
-    public function index()
-    {
-        $orders = \App\Models\Order::all();
+    public function index() {
+        $orders =  Order::all();
+
         return view('orders.orders', compact('orders'));
     }
 
     public function add_order() {
-
-        $suppliers = \App\Models\Supplier::all();
-        $products = \App\Models\Product::all();
+        $suppliers = Supplier::all();
+        $products = Product::all();
         
         return view ('orders.add_order', compact('suppliers','products'));
     }
@@ -33,47 +34,43 @@ class OrderController extends Controller
             'notes' => 'nullable',
             'arrival_date' => 'nullable'
         ]);
-
         $new_order = \App\Models\Order::create($data);
-        
         $products_count = request()->input('count');
         
-        for ($i=0; $i < $products_count +1 ; $i++){
-            
+        for ($i=1; $i < $products_count +1 ; $i++){
             $product_to_add = Product::find($request->input('product'.$i));
      
-            \App\Models\OrderDetails::create([
+            //No financial details of order_details are provided here
+            OrderDetails::create([
                 'order_id' => $new_order->id,
                 'quantity' => $request->input('quantity'.$i),
                 'product_id' => $product_to_add->id,
             ]);
         }
-        return redirect()->back()->with('message', 'Επιτυχής αποθήκευση παραγγελίας!');
+        
+        return redirect('/orders')->with('message', 'Επιτυχής αποθήκευση παραγγελίας!');
     }
 
     public function show($orderId) {
-        $order = \App\Models\Order::findOrFail($orderId);
-        $shippers = \App\Models\Shipper::all();
-        $order_details = \App\Models\OrderDetails::where('order_id', $orderId)->get();
-        //dd($models);
-
-        return view('orders.edit_order', compact('order','order_details', 'shippers'));
+        $order = Order::findOrFail($orderId);
+        $shippers = Shipper::all();
+        $suppliers = Supplier::all();
+        $products = Product::all();
+        $details = OrderDetails::where('order_id', $orderId)->get();
+        
+        return view('orders.edit_order', compact('order','details', 'shippers','suppliers','products'));
     }
 
-    public function showDetails($orderId)
-    {
-        $order = \App\Models\Order::findOrFail($orderId);
+    public function showDetails($orderId) {
+        $order = Order::findOrFail($orderId);
 
-        $order_details = \App\Models\OrderDetails::where('order_id', $orderId)->get();
+        $order_details = OrderDetails::where('order_id', $orderId)->get();
         
         return view('orders.view_order', compact('order','order_details'));
     }
 
 
-    public function update(\App\Models\Order $order)
-    {
-        //dd($order);
-
+    public function update(Order $order) {
         $data = request()->validate([
             'order_date' => 'required',
             'supplier_id' => 'required',
@@ -87,9 +84,8 @@ class OrderController extends Controller
         ]);
 
         $order->update($data);
-        //dd($order->name);
         
-        $orders = \App\Models\Order::all();
+        $orders = Order::all();
         return view('orders', compact('orders'));
     }
 
@@ -115,7 +111,7 @@ class OrderController extends Controller
 
         // Creating the history of prices of each product in the order [prices]
         for ($i=1; $i < $count+1 ; $i++) { 
-            \App\Models\Price::create([
+            Price::create([
                 'price_date' => $request->input('arrival_date'),
                 'history_price' => $request->input('net_value'.$i),
                 'history_discount' => $request->input('product_discount'.$i),
@@ -180,6 +176,6 @@ class OrderController extends Controller
     {
         $order->delete();
 
-        return redirect('/orders');
+        return redirect('/orders')->with('message', 'Επιτυχής διαγραφή παραγγελίας!');
     }
 }

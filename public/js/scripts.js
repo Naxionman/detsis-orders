@@ -30,11 +30,9 @@ $('tr[data-href]').on("click", function() {
     document.location = $(this).data('href');
 });
 
-
-
 jQuery(function() {
     $.fn.select2.defaults.set( "theme", "bootstrap" );
-
+    $('#product0').select2();
     $('.js-example-basic-single').select2();
     
     if (top.location.pathname.match(/^\/edit_order\//)) {
@@ -157,6 +155,7 @@ function updateFields(){
 }
 
 jQuery(function(){
+    
     //Fucntion used to hide description column from suppliers table, but make it still searchable (for the tags)
     if(top.location.pathname === '/suppliers'){
         var table = $('#myTable').DataTable({

@@ -5,7 +5,19 @@
 @section('content')
 <div class="container">
     <div class="card bg-warning bg-opacity-25 shadow-lg border-0 rounded-3 mt-3 ">
-        <div class="card-header"><h3 class="text-center font-weight-light my-2 ">Λεπτομέρειες παραγγελίας</h3></div>
+        <div class="card-header"><h3 class="text-center font-weight-light my-2 ">Λεπτομέρειες παραγγελίας
+            @if($order->arrival_date !=null)
+                @foreach ($order->invoices as $invoice)
+                    @if ($invoice->orderDetails->order_id == $order->id)
+                        
+                        <a href="/invoices/{{ $invoice->id }}"></a>        
+                    @endif
+                    
+                @endforeach
+                
+            @endif
+        
+            </h3></div>
             <div class="card-body bg-light">
                 <!-- General details of order -->
                 <div class="row">
