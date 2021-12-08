@@ -18,7 +18,7 @@ class CreateInvoicesTable extends Migration
             $table->unsignedBigInteger('order_id')->nullable();
             $table->unsignedBigInteger('shipment_id');
             $table->unsignedBigInteger('supplier_id');
-            $table->date('arrival_date');
+            $table->date('invoice_date');
             $table->string('invoice_number');
             $table->float('invoice_tax_rate')->default('24.00');
             $table->float('extra_charges')->default('0.00');

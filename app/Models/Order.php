@@ -12,19 +12,20 @@ class Order extends Model
     protected $dates = ['order_date','arrival_date'];
 
     // Defining One-To-Many relationship of Order->Products
-    public function orderDetails()
-    {
+    public function orderDetails() {
         return $this->hasMany(OrderDetails::class);
     }
 
-    public function supplier()
-    {
+    public function supplier() {
         return $this->belongsTo(Supplier::class);
     }
 
-    public function shipment()
-    {
+    public function shipment() {
         return $this->belongsTo(Shipment::class);
+    }
+
+    public function invoices() {
+        return $this->belongsToMany(Invoice::class);
     }
 
 }

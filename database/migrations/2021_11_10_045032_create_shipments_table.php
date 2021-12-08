@@ -16,13 +16,11 @@ class CreateShipmentsTable extends Migration
         Schema::create('shipments', function (Blueprint $table) {
             $table->id();
             $table->date('shipping_date');
-            $table->unsignedBigInteger('invoice_id');
             $table->unsignedBigInteger('shipper_id');
             $table->unsignedBigInteger('extra_shipper_id')->nullable();
             $table->string('invoice_number');
             $table->float('shipment_price');  //includes extra_price
             $table->float('extra_price')->nullable();
-            $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
             $table->foreign('shipper_id')->references('id')->on('shippers')->onDelete('cascade');
             $table->foreign('extra_shipper_id')->references('id')->on('shippers')->onDelete('cascade');
             $table->timestamps();

@@ -24,7 +24,6 @@
                             </select>
                         </div>
                     </div>
-
                     <div class="row mt-3 justify-content-center">
                         <h2>Προϊόντα παραγγελίας</h2>
                         <table id="order" class="cell-border display compact">
@@ -57,10 +56,8 @@
                                         <button type="button" id="removeProduct" onclick="removeInputField({{ $i }})" class="btn btn-danger btn-sm m-1"> - </button></td><input type="hidden" name="count" value="{{ $i}}">
                                     </td>
                                 </tr>
-                                
                                 @endforeach
                                 <input type="hidden" name="pending" value="1">
-                                
                             </tbody>
                         </table>
                         <div class="col-sm-4">
@@ -78,7 +75,6 @@
                 <a href="/orders" class="btn btn-info shadow-sm">  Ακύρωση - Επιστροφή </a>
             </div>
         </div>
-           
         
     @if ($errors->any())
         <div class="alert alert-danger">

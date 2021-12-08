@@ -9,8 +9,15 @@ class Invoice extends Model
 {
     protected $guarded = [];
 
-    public function invoices() {
-        return $this->belongsToMany(Invoice::class);
+    protected $dates = ['order_date','arrival_date'];
+
+    public function shipment(){
+        return $this->belongsTo(Shipment::class);
+    }
+
+
+    public function orders() {
+        return $this->belongsToMany(Order::class);
     }
     
     public function orderDetails() {

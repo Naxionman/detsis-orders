@@ -49,6 +49,7 @@
                                     </td>
                                 </tr>
                                 <input type="hidden" name="pending" value="1">
+                                <input type="hidden" name="count" value="1">
                                 
                             </tbody>
                         </table>
@@ -56,6 +57,7 @@
                         </div>
                     </div>
                     <div class="row mt-3 justify-content-center">
+
                         <div class="col-sm-2"><label for="inputNotes">Σημειώσεις</label></div>
                         <div class="col-sm-4"><textarea rows="4" class="form-control" autocomplete="nope" type="text" id="inputNotes" name="notes" placeholder="Τα πεδία ημερομηνία άφιξης, μεταφορική εταιρεία, τιμή, έκπτωση και τιμολόγιο φορτωτικής συμπληρώνονται με την παραλαβή" ></textarea></div>
                     </div>

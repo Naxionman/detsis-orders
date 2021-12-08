@@ -35,11 +35,12 @@ class OrderController extends Controller {
             'arrival_date' => 'nullable'
         ]);
         $new_order = \App\Models\Order::create($data);
+        
         $products_count = request()->input('count');
         
         for ($i=1; $i < $products_count +1 ; $i++){
             $product_to_add = Product::find($request->input('product'.$i));
-     
+        
             //No financial details of order_details are provided here
             OrderDetails::create([
                 'order_id' => $new_order->id,

@@ -9,6 +9,10 @@ class Shipment extends Model
 {
     protected $guarded = [];
 
+    public function invoices(){
+        return $this->hasMany(Invoice::class);
+    }
+
     public function shipper() {
         return $this->belongsTo(Shipper::class);
     }
