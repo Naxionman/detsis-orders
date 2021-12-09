@@ -35,7 +35,7 @@ jQuery(function() {
     $('#product0').select2();
     $('.js-example-basic-single').select2();
     
-    if (top.location.pathname.match(/^\/edit_order\//)) {
+    if (top.location.pathname.match(/^\/add_invoice\//)) {
         
         //determining the count of details
         var count = $('#count').val();

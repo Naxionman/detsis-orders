@@ -8,7 +8,7 @@ use App\Models\Product;
 use App\Models\Shipper;
 use App\Models\Supplier;
 use App\Models\Price;
-use App\Models\Shipment;
+use App\Models\Client;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller {
@@ -22,17 +22,19 @@ class OrderController extends Controller {
     public function add_order() {
         $suppliers = Supplier::all();
         $products = Product::all();
+        $clients = Client::all();
         
-        return view ('orders.add_order', compact('suppliers','products'));
+        return view ('orders.add_order', compact('suppliers','products', 'clients'));
     }
 
     public function store(Request $request) {
         $data = request()->validate([
-            'order_date' => 'required',
-            'supplier_id' => 'required',
-            'pending' => 'required',
-            'notes' => 'nullable',
-            'arrival_date' => 'nullable'
+            'order_date'    => 'required',
+            'client_id'     => 'nullable',
+            'supplier_id'   => 'required',
+            'pending'       => 'required',
+            'notes'         => 'nullable',
+            'arrival_date'  => 'nullable'
         ]);
         $new_order = \App\Models\Order::create($data);
         

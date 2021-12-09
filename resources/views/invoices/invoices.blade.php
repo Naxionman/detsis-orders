@@ -34,9 +34,9 @@
                                 <th>α/α</th>
                                 <th>Ημερομηνία</th>
                                 <th>Προμηθευτής</th>
+                                <th>Παραγγελίες</th>
+                                <th>Πληρωτέο</th>
                                 <th>Αφορά</th>
-                                <th>Άφιξη</th>
-                                <th>Σύνολο</th>
                                 <th>Στοιχεία Ελέγχου</th>
                             </tr>
                         </thead>
@@ -45,9 +45,9 @@
                                 <th>α/α</th>
                                 <th>Ημερομηνία</th>
                                 <th>Προμηθευτής</th>
+                                <th>Παραγγελίες</th>
+                                <th>Πληρωτέο</th>
                                 <th>Αφορά</th>
-                                <th>Άφιξη</th>
-                                <th>Σύνολο</th>
                                 <th>Στοιχεία Ελέγχου</th>
                             </tr>
                         </tfoot>
@@ -57,19 +57,21 @@
                         @forelse ($invoices as $invoice)
                             <tr data-href="view_invoice/{{ $invoice->id}}">
                                 <td>{{ $invoice->id }}</td>
-                                <td>{{ $invoice->arrival_date->format('d-m-Y') }}</td>
+                                <td>{{ $invoice->invoice_date }}</td>
                                 <td>{{ $invoice->supplier->company_name }}</td>
                                 <td>
-                                    @php
-                                        $detail = $order->orderDetails()->first();
-                                        if($detail->product_id == 1){
-                                            echo "Εμπόριο"; //This is about the showroom orders
-                                        } else{
-                                            echo "Εργοστάσιο"; //This is about the factory orders
-                                        }
-                                    @endphp
+                                    @foreach ($invoice->orders as $order )
+                                        {{ $order->id }},
+                                    @endforeach
                                 </td>
-                                <td>{{$invoice->invoice_total}}</td>
+                                <td>{{$invoice->invoice_total}} €</td>
+                                <td>
+                                    @if ($invoice->orders->first()->orderDetails->first()->product->id < 3)
+                                        {{ 'Εμπορίου'}}
+                                    @else
+                                        {{ 'Εργοστασίου'}}
+                                    @endif
+                                </td>
                                 <td style="width:15%" >
                                     <div class="d-flex justify-content-evenly">
                                         <a href="/edit_invoice/{{ $invoice->id }}" class="btn btn-sm btn-warning">

@@ -10,32 +10,66 @@
                 <form action="/add_invoice" id="addInvoice" method="post">
                     <!-- General details of order -->
                     <div class="row m-2">
-                        <div class="col-5 me-5 border rounded-3 shadow-sm">
+                        <div class="col-6 me-2 border rounded-3 shadow-sm">
                             <br>
-                            <h6>Αφορά παραγγελία/ες : {{ $order->id }}</h6>
-                            <h6>Προμηθευτής : <strong>{{ $order->supplier->company_name }}</strong></h6>
-                            <h6>Ημερομηνία παραγγελίας : {{ $order->order_date->format('d-m-Y') }}</h6>
                             <div class="row">
-                                <div class="col-7 text-end justify-content-center">
+                                <div class="col-4 text-end justify-content-center">
+                                    <label for="inputOrder" class="align-middle">Αφορά παραγγελία/ες</label>
+                                </div>
+                                <div class="col-2 text-end justify-content-center">
+                                    <input type="hidden" name="order_id" value="{{ $order->id }}">
+                                    <input class="form-control" value="{{ $order->id }}" name="arrival_date" type="text" readonly>
+                                </div>
+                                <div class="col-2 text-end justify-content-center">
+                                    <label for="addOrders" class="align-middle">Προσθήκη</label>
+                                </div>
+                                <div class="col-4">
+                                    <select class="form-control js-example-basic-multiple" name="more_orders[]" multiple="multiple" id="addOrders">
+                                        @foreach ($orders as $orderToAdd)
+                                            @if($orderToAdd != $order) <!-- We exclude the one we were sent here through! -->
+                                                <option value="{{ $orderToAdd->id }}">{{ $orderToAdd->id}}-{{ $orderToAdd->client->surname ?? "" }} από {{ $orderToAdd->supplier->company_name }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 text-end justify-content-center">
+                                    <label class="align-middle" for="orderSupplier">Προμηθευτής</label>
+                                </div>
+                                <div class="col-6">
+                                    <input class="form-control" value="{{ $order->supplier->company_name }}" name="" id="orderSupplier" type="text" readonly">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 text-end justify-content-center">
+                                    <label for="orderDate" class="align-middle"><strong>Ημερομηνία παραγγελίας</strong></label>
+                                </div>
+                                <div class="col-6">
+                                    <input class="form-control" value="{{ $order->order_date->format('Y-m-d') }}" type="date" id="orderDate" readonly>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 text-end justify-content-center">
                                     <label for="inputArrivalDate" class="align-middle"><strong>Ημερομηνία άφιξης</strong></label>
                                 </div>
-                                <div class="col-5">
+                                <div class="col-6">
                                     <input class="form-control" value="{{date('Y-m-d')}}"name="arrival_date" type="date" id="inputArrivalDate" required="required">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-7 text-end justify-content-center">
+                                <div class="col-6 text-end justify-content-center">
                                     <label for="inputInvoiceDate" class="align-middle"><strong>Ημερομηνία τιμολόγησης</strong></label>
                                 </div>
-                                <div class="col-5">
+                                <div class="col-6">
                                     <input class="form-control" value="{{date('Y-m-d')}}"name="invoice_date" type="date" id="inputInvoiceDate" required="required">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-7 text-end justify-content-center">
+                                <div class="col-6 text-end justify-content-center">
                                     <label for="inputInvoiceNumber">Αριθμός Τιμολογίου Προμηθευτή</label>
                                 </div>
-                                <div class="col-5">
+                                <div class="col-6">
                                     <input class="form-control" name="order_invoice_number" type="text" id="inputInvoiceNumber" required="required">
                                 </div>
                             </div>
@@ -141,7 +175,7 @@
                 <a href="/orders" class="btn btn-info shadow-sm">  Ακύρωση - Επιστροφή </a>
             </div>
         </div>
-
+<script>$('.js-example-basic-multiple').select2();</script>
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

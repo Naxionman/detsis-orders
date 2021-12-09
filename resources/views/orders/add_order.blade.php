@@ -22,7 +22,17 @@
                             </select>
                         </div>
                     </div>
-
+                    <div class="row mt-3 justify-content-center">
+                    <div class="col-sm-2"><label for="inputClient">Πελάτης (προαιρετικό)</label></div>
+                        <div class="col-sm-4">
+                            <select class="js-example-basic-single form-control" id="inputClient" name="client_id">
+                                <option value="null" selected>Δεν αφορά πελάτη</option>
+                                @foreach ($clients as $client)
+                                    <option   type="text" value="{{ $client->id }}">{{ $client->surname }} {{ $client->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                     <div class="row mt-3 justify-content-center">
                         <h2>Προϊόντα παραγγελίας</h2>
                         <table id="order" class="cell-border display compact">

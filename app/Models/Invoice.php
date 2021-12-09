@@ -14,7 +14,10 @@ class Invoice extends Model
     public function shipment(){
         return $this->belongsTo(Shipment::class);
     }
-
+    
+    public function supplier(){
+        return $this->belongsTo(Supplier::class);
+    }
 
     public function orders() {
         return $this->belongsToMany(Order::class);

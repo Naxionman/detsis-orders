@@ -19,8 +19,10 @@ class CreateOrdersTable extends Migration
             $table->date('arrival_date')->nullable();
             $table->boolean('pending')->default(1);
             $table->unsignedBigInteger('supplier_id');
+            $table->unsignedBigInteger('client_id')->nullable();
             $table->text('notes')->nullable();
             $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
             $table->timestamps();
 
             
