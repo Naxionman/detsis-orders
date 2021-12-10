@@ -11,14 +11,13 @@ use App\Models\Order;
 use App\Models\OrderDetails;
 use Illuminate\Http\Request;
 
-class InvoiceController extends Controller
-{
+class InvoiceController extends Controller {
+    
     public function index() {
         $invoices = \App\Models\Invoice::all();
 
         return view('invoices.invoices', compact('invoices'));
     }
-
     
     public function add_invoice($orderId) {
         $suppliers = Supplier::all();
@@ -32,15 +31,16 @@ class InvoiceController extends Controller
         return view ('invoices.add_invoice', compact('suppliers','products','shipments','shippers', 'orders','order', 'details'));
     }
 
-
     public function store(Request $request) { 
         //The counter of the products 
         $count = $request->input('count');
         //dd($request);
         //The order through which we create a new invoice
         $order = Order::findOrFail($request->input('order_id'));
+        
         //dd($request);
         //dd($request->input('shared_shipment'));
+
         //There maybe more than one invoices with the same shipment. In this case we don't create a shipment as there is already one.
         if($request->input('shared_shipment') != 'null') {
             $shared_shipment_id = $request->input('shared_shipment');
@@ -70,8 +70,6 @@ class InvoiceController extends Controller
         for ($i=1; $i < $count+1; $i++) { 
             
         }
-
-        
         
         //We finally create and store the invoice
         $invoice = Invoice::create([
@@ -82,15 +80,11 @@ class InvoiceController extends Controller
             'invoice_total' => $request->input('invoice_total'),
             'notes' => $request->input('notes')
         ]);
-
         
         //This invoice may refer to more than the order that brought us here
         $more_orders = $request->input('more_orders');
         $invoice->orders()->attach($more_orders);
 
         return redirect('/orders')->with('message', 'Επιτυχής αποθήκευση Τιμολογίου!');
-        
     }
-
-   
 }

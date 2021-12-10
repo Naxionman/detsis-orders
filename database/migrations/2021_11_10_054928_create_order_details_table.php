@@ -16,7 +16,8 @@ class CreateOrderDetailsTable extends Migration
         Schema::create('order_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('order_id');
+            $table->unsignedBigInteger('order_id')->nullable();   //We need to be able to create an invoice without having to place an order
+            $table->unsignedBigInteger('invoice_id')->nullable(); 
             $table->boolean('pending')->default(1);
             $table->integer('quantity');
             $table->string('measurement_unit')->default('ΤΕΜ');
@@ -27,6 +28,7 @@ class CreateOrderDetailsTable extends Migration
             $table->float('price')->nullable(); //final price after discount and tax
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
             $table->timestamps();
         });
     }

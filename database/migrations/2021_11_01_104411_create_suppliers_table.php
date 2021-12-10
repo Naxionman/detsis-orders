@@ -21,7 +21,7 @@ class CreateSuppliersTable extends Migration
             $table->string('phone1')->nullable();
             $table->string('phone2')->nullable();
             $table->string('website')->nullable();
-            $table->string('afm')->nullable();
+            $table->string('afm', 9)->nullable();
             $table->string('address')->nullable();
             $table->integer('zipcode')->nullable();
             $table->string('city')->nullable();

@@ -28,7 +28,7 @@ class CreateEmployeesTable extends Migration
             $table->date('date_left')->nullable();
             $table->string('amka')->nullable();
             $table->string('ama')->nullable();
-            $table->string('afm')->nullable();
+            $table->string('afm', 9)->nullable();
             $table->string('adt')->nullable();
             $table->string('citizenship')->nullable();
             $table->string('contract_type')->nullable();
