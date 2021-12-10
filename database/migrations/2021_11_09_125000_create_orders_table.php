@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->date('order_date');
             $table->date('arrival_date')->nullable();
+            $table->string('order_type');
             $table->boolean('pending')->default(1);
             $table->unsignedBigInteger('supplier_id');
             $table->unsignedBigInteger('client_id')->nullable();
@@ -24,8 +25,6 @@ class CreateOrdersTable extends Migration
             $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
             $table->timestamps();
-
-            
         });
     }
 
@@ -34,8 +33,7 @@ class CreateOrdersTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('orders');
     }
 }

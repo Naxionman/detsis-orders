@@ -21,6 +21,7 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
+                <th>Ήρθαν;</th>
                 <th style="width: 5%">α/α</th>
                 <th>DCode</th>
                 <th>Κωδ.Προμηθευτή</th>
@@ -46,11 +47,12 @@
             @php
                 $count +=1;
             @endphp
-
-            <tr>
                 <tr>
                     <input type="hidden" name="product_id{{$count}}" value="{{ $detail->product->id }}">
                     <input type="hidden" name="detail_id{{$count}}" value="{{ $detail->id }}">
+                    <td>
+                        <div class="form-check"><input class="form-check-input" type="checkbox" value="0" name="arrived{{$count}}" id="check{{$count}}" checked></div>
+                    </td>
                     <td style="width: 5%" class="p-0 order-font">{{ $count }}</td>
                     <td style="width: 10%" class="p-0 order-font">{{ $detail->product->detsis_code }}</td>
                     <td style="width: 10%" class="p-0 order-font">{{ $detail->product->product_code }}</td>
@@ -86,13 +88,11 @@
                         <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="price{{$count}}" min="0" id="price{{$count}}" readonly="readonly">
                     </td>
                 </tr>
-            </tr>
+            
         @endforeach
         </tbody>
     </table>
     <input type="hidden" name="count" id="count" value="{{$count}}">
-    <input type="hidden" name="order_id" value="{{$detail->order_id}}">
-    <input type="hidden" name="pending" value="0">
     <input type="hidden" name="supplier_id" value="{{$order->supplier_id}}">
     
 </div>
@@ -125,23 +125,22 @@
     </div>
     <div class="col-2 border rounded-end">
         <div class="row">
-            <input type="number" step="0.01" readonly="readonly" class="form-control p-0 pe-2 text-end order-font" min="0" id="orderNetValue" 
-            value="{{ $order->order_price - ($order->order_price * $order->tax_rate/100) - ($order->order_price * $order->order_discount/100) }}">
+            <input type="number" step="0.01" readonly="readonly" class="form-control p-0 pe-2 text-end order-font" min="0" id="invoiceNetValue">
         </div>
         <div class="row">
-            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="order_discount" min="0" id="orderDiscount" value="{{  $order->order_discount }}">
+            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="order_discount" min="0" id="orderDiscount">
         </div>
         <div class="row">
-            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="order_charges" min="0" id="orderCharges" value="{{  $order->order_charges }}">
+            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="extra_charges" min="0" id="extraCharges">
         </div>
         <div class="row">
-            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="order_tax_rate" min="0" id="orderTaxRate"value="{{  $order->tax_rate }}"  >
+            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="invoice_tax_rate" min="0" id="invoiceTaxRate" value="24.00">
         </div>
         <div class="row">
-            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" min="0" id="tax" value="{{  $order->order_price * $order->tax_rate/100 }}">
+            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" min="0" id="tax">
         </div>
         <div class="row">
-            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="order_price" value="{{  $order->order_price  }}" min="0" id="orderPrice">
+            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="invoice_total" min="0" id="invoiceTotal">
         </div>
 
     </div>

@@ -11,7 +11,6 @@ class Order extends Model
 
     protected $dates = ['order_date','arrival_date'];
 
-    // Defining One-To-Many relationship of Order->Products
     public function orderDetails() {
         return $this->hasMany(OrderDetails::class);
     }

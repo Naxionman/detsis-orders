@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use \App\Models\Supplier;
 
 class SuppliersTableSeeder extends Seeder
 {
@@ -11,17 +12,16 @@ class SuppliersTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
         
-        \App\Models\Supplier::create([
+        Supplier::create([
             'company_name'  => 'Accessories – Αθανασιάδης Δημήτριος',
             'email'         => 'a.d.2accessories@gmail.com',
             'phone1'        => '6972 264 042',
             'description'   => 'Εργοστάσιο χημικά σιλικόνες',
         ]);
         
-        \App\Models\Supplier::create([
+        Supplier::create([
             'company_name'  => 'ADLER – Αφοί Ιωαννίδη και ΣΙΑ ΕΕ',
             'email'         => 'adlergr@otenet.gr',
             'phone1'        => '210 2710884',
@@ -32,7 +32,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο χρώματα',
         ]);
 
-        \App\Models\Supplier::create([
+        Supplier::create([
             'company_name'  => 'Αρνάκης Δημ. Βασίλειος – Trusttools',
             'email'         => 'info@trusttools.gr',
             'phone1'        => '210 9649810',
@@ -43,7 +43,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Βιομηχανικά εργαλεία',
         ]);
         
-        \App\Models\Supplier::create([
+        Supplier::create([
             'company_name'  => 'Βογιατζόγλου Systems A.E.',
             'salesman'      => 'Σάκης 6971545749',
             'email'         => 'info@voyatzoglou.gr',
@@ -57,7 +57,7 @@ class SuppliersTableSeeder extends Seeder
             
         ]);
 
-        \App\Models\Supplier::create([
+        Supplier::create([
             'company_name'  => 'Μ.Βράτιμος - Π.Παπαδόπουλος Ο.Ε. (Woodman)',
             'email'         => 'vratimos@woodman.gr',
             'phone1'        => '2710 233847',
@@ -67,7 +67,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ξυλεία',
         ]);
 
-        \App\Models\Supplier::create([
+        Supplier::create([
             'company_name'  => 'ΒΥΡΤ ΕΛΛΑΣ ΑΕΒΕ  (WURTH)',
             'email'         => 'info@wurth.gr',
             'phone1'        => '210 6290800',
@@ -78,7 +78,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο Υλικά συναρμολόγησης',
         ]);
 
-        \App\Models\Supplier::create([
+        Supplier::create([
             'company_name'  => 'BLUM ΕΛΛΑΣ ΑΕΒΕ',
             'salesman'      => 'Δημήτρης: 6945109765 Δήμητρα Δραγώνα: dimitra.dragona@blum.com',
             'email'         => 'info.gr@blum.com',
@@ -90,7 +90,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο Υλικά επιπλοποιίας μεντεσέδες κουμπάσα',
         ]);
 
-        \App\Models\Supplier::create([
+        Supplier::create([
             'company_name' => 'Βαμβακάς Βιομηχανικός εξοπλισμός ΑΕ',
             'email' => 'info@vamvacas.gr',
             'phone1' => '210 4208707',
@@ -101,7 +101,7 @@ class SuppliersTableSeeder extends Seeder
             'description' => 'Εργοστάσιο βιομηχανικός εξοπλισμός εργαλεία εξαρτήματα',
         ]);
 
-        \App\Models\Supplier::create([
+        Supplier::create([
             'company_name' => 'Wood Profile Μ.ΕΠΕ',
             'email' => 'info@woodprofile.com',
             'phone1' => '210 6628544',
@@ -112,7 +112,7 @@ class SuppliersTableSeeder extends Seeder
             'description' => 'Εργοστάσιο είδη ξύλου ξυλεία',
         ]);
 
-        \App\Models\Supplier::create([
+        Supplier::create([
             'company_name' => 'ΓΛΥΚΟΣ Ο.Ε.',
             'email' => 'glykosoe@otenet.gr',
             'phone1' => '22210 83502',
@@ -124,7 +124,7 @@ class SuppliersTableSeeder extends Seeder
             'description' => 'Εργοστάσιο πορτάκια',
         ]);
 
-        \App\Models\Supplier::create([
+        Supplier::create([
             'company_name' => 'ΣΩΤΗΡΗΣ & ΠΕΤΡΟΣ ΔΗΜΟΥ Ο.Ε.',
             'email' => 'info@dimou.com.gr',
             'phone1' => '2310 667266',
@@ -135,7 +135,7 @@ class SuppliersTableSeeder extends Seeder
             'description' => 'Εργοστάσιο αλουμίνιο τζάμι μηχανισμοί συρόμενων',
         ]);
 
-        \App\Models\Supplier::create([
+        Supplier::create([
             'company_name' => 'ΕΥΡΩΤΕΧΝΙΚΗ Ε.Π.Ε.  - Eurotecnica Roto',
             'email' => 'info@eurotechnica.gr',
             'phone1' => '210 9959397',
@@ -146,7 +146,7 @@ class SuppliersTableSeeder extends Seeder
             'description' => 'Εργοστάσιο ',
         ]);
 
-        \App\Models\Supplier::create([
+        Supplier::create([
             'company_name' => 'ΕΛΕΥΘΕΡΙΟΥ Α.Ε.',
             'email' => 'info@eleftheriou-sa.gr',
             'phone1' => '2310 781822',
@@ -157,7 +157,7 @@ class SuppliersTableSeeder extends Seeder
             'description' => 'Εργοστάσιο πορτάκια ',
         ]);
 
-        \App\Models\Supplier::create([
+        Supplier::create([
             'company_name' => 'ΕΛΑΣΤΡΟΝ ΑΕΒΕ',
             'email' => '',
             'phone1' => '210 5515000',
@@ -168,7 +168,7 @@ class SuppliersTableSeeder extends Seeder
             'description' => 'Εργοστάσιο πάνελ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'ΖΩΓΟΜΕΤΑΛ ΑΕΒΕ',
             'salesman'      => '',
             'email'         => 'info@zogometal.com',
@@ -180,7 +180,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο πόμολα μάσκουλα',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'ΖΑΛΩΝΗ ΑΦΟΙ Ο.Ε.',
             'email'         => 'info@zalonis.eu',
             'phone1'        => '210 9613206',
@@ -191,7 +191,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο μηχανισμοί συρόμενων',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Θεοδοσιάδης Κ. Α.Ε.',
             'salesman'      => '',
             'email'         => 'info@theodosiadis.gr',
@@ -202,7 +202,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ανοξείδωτα',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Κοντογεώργου Ε.Π.Ε.',
             'email'         => 'carve@otenet.gr',
             'phone1'        => '22950 29946',
@@ -213,7 +213,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο πορτάκια ημιμασίφ ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Κανελλόπουλος Αν. Ι.Κ.Ε. ',
             'email'         => 'sales@woodkanellopoulos.gr',
             'phone1'        => '210 9752147',
@@ -223,7 +223,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο πορτάκια',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Κανέλλη Α.Ε.Ε.',
             'email'         => 'info@kanelli.eu',
             'phone1'        => '210 4134972',
@@ -234,7 +234,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο πορτάκια',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Καριανάκης Κωνσταντίνος Greenroof',
             'email'         => 'info@greenroof.gr',
             'phone1'        => '210 9231052',
@@ -245,7 +245,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Λινάκης Μ. Α.Ε.',
             'email'         => 'sales@ra-ba.gr',
             'phone1'        => '210 9411509',
@@ -256,7 +256,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Μαριόγλου ΑΦΟΙ ΑΒΕΕ',
             'salesman'      => 'Κατερίνα',
             'email'         => 'info@marioglou.gr',
@@ -267,7 +267,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Madeira',
             'email'         => 'info@madeira.gr',
             'phone1'        => '210 6230972',
@@ -278,7 +278,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'ASH - Hafele ΜΟΥΡΔΟΥΚΟΥΤΑΣ ΙΚΕ',
             'salesman'      => '',
             'email'         => 'info@ash.gr',
@@ -290,7 +290,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'METALOR ΑΒΕΕ',
             'email'         => 'Ασπρόπυργος',
             'phone1'        => '210 5599690',
@@ -301,7 +301,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Ματράκας Αθανάσιος',
             'email'         => 'info@matrakas.gr',
             'phone1'        => '22280 25252',
@@ -312,7 +312,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Πραξιτέλης Α.Ε.',
             'email'         => 'info@praxitelis-sa.gr',
             'phone1'        => '27410 24952',
@@ -322,7 +322,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Παπαδόπουλος Ηλίας – Papadopoulos Tools',
             'salesman'      => '',
             'email'         => 'info@papadopoulostools.com',
@@ -334,7 +334,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Προμηθεύς - Μ. Παπαδοπούλου - Χ. Τερψίδης Ο.Ε.',
             'email'         => 'sales@prometheus.gr',
             'phone1'        => '210 4131716',
@@ -345,7 +345,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Paramina ΑΕΒΕ',
             'email'         => 'info@paramina.gr',
             'phone1'        => '210 5575860',
@@ -356,7 +356,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Ραπτόπουλος Μ. Α.Ε.',
             'email'         => 'info@raptopoulosae.gr',
             'phone1'        => '2310 461797',
@@ -367,7 +367,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Rimar Ε.Π.Ε.',
             'email'         => 'info@rimar.gr',
             'phone1'        => '22620 73054',
@@ -378,7 +378,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'SILVES',
             'salesman'      => '',
             'email'         => 'info@silves.gr',
@@ -390,7 +390,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Δημητρακόπουλοι Αφοι Ο.Ε. ΣΥΡΤΕΞ',
             'salesman'      => '',
             'email'         => '',
@@ -402,7 +402,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ',
         ]);
         
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'SYNCRO AE',
             'salesman'      => '',
             'email'         => 'info@syncro.gr',
@@ -414,7 +414,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Συνοδιάς Ι.Β. Α.Ε.',
             'salesman'      => 'Γιώργος Μιμίκος 697 28 29 284',
             'email'         => 'info@sinodias.com',
@@ -426,7 +426,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Sideco - Οικονομίδης Σ. & Δ.  Ο.Ε.',
             'salesman'      => '',
             'email'         => 'info@sideco.gr',
@@ -438,7 +438,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Σαχλός Α. - Timbersa',
             'salesman'      => '',
             'email'         => 'info@xyleia-athina.gr',
@@ -450,7 +450,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Σακαλάκης Μιχαήλ',
             'salesman'      => '',
             'email'         => 'sakal1@otenet.gr',
@@ -462,7 +462,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Σίντερ Ελλάς Ε.Π.Ε.',
             'salesman'      => '',
             'email'         => 'sinter.hellas@gmail.com',
@@ -474,7 +474,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Σαρρής Μηχανήματα ΑΕΒΕ',
             'salesman'      => '',
             'email'         => 'info@sarris-machinery.gr',
@@ -486,7 +486,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Χατζηιωάννου Κωνσταντίνος – Sokratis',
             'email'         => 'info@sokratis.com.gr',
             'phone1'        => '210 5778748',
@@ -497,7 +497,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'ΧΗΜΙΚΟΔΟΜΙΚΗ Α.Ε.',
             'email'         => 'info@chimikodomiki.gr',
             'phone1'        => '2310 420125',
@@ -508,7 +508,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Χαμπάκης Σ.Ε. & ΣΙΑ',
             'salesman'      => '',
             'email'         => 'info@habakis.gr',
@@ -520,7 +520,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εργοστάσιο ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Varvaresos Doors',
             'email'         => 'varvaresosgr@hotmail.com',
             'phone1'        => '26230 54968',
@@ -531,7 +531,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εμπόριο πόρτες',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'FRANKE',
             'salesman'      => '',
             'email'         => 'ks-orders.gr@franke.com',
@@ -543,7 +543,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εμπόριο ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Μπακλατσίδης',
             'email'         => 'sales@baklatsidis.gr',
             'phone1'        => '2310 463 135',
@@ -555,7 +555,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εμπόριο ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'VS Doors',
             'salesman'      => 'Σιδηρόπουλος Βασίλης',
             'email'         => 'info@vs-windows-doors.gr',
@@ -565,7 +565,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εμπόριο  ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'Σάλτας Χρήστος & Υιοί',
             'salesman'      => '',
             'email'         => 'X_Saltas_Yioi@yahoo.gr',
@@ -577,7 +577,7 @@ class SuppliersTableSeeder extends Seeder
             'description'   => 'Εμπόριο κουφώματα ',
         ]);
 
-        \App\Models\Supplier::create ([
+        Supplier::create ([
             'company_name'  => 'ΤΖΙ ΕΣ - GS',
             'salesman'      => 'Ιωάννα Πέγκα',
             'email'         => 'clients@g-s.gr',

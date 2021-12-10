@@ -26,7 +26,7 @@
                     <div class="col-sm-2"><label for="inputClient">Πελάτης (προαιρετικό)</label></div>
                         <div class="col-sm-4">
                             <select class="js-example-basic-single form-control" id="inputClient" name="client_id">
-                                <option value="null" selected>Δεν αφορά πελάτη</option>
+                                <option value="1" selected>Δεν αφορά πελάτη</option>
                                 @foreach ($clients as $client)
                                     <option   type="text" value="{{ $client->id }}">{{ $client->surname }} {{ $client->name }}</option>
                                 @endforeach
@@ -66,10 +66,9 @@
                         <div class="col-sm-4">
                         </div>
                     </div>
-                    <div class="row mt-3 justify-content-center">
-
-                        <div class="col-sm-2"><label for="inputNotes">Σημειώσεις</label></div>
-                        <div class="col-sm-4"><textarea rows="4" class="form-control" autocomplete="nope" type="text" id="inputNotes" name="notes" placeholder="Τα πεδία ημερομηνία άφιξης, μεταφορική εταιρεία, τιμή, έκπτωση και τιμολόγιο φορτωτικής συμπληρώνονται με την παραλαβή" ></textarea></div>
+                    <div class="row m-5 justify-content-center">
+                        <label for="inputNotes">Σημειώσεις</label>
+                        <textarea rows="4" class="form-control" type="text" id="inputNotes" name="notes" placeholder="Τα πεδία ημερομηνία άφιξης, μεταφορική εταιρεία, τιμή, έκπτωση και τιμολόγιο φορτωτικής συμπληρώνονται με την παραλαβή" ></textarea>
                     </div>
                     @csrf
                 </form>

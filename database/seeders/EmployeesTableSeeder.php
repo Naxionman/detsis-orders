@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use \App\Models\Employee;
 
 class EmployeesTableSeeder extends Seeder
 {
@@ -11,9 +12,8 @@ class EmployeesTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
-        \App\Models\Employee::create([
+    public function run() {
+        Employee::create([
             'first_name' => 'Νικόλαος',
             'surname' =>'Χωριανόπουλος',
             'father_name' =>'Γεώργιος',
@@ -39,7 +39,7 @@ class EmployeesTableSeeder extends Seeder
             'notes' => '',
         ]);
 
-        \App\Models\Employee::create([
+        Employee::create([
             'first_name' => 'Ervis',
             'surname' =>'Gjonaj',
             'father_name' =>'Jak',
@@ -63,7 +63,7 @@ class EmployeesTableSeeder extends Seeder
             'leave_days_taken' => '0',
         ]);
 
-        \App\Models\Employee::create([
+        Employee::create([
             'first_name' => 'Πέτρος',
             'surname' =>'Μαράκης',
             'father_name' =>'Λεωνίδας',
@@ -84,7 +84,7 @@ class EmployeesTableSeeder extends Seeder
             'children' => '0',
         ]);
 
-        \App\Models\Employee::create([
+        Employee::create([
             'first_name' => 'Δημήτριος',
             'surname' =>'Απειρανθίτης',
             'father_name' =>'Γεώργιος',
@@ -106,7 +106,7 @@ class EmployeesTableSeeder extends Seeder
             'children' => '0',
         ]);
 
-        \App\Models\Employee::create([
+        Employee::create([
             'first_name' => 'Νικόλαος',
             'surname' =>'Βρεττός',
             'father_name' =>'Γεώργιος',
@@ -126,7 +126,7 @@ class EmployeesTableSeeder extends Seeder
             'children' => '0',
         ]);
 
-        \App\Models\Employee::create([
+        Employee::create([
             'first_name' => 'Γεώργιος',
             'surname' =>'Κορρές',
             'father_name' =>'Βασίλειος',
@@ -147,7 +147,7 @@ class EmployeesTableSeeder extends Seeder
             'children' => '0',
         ]);
 
-        \App\Models\Employee::create([
+        Employee::create([
             'first_name' => 'Στυλιανός',
             'surname' =>'Ψαρράς',
             'father_name' =>'Ιάκωβος',
@@ -166,7 +166,7 @@ class EmployeesTableSeeder extends Seeder
             'children' => '2',
         ]);
 
-        \App\Models\Employee::create([
+        Employee::create([
             'first_name' => 'Νικόλαος',
             'surname' =>'Κατρακάζας',
             'father_name' =>'Μιχαήλ',
@@ -186,7 +186,7 @@ class EmployeesTableSeeder extends Seeder
             'children' => '2',
         ]);
 
-        \App\Models\Employee::create([
+        Employee::create([
             'first_name' => 'Σταμάτιος',
             'surname' =>'Γερονικολόπουλος',
             'father_name' =>'Ιωάννης',
@@ -206,7 +206,7 @@ class EmployeesTableSeeder extends Seeder
             'children' => '0',
         ]);
         
-        \App\Models\Employee::create([
+        Employee::create([
             'first_name' => 'Mihail',
             'surname' =>'Bani',
             'father_name' =>'Lohinda',

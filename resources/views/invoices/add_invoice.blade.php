@@ -70,7 +70,7 @@
                                     <label for="inputInvoiceNumber">Αριθμός Τιμολογίου Προμηθευτή</label>
                                 </div>
                                 <div class="col-6">
-                                    <input class="form-control" name="order_invoice_number" type="text" id="inputInvoiceNumber" required="required">
+                                    <input class="form-control" name="supplier_invoice_number" type="text" id="inputInvoiceNumber" required="required">
                                 </div>
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                                                 <label for="inputShipmentNumber" class="align-middle">Αριθμός Τιμολογίου</label>
                                             </div>
                                             <div class="col-8">
-                                                <input class="form-control" name="shipping_invoice_number" type="text" id="inputShipmentNumber" autocomplete="off" required="required">
+                                                <input class="form-control" name="shipment_invoice_number" type="text" id="inputShipmentNumber" autocomplete="off" required="required">
                                             </div>
                                     </div>
                                     <div class="row">

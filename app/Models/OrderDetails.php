@@ -13,7 +13,18 @@ class OrderDetails extends Model
 
     public $timestamps = false;
 
-    public function product(){
+    //An OrderDetail has one Product
+    public function product() {
         return $this->belongsTo(Product::class);
+    }
+
+    //An OrderDetail belongs to an Invoice
+    public function invoice() {
+        return $this->belongsTo(Invoice::class);
+    }
+
+    //An OrderDetail belongs to an Order
+    public function order() {
+        return $this->belongsTo(Order::class);
     }
 }

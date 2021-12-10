@@ -18,6 +18,7 @@ class CreateInvoicesTable extends Migration
             
             $table->unsignedBigInteger('shipment_id');
             $table->unsignedBigInteger('supplier_id');
+            $table->string('invoice_type');
             $table->date('invoice_date');
             $table->string('supplier_invoice_number');
             $table->float('invoice_tax_rate')->default('24.00');
@@ -37,8 +38,7 @@ class CreateInvoicesTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('invoices');
     }
 }

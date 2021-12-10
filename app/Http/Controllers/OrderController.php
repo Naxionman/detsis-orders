@@ -28,15 +28,31 @@ class OrderController extends Controller {
     }
 
     public function store(Request $request) {
-        $data = request()->validate([
-            'order_date'    => 'required',
-            'client_id'     => 'nullable',
-            'supplier_id'   => 'required',
-            'pending'       => 'required',
-            'notes'         => 'nullable',
-            'arrival_date'  => 'nullable'
+
+        
+
+        $new_order = Order::create ([
+            'order_date'    => $request->input('order_date'),
+            'order_type'    => '',
+            'client_id'     => $request->input('client_id'),
+            'supplier_id'   => $request->input('supplier_id'),
+            'pending'       => $request->input('pending'),
+            'notes'         => $request->input('notes'),
+            'arrival_date'  => $request->input('arrival_date'),
         ]);
-        $new_order = \App\Models\Order::create($data);
+
+        //After creating an instance of Order we set the type
+        $first_product = Product::find($request->input('product1'));
+
+        if($first_product->id == 1) {
+            $new_order->order_type = 'Εμπόριο';
+        } elseif ($first_product->id == 2){
+            $new_order->order_type = 'Εργοστάσιο (Μ)';
+        } else {
+            $new_order->order_type = 'Εργοστασίο';
+        }
+
+        $new_order->save();
         
         $products_count = request()->input('count');
         

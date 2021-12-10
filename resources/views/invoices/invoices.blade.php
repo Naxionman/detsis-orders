@@ -31,7 +31,7 @@
                     <table id="myTable" class="cell-border display compact">
                         <thead>
                             <tr>
-                                <th>α/α</th>
+                                <th>id</th>
                                 <th>Ημερομηνία</th>
                                 <th>Προμηθευτής</th>
                                 <th>Παραγγελίες</th>
@@ -42,7 +42,7 @@
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>α/α</th>
+                                <th>id</th>
                                 <th>Ημερομηνία</th>
                                 <th>Προμηθευτής</th>
                                 <th>Παραγγελίες</th>
@@ -66,7 +66,7 @@
                                 </td>
                                 <td>{{$invoice->invoice_total}} €</td>
                                 <td>
-                                    @if ($invoice->orders->first()->orderDetails->first()->product->id < 3)
+                                    @if ($invoice->orderDetails->first()->product_id == 1 )
                                         {{ 'Εμπορίου'}}
                                     @else
                                         {{ 'Εργοστασίου'}}

@@ -38,9 +38,9 @@
                                 <th>α/α</th>
                                 <th>Ημερομηνία</th>
                                 <th>Καθυστέρηση</th>
+                                <th>Πελάτης</th>
                                 <th>Προμηθευτής</th>
                                 <th>Αφορά</th>
-                                <th>Σύνολο</th>
                                 <th>Άφιξη</th>
                                 <th>Στοιχεία Ελέγχου</th>
                             </tr>
@@ -50,9 +50,9 @@
                                 <th>α/α</th>
                                 <th>Ημερομηνία</th>
                                 <th>Καθυστέρηση</th>
+                                <th>Πελάτης</th>
                                 <th>Προμηθευτής</th>
                                 <th>Αφορά</th>
-                                <th>Σύνολο</th>
                                 <th>Άφιξη</th>
                                 <th>Στοιχεία Ελέγχου</th>
                             </tr>
@@ -73,20 +73,17 @@
                                         echo $difference;
                                     @endphp 
                                 </td>
-                                <td>{{ $order->supplier->company_name }}</td>
                                 <td>
-                                    @php
-                                        $detail = $order->orderDetails()->first();
-                                        if($detail->product_id == 1){
-                                            echo "Εμπόριο"; //This is about the showroom orders
-                                        } else{
-                                            echo "Εργοστάσιο"; //This is about the factory orders
-                                        }
-                                    @endphp
+                                    @if($order->client_id == null)
+                                        {{ 'Εργοστάσιο' }}
+                                    @else
+                                        {{ $order->client->surname }} {{ $order->client->name }}
+                                    @endif
                                 </td>
-                                <td class="text-end">{{ number_format($order->order_price, 2,',','.') }} €</td>
+                                <td>{{ $order->supplier->company_name }}</td>
+                                <td>{{ $order->order_type }}</td>
                                 <td>
-                                    @if ($order->arrival_date == null)
+                                    @if ($order->pending == 1)
                                         <a class="btn btn-primary shadow-sm btn-sm" href="/add_invoice/{{$order->id}}">Άφιξη</a>
                                     @else
                                         {{ $order->arrival_date->format('d-m-Y'); }} 
