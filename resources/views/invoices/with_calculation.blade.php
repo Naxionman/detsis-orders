@@ -51,7 +51,8 @@
                     <input type="hidden" name="product_id{{$count}}" value="{{ $detail->product->id }}">
                     <input type="hidden" name="detail_id{{$count}}" value="{{ $detail->id }}">
                     <td>
-                        <div class="form-check"><input class="form-check-input" type="checkbox" value="0" name="arrived{{$count}}" id="check{{$count}}" checked></div>
+                        <input type="hidden" name="arrived{{$count}}" value="0">
+                        <div class="form-check"><input class="form-check-input" type="checkbox" value="1" name="arrived{{$count}}" id="check{{$count}}" checked></div>
                     </td>
                     <td style="width: 5%" class="p-0 order-font">{{ $count }}</td>
                     <td style="width: 10%" class="p-0 order-font">{{ $detail->product->detsis_code }}</td>
@@ -60,29 +61,29 @@
                         <input type="number" class="form-control p-0 pe-2 text-end order-font" name="quantity{{$count}}" value="{{ $detail->quantity }}" id="quantity{{$count}}">
                     </td>
                     <td class="p-0">
-                        <input type="text" class="form-control p-0 pe-2 text-end order-font" name="measurement_unit{{$count}}" value="{{ $detail->measurement_unit == null ?: 'ΤΕΜ'}}">
+                        <input type="text" class="form-control p-0 pe-2 text-end order-font" name="measurement_unit{{$count}}" id="measurementUnit{{$count}}" value="{{ $detail->measurement_unit == null ?: 'ΤΕΜ'}}">
                     </td>
                     <td class="p-0">
-                        <input type="number" class="form-control p-0 pe-2 text-end order-font" name="items_per_package{{$count}}" value="{{ $detail->items_per_package == null ?: '1'}}">
+                        <input type="number" class="form-control p-0 pe-2 text-end order-font" name="items_per_package{{$count}}" id="itemsPerPackage{{$count}}" value="{{ $detail->items_per_package == null ?: '1'}}">
                     </td>
-                    <td style="width: 20%" class="p-0 order-font" >{{ $detail->product->product_name }}</td>
+                    <td style="width: 30%" class="p-0 order-font" >{{ $detail->product->product_name }}</td>
                     <td style="width: 5%" class="p-0">
                         <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="net_value{{$count}}" id="netValue{{$count}}" min="0" required>
                     </td>
                     <td style="width: 5%" class="p-0">
-                        <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="sum_net_value{{$count}}" id="sumNetValue{{$count}}" min="0" required>
+                        <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="sum_net_value{{$count}}" id="sumNetValue{{$count}}" min="0" readonly="readonly">
                     </td>
                     <td style="width: 5%" class="p-0">
                         <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="product_discount{{$count}}" value="0.00"min="0" max="100" id="productDiscount{{$count}}">
                     </td>
                     <td style="width: 5%" class="p-0">
-                        <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="value{{$count}}" value="0.00"min="0" id="value{{$count}}">
+                        <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="value{{$count}}" value="0.00"min="0" id="value{{$count}}" readonly="readonly">
                     </td>
                     <td style="width: 5%" class="p-0">
                         <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="tax_rate{{$count}}" value="24.00" min="0" max="100" id="taxRate{{$count}}">
                     </td>
                     <td style="width: 5%" class="p-0">
-                        <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="tax{{$count}}" min="0" id="tax{{$count}}">
+                        <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="tax{{$count}}" min="0" id="tax{{$count}}" readonly="readonly">
                     </td>
                     <td style="width: 10%" class="p-0">
                         <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="price{{$count}}" min="0" id="price{{$count}}" readonly="readonly">
@@ -128,10 +129,10 @@
             <input type="number" step="0.01" readonly="readonly" class="form-control p-0 pe-2 text-end order-font" min="0" id="invoiceNetValue">
         </div>
         <div class="row">
-            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="order_discount" min="0" id="orderDiscount">
+            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="order_discount" min="0" id="orderDiscount" value="0.00">
         </div>
         <div class="row">
-            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="extra_charges" min="0" id="extraCharges">
+            <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="extra_charges" min="0" id="extraCharges" value="0.00">
         </div>
         <div class="row">
             <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="invoice_tax_rate" min="0" id="invoiceTaxRate" value="24.00">
