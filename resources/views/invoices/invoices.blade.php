@@ -64,14 +64,8 @@
                                         {{ $order->id }},
                                     @endforeach
                                 </td>
-                                <td>{{$invoice->invoice_total}} €</td>
-                                <td>
-                                    @if ($invoice->orderDetails->first()->product_id == 1 )
-                                        {{ 'Εμπορίου'}}
-                                    @else
-                                        {{ 'Εργοστασίου'}}
-                                    @endif
-                                </td>
+                                <td>{{ $invoice->invoice_total }} €</td>
+                                <td>{{ $invoice->invoice_type }}</td>
                                 <td style="width:15%" >
                                     <div class="d-flex justify-content-evenly">
                                         <a href="/edit_invoice/{{ $invoice->id }}" class="btn btn-sm btn-warning">

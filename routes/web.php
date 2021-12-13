@@ -61,6 +61,7 @@ Route::get('/add_insurance/{vehicleId}', [InsuranceController::class, 'add_insur
 Route::get('/add_kteo/{vehicleId}', [KteoController::class, 'add_kteo']);
 Route::get('/add_car_service/{vehicleId}', [CarServiceController::class, 'add_car_service']);
 
+Route::get('/add_special_invoice', [InvoiceController::class, 'add_special_invoice']);
 Route::get('/add_invoice/{orderId}', [InvoiceController::class, 'add_invoice']);
 
 Route::post('/add_supplier', [SupplierController::class, 'store']);
@@ -71,6 +72,8 @@ Route::post('/add_vehicle', [VehicleController::class, 'store']);
 Route::post('/add_dispatch', [DispatchController::class, 'store']);
 Route::post('/add_order', [OrderController::class, 'store']);
 Route::post('/add_invoice', [InvoiceController::class, 'store']);
+
+Route::post('/add_special_invoice', [InvoiceController::class, 'storeSpecial']);
 Route::post('/add_shipment', [ShipmentController::class, 'store']);
 Route::post('/add_product', [ProductController::class, 'store']);
 Route::post('/add_fuel/{vehicleId}', [RefuelingController::class, 'store']);

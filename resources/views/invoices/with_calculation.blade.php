@@ -143,6 +143,5 @@
         <div class="row">
             <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="invoice_total" min="0" id="invoiceTotal">
         </div>
-
     </div>
 </div>

@@ -31,6 +31,19 @@ class InvoiceController extends Controller {
         return view ('invoices.add_invoice', compact('suppliers','products','shipments','shippers', 'orders','order', 'details'));
     }
 
+    public function add_special_invoice() {
+        $suppliers = Supplier::all();
+        $shippers = Shipper::all();
+        $products = Product::all();
+        $shipments = Shipment::all();
+        
+        return view ('invoices.add_invoice', compact('suppliers','products','shipments','shippers'));
+    }
+
+    public function storeSpecial(Request $request) {
+        
+    }
+
     public function store(Request $request) { 
 
         /* Since it's the most complicated action I will try to explain every step thoroughly not only 
@@ -52,7 +65,8 @@ class InvoiceController extends Controller {
          * 
          *       4. We create a new invoice instance including type (taken from order)
          * 
-         *       5. We place the invoice_id to the order_detail.  
+         *       5. We place the invoice_id to the order_detail. Furthermore we create a record in prices table 
+         *          where we keep the history of the prices for each invoiced product
          * 
          *       6. While some order may be partially invoiced (not completed), there is always the posibility
          *          of having more than one orders within the same invoice. This is dealt with linking orders 
@@ -66,7 +80,7 @@ class InvoiceController extends Controller {
 
         //The counter of the products 
         $count = $request->input('count');
-        dd($request);
+        //dd($request);
         //(Step 1)   The order through which we create a new invoice
         $order = Order::findOrFail($request->input('order_id'));
         
@@ -89,10 +103,24 @@ class InvoiceController extends Controller {
         }
 
         //(Step 3) Order update
+            //If the invoice is for the factory then pending should be calculated through the order details. 
+            // When all of the products in the order details are not pending, order is not pending too.
+        
+        if($request->input('pending')== null){
+            for($i=1;$i< $count+1;$i++){
+                if($request->input('arrived'.$i) == "0"){
+                    $order_pending = "1";
+                    break; //Even if there is only one pending produc, the order should be considered pending.
+                }
+            }
+        } else {
+            $order_pending = $request->input('pending');
+        }
+
         $data_for_orders = [
             'arrival_date' => $request->input('arrival_date'),
             'notes' => $request->input('notes'),
-            'pending' => $request->input('pending'),   //The request sends the choice of the Radio button
+            'pending' => $order_pending,   //The request sends the choice of the Radio button
         ];
         $order->update($data_for_orders);
         
@@ -109,9 +137,26 @@ class InvoiceController extends Controller {
         
         //  OrderDetails. The most tricky part!
         //(Step 5) Linking order details with the new invoice
+        $i = 1;
         foreach($order->orderDetails as $detail){
-            $detail->invoice_id = $invoice->id;
-            $detail->save();
+            if($request->input('arrived'.$i) == 1){
+                $detail->invoice_id = $invoice->id; //link to the invoice
+                $detail->pending = '0'; //updating pending status
+                //creating price record for the specific product
+                \App\Models\Price::create([
+                    'price_date' => $request->input('invoice_date'),
+                    'history_price' => $request->input('net_value'.$i),
+                    'history_discount' => $request->input('product_discount'.$i),
+                    'history_tax_rate' => $request->input('tax_rate'.$i),
+                    'supplier_id' => $request->input('supplier_id'),
+                    'product_id' => $detail->product_id
+                ]);
+
+
+                $detail->product->last_supplier = $request->input('supplier_id'); //Updating last supplier
+                $detail->save();
+            }
+            $i++;
         }
 
         //(Step 6) This invoice may refer to more than the order that brought us here
