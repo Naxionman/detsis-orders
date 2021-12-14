@@ -169,4 +169,10 @@ class InvoiceController extends Controller {
 
         return redirect('/orders')->with('message', 'Επιτυχής αποθήκευση Τιμολογίου!');
     }
+
+    public function destroy(Invoice $invoice) {
+        $invoice->delete();
+
+        return redirect('/invoices')->with('message', 'Επιτυχής διαγραφή Τιμολογίου!');
+    }
 }

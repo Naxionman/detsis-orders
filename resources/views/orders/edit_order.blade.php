@@ -8,7 +8,8 @@
     <div class="card bg-success bg-opacity-50 shadow-lg border-0 rounded-3 mt-3 ">
         <div class="card-header"><h3 class="text-center font-weight-light my-2 ">Παραγγελία : {{ $order->id }}</h3></div>
             <div class="card-body bg-light">
-                <form action="add_order" id="addOrder" method="POST">
+                <form action="/edit_order/{{ $order->id }}" id="editOrder" method="POST">
+                    @method('PATCH')
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputOrderDate">Ημερομηνία</label></div>
                         <div class="col-sm-4"><input class="form-control" type="date" id="inputOrderDate" value="{{ $order->order_date->format('Y-m-d') }}" name="order_date" required="required" autofocus></div>
@@ -24,6 +25,20 @@
                             </select>
                         </div>
                     </div>
+                    <div class="row mt-3 justify-content-center">
+                        <div class="col-sm-2"><label for="inputClient">Πελάτης (προαιρετικό)</label></div>
+                            <div class="col-sm-4">
+                                <select class="js-example-basic-single form-control" id="inputClient" name="client_id">
+                                    <option value="{{ $order->client_id }}">{{ $order->client->surname }} {{ $order->client->name }}</option>
+                                    <option value="1">Δεν αφορά πελάτη</option>
+                                    @foreach ($clients as $client)
+                                        <option   type="text" value="{{ $client->id }}">{{ $client->surname }} {{ $client->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+
                     <div class="row mt-3 justify-content-center">
                         <h2>Προϊόντα παραγγελίας</h2>
                         <table id="order" class="cell-border display compact">

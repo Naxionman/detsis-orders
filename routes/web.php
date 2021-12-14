@@ -104,7 +104,7 @@ Route::patch('/edit_shipper/{shipper}',[ShipperController::class, 'update']);
 Route::patch('/edit_vehicle/{vehicle}',[VehicleController::class, 'update']);
 Route::patch('/edit_dispatch/{dispatch}',[DispatchController::class, 'update']);
 Route::patch('/edit_order/{order}',[OrderController::class, 'update']);
-Route::patch('/edit_order/{order}',[OrderController::class, 'updateDetails']);
+Route::patch('/edit_invoice/{invoice}',[InvoiceController::class, 'update']);
 Route::patch('/edit_shipment/{shipment}',[ShipmentController::class, 'update']);
 Route::patch('/edit_product/{product}',[ProductController::class, 'update']);
 Route::patch('/edit_insurance/{insurance}',[InsuranceController::class, 'update']);
@@ -123,3 +123,4 @@ Route::delete('/refuelings/{refueling}',[RefuelingController::class, 'destroy'])
 Route::delete('/insurances/{insurance}',[InsuranceController::class, 'destroy']);
 Route::delete('/kteos/{kteo}',[KteoController::class, 'destroy']);
 Route::delete('/car_services/{car_service}',[CarServiceController::class, 'destroy']);
+Route::delete('/invoices/{invoice}',[InvoiceController::class, 'destroy']);
