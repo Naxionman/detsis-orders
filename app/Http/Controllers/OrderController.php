@@ -103,7 +103,8 @@ class OrderController extends Controller {
         $order->update($data);
         
         $orders = Order::all();
-        return view('orders', compact('orders'));
+
+        return redirect('/orders')->with('message', 'Επιτυχής επεξεργασία παραγγελίας!');
     }
 
     public function destroy(\App\Models\Order $order) {

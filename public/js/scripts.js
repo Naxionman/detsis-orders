@@ -42,6 +42,8 @@ jQuery(function() {
 
         updateFields();
 
+        
+
         //Enable/Disable a row (if products of an order are not included in the invoice)
         for (let i = 1; i < count+1; i++) {
             $('#check'+i).on('change', function(){

@@ -44,10 +44,11 @@
             $count = 0
         @endphp          
         @foreach ($details as $detail)
+            @if ($detail->pending == 1)
             @php
                 $count +=1;
             @endphp
-                <tr>
+                <tr id="tr">
                     <input type="hidden" name="product_id{{$count}}" value="{{ $detail->product->id }}">
                     <input type="hidden" name="detail_id{{$count}}" value="{{ $detail->id }}">
                     <td>
@@ -89,7 +90,49 @@
                         <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="price{{$count}}" min="0" id="price{{$count}}" readonly="readonly">
                     </td>
                 </tr>
-            
+                @else
+                <tr style="color:#808080"">
+                    <td>
+                        <input type="hidden" name="arrived{{$count}}" value="0">
+                        <div class="form-check"><input class="form-check-input" type="checkbox" checked disabled>*</div>
+                    </td>
+                    <td style="width: 5%" class="p-0 order-font">{{ $count }}</td>
+                    <td style="width: 10%" class="p-0 order-font">{{ $detail->product->detsis_code }}</td>
+                    <td style="width: 10%" class="p-0 order-font">{{ $detail->product->product_code }}</td>
+                    <td style="width: 5%" class="p-0 order-font">
+                        <input type="number" class="form-control p-0 pe-2 text-end order-font"  value="{{ $detail->quantity }}" id="quantity{{$count}}"disabled>
+                    </td>
+                    <td class="p-0">
+                        <input type="text" class="form-control p-0 pe-2 text-end order-font" id="measurementUnit{{$count}}" value="{{ $detail->measurement_unit == null ?: 'ΤΕΜ'}}" disabled>
+                    </td>
+                    <td class="p-0">
+                        <input type="number" class="form-control p-0 pe-2 text-end order-font" id="itemsPerPackage{{$count}}" value="{{ $detail->items_per_package == null ?: '1'}}"disabled>
+                    </td>
+                    <td style="width: 30%" class="p-0 order-font" >{{ $detail->product->product_name }}</td>
+                    <td style="width: 5%" class="p-0">
+                        <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font"  id="netValue{{$count}}" min="0" disabled>
+                    </td>
+                    <td style="width: 5%" class="p-0">
+                        <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" min="0" readonly="readonly"disabled>
+                    </td>
+                    <td style="width: 5%" class="p-0">
+                        <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" value="0.00"min="0" max="100" id="productDiscount{{$count}}"disabled>
+                    </td>
+                    <td style="width: 5%" class="p-0">
+                        <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" value="0.00"min="0" id="value{{$count}}" readonly="readonly"disabled>
+                    </td>
+                    <td style="width: 5%" class="p-0">
+                        <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" value="24.00" id="taxRate{{$count}}"disabled>
+                    </td>
+                    <td style="width: 5%" class="p-0">
+                        <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" id="tax{{$count}}" readonly="readonly"disabled>
+                    </td>
+                    <td style="width: 10%" class="p-0">
+                        <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" id="price{{$count}}" readonly="readonly">
+                    </td>
+                </tr>
+
+                @endif            
         @endforeach
         </tbody>
     </table>
@@ -97,6 +140,13 @@
     <input type="hidden" name="supplier_id" value="{{$order->supplier_id}}">
     
 </div>
+    @foreach ($details as $detail)
+        @if($detail->pending == 0)
+            <div class="row mb-2"><p style="font-style: italic;">* Τα προϊόντα έχουν έρθει σε προηγούμενη παράδοση</p></div>    
+            @break
+        @endif
+    @endforeach
+    
 <div class="row m-2">
     <div class="col-7 border rounded">
         <div class="m-2">Σημειώσεις :</div>
