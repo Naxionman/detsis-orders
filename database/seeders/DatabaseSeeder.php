@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             KteosTableSeeder::class,
             PaymentsTableSeeder::class,
             ProductsTableSeeder::class,
+            RefuelingsTableSeeder::class,
         ]);
     }
 }

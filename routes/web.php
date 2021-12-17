@@ -60,7 +60,6 @@ Route::get('/add_fuel/{vehicleId}', [RefuelingController::class, 'add_fuel']);
 Route::get('/add_insurance/{vehicleId}', [InsuranceController::class, 'add_insurance']);
 Route::get('/add_kteo/{vehicleId}', [KteoController::class, 'add_kteo']);
 Route::get('/add_car_service/{vehicleId}', [CarServiceController::class, 'add_car_service']);
-
 Route::get('/add_special_invoice', [InvoiceController::class, 'add_special_invoice']);
 Route::get('/add_invoice/{orderId}', [InvoiceController::class, 'add_invoice']);
 
@@ -72,7 +71,6 @@ Route::post('/add_vehicle', [VehicleController::class, 'store']);
 Route::post('/add_dispatch', [DispatchController::class, 'store']);
 Route::post('/add_order', [OrderController::class, 'store']);
 Route::post('/add_invoice', [InvoiceController::class, 'store']);
-
 Route::post('/add_special_invoice', [InvoiceController::class, 'storeSpecial']);
 Route::post('/add_shipment', [ShipmentController::class, 'store']);
 Route::post('/add_product', [ProductController::class, 'store']);
@@ -94,6 +92,7 @@ Route::get('/edit_shipment/{shipmentId}',[ShipmentController::class, 'show']);
 Route::get('/edit_product/{productId}',[ProductController::class, 'show']);
 
 Route::get('/view_order/{orderId}',[OrderController::class, 'showDetails']);
+Route::get('/view_invoice/{invoiceId}',[InvoiceController::class, 'showDetails']);
 Route::get('/view_vehicle/{vehicleId}',[VehicleController::class, 'showDetails']);
 
 //Patch/put actions

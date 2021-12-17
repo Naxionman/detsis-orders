@@ -37,10 +37,12 @@ class InvoiceController extends Controller {
         $products = Product::all();
         $shipments = Shipment::all();
         
-        return view ('invoices.add_invoice', compact('suppliers','products','shipments','shippers'));
+        return view ('invoices.add_special_invoice', compact('suppliers','products','shipments','shippers'));
     }
 
     public function storeSpecial(Request $request) {
+        dd($request);
+
         
     }
 
@@ -168,6 +170,13 @@ class InvoiceController extends Controller {
 
 
         return redirect('/orders')->with('message', 'Επιτυχής αποθήκευση Τιμολογίου!');
+    }
+
+    public function showDetails($invoiceId) {
+        $invoice = Invoice::findOrFail($invoiceId);
+        $details = OrderDetails::where('invoice_id','=',$invoiceId)->get();
+               
+        return view ('invoices.view_invoice', compact('invoice','details'));
     }
 
     public function destroy(Invoice $invoice) {

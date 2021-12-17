@@ -4,6 +4,7 @@
 
 
 @section('content')
+
     <div class="container-fluid px-4">
         <h1 class="mt-4">Προϊόντα</h1>
             <ol class="breadcrumb mb-4">
@@ -11,7 +12,7 @@
                 <li class="breadcrumb-item active">Προϊόντα</li>
             </ol>
                 <div class="card mb-4">
-                    <a href="/add_product" class="btn btn-success" >Προσθήκη προϊόντος</a>    
+                    <a href="/add_product" class="btn btn-info bg-info bg-opacity-25 shadow-lg" >Προσθήκη προϊόντος</a>    
                 </div>
             <div class="card mb-4">
                 <div class="card-header">

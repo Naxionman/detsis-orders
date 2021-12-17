@@ -175,7 +175,7 @@
                 <a href="/orders" class="btn btn-info shadow-sm">  Ακύρωση - Επιστροφή </a>
             </div>
         </div>
-<script>$('.js-example-basic-multiple').select2();</script>
+    <script>$('.js-example-basic-multiple').select2();</script>
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

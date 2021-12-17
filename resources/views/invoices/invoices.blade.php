@@ -11,7 +11,7 @@
                 <li class="breadcrumb-item active">Τιμολόγια</li>
             </ol>
                 <div class="card mb-4">
-                    <a href="/add_order" class="btn w-100 btn-danger" >Νέο Τιμολόγιο</a>
+                    <a href="/add_special_invoice" class="btn w-100 btn-danger" >Νέο Τιμολόγιο</a>
                 </div>
             <div class="card mb-4">
                 <div class="card-header">
@@ -57,7 +57,7 @@
                         @forelse ($invoices as $invoice)
                             <tr data-href="view_invoice/{{ $invoice->id}}">
                                 <td>{{ $invoice->id }}</td>
-                                <td>{{ $invoice->invoice_date }}</td>
+                                <td>{{ $invoice->invoice_date->format('d-m-Y') }}</td>
                                 <td>{{ $invoice->supplier->company_name }}</td>
                                 <td>
                                     @foreach ($invoice->orders as $order )

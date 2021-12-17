@@ -35,72 +35,137 @@ jQuery(function() {
     $('#product0').select2();
     $('.js-example-basic-single').select2();
     
-    if (top.location.pathname.match(/^\/add_invoice\//)) {
+    if (top.location.pathname.match(/^\/add_invoice\//) || top.location.pathname.match('/add_special_invoice') ) {
         
-        //determining the count of details
+        //determining the count of details and updating it when addProduct is pressed
         var count = $('#count').val();
-
-        updateFields();
-
         
+        calculate(count);
+        updateFields(count);
+        $('#addProduct').on('click', function () {
+            count++;
+            console.log('new count is :' + count);
+            calculate(count);
+            updateFields(count);
+        });
 
         //Enable/Disable a row (if products of an order are not included in the invoice)
-        for (let i = 1; i < count+1; i++) {
-            $('#check'+i).on('change', function(){
-                if($('#quantity'+i).is(':disabled')){
+        for (let j = 1; j < Number(count)+2; j++) {
+            $('#check'+j).on('change', function(){
+                if($('#quantity'+j).is(':disabled')){
                     console.log("change");
-                    $('#quantity'+i).prop( "disabled", false );
-                    $('#measurementUnit'+i).prop( "disabled", false );
-                    $('#itemsPerPackage'+i).prop( "disabled", false );
-                    $('#netValue'+i).prop( "disabled", false );
-                    $('#sumNetValue'+i).prop( "disabled", false );
-                    $('#productDiscount'+i).prop( "disabled", false );
-                    $('#value'+i).prop( "disabled", false );
-                    $('#taxRate'+i).prop( "disabled", false );
-                    $('#tax'+i).prop( "disabled", false );
-                    $('#price'+i).prop( "disabled", false );
+                    $('#quantity'+j).prop( "disabled", false );
+                    $('#measurementUnit'+j).prop( "disabled", false );
+                    $('#itemsPerPackage'+j).prop( "disabled", false );
+                    $('#netValue'+j).prop( "disabled", false );
+                    $('#sumNetValue'+j).prop( "disabled", false );
+                    $('#productDiscount'+j).prop( "disabled", false );
+                    $('#value'+j).prop( "disabled", false );
+                    $('#taxRate'+j).prop( "disabled", false );
+                    $('#tax'+j).prop( "disabled", false );
+                    $('#price'+j).prop( "disabled", false );
                 }else{
-                    $('#quantity'+i).prop( "disabled", true );
-                    $('#measurementUnit'+i).prop( "disabled", true );
-                    $('#itemsPerPackage'+i).prop( "disabled", true );
-                    $('#netValue'+i).prop( "disabled", true );
-                    $('#sumNetValue'+i).prop( "disabled", true );
-                    $('#productDiscount'+i).prop( "disabled", true );
-                    $('#value'+i).prop( "disabled", true );
-                    $('#taxRate'+i).prop( "disabled", true );
-                    $('#tax'+i).prop( "disabled", true );
-                    $('#price'+i).prop( "disabled", true );
+                    $('#quantity'+j).prop( "disabled", true );
+                    $('#measurementUnit'+j).prop( "disabled", true );
+                    $('#itemsPerPackage'+j).prop( "disabled", true );
+                    $('#netValue'+j).prop( "disabled", true );
+                    $('#sumNetValue'+j).prop( "disabled", true );
+                    $('#productDiscount'+j).prop( "disabled", true );
+                    $('#value'+j).prop( "disabled", true );
+                    $('#taxRate'+j).prop( "disabled", true );
+                    $('#tax'+j).prop( "disabled", true );
+                    $('#price'+j).prop( "disabled", true );
                 }
+            });
+        }
+    }
 
+    if(top.location.pathname === '/add_special_invoice'){
+        var counter = 1;
+        $('#addProduct').on('click', function () {
+            $('#count').attr('value',counter + 1);
+            
+            //select2 special requirment: You need to destroy the dropdown before cloning!
+            $('#product'+counter).select2('destroy');
+
+            //We clone the last element!
+            $('#productRow'+counter).last().clone().attr('id', 'productRow' + ++counter).appendTo('tbody');
+            
+            $('#product'+ (counter-1)).select2();
+
+            //Changing the ids of its children...
+            $($('#productRow'+ counter)).find("[id]").add($('#productRow'+ counter)).each(function() {
+                if(this.id != 'count') {
+                    this.id = this.id.replace(/\d+$/, "") + counter;
+                }
             });
 
-            //Auto-calculation while typing in the fields that are available
-            $('#netValue'+i).on('input keyup keydown', () => {
-                    updatePrice(i);
-                });
+            //now that the new select product has taken its id we can make it select2
+            $('#product'+ counter).select2();
+
+            //...and the names
+            $('#quantity'+ counter).attr('name','quantity'+ counter);
+            $('#product'+ counter).attr('name','product'+ counter);
+            $('#netValue'+ counter).attr('name','net_value'+ counter);
+            $('#sumNetValue'+ counter).attr('name','sum_net_value'+ counter);
+            $('#productDiscount'+ counter).attr('name','product_discount'+ counter);
+            $('#value'+ counter).attr('name','value'+ counter);
+            $('#taxRate'+ counter).attr('name','tax_rate'+ counter);
+            $('#tax'+ counter).attr('name','tax'+ counter);
+            $('#price'+ counter).attr('name','value'+ counter);
             
-            $('#quantity'+i).on('input keyup keydown', () => {
-                    updatePrice(i);
-                });
+            
+            //Why not the counter as well?
+            $("#aa"+counter).html(counter);
+                       
+            
+
+            calculate(counter);
+            updateFields(counter);
+
+        });
+
+        $('.removeInputField').on('click', function () {
+            var addedRow = $(this).parents('.tbody')
+            if (addedRow.get(0).id !== 'productRow') addedRow.remove();
+        });
+    }
+
+    function calculate(count){
+        for (let i = 1; i < Number(count)+1; i++) {
+            //Auto-calculation while typing in the fields that are available
+            console.log('(inside calculate) i is '+i);
+            $('[id^=netValue]').on('input keyup keydown', () => {
+                
+                console.log("typing in netValue" + i);
+                updatePrice(i);
+            });
+
+            $('#quantity'+i).on('input keyup keydown','.input', () => {
+            console.log("typing in quantity" + i);
+                updatePrice(i);
+            });
 
             $('#productDiscount'+i).on('input keyup keydown', () => {
-                    updatePrice(i);
-                });
+            console.log("typing in productDiscount" + i);
+                updatePrice(i);
+            });
 
             $('#taxRate'+i).on('input keyup keydown', () => {
-                    updatePrice(i);
-                });
-            
+                updatePrice(i);
+            });
+
             $('#orderDiscount').on('input keyup keydown', () => {
-                    updatePrice(i);
-                });
+                updatePrice(i);
+            });
+
             $('#extraCharges').on('input keyup keydown', () => {
-                    updatePrice(i);
-                });
-            
+                updatePrice(i);
+            });
+
             $('#invoiceTaxRate').on('input keyup keydown', () => {
-                    updatePrice(i);
-                });
+                updatePrice(i);
+            });
 
             //Beautifying numbers
             $('#extraCharges, #orderDiscount,#inputShipmentPrice, #invoiceTaxRate,#inputExtraPrice, #netValue'+i+',#taxRate'+i+',#productDiscount'+i).on('focusout',function (){
@@ -108,9 +173,11 @@ jQuery(function() {
                 this.value = parseFloat(this.value).toFixed(2);
             });
         }
+        
     }
-
+    
     function updatePrice(x){
+        console.log('x is ' + x);
         if(!$('#quantity'+x).prop(':disabled')){
             //sum_net_value = the net value of the unit multiplied by quantity
             var sum_net_value = $('#netValue'+x).val() * $('#quantity'+x).val();
@@ -144,19 +211,18 @@ jQuery(function() {
             $('#tax'+x).val(tax);
             $('#price'+x).val(price);
 
-            updateFields();
+            updateFields(count);
         }
     }
 });
 
-function updateFields(){
-    var count = $('#count').val();
-    
+function updateFields(count){
+    console.log("count in updateFields = " + count);
     var invoice_net_value = 0;
     var total_tax = 0;
     var invoice_total = 0;
     
-    for (let i = 0; i < count+1; i++) {
+    for (let i = 0; i < Number(count)+1; i++) {
         if(!$('#quantity'+i).is(':disabled')){
             if($('#sumNetValue'+i).val() != null){
                 invoice_net_value += Number($('#value'+i).val()) ;
@@ -201,12 +267,9 @@ function updateFields(){
     $('#tax').val(total_tax);
     
     $('#invoiceTotal').val(invoice_total_final);
-    
-    //setTimeout(function() { updateFields(); }, 500);
 }
 
 jQuery(function(){
-    
     //Fucntion used to hide description column from suppliers table, but make it still searchable (for the tags)
     if(top.location.pathname === '/suppliers'){
         var table = $('#myTable').DataTable({
@@ -235,7 +298,6 @@ jQuery(function(){
             }    
         })
     }
-
 
     if (top.location.pathname === '/orders') {
         //Get the table

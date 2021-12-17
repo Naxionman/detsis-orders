@@ -3,6 +3,12 @@
 @section('title', 'Οχήματα')
 
 @section('content')
+    <style>
+        body {
+            background-image: url('images/vehicles-bg.png');
+            background-size: auto;
+        }
+    </style>
     <div class="container-fluid px-4">
         <h1 class="mt-4">Oχήματα</h1>
             <ol class="breadcrumb mb-4">

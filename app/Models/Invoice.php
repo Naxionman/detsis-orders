@@ -9,7 +9,7 @@ class Invoice extends Model
 {
     protected $guarded = [];
 
-    protected $dates = ['order_date','arrival_date'];
+    protected $dates = ['order_date','arrival_date', 'invoice_date','shipping_date'];
 
     public function shipment(){
         return $this->belongsTo(Shipment::class);

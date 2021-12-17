@@ -9,6 +9,8 @@ class Shipment extends Model
 {
     protected $guarded = [];
 
+    protected $dates = ['shipping_date'];
+
     public function invoices(){
         return $this->hasMany(Invoice::class);
     }
