@@ -42,12 +42,14 @@ class InvoiceController extends Controller {
 
     public function storeSpecial(Request $request) {
         dd($request);
+        $count = $request->input('count');
 
+        
         
     }
 
     public function store(Request $request) { 
-
+        dd($request);
         /* Since it's the most complicated action I will try to explain every step thoroughly not only 
          * so that you can understand what I am doing, but to be able to maintain the code after a while
          * 
@@ -77,8 +79,6 @@ class InvoiceController extends Controller {
          *              For example: A new invoice arrives which contains products from orders 2,5 and 6.
          *                           In the form we can add these orders and they are linked to the invoice
          */ 
-
-
 
         //The counter of the products 
         $count = $request->input('count');
@@ -153,8 +153,6 @@ class InvoiceController extends Controller {
                     'supplier_id' => $request->input('supplier_id'),
                     'product_id' => $detail->product_id
                 ]);
-
-
                 $detail->product->last_supplier = $request->input('supplier_id'); //Updating last supplier
                 $detail->save();
             }

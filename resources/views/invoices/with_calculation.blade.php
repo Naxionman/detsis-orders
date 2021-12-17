@@ -93,7 +93,7 @@
                 @else
                 <tr style="color:#808080"">
                     <td>
-                        <input type="hidden" name="arrived{{$count}}" value="0">
+                        <input type="hidden" name="arrived{{$count}}" value="1">
                         <div class="form-check"><input class="form-check-input" type="checkbox" checked disabled>*</div>
                     </td>
                     <td style="width: 5%" class="p-0 order-font">{{ $count }}</td>
