@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Shipment;
 use App\Models\Order;
+use App\Models\Shipper;
 use Illuminate\Http\Request;
 
 class PageController extends Controller {
@@ -27,8 +28,23 @@ class PageController extends Controller {
                 $extra_sum += $shipment->extra_price;
             }
         }
+
         
-        return view('welcome', compact('monthly_sum','extra_sum', 'pending_orders','monthly_orders')); 
+        $shippers = Shipper::all();
+        $ship_stats = array();
+        foreach ($shippers as $shipper) {
+            $count = Shipment::where('shipper_id','=', $shipper->id)
+                                ->orWhere('extra_shipper_id','=', $shipper->id)
+                                ->count();
+            if($count != 0){
+                $ship_stats[$shipper->name] = $count;
+            }
+        }
+
+
+        //dd($ship_stats);
+        
+        return view('welcome', compact('monthly_sum','extra_sum', 'pending_orders','monthly_orders','ship_stats')); 
     }
 
     

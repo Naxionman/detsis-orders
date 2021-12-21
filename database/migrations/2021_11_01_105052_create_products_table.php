@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('stock_level')->nullable();
             $table->string('min_level')->nullable();
             $table->string('notes')->nullable();
-            $table->string('image_url')->nullable();
+            $table->string('image_url', 2083)->nullable();
             $table->timestamps();
         });
     }

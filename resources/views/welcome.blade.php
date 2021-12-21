@@ -89,16 +89,62 @@
                 </div>
             </div>
         </div>
-
-
     </div> <!-- 4-card row ending -->
 
-    <div class="row mt-2">
-
+    <div class="row mt-2 ">
+        <div class="col">
+            <div class="border border-1 rounded-3">
+                Παραδόσεις Μεταφορικών
+                <canvas id="shippersChart" width="600" height="300">Μεταφορικές</canvas>
+            </div>
+        </div>
+        <div class="col">
+            <div class="border border-1 rounded-3">
+                Άλλο γραφικό
+                <canvas id="ordersChart" width="600" height="300">Μεταφορικές</canvas>
+            </div>
+        </div>
     
 
     </div> <!-- end of main row -->
 
 </div>
+
+<script>
+    var shipStats = {!! json_encode($ship_stats, JSON_HEX_TAG) !!};
+    console.log(Object.values(shipStats));
+    console.log(Object.keys(shipStats));
+    const ctx = $('#shippersChart');
+    const myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: Object.keys(shipStats),
+            datasets: [{
+                label: ['# παραδόσεις'],
+                data: Object.values(shipStats),
+                backgroundColor:[ 'rgb(255, 99, 132)','rgb(54, 162, 235)','rgb(255, 205, 86)']
+            }]
+        },
+        options: {
+            responsive: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    const ctx2 = $('#ordersChart');
+    const orderChart = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            label: ['Παραγγελίες'],
+        }
+    }
+
+    )
+</script>
+
     
 @endsection

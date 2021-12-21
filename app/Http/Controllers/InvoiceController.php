@@ -41,15 +41,43 @@ class InvoiceController extends Controller {
     }
 
     public function storeSpecial(Request $request) {
-        dd($request);
+        //dd($request);
+        //Special Invoices are the ones that do not come from the orders. The difference is that orderDetails do not exist
         $count = $request->input('count');
-
+        for ($i=1; $i < $count+1; $i++) { 
+            OrderDetails::create([
+                'product_id' => $request->input('product'.$i),
+                'pending' => 0,
+                'quantity' => $request->input('quantity'.$i),
+                'measurement_unit' => 'τεμάχια',
+                'items_per_package' => 1,
+                'net_value' => $request->input('net_value'.$i),
+                'product_discount' => $request->input('product_discount'.$i),
+                'tax_rate' => $request->input('tax_rate'.$i),
+                'price' => $request->input('price'.$i),
+            ]);
+        }
         
-        
+        //shipment
+        if($request->input('shared_shipment') != 'null') {
+            $shared_shipment_id = $request->input('shared_shipment');
+            $shared_shipment = Shipment::find($shared_shipment_id);
+            $shared_shipment->invoices()->attach($shared_shipment_id);
+        } else {
+            // (Step 2b) Creating a shipment
+            $shipment = Shipment::create([
+                'shipping_date' => $request->input('arrival_date'),
+                'shipper_id' => $request->input('shipper_id'),
+                'shipment_price' => $request->input('shipment_price'),
+                'extra_shipper_id' => $request->input('extra_shipper_id'),
+                'shipment_invoice_number' => $request->input('shipment_invoice_number'),
+                'extra_price' => $request->input('extra_price'),
+            ]);
+        }
     }
 
     public function store(Request $request) { 
-        dd($request);
+        //dd($request);
         /* Since it's the most complicated action I will try to explain every step thoroughly not only 
          * so that you can understand what I am doing, but to be able to maintain the code after a while
          * 
@@ -112,7 +140,7 @@ class InvoiceController extends Controller {
             for($i=1;$i< $count+1;$i++){
                 if($request->input('arrived'.$i) == "0"){
                     $order_pending = "1";
-                    break; //Even if there is only one pending produc, the order should be considered pending.
+                    break; //Even if there is only one pending product, the order should be considered pending.
                 }
             }
         } else {

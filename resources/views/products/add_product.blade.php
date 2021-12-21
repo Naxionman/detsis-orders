@@ -36,6 +36,10 @@
                                 <div class="col-sm-2"><label class="form-label" for="inputUrl">Url εικόνας</label></div>
                                 <div class="col-sm-8"><input class="form-control" type="file" id="inputUrl"></div>
                             </div>
+                            <div class="form-group">
+                                <label for="inputNotes">Σημειώσεις</label>
+                                <textarea class="form-control" name="notes" id="inputNotes" rows="3"></textarea>
+                              </div>
                             @csrf
                         </form>
                     </div>

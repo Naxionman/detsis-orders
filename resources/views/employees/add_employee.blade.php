@@ -223,14 +223,12 @@
                             </div>
 
                         </div>
-
-
-                    <div class="row mt-3 justify-content-center">
-                        <div class="col-sm-10">
-                            <label for="inputNotes">Σημειώσεις</label>
-                            <input class="form-control" autocomplete="nope" type="text" id="inputNotes" name="notes" placeholder="Σημειώσεις">
+                        <div class="row mt-3 justify-content-center">
+                            <div class="col-sm-10">
+                                <label for="inputNotes">Σημειώσεις</label>
+                                <input class="form-control" autocomplete="nope" type="text" id="inputNotes" name="notes" placeholder="Σημειώσεις">
+                            </div>
                         </div>
-                    </div>
                     </div>
                     
                     

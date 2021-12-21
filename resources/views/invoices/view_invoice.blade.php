@@ -118,7 +118,6 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Ήρθαν;</th>
                             <th style="width: 5%">α/α</th>
                             <th>DCode</th>
                             <th>Κωδ.Προμηθευτή</th>
@@ -145,9 +144,6 @@
                                 $count +=1;
                             @endphp
                             <tr id="tr">
-                                <td>
-                                    <div class="form-check"><input class="form-check-input" type="checkbox" value="1" name="arrived{{$count}}" id="check{{$count}}" checked></div>
-                                </td>
                                 <td style="width: 5%" class="p-0 order-font">{{ $count }}</td>
                                 <td style="width: 10%" class="p-0 order-font">{{ $detail->product->detsis_code }}</td>
                                 <td style="width: 10%" class="p-0 order-font">{{ $detail->product->product_code }}</td>

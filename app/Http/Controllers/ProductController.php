@@ -27,6 +27,8 @@ class ProductController extends Controller
             'product_name'=>'required',
             'stock_level' => 'nullable',
             'min_level' => 'nullable',
+            'image_url' => 'nullable',
+            'notes' => 'nullable'
             
         ]);
 
@@ -48,8 +50,17 @@ class ProductController extends Controller
             'product_name'=>'required',
             'stock_level' => 'nullable',
             'min_level' => 'nullable',
-            'last_supplier'=>'nullable'
+            'last_supplier'=>'nullable',
+            'image_url' => 'nullable',
+            'notes' => 'nullable'
         ]);
+        //dd(request()->input('image_url'));
+
+        if(request()->input('image_url') != null){
+            $source = 'C:\Users\Detsis Factory Nick\Desktop\Εικόνες για επεξεργασία\P R O D U C T S\/'.request()->input('image_url');
+            $target = 'images/products/'.request()->input('image_url');
+            copy($source, $target);
+        }
 
         $product->update($data);
        
