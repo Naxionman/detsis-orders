@@ -110,7 +110,7 @@
                     </td>
                     <td style="width: 30%" class="p-0 order-font" >{{ $detail->product->product_name }}</td>
                     <td style="width: 5%" class="p-0">
-                        <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font"  id="netValue{{$count}}" min="0" disabled>
+                        <input type="number" step="0.0001" class="form-control p-0 pe-2 text-end order-font"  id="netValue{{$count}}" min="0" disabled>
                     </td>
                     <td style="width: 5%" class="p-0">
                         <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" min="0" readonly="readonly"disabled>

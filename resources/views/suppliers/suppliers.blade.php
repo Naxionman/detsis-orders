@@ -57,7 +57,7 @@
                         </tfoot>
                         <tbody>
                         @forelse ($suppliers as $supplier)
-                            <tr>
+                            <tr data-href="view_supplier/{{ $supplier->id}}">
                                 <td>{{ $supplier->description }}</td>
                                 <td><strong>{{$supplier->company_name }}</strong></td>
                                 <td>{{$supplier->email }}</td>

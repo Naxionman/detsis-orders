@@ -25,7 +25,11 @@ class CreateSuppliersTable extends Migration
             $table->string('address')->nullable();
             $table->integer('zipcode')->nullable();
             $table->string('city')->nullable();
-            $table->string('iban')->nullable();
+            $table->string('iban1')->nullable();
+            $table->string('iban2')->nullable();
+            $table->string('iban3')->nullable();
+            $table->string('iban4')->nullable();
+            $table->float('starting_balance')->default('0.00');
             $table->longtext('description')->nullable();
             $table->timestamps();
         });

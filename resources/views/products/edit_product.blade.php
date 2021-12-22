@@ -35,7 +35,6 @@
                             </div>
                             <div class="row mt-3 justify-content-center">
                                 <div class="col-sm-2"><label class="form-label" for="inputUrl">Url εικόνας</label></div>
-                                
                                 <div class="col-sm-7"><input class="form-control" type="file" id="inputUrl" name="image_url"></div>
                                 <div class="col-sm-1">
                                     <i data-toggle="tooltip" data-placement="top" title="Οι εικόνες πρέπει να είναι διαστάσεων 256x256 και να βρίσκονται στον φάκελο PRODUCTS. 

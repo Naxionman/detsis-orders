@@ -193,7 +193,7 @@ class InvoiceController extends Controller {
         $invoice->orders()->attach($more_orders);
 
         //What happens if the added orders are not completed?
-
+        
 
         return redirect('/orders')->with('message', 'Επιτυχής αποθήκευση Τιμολογίου!');
     }

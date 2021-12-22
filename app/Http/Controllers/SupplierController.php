@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Invoice;
 use App\Models\Supplier;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 
 class SupplierController extends Controller {
@@ -40,6 +43,21 @@ class SupplierController extends Controller {
         $supplier = \App\Models\Supplier::findOrFail($supplierId);
         //dd($supplier);
         return view('suppliers.edit_supplier', compact('supplier'));
+    }
+
+    public function showDetails($supplierId) {
+        $supplier = Supplier::findOrFail($supplierId);
+        
+        //The number of invoices concerning this supplier
+        $invoice_number = Invoice::where('supplier_id','=',$supplierId)->count();
+        //The array of payments made to this supplier
+        $paid = Payment::where('supplier_id','=',$supplierId)->sum('amount');
+        //dd($paid);   
+        $sum_charged = Invoice::where('supplier_id','=',$supplierId)->sum('invoice_total');        
+        //The balance = invoice charges - payments + initial balance 
+        $new_balance = $sum_charged - $paid + $supplier->balance;
+        dd($supplier->balance);
+        return view ('suppliers.view_supplier', compact('supplier','invoice_number', 'new_balance'));
     }
 
     public function update(\App\Models\Supplier $supplier) {
