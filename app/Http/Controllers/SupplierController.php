@@ -56,8 +56,8 @@ class SupplierController extends Controller {
         $sum_charged = Invoice::where('supplier_id','=',$supplierId)->sum('invoice_total');        
         //The balance = invoice charges - payments + initial balance 
         $new_balance = $sum_charged - $paid + $supplier->balance;
-        dd($supplier->balance);
-        return view ('suppliers.view_supplier', compact('supplier','invoice_number', 'new_balance'));
+        //dd($supplier->balance);
+        return view ('suppliers.view_supplier', compact('supplier','invoice_number', 'sum_charged','paid','new_balance'));
     }
 
     public function update(\App\Models\Supplier $supplier) {

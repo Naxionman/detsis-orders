@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             PaymentsTableSeeder::class,
             ProductsTableSeeder::class,
             RefuelingsTableSeeder::class,
+            OrdersTableSeeder::class,
         ]);
     }
 }

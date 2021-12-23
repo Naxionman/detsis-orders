@@ -46,5 +46,35 @@ class ShippersTableSeeder extends Seeder
             'email' => 'sfairatrans@gmail.com',
         ]);
 
+        Shipper::create([
+            'name' => 'Speedex',
+            'phone' => '',
+            'website' => '',
+            'email' => '',
+        ]);
+
+        Shipper::create([
+            'name' => 'Γενική Ταχυδρομική',
+            'phone' => '',
+            'website' => '',
+            'email' => '',
+        ]);
+
+        Shipper::create([
+            'name' => 'ACS Courier',
+            'phone' => '',
+            'website' => '',
+            'email' => '',
+        ]);
+
+        Shipper::create([
+            'name' => 'ΕΛΤΑ Courier',
+            'phone' => '',
+            'website' => '',
+            'email' => '',
+        ]);
+
+        
+
     }
 }
