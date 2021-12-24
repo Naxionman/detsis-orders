@@ -16,6 +16,7 @@ use App\Http\Controllers\RefuelingController;
 use App\Http\Controllers\InsuranceController;
 use App\Http\Controllers\KteoController;
 use App\Http\Controllers\CarServiceController;
+use App\Http\Controllers\PaymentController;
 
 
 /*
@@ -46,6 +47,7 @@ Route::get('/refuelings', [RefuelingController::class, 'index']);
 Route::get('/insurances', [InsuranceController::class, 'index']);
 Route::get('/kteos', [KteoController::class, 'index']);
 Route::get('/car_services', [CarServiceController::class, 'index']);
+Route::get('/payments', [PaymentController::class, 'index']);
 
 Route::get('/add_supplier', [SupplierController::class, 'add_supplier']);
 Route::get('/add_client', [ClientController::class, 'add_client']);
@@ -62,6 +64,7 @@ Route::get('/add_kteo/{vehicleId}', [KteoController::class, 'add_kteo']);
 Route::get('/add_car_service/{vehicleId}', [CarServiceController::class, 'add_car_service']);
 Route::get('/add_special_invoice', [InvoiceController::class, 'add_special_invoice']);
 Route::get('/add_invoice/{orderId}', [InvoiceController::class, 'add_invoice']);
+Route::get('/add_payment', [PaymentController::class, 'add_payment']);
 
 Route::post('/add_supplier', [SupplierController::class, 'store']);
 Route::post('/add_client', [ClientController::class, 'store']);
@@ -78,6 +81,7 @@ Route::post('/add_fuel/{vehicleId}', [RefuelingController::class, 'store']);
 Route::post('/add_insurance/{vehicleId}', [InsuranceController::class, 'store']);
 Route::post('/add_kteo/{vehicleId}', [KteoController::class, 'store']);
 Route::post('/add_car_service/{vehicleId}', [CarServiceController::class, 'store']);
+Route::post('/add_payment', [PaymentController::class, 'store']);
 
 //Show actions (for editing records)
 Route::get('/edit_supplier/{supplierId}',[SupplierController::class, 'show']);
@@ -90,11 +94,11 @@ Route::get('/edit_order/{orderId}',[OrderController::class, 'show']);
 Route::get('/edit_showroom_order/{orderId}',[OrderController::class, 'show']);
 Route::get('/edit_shipment/{shipmentId}',[ShipmentController::class, 'show']);
 Route::get('/edit_product/{productId}',[ProductController::class, 'show']);
-
 Route::get('/view_order/{orderId}',[OrderController::class, 'showDetails']);
 Route::get('/view_supplier/{SupplierId}',[SupplierController::class, 'showDetails']);
 Route::get('/view_invoice/{invoiceId}',[InvoiceController::class, 'showDetails']);
 Route::get('/view_vehicle/{vehicleId}',[VehicleController::class, 'showDetails']);
+Route::get('/edit_payment/{paymentId}',[PaymentController::class, 'show']);
 
 //Patch/put actions
 Route::patch('/edit_supplier/{supplier}',[SupplierController::class, 'update']);
@@ -108,6 +112,7 @@ Route::patch('/edit_invoice/{invoice}',[InvoiceController::class, 'update']);
 Route::patch('/edit_shipment/{shipment}',[ShipmentController::class, 'update']);
 Route::patch('/edit_product/{product}',[ProductController::class, 'update']);
 Route::patch('/edit_insurance/{insurance}',[InsuranceController::class, 'update']);
+Route::patch('/edit_payment/{payment}',[PaymentController::class, 'update']);
 
 //Delete actions
 Route::delete('/suppliers/{supplier}',[SupplierController::class, 'destroy']);
@@ -124,3 +129,4 @@ Route::delete('/insurances/{insurance}',[InsuranceController::class, 'destroy'])
 Route::delete('/kteos/{kteo}',[KteoController::class, 'destroy']);
 Route::delete('/car_services/{car_service}',[CarServiceController::class, 'destroy']);
 Route::delete('/invoices/{invoice}',[InvoiceController::class, 'destroy']);
+Route::delete('/payments/{payment}',[PaymentController::class, 'destroy']);

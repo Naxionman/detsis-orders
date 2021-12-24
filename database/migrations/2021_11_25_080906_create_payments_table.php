@@ -17,6 +17,7 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->date('payment_date');
             $table->string('bank');
+            $table->string('holder');
             $table->unsignedBigInteger('supplier_id');
             $table->float('amount');
             $table->timestamps();

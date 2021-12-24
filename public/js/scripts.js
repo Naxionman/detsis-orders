@@ -215,6 +215,22 @@ jQuery(function() {
             updateFields(count);
         }
     }
+
+    //Bank selector
+    $('#bank1icon').on('click', function () {
+        $('#inputBank').val('Τράπεζα Πειραιώς');
+    });
+    $('#bank2icon').on('click', function () {
+        $('#inputBank').val('Εθνική Τράπεζα');
+    });
+    $('#bank3icon').on('click', function () {
+        $('#inputBank').val('Eurobank');
+    });
+    $('#bank4icon').on('click', function () {
+        $('#inputBank').val('Alpha Bank');
+    });
+
+
 });
 
 function updateFields(count){

@@ -97,7 +97,7 @@
                                     <label class="align-middle">Επιπλέον μεταφορική</label>
                                 </div>
                                 <div class="col-5">
-                                    <label class="align-middle">{{ $invoice->shipment->extraShipper->name }}</label>
+                                    <label class="align-middle">{{ $invoice->shipment->extraShipper->name ?: '-'}}</label>
                                 </div>
                             </div>
                             <div class="row">
@@ -105,7 +105,7 @@
                                     <label class="align-middle">Xρεώση 2ης μεταφορικής</label>
                                 </div>
                                 <div class="col-5">
-                                    <label class="align-middle">{{ $invoice->shipment->extra_price }} €</label>
+                                    <label class="align-middle">{{ $invoice->shipment->extra_price ?: '-'}} €</label>
                                 </div>
                             </div>
                             <br>
