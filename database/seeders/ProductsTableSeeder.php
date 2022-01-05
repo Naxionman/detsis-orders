@@ -156,6 +156,14 @@ class ProductsTableSeeder extends Seeder
         ]);
 
         Product::create([
+            'detsis_code' => '0306-02',
+            'product_code'=> '3-0650',
+            'product_name'=> 'ΤΑΠΑ ΜΑΥΡΗ 113',
+            'notes' => 'Τάπα για τσιμεντόβιδα',
+            'image_url' => 'ΤΑΠΑ ΜΑΥΡΗ 113.jpg'
+        ]);
+
+        Product::create([
             'detsis_code' => '0401-01',
             'product_code'=> '6-0002',
             'product_name'=> 'ΧΑΡΤΟΤΑΙΝΙΑ 25',
@@ -172,7 +180,7 @@ class ProductsTableSeeder extends Seeder
         ]);
 
         Product::create([
-            'detsis_code' => '0306-02',
+            'detsis_code' => '0306-03',
             'product_code'=> '3-0119',
             'product_name'=> 'ΤΑΠΑ ΔΙΟΡΘ.Φ10 ΛΕΥΚΗ 31',
             'notes' => 'Τάπα διορθωτική φ10',
@@ -180,7 +188,7 @@ class ProductsTableSeeder extends Seeder
         ]);
 
         Product::create([
-            'detsis_code' => '0306-03',
+            'detsis_code' => '0306-04',
             'product_code'=> '3-0570',
             'product_name'=> 'ΤΑΠΑ ΔΙΟΡΘ.Φ12 ΛΕΥΚΗ 41',
             'notes' => 'Τάπα διορθωτική φ12',
