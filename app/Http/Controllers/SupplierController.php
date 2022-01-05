@@ -5,14 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Invoice;
 use App\Models\Supplier;
 use App\Models\Payment;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class SupplierController extends Controller {
     
     // Show all records of suppliers table
     public function index() {
-        $suppliers = \App\Models\Supplier::all();
-        return view('suppliers.suppliers', compact('suppliers'));
+        $suppliers = Supplier::all();
+
+        $orders = Order::where('pending', '=', '1');
+        $invoices = Invoice::all();
+        $payments = Payment::all();
+
+        return view('suppliers.suppliers', compact('suppliers', 'orders','payments', 'invoices'));
     }
 
     public function add_supplier() {
@@ -49,7 +55,7 @@ class SupplierController extends Controller {
         $supplier = Supplier::findOrFail($supplierId);
         
         //The number of invoices concerning this supplier
-        $invoice_number = Invoice::where('supplier_id','=',$supplierId)->count();
+        $invoice_count = Invoice::where('supplier_id','=',$supplierId)->count();
         //The array of payments made to this supplier
         $paid = Payment::where('supplier_id','=',$supplierId)->sum('amount');
         //dd($paid);   
@@ -57,7 +63,7 @@ class SupplierController extends Controller {
         //The balance = invoice charges - payments + initial balance 
         $new_balance = $sum_charged - $paid + $supplier->balance;
         //dd($supplier->balance);
-        return view ('suppliers.view_supplier', compact('supplier','invoice_number', 'sum_charged','paid','new_balance'));
+        return view ('suppliers.view_supplier', compact('supplier','invoice_count', 'sum_charged','paid','new_balance'));
     }
 
     public function update(\App\Models\Supplier $supplier) {

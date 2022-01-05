@@ -40,6 +40,7 @@ class CreateEmployeesTable extends Migration
             $table->integer('children')->nullable();
             $table->integer('leave_days_entitled')->nullable();
             $table->integer('leave_days_taken')->nullable();
+            $table->float('salary')->nullable();
             $table->string('notes')->nullable();
             $table->timestamps();
         });

@@ -165,7 +165,7 @@
                                 <td style="width: 3%" class="p-0 text-start order-font">{{ $detail->measurement_unit == null ?: 'ΤΕΜ' }}</td>
                                 <td style="width: 5%" class="p-0 text-start order-font">{{ $detail->items_per_package == null ?: '1'}}</td>
                                 <td style="width: 30%" class="p-0 text-start ps-2 order-font" >{{ $detail->product->product_name }}</td>
-                                <td style="width: 5%" class="p-0 pe-3 text-end">{{ number_format ($detail->net_value, 2, ",", ".") }}</td>
+                                <td style="width: 5%" class="p-0 pe-3 text-end">{{ number_format($detail->net_value, 4, ",", ".") }}</td>
                                 <td style="width: 5%" class="p-0 pe-3 text-end">{{ number_format ($detail->net_value * $detail->quantity , 2, ",", ".")}}</td>
                                 <td style="width: 5%" class="p-0 pe-3 text-end">{{ number_format ($detail->product_discount, 2, ",", ".") }}</td>
                                 <td style="width: 5%" class="p-0 pe-3 text-end">{{ number_format (($detail->net_value * $detail->quantity) - ($detail->net_value * $detail->quantity)* $detail->product_discount/100, 2, ",", ".") }}</td>

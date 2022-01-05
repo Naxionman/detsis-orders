@@ -165,7 +165,7 @@
                                     </select>
                                 </td>
                                 <td style="width: 5%" class="p-0">
-                                    <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="net_value1" id="netValue1" min="0" required="required">
+                                    <input type="number" step="0.0001" class="form-control p-0 pe-2 text-end order-font" name="net_value1" id="netValue1" min="0" required="required">
                                 </td>
                                 <td style="width: 5%" class="p-0">
                                     <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="sum_net_value1" id="sumNetValue1" min="0" readonly="readonly">

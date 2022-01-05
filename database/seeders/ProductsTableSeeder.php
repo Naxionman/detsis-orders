@@ -36,7 +36,7 @@ class ProductsTableSeeder extends Seeder
         ]);
 
         Product::create([
-            'detsis_code' => '0202-0001',
+            'detsis_code' => '0202-01',
             'product_code'=> '4-1132',
             'product_name'=> 'MS ARASEAL 225 ΛΕΥΚΟ 290ML',
             'notes' => 'Σιλικόνη λευκή εξωτερικού χώρου',
@@ -44,7 +44,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         
         Product::create([
-            'detsis_code' => '0202-0002',
+            'detsis_code' => '0202-02',
             'product_code'=> '4-1130',
             'product_name'=> 'MS ARASEAL 225 ΛΕΥΚΟ 600ML',
             'notes' => 'Σιλικόνη λευκή εξωτερικού χώρου ΣΑΛΑΜΙ',
@@ -52,7 +52,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         
         Product::create([
-            'detsis_code' => '0202-0003',
+            'detsis_code' => '0202-03',
             'product_code'=> '4-1157',
             'product_name'=> 'MS ARA SMP35 ΛΕΥΚΟ 600ML',
             'notes' => ' ΣΑΛΑΜΙ',
@@ -60,7 +60,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         
         Product::create([
-            'detsis_code' => '0202-0004',
+            'detsis_code' => '0202-04',
             'product_code'=> '4-1144',
             'product_name'=> 'MS COSMOFIX-CRYSTAL HD-150.160 290ML',
             'notes' => 'Υβριδική κόλλα',
@@ -68,7 +68,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         
         Product::create([
-            'detsis_code' => '0205-0001',
+            'detsis_code' => '0205-01',
             'product_code'=> '2-0062',
             'product_name'=> 'ΠΙΣΤΟΛΙ ΣΙΛΙΚ. SKW',
             'notes' => 'Πιστόλι σιλικόνης',
@@ -76,7 +76,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         
         Product::create([
-            'detsis_code' => '0205-0002',
+            'detsis_code' => '0205-02',
             'product_code'=> '2-0062',
             'product_name'=> 'ΠΙΣΤΟΛΙ ΑΦΡΟΥ PL-9403',
             'notes' => 'Πιστόλι αφρού',
@@ -84,7 +84,7 @@ class ProductsTableSeeder extends Seeder
         ]);
 
         Product::create([
-            'detsis_code' => '0201-0001',
+            'detsis_code' => '0201-01',
             'product_code'=> '2-0213',
             'product_name'=> 'ΣΙΛΙΚ. DURASIL W15 PLUS ΔΙΑΦ. 310ML',
             'notes' => 'Σιλικόνη διάφανη',
@@ -92,7 +92,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         
         Product::create([
-            'detsis_code' => '0201-0002',
+            'detsis_code' => '0201-02',
             'product_code'=> '2-0236',
             'product_name'=> 'ΣΙΛΙΚ. DURASIL W15 PLUS ΚΑΦΕ 310ML',
             'notes' => 'Σιλικόνη λευκή',
@@ -100,7 +100,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         
         Product::create([
-            'detsis_code' => '0206-0001',
+            'detsis_code' => '0206-01',
             'product_code'=> '2-0026',
             'product_name'=> 'SILIKON SPRAY',
             'notes' => 'Spray σιλικόνης',
@@ -108,7 +108,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         
         Product::create([
-            'detsis_code' => '0203-0001',
+            'detsis_code' => '0203-01',
             'product_code'=> '4-0014',
             'product_name'=> 'ΚΑΘΑΡ.PVC No5',
             'notes' => 'Καθαριστικό PVC Νο.5',
@@ -116,7 +116,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         
         Product::create([
-            'detsis_code' => '0204-0001',
+            'detsis_code' => '0204-01',
             'product_code'=> '1-0005',
             'product_name'=> 'ARAPURAN SPEED 750ML',
             'notes' => 'Αφρός πολυουρεθάνης',
@@ -124,7 +124,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         
         Product::create([
-            'detsis_code' => '0204-0002',
+            'detsis_code' => '0204-02',
             'product_code'=> '1-0014',
             'product_name'=> 'ARAPURAN SYN 750ML',
             'notes' => 'Αφρός πολυουρεθάνης',
@@ -132,7 +132,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         
         Product::create([
-            'detsis_code' => '0201-0003',
+            'detsis_code' => '0201-03',
             'product_code'=> '2-0279',
             'product_name'=> 'ARACRYLAN 200 310ML ΛΕΥΚΟ',
             'notes' => 'Σιλικόνη λευκή',
@@ -140,7 +140,7 @@ class ProductsTableSeeder extends Seeder
         ]);
 
         Product::create([
-            'detsis_code' => '0201-0004',
+            'detsis_code' => '0201-04',
             'product_code'=> '2-0196',
             'product_name'=> 'ΣΙΛΙΚ.DURASIL 811 SANDGRAU 310ML',
             'notes' => 'Σιλικόνη λευκή',
@@ -148,7 +148,7 @@ class ProductsTableSeeder extends Seeder
         ]);
 
         Product::create([
-            'detsis_code' => '0306-0001',
+            'detsis_code' => '0306-01',
             'product_code'=> '3-0121',
             'product_name'=> 'ΤΑΠΑ ΛΕΥΚΗ 111',
             'notes' => 'Τάπα για τσιμεντόβιδα',
@@ -156,7 +156,7 @@ class ProductsTableSeeder extends Seeder
         ]);
 
         Product::create([
-            'detsis_code' => '0401-0001',
+            'detsis_code' => '0401-01',
             'product_code'=> '6-0002',
             'product_name'=> 'ΧΑΡΤΟΤΑΙΝΙΑ 25',
             'notes' => 'Χαρτοταινία 25mm',
@@ -164,7 +164,7 @@ class ProductsTableSeeder extends Seeder
         ]);
 
         Product::create([
-            'detsis_code' => '0201-0005',
+            'detsis_code' => '0201-05',
             'product_code'=> '2-0097',
             'product_name'=> 'ΣΙΛΙΚ.811-DURASIL310ML',
             'notes' => 'Σιλικόνη μαύρη',
@@ -172,7 +172,7 @@ class ProductsTableSeeder extends Seeder
         ]);
 
         Product::create([
-            'detsis_code' => '0306-0002',
+            'detsis_code' => '0306-02',
             'product_code'=> '3-0119',
             'product_name'=> 'ΤΑΠΑ ΔΙΟΡΘ.Φ10 ΛΕΥΚΗ 31',
             'notes' => 'Τάπα διορθωτική φ10',
@@ -180,7 +180,7 @@ class ProductsTableSeeder extends Seeder
         ]);
 
         Product::create([
-            'detsis_code' => '0306-0003',
+            'detsis_code' => '0306-03',
             'product_code'=> '3-0570',
             'product_name'=> 'ΤΑΠΑ ΔΙΟΡΘ.Φ12 ΛΕΥΚΗ 41',
             'notes' => 'Τάπα διορθωτική φ12',

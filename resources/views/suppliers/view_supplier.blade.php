@@ -58,7 +58,7 @@
                             <h5>Οικονομικά στοιχεία</h5>
                             <div class="row">
                                 <div class="col-4"><label>Πλήθος τιμολογίων :</label></div>
-                                <div class="col-8">{{$invoice_number ?: '0'}}</div>
+                                <div class="col-8">{{$invoice_count ?: '0'}}</div>
                             </div>
                             <div class="row">
                                 <div class="col-4"><label>Σύνολο χρεώσεων :</label></div>

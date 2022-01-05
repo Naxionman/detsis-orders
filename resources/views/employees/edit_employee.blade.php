@@ -181,7 +181,7 @@
                                 </div>
                             </div>
 
-                            <div class="row mt-1 mb-5"> <!-- inner sixth row -->
+                            <div class="row mt-1 mb-1"> <!-- inner sixth row -->
                                 <div class="col-sm-3">
                                     <label for="inputWorkingDays" class="align-middle">Ημέρες εργασίας</label>
                                 </div>
@@ -193,6 +193,21 @@
                                 </div>
                                 <div class="col-sm-2">
                                     <input class="form-control" value = "{{ $employee->working_hours }}" autocomplete="nope" type="number" value="40" id="inputWorkingHours" name="working_hours" >
+                                </div>
+                            </div>
+                            
+                            <div class="row mt-1 mb-5"> <!-- inner seventh row -->
+                                <div class="col-sm-3">
+                                    <label for="inputWorkingDays" class="align-middle">Ημέρες Αδείας δικαιούται</label>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input class="form-control" value = "{{ $employee->leave_days_entitled }}" autocomplete="nope" type="number" id="inputLeaveDaysEntitled" name="leave_days_entitled" >
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="inputWorkingHours" class="align-middle">Ημέρες που έχει πάρει</label>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input class="form-control" value = "{{ $employee->leave_days_taken }}" autocomplete="nope" type="number" id="inputLeaveDaysTaken" name="leave_days_taken" >
                                 </div>
                             </div>
                             

@@ -22,9 +22,9 @@ class ProductController extends Controller
 
     public function store() {
         $data = request()->validate([
-            'detsis_code' => 'required',
-            'product_code' => 'required',
-            'product_name'=>'required',
+            'detsis_code' => 'required|unique',
+            'product_code' => 'required|unique',
+            'product_name'=>'required|unique',
             'stock_level' => 'nullable',
             'min_level' => 'nullable',
             'image_url' => 'nullable',

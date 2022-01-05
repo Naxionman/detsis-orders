@@ -42,7 +42,7 @@ class InvoiceController extends Controller {
     }
 
     public function storeSpecial(Request $request) {
-        dd($request);
+        //dd($request);
         
         $invoice_type = "";
         //Special Invoices are the ones that do not come from the orders. The difference is that orderDetails do not exist
@@ -109,7 +109,12 @@ class InvoiceController extends Controller {
         foreach($details as $detail){
             //Updating each detail with the id of the invoice
             $detail->invoice_id = $invoice->id;
-            $detail->save();
+            //Setting the last supplier
+            $detail->product->last_supplier = $request->input('supplier_id');
+            //Updating the stock level
+            $detail->product->stock_level = $detail->product->stock_level + $request->input('quantity'.$i);
+            //dd($detail->product->stock_level);
+            $detail->product->save();
 
             //We also create the history of prices records for each of the details
             Price::create([
@@ -232,7 +237,8 @@ class InvoiceController extends Controller {
                     'product_id' => $detail->product_id
                 ]);
                 $detail->product->last_supplier = $request->input('supplier_id'); //Updating last supplier
-                $detail->save();
+                $detail->product->stock_level = $detail->product->stock_level + $request->input('quantity'.$i);
+                $detail->product->save();
             }
             $i++;
         }

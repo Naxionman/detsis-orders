@@ -37,8 +37,8 @@
                                 <th>Ονομασία</th>
                                 <th>email</th>
                                 <th>Τηλέφωνο</th>
-                                <th>Πόλη</th>
-                                <th>Παραγγελίες</th>
+                                <th>Τιμολόγια</th>
+                                <th>Σε αναμονή</th>
                                 <th>Σύνολο €</th>
                                 <th>Στοιχεία Ελέγχου</th>
                             </tr>
@@ -49,8 +49,8 @@
                                 <th>Ονομασία</th>
                                 <th>email</th>
                                 <th>Τηλέφωνο</th>
-                                <th>Πόλη</th>
-                                <th>Παραγγελίες</th>
+                                <th>Τιμολόγια</th>
+                                <th>Σε αναμονή</th>
                                 <th>Σύνολο €</th>
                                 <th>Στοιχεία Ελέγχου</th>
                             </tr>
@@ -60,19 +60,29 @@
                             <tr data-href="view_supplier/{{ $supplier->id}}">
                                 <td>{{ $supplier->description }}</td>
                                 <td><strong>{{$supplier->company_name }}</strong></td>
-                                <td>{{$supplier->email }}</td>
-                                <td>{{$supplier->phone1 }}</td>
-                                <td>{{$supplier->phone1 }}</td>
-                                <td>0</td>
-                                <td>0 €</td>
+                                <td>{{ $supplier->email }}</td>
+                                <td>{{ $supplier->phone1 }}</td>
+                                <td>{{ $invoices->where('supplier_id','=',$supplier->id)->count() }}</td>
+                                <td>{{ $orders->where('supplier_id','=',$supplier->id)->where('pending','=','1')->count() }}</td>
+                                <td>
+                                    @php
+                                        //The array of payments made to this supplier
+                                        $paid = $payments->where('supplier_id','=',$supplier->id)->sum('amount');
+                                        //dd($paid);   
+                                        $sum_charged = $invoices->where('supplier_id','=',$supplier->id)->sum('invoice_total');        
+                                        //The balance = invoice charges - payments + initial balance 
+                                        $new_balance = $sum_charged - $paid + $supplier->balance;
+                                    @endphp
+                                        {{ $new_balance }}
+                                    €</td>
                                 <td style="width:15%" >
                                     <div class="d-flex justify-content-evenly">
-                                        <a href="/edit_supplier/{{ $supplier->id }}" class="btn btn-warning ">
+                                        <a href="/edit_supplier/{{ $supplier->id }}" class="btn btn-warning btn-sm">
                                             <i class="far fa-edit"></i>Edit</a>
                                             <form action="/suppliers/{{ $supplier->id }}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                                <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                                                <button class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i></button>
                                             </form>
                                     </div>
                                 </td>

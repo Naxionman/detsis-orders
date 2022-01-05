@@ -14,8 +14,16 @@
                 </div>
             <div class="card mb-4">
                 <div class="card-header">
-                    <i class="fas fa-table me-1"></i>
-                        Πίνακας εργαζομένων
+                    <div class="row">
+                        <div class="col-4"> 
+                            <i class="fas fa-table me-1"></i>
+                            Πίνακας Eργαζομένων
+                        </div>
+                        <div class="col-8">Συγκενρωτικοί πίνακες : 
+                            <a class="btn btn-dark" href="/leaves">Άδειες</a>
+                            <a class="btn btn-dark" href="/salaries">Μισθοδοσία</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <table id="EmployeesTable" class="cell-border display compact">
@@ -26,7 +34,7 @@
                                 <th>Κινητό</th>
                                 <th>Ημερομηνία γέννησης</th>
                                 <th>Ημερομηνία Πρόσληψης</th>
-                                <th>Κάτι άλλο</th>
+                                <th>Άδειες</th>
                                 <th>Στοιχεία Ελέγχου</th>
                             </tr>
                         </thead>
@@ -37,19 +45,19 @@
                                 <th>Κινητό</th>
                                 <th>Ημερομηνία γέννησης</th>
                                 <th>Ημερομηνία Πρόσληψης</th>
-                                <th>Κάτι άλλο</th>
+                                <th>Άδειες</th>
                                 <th>Στοιχεία Ελέγχου</th>
                             </tr>
                         </tfoot>
                         <tbody>
                         @forelse ($employees as $employee)
                             <tr>
-                                <td>{{$employee->surname }}</td>
-                                <td>{{$employee->first_name }}</td>
-                                <td>{{$employee->mobile }}</td>
-                                <td>{{$employee->date_of_birth->format('d-m-Y') }}</td>
-                                <td>{{$employee->date_joined->format('d-m-Y') }}</td>
-                                <td>0</td>
+                                <td>{{ $employee->surname }}</td>
+                                <td>{{ $employee->first_name }}</td>
+                                <td>{{ $employee->mobile }}</td>
+                                <td>{{ $employee->date_of_birth->format('d-m-Y') }}</td>
+                                <td>{{ $employee->date_joined->format('d-m-Y') }}</td>
+                                <td>{{ $employee->leave_days_entitled }} / {{ $employee->leave_days_taken }}</td>
                                 <td style="width:15%" >
                                     <div class="d-flex justify-content-evenly">
                                         <a href="/edit_employee/{{ $employee->id }}" class="btn btn-warning flex-fill">

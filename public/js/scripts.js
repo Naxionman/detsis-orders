@@ -22,9 +22,7 @@ window.addEventListener('DOMContentLoaded', event => {
             localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
         });
     }
-
 });
-
 
 $('tr[data-href]').on("click", function() {
     document.location = $(this).data('href');
@@ -182,7 +180,7 @@ jQuery(function() {
             //sum_net_value = the net value of the unit multiplied by quantity
             var sum_net_value = $('#netValue'+x).val() * $('#quantity'+x).val();
             sum_net_value = Math.round(sum_net_value*100)/100;
-            sum_net_value = parseFloat(sum_net_value).toFixed(2);
+            sum_net_value = parseFloat(sum_net_value).toFixed(4);
 
             //value = the value of the quantity after the discount
             var value = $('#sumNetValue'+x).val() - ($('#sumNetValue'+x).val() * $('#productDiscount'+x).val()/100);
