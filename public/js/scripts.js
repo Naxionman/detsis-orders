@@ -166,9 +166,13 @@ jQuery(function() {
             });
 
             //Beautifying numbers
-            $('#extraCharges, #orderDiscount,#inputShipmentPrice, #invoiceTaxRate,#inputExtraPrice, #netValue'+i+',#taxRate'+i+',#productDiscount'+i).on('focusout',function (){
+            $('#extraCharges, #orderDiscount,#inputShipmentPrice, #invoiceTaxRate,#inputExtraPrice, #taxRate'+i+',#productDiscount'+i).on('focusout',function (){
                 this.value = Math.round(this.value*100)/100;
                 this.value = parseFloat(this.value).toFixed(2);
+            });
+            $('#netValue'+i).on('focusout',function (){
+                this.value = Math.round(this.value*10000)/10000;
+                this.value = parseFloat(this.value).toFixed(4);
             });
         }
         
@@ -180,7 +184,7 @@ jQuery(function() {
             //sum_net_value = the net value of the unit multiplied by quantity
             var sum_net_value = $('#netValue'+x).val() * $('#quantity'+x).val();
             sum_net_value = Math.round(sum_net_value*100)/100;
-            sum_net_value = parseFloat(sum_net_value).toFixed(4);
+            sum_net_value = parseFloat(sum_net_value).toFixed(2);
 
             //value = the value of the quantity after the discount
             var value = $('#sumNetValue'+x).val() - ($('#sumNetValue'+x).val() * $('#productDiscount'+x).val()/100);

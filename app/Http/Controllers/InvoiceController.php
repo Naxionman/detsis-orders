@@ -109,11 +109,13 @@ class InvoiceController extends Controller {
         foreach($details as $detail){
             //Updating each detail with the id of the invoice
             $detail->invoice_id = $invoice->id;
+            
             //Setting the last supplier
             $detail->product->last_supplier = $request->input('supplier_id');
             //Updating the stock level
             $detail->product->stock_level = $detail->product->stock_level + $request->input('quantity'.$i);
             //dd($detail->product->stock_level);
+            $detail->save();
             $detail->product->save();
 
             //We also create the history of prices records for each of the details
@@ -238,6 +240,7 @@ class InvoiceController extends Controller {
                 ]);
                 $detail->product->last_supplier = $request->input('supplier_id'); //Updating last supplier
                 $detail->product->stock_level = $detail->product->stock_level + $request->input('quantity'.$i);
+                $detail->save();
                 $detail->product->save();
             }
             $i++;
