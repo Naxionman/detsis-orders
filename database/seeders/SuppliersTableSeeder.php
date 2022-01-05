@@ -75,7 +75,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '094231373',
             'address'       => '23ο χλμ. Αθηνών-Λαμίας',
             'city'          => 'Κρυονέρι',
-            'description'   => 'Εργοστάσιο Υλικά συναρμολόγησης',
+            'description'   => 'Εργοστάσιο Υλικά συναρμολόγησης εργαλεία εξοπλισμός',
         ]);
 
         Supplier::create([
@@ -133,6 +133,17 @@ class SuppliersTableSeeder extends Seeder
             'address' => 'Βι Πα Ωραιοκάστρου',
             'city' => 'Θεσσαλονίκη',
             'description' => 'Εργοστάσιο αλουμίνιο τζάμι μηχανισμοί συρόμενων',
+        ]);
+
+        Supplier::create([
+            'company_name' => 'Δόμηση (Θεόφιλος Γρηγορόπουλος',
+            'email' => 'domisi2011@gmail.com',
+            'phone1' => '22850 24626',
+            'phone1' => '22850 24065',
+            
+            'address' => 'Απέναντι από Βασιλόπουλο',
+            'city' => 'Νάξος',
+            'description' => 'Εργοστάσιο Χρώματα Βερνίκια',
         ]);
 
         Supplier::create([
@@ -242,7 +253,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '044242500',
             'address'       => 'Σαπφούς 35 Καλλιθέα',
             'city'          => 'Αθήνα',
-            'description'   => 'Εργοστάσιο ',
+            'description'   => 'Εργοστάσιο δοκοθήκες',
         ]);
 
         Supplier::create ([
@@ -253,7 +264,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '094462882',
             'address'       => 'Ανδρέα Μουράτη 24',
             'city'          => 'Πειραιάς',
-            'description'   => 'Εργοστάσιο ',
+            'description'   => 'Εργοστάσιο καλάμια',
         ]);
 
         Supplier::create ([
@@ -264,7 +275,7 @@ class SuppliersTableSeeder extends Seeder
             'website'       => 'https://www.marioglou.gr/',
             'address'       => '5ο χλμ. Θεσσαλονίκης-Θέρμης',
             'city'          => 'Θεσσαλονίκη',
-            'description'   => 'Εργοστάσιο ',
+            'description'   => 'Εργοστάσιο πάγκοι πορτάκια επιλοποιία',
         ]);
 
         Supplier::create ([
@@ -275,7 +286,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '094352238',
             'address'       => 'Τοσίτσα 4 Κηφισιάς',
             'city'          => 'Αθήνα',
-            'description'   => 'Εργοστάσιο ',
+            'description'   => 'Εργοστάσιο ξυλεία',
         ]);
 
         Supplier::create ([
@@ -287,7 +298,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '081175449',
             'address'       => 'Θεσσαλονίκης 113 Νέα Φιλαδέλφια',
             'city'          => 'Αθήνα',
-            'description'   => 'Εργοστάσιο ',
+            'description'   => 'Εργοστάσιο εξαρτήματα κουζίνας',
         ]);
 
         Supplier::create ([
@@ -298,7 +309,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '094507216',
             'address'       => 'Γκορυτσάς 564 Ασπρόπυργος Αττικής',
             'city'          => 'Ασπρόπυργος',
-            'description'   => 'Εργοστάσιο ',
+            'description'   => 'Εργοστάσιο ορείχαλκος πόμολα',
         ]);
 
         Supplier::create ([
@@ -309,7 +320,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '028733936',
             'address'       => 'Πάροδος, Αγγελή Γοβιού 50-52 Ψαχνά Ευβοίας',
             'city'          => 'Εύβοια',
-            'description'   => 'Εργοστάσιο ',
+            'description'   => 'Εργοστάσιο υδαυλικά σιδηρικά',
         ]);
 
         Supplier::create ([
@@ -319,7 +330,7 @@ class SuppliersTableSeeder extends Seeder
             'website'       => 'https://www.praxitelis-sa.gr/',
             'address'       => 'Μπαθαρίστρα Κορίνθου',
             'city'          => 'Κόρινθος',
-            'description'   => 'Εργοστάσιο ',
+            'description'   => 'Εργοστάσιο πάγκοι πορτάκια',
         ]);
 
         Supplier::create ([
@@ -331,7 +342,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '052082791',
             'address'       => 'Πλουτάρχου 65 Άγιος Δημήτριος',
             'city'          => 'Αθήνα',
-            'description'   => 'Εργοστάσιο',
+            'description'   => 'Εργοστάσιο τροχοί δίσκοι τροχείο',
         ]);
 
         Supplier::create ([
@@ -342,7 +353,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '091829090',
             'address'       => 'Γούναρη Δημητρίου 31',
             'city'          => 'Πειραιάς',
-            'description'   => 'Εργοστάσιο ',
+            'description'   => 'Εργοστάσιο service εργαλείων',
         ]);
 
         Supplier::create ([
@@ -353,7 +364,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '095028995',
             'address'       => 'Πάροδος Ευαγγελιστρίας 245',
             'city'          => 'Ασπρόπυργος',
-            'description'   => 'Εργοστάσιο ',
+            'description'   => 'Εργοστάσιο μηχανήματα πεπιεσμένου αέρα',
         ]);
 
         Supplier::create ([
@@ -364,7 +375,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '094220278',
             'address'       => 'Θέρμη – Θεσσαλονίκη',
             'city'          => 'Θεσσαλονίκη',
-            'description'   => 'Εργοστάσιο ',
+            'description'   => 'Εργοστάσιο ταινίες περιθωρίων',
         ]);
 
         Supplier::create ([
@@ -375,7 +386,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '998328327',
             'address'       => 'Εθνική οδός Θήβας-Χαλκίδας',
             'city'          => 'Σχηματάρι',
-            'description'   => 'Εργοστάσιο ',
+            'description'   => 'Εργοστάσιο πορτάκια κουτιά',
         ]);
 
         Supplier::create ([
@@ -387,7 +398,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '999873641',
             'address'       => 'Θέση Βρύσες, Βαθύ Αυλίδας',
             'city'          => 'Σχηματάρι',
-            'description'   => 'Εργοστάσιο ',
+            'description'   => 'Εργοστάσιο πορτάκια πόρτες',
         ]);
 
         Supplier::create ([
@@ -399,7 +410,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '081487840',
             'address'       => '23ο χλμ. Αθηνών-Λαμίας',
             'city'          => 'Κρυονέρι',
-            'description'   => 'Εργοστάσιο ',
+            'description'   => 'Εργοστάσιο μηχανισμοί συρόμενων',
         ]);
         
         Supplier::create ([
@@ -411,7 +422,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '',
             'address'       => '15,5o χλμ. Θες/νίκης-Καβάλας',
             'city'          => 'Λαγκαδάς',
-            'description'   => 'Εργοστάσιο ',
+            'description'   => 'Εργοστάσιο μεσόπορτες',
         ]);
 
         Supplier::create ([
@@ -423,7 +434,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '999124758',
             'address'       => '15o χλμ. Θες/νίκης-Καβάλας',
             'city'          => 'Λαγκαδάς',
-            'description'   => 'Εργοστάσιο ',
+            'description'   => 'Εργοστάσιο χημικά σιλικόνες',
         ]);
 
         Supplier::create ([
@@ -435,7 +446,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '082346032',
             'address'       => 'Ιθάκης 39 Αγ.Ιωάννης Ρέντης',
             'city'          => 'Πειραιάς',
-            'description'   => 'Εργοστάσιο ',
+            'description'   => 'Εργοστάσιο ανοξείδωτα σιδηρικά',
         ]);
 
         Supplier::create ([
@@ -447,7 +458,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '998993260',
             'address'       => 'Λεωφόρος Καραμανλή 190',
             'city'          => 'Αχαρνές',
-            'description'   => 'Εργοστάσιο ',
+            'description'   => 'Εργοστάσιο ξυλεία',
         ]);
 
         Supplier::create ([
@@ -459,7 +470,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '998279170',
             'address'       => 'Παλαιάς Καβάλας 240 Περιστέρι',
             'city'          => 'Αθήνα',
-            'description'   => 'Εργοστάσιο ',
+            'description'   => 'Εργοστάσιο υλικά επίπλων',
         ]);
 
         Supplier::create ([
@@ -471,7 +482,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '095029304',
             'address'       => 'Πέτρου Ράλλη 35 Ταύρος',
             'city'          => 'Αθήνα',
-            'description'   => 'Εργοστάσιο ',
+            'description'   => 'Εργοστάσιο ντίζες',
         ]);
 
         Supplier::create ([
@@ -483,7 +494,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '998090894',
             'address'       => 'Παπαγιάννη Σκουλά & Ηρακλή',
             'city'          => 'Ηράκλειο',
-            'description'   => 'Εργοστάσιο ',
+            'description'   => 'Εργοστάσιο μηχανήματα',
         ]);
 
         Supplier::create ([
@@ -494,7 +505,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '067062008',
             'address'       => 'Τερπάνδρου 47 Περιστέρι',
             'city'          => 'Αθήνα',
-            'description'   => 'Εργοστάσιο ',
+            'description'   => 'Εργοστάσιο πόμολα',
         ]);
 
         Supplier::create ([
@@ -505,7 +516,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '095063125',
             'address'       => 'Βασιλίσσης Όλγας 220',
             'city'          => 'Θεσσαλονίκη',
-            'description'   => 'Εργοστάσιο ',
+            'description'   => 'Εργοστάσιο κόλλες RAKOLL',
         ]);
 
         Supplier::create ([
@@ -517,7 +528,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '082205954',
             'address'       => 'Υψηλάντου 4 Κηφισιά',
             'city'          => 'Αθήνα',
-            'description'   => 'Εργοστάσιο ',
+            'description'   => 'Εργοστάσιο ηλεκτρονικές κλειδαριές',
         ]);
 
         Supplier::create ([
@@ -528,7 +539,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '',
             'address'       => 'Ε.Ο. Ανδραβίδας - Κυλλήνης',
             'city'          => 'Ανδραβίδα Ηλείας',
-            'description'   => 'Εμπόριο πόρτες',
+            'description'   => 'Εμπόριο πόρτες μεσόπορτες',
         ]);
 
         Supplier::create ([
@@ -540,7 +551,7 @@ class SuppliersTableSeeder extends Seeder
             'afm'           => '',
             'address'       => '',
             'city'          => '',
-            'description'   => 'Εμπόριο ',
+            'description'   => 'Εμπόριο κουζίνες απορροφητήρες ',
         ]);
 
         Supplier::create ([

@@ -9,6 +9,7 @@ use App\Models\Supplier;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\OrderDetails;
+use App\Models\Price;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller {
@@ -41,23 +42,38 @@ class InvoiceController extends Controller {
     }
 
     public function storeSpecial(Request $request) {
-        //dd($request);
+        dd($request);
+        
+        $invoice_type = "";
         //Special Invoices are the ones that do not come from the orders. The difference is that orderDetails do not exist
         $count = $request->input('count');
+        $details = collect();
         for ($i=1; $i < $count+1; $i++) { 
-            OrderDetails::create([
+            //Taking advantage of the loop to determine the type of the invoice, that is whether it is for the factory or the showroom
+            if($request->input('product'.$i) == 1) {
+                $invoice_type = "Εμπόριο";
+            } else if($request->input('product'.$i) == 2) {
+                $invoice_type = "Εργοστάσιο (Ν)";
+            } else {
+                $invoice_type = "Εργοστάσιο";
+            }
+
+            $temp_detail = OrderDetails::create([
                 'product_id' => $request->input('product'.$i),
+                //'invoice_id' => $invoice->id,
                 'pending' => 0,
                 'quantity' => $request->input('quantity'.$i),
-                'measurement_unit' => 'τεμάχια',
+                'measurement_unit' => $request->input('measurement_unit'.$i),
                 'items_per_package' => 1,
                 'net_value' => $request->input('net_value'.$i),
                 'product_discount' => $request->input('product_discount'.$i),
                 'tax_rate' => $request->input('tax_rate'.$i),
                 'price' => $request->input('price'.$i),
             ]);
+
+            $details->push($temp_detail);
         }
-        
+
         //shipment
         if($request->input('shared_shipment') != 'null') {
             $shared_shipment_id = $request->input('shared_shipment');
@@ -74,6 +90,40 @@ class InvoiceController extends Controller {
                 'extra_price' => $request->input('extra_price'),
             ]);
         }
+
+        //We create the instance of the model and add to the database
+        $invoice = Invoice::create([
+            'invoice_type' => $invoice_type,
+            'shipment_id' => $shipment->id,
+            'supplier_id' => $request->input('supplier_id'),
+            'invoice_date' => $request->input('invoice_date'),
+            'supplier_invoice_number' => $request->input('supplier_invoice_number'),
+            'order_discount' => $request->input('order_discount'),
+            'invoice_tax_rate' => $request->input('invoice_tax_rate'),
+            'extra_charges' => $request->input('extra_charges'),
+            'invoice_total' => $request->input('invoice_total'),
+            'notes' => $request->input('notes')
+        ]);
+
+        $i = 1;        
+        foreach($details as $detail){
+            //Updating each detail with the id of the invoice
+            $detail->invoice_id = $invoice->id;
+            $detail->save();
+
+            //We also create the history of prices records for each of the details
+            Price::create([
+                'price_date' => $invoice->invoice_date,
+                'history_price' => $request->input('net_value'.$i),
+                'history_discount' => $request->input('product_discount'.$i),
+                'history_tax_rate' => $request->input('tax_rate'.$i),
+                'supplier_id' => $request->input('supplier_id'),
+                'product_id' => $request->input('product'.$i)
+            ]);
+            $i++;
+        }
+
+        return redirect('/invoices')->with('message', 'Επιτυχής αποθήκευση Τιμολογίου!');
     }
 
     public function store(Request $request) { 

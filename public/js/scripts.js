@@ -82,9 +82,9 @@ jQuery(function() {
     }
 
     if(top.location.pathname === '/add_special_invoice'){
-        var counter = 1;
+        var counter = Number($('#count').val());
         $('#addProduct').on('click', function () {
-            $('#count').attr('value',counter + 1);
+            
             
             //select2 special requirment: You need to destroy the dropdown before cloning!
             $('#product'+counter).select2('destroy');
@@ -99,6 +99,7 @@ jQuery(function() {
                 if(this.id != 'count') {
                     this.id = this.id.replace(/\d+$/, "") + counter;
                 }
+                $('#count').val(counter);
             });
 
             //now that the new select product has taken its id we can make it select2
@@ -106,6 +107,7 @@ jQuery(function() {
 
             //...and the names
             $('#quantity'+ counter).attr('name','quantity'+ counter);
+            $('#measurementUnit'+ counter).attr('name','measurement_unit'+ counter);
             $('#product'+ counter).attr('name','product'+ counter);
             $('#netValue'+ counter).attr('name','net_value'+ counter);
             $('#sumNetValue'+ counter).attr('name','sum_net_value'+ counter);
@@ -113,13 +115,10 @@ jQuery(function() {
             $('#value'+ counter).attr('name','value'+ counter);
             $('#taxRate'+ counter).attr('name','tax_rate'+ counter);
             $('#tax'+ counter).attr('name','tax'+ counter);
-            $('#price'+ counter).attr('name','value'+ counter);
-            
+            $('#price'+ counter).attr('name','price'+ counter);
             
             //Why not the counter as well?
             $("#aa"+counter).html(counter);
-                       
-            
 
             calculate(counter);
             updateFields(counter);

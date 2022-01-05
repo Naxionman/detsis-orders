@@ -36,31 +36,187 @@ class ProductsTableSeeder extends Seeder
         ]);
 
         Product::create([
-            'detsis_code' => '001',
-            'product_code'=> '001',
-            'product_name'=> 'Δοκιμαστικό προϊόν 1',
-            'notes' => 'Προϊόν που έχει δημιουργηθεί για δοκιμές στη βάση'
+            'detsis_code' => '0202-0001',
+            'product_code'=> '4-1132',
+            'product_name'=> 'MS ARASEAL 225 ΛΕΥΚΟ 290ML',
+            'notes' => 'Σιλικόνη λευκή εξωτερικού χώρου',
+            'image_url' => 'MS ARASEAL 225 ΛΕΥΚΟ 290ML.jpg'
         ]);
         
         Product::create([
-            'detsis_code' => '002',
-            'product_code'=> '002',
-            'product_name'=> 'Δοκιμαστικό προϊόν 2',
-            'notes' => 'Προϊόν που έχει δημιουργηθεί για δοκιμές στη βάση'
+            'detsis_code' => '0202-0002',
+            'product_code'=> '4-1130',
+            'product_name'=> 'MS ARASEAL 225 ΛΕΥΚΟ 600ML',
+            'notes' => 'Σιλικόνη λευκή εξωτερικού χώρου ΣΑΛΑΜΙ',
+            'image_url' => 'MS ARASEAL 225 ΛΕΥΚΟ 600ML.jpg'
         ]);
         
         Product::create([
-            'detsis_code' => '003',
-            'product_code'=> '003',
-            'product_name'=> 'Δοκιμαστικό προϊόν 3',
-            'notes' => 'Προϊόν που έχει δημιουργηθεί για δοκιμές στη βάση'
+            'detsis_code' => '0202-0003',
+            'product_code'=> '4-1157',
+            'product_name'=> 'MS ARA SMP35 ΛΕΥΚΟ 600ML',
+            'notes' => ' ΣΑΛΑΜΙ',
+            'image_url' => 'MS ARA SMP35 ΛΕΥΚΟ 600ML.jpg'
         ]);
         
         Product::create([
-            'detsis_code' => '004',
-            'product_code'=> '004',
-            'product_name'=> 'Δοκιμαστικό προϊόν 4',
-            'notes' => 'Προϊόν που έχει δημιουργηθεί για δοκιμές στη βάση'
+            'detsis_code' => '0202-0004',
+            'product_code'=> '4-1144',
+            'product_name'=> 'MS COSMOFIX-CRYSTAL HD-150.160 290ML',
+            'notes' => 'Υβριδική κόλλα',
+            'image_url' => 'MS COSMOFIX-CRYSTAL HD-150.160 290ML.jpg'
+        ]);
+        
+        Product::create([
+            'detsis_code' => '0205-0001',
+            'product_code'=> '2-0062',
+            'product_name'=> 'ΠΙΣΤΟΛΙ ΣΙΛΙΚ. SKW',
+            'notes' => 'Πιστόλι σιλικόνης',
+            'image_url' => 'ΠΙΣΤΟΛΙ ΣΙΛΙΚ. SKW.jpg'
+        ]);
+        
+        Product::create([
+            'detsis_code' => '0205-0002',
+            'product_code'=> '2-0062',
+            'product_name'=> 'ΠΙΣΤΟΛΙ ΑΦΡΟΥ PL-9403',
+            'notes' => 'Πιστόλι αφρού',
+            'image_url' => 'ΠΙΣΤΟΛΙ ΑΦΡΟΥ PL-9403.jpg'
+        ]);
+
+        Product::create([
+            'detsis_code' => '0201-0001',
+            'product_code'=> '2-0213',
+            'product_name'=> 'ΣΙΛΙΚ. DURASIL W15 PLUS ΔΙΑΦ. 310ML',
+            'notes' => 'Σιλικόνη διάφανη',
+            'image_url' => 'DURASIL W15 PLUS 310ML ΔΙΑΦΑΝΗ.jpg'
+        ]);
+        
+        Product::create([
+            'detsis_code' => '0201-0002',
+            'product_code'=> '2-0236',
+            'product_name'=> 'ΣΙΛΙΚ. DURASIL W15 PLUS ΚΑΦΕ 310ML',
+            'notes' => 'Σιλικόνη λευκή',
+            'image_url' => 'DURASIL W15 PLUS 310ML ΚΑΦΕ.jpg'
+        ]);
+        
+        Product::create([
+            'detsis_code' => '0206-0001',
+            'product_code'=> '2-0026',
+            'product_name'=> 'SILIKON SPRAY',
+            'notes' => 'Spray σιλικόνης',
+            'image_url' => 'SILICON SPRAY.jpg'
+        ]);
+        
+        Product::create([
+            'detsis_code' => '0203-0001',
+            'product_code'=> '4-0014',
+            'product_name'=> 'ΚΑΘΑΡ.PVC No5',
+            'notes' => 'Καθαριστικό PVC Νο.5',
+            'image_url' => 'ΚΑΘΑΡ. PVC No 5.jpg'
+        ]);
+        
+        Product::create([
+            'detsis_code' => '0204-0001',
+            'product_code'=> '1-0005',
+            'product_name'=> 'ARAPURAN SPEED 750ML',
+            'notes' => 'Αφρός πολυουρεθάνης',
+            'image_url' => 'ARAPURAN SPEED 750ML.jpg'
+        ]);
+        
+        Product::create([
+            'detsis_code' => '0204-0002',
+            'product_code'=> '1-0014',
+            'product_name'=> 'ARAPURAN SYN 750ML',
+            'notes' => 'Αφρός πολυουρεθάνης',
+            'image_url' => 'ARAPURAN SYN 750ML.jpg'
+        ]);
+        
+        Product::create([
+            'detsis_code' => '0201-0003',
+            'product_code'=> '2-0279',
+            'product_name'=> 'ARACRYLAN 200 310ML ΛΕΥΚΟ',
+            'notes' => 'Σιλικόνη λευκή',
+            'image_url' => 'ARACRYLAN 200 310ML ΛΕΥΚΟ.jpg'
+        ]);
+
+        Product::create([
+            'detsis_code' => '0201-0004',
+            'product_code'=> '2-0196',
+            'product_name'=> 'ΣΙΛΙΚ.DURASIL 811 SANDGRAU 310ML',
+            'notes' => 'Σιλικόνη λευκή',
+            'image_url' => 'ΣΙΛΙΚ. DURASIL 811 SANDGRAU 310ML.jpg'
+        ]);
+
+        Product::create([
+            'detsis_code' => '0306-0001',
+            'product_code'=> '3-0121',
+            'product_name'=> 'ΤΑΠΑ ΛΕΥΚΗ 111',
+            'notes' => 'Τάπα για τσιμεντόβιδα',
+            'image_url' => 'ΤΑΠΑ ΛΕΥΚΗ 111.jpg'
+        ]);
+
+        Product::create([
+            'detsis_code' => '0401-0001',
+            'product_code'=> '6-0002',
+            'product_name'=> 'ΧΑΡΤΟΤΑΙΝΙΑ 25',
+            'notes' => 'Χαρτοταινία 25mm',
+            'image_url' => 'ΧΑΡΤΟΤΑΙΝΙΑ 25ΜΜ.jpg'
+        ]);
+
+        Product::create([
+            'detsis_code' => '0201-0005',
+            'product_code'=> '2-0097',
+            'product_name'=> 'ΣΙΛΙΚ.811-DURASIL310ML',
+            'notes' => 'Σιλικόνη μαύρη',
+            'image_url' => 'ΣΙΛΙΚ.811-DURASIL ΜΑΥΡΗ 310ML.jpg'
+        ]);
+
+        Product::create([
+            'detsis_code' => '0306-0002',
+            'product_code'=> '3-0119',
+            'product_name'=> 'ΤΑΠΑ ΔΙΟΡΘ.Φ10 ΛΕΥΚΗ 31',
+            'notes' => 'Τάπα διορθωτική φ10',
+            'image_url' => 'ΤΑΠΑ ΔΙΟΡΘ.Φ10 ΛΕΥΚΗ 31.jpg'
+        ]);
+
+        Product::create([
+            'detsis_code' => '0306-0003',
+            'product_code'=> '3-0570',
+            'product_name'=> 'ΤΑΠΑ ΔΙΟΡΘ.Φ12 ΛΕΥΚΗ 41',
+            'notes' => 'Τάπα διορθωτική φ12',
+            'image_url' => 'ΤΑΠΑ ΔΙΟΡΘ.Φ10 ΛΕΥΚΗ 31.jpg'
+        ]);
+        
+        Product::create([
+            'detsis_code' => '0106-01',
+            'product_code'=> '5-1276',
+            'product_name'=> 'ΚΥΛΙΝΔΡΟΣ Υ ΑΠΛΟΣ 43-43 ΠΟΜΟΛΟ ΔΑΚΡΥ',
+            'notes' => 'Αφαλός 90mm με πομολάκι 43-43',
+            'image_url' => 'ΚΥΛΙΝΔΡΟΣ Υ ΑΠΛΟΣ 43-43 ΠΟΜΟΛΟ ΔΑΚΡΥ.jpg'
+        ]);
+        
+        Product::create([
+            'detsis_code' => '0106-02',
+            'product_code'=> '5-0288',
+            'product_name'=> 'ΚΥΛΙΝΔΡΟΣ Υ ΑΠΛΟΣ 43-52 ΠΟΜΟΛΟ ΔΑΚΡΥ',
+            'notes' => 'Αφαλός 90mm με πομολάκι 43-52',
+            'image_url' => 'ΚΥΛΙΝΔΡΟΣ Υ ΑΠΛΟΣ 43-43 ΠΟΜΟΛΟ ΔΑΚΡΥ.jpg'
+        ]);
+
+        Product::create([
+            'detsis_code' => '0106-03',
+            'product_code'=> '5-0284',
+            'product_name'=> 'ΚΥΛΙΝΔΡΟΣ Υ ΑΣΦ 40-50',
+            'notes' => 'Αφαλός ασφαλείας διπλής ενέργειας 40-50',
+            'image_url' => 'ΚΥΛΙΝΔΡΟΣ Υ ΑΣΦ 40-50.jpg'
+        ]);
+
+        Product::create([
+            'detsis_code' => '0106-04',
+            'product_code'=> '5-0337',
+            'product_name'=> 'ΕΞΤΡΑ ΚΛΕΙΔΙ ΓΙΑ ΚΥΛΙΝΔΡΟ',
+            'notes' => '1 επιπλέον κλειδί',
+            'image_url' => 'extra κλειδί.jpg'
         ]);
         
     }

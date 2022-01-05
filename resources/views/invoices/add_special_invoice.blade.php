@@ -79,7 +79,7 @@
                                             <label for="inputShipmentNumber" class="align-middle">Αριθμός Τιμολογίου</label>
                                         </div>
                                         <div class="col-7">
-                                            <input class="form-control" name="shipment_invoice_number" type="text" id="inputShipmentNumber" autocomplete="off" required="required">
+                                            <input class="form-control" name="shipment_invoice_number" type="text" id="inputShipmentNumber" autocomplete="off">
                                         </div>
                                 </div>
                                 <div class="row">
@@ -87,7 +87,7 @@
                                             <label for="inputShipmentPrice" class="align-middle">Συνολική χρεώση</label>
                                         </div>
                                         <div class="col-7">
-                                            <input class="form-control" name="shipment_price" type="number" step="0.01" id="inputShipmentPrice" autocomplete="off" required="required">
+                                            <input class="form-control" name="shipment_price" type="number" step="0.01" id="inputShipmentPrice" autocomplete="off">
                                         </div>
                                 </div>
                                 <div class="row">
@@ -135,6 +135,7 @@
                             <tr>
                                 <th style="width: 5%">α/α</th>
                                 <th>Ποσότητα</th>
+                                <th>Μ/Μ</th>
                                 <th>Προϊόν</th>
                                 <th>Τιμή μονάδας</th>
                                 <th>Καθαρή αξία</th>
@@ -152,6 +153,9 @@
                                 
                                 <td style="width: 5%" class="p-0 order-font">
                                     <input type="number" class="form-control p-0 pe-2 text-end order-font" name="quantity1" id="quantity1" required="required">
+                                </td>
+                                <td style="width: 5%" class="p-0 order-font">
+                                    <input type="text" class="form-control p-0 pe-2 text-end order-font" name="measurement_unit1" id="measurementUnit1" value="ΤΕΜ">
                                 </td>
                                 <td>
                                     <select class="form-control js-example-basic-single" name="product1" id="product1">
@@ -181,9 +185,8 @@
                                 <td style="width: 10%" class="p-0">
                                     <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="price1" min="0" id="price1" readonly="readonly">
                                 </td>
-                                <input type="hidden" name="count" id="count" value="1"> 
-                                
                             </tr>
+                            <input type="hidden" name="count" id="count" value="1">
                         </tbody>
                     </table>
                     <div>
