@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "chart.js": "^3.6.2",
+        "moment": "^2.29.1",
         "toastr": "^2.1.4"
     }
 }

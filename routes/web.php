@@ -98,6 +98,7 @@ Route::get('/edit_order/{orderId}',[OrderController::class, 'show']);
 Route::get('/edit_showroom_order/{orderId}',[OrderController::class, 'show']);
 Route::get('/edit_shipment/{shipmentId}',[ShipmentController::class, 'show']);
 Route::get('/edit_product/{productId}',[ProductController::class, 'show']);
+Route::get('/view_product/{productId}',[ProductController::class, 'showDetails']);
 Route::get('/view_order/{orderId}',[OrderController::class, 'showDetails']);
 Route::get('/view_supplier/{SupplierId}',[SupplierController::class, 'showDetails']);
 Route::get('/view_invoice/{invoiceId}',[InvoiceController::class, 'showDetails']);

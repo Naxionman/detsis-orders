@@ -16,6 +16,7 @@ class CreatePricesTable extends Migration
         Schema::create('prices', function (Blueprint $table) {
             $table->id();
             $table->date('price_date');
+            $table->integer('history_quantity');
             $table->float('history_price',8,4);
             $table->float('history_discount');
             $table->float('history_tax_rate');

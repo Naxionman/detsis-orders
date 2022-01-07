@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <div class="card bg-info bg-opacity-25 shadow-lg border-0 rounded-3 mt-3 ">
+    <div class="card bg-info bg-opacity-25 shadow-sm border-0 rounded-3 mt-3 ">
         <div class="card-header"><h3 class="text-center font-weight-light my-2 "><i class="fas fa-box-open"></i>    Νέο προϊόν</h3></div>
             <div class="card-body bg-light">
                 <div class="row">
@@ -48,7 +48,7 @@
                             Εικόνα προϊόντος
                         </div>
                         <div class="row">
-                            <img class="shadow-lg p-0" src="images/no_image.png" style="border-radius: 30px; 
+                            <img class="shadow-lg p-0" src="images/products/no_image.png" style="border-radius: 30px; 
                                                                                     width:256px;
                                                                                     height:256px;">
                         </div>

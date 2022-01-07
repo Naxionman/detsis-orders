@@ -84,6 +84,9 @@
     <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.11/sorting/date-eu.js"></script>
 
     <script type = "text/javascript">
-        $(document).ready( function () {$('#EmployeesTable').DataTable();});
+        $(document).ready( function () {$('#EmployeesTable').DataTable({
+            columnDefs: [{ 
+                type: 'date-eu', targets: [3,4] }]}  
+            );});
     </script>
 @endsection

@@ -121,6 +121,7 @@ class InvoiceController extends Controller {
             //We also create the history of prices records for each of the details
             Price::create([
                 'price_date' => $invoice->invoice_date,
+                'history_quantity' => $request->input('quantity'.$i),
                 'history_price' => $request->input('net_value'.$i),
                 'history_discount' => $request->input('product_discount'.$i),
                 'history_tax_rate' => $request->input('tax_rate'.$i),
@@ -230,8 +231,9 @@ class InvoiceController extends Controller {
                 $detail->invoice_id = $invoice->id; //link to the invoice
                 $detail->pending = '0'; //updating pending status
                 //creating price record for the specific product
-                \App\Models\Price::create([
+                Price::create([
                     'price_date' => $request->input('invoice_date'),
+                    'history_quantity' => $request->input('quantity'.$i),
                     'history_price' => $request->input('net_value'.$i),
                     'history_discount' => $request->input('product_discount'.$i),
                     'history_tax_rate' => $request->input('tax_rate'.$i),

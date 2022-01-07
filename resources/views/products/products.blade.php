@@ -4,20 +4,29 @@
 
 
 @section('content')
-
     <div class="container-fluid px-4">
         <h1 class="mt-4">Προϊόντα</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item"><a href="/">Αρχική σελίδα</a></li>
                 <li class="breadcrumb-item active">Προϊόντα</li>
             </ol>
-                <div class="card mb-4">
-                    <a href="/add_product" class="btn btn-info bg-info bg-opacity-25 shadow-lg" >Προσθήκη προϊόντος</a>    
+                <div class="card mb-4 shadow-sm">
+                    <a href="/add_product" class="btn btn-info bg-info bg-opacity-25" >Προσθήκη προϊόντος</a>    
                 </div>
             <div class="card mb-4">
                 <div class="card-header">
-                    <i class="fas fa-table me-1"></i>
-                    Προϊόντα
+                    <div class="row">
+                        <div class="col-4">
+                            <i class="fas fa-table me-1"></i>Προϊόντα
+                        </div>
+                        <div class="col-8">Επιλογές προβολής 
+                            <button class="btn btn-sm shadow-sm"><i class="fas fa-th-list"></i></button>
+                            <button class="btn btn-sm shadow-sm"><i class="fas fa-th"></i></button>
+                            <button class="btn btn-sm shadow-sm"><i class="fas fa-th-large"></i></button>
+                        </div>
+                        
+                    </div>
+                    
                 </div>
                 <div class="card-body">
                     <table id="myTable" class="cell-border display compact">
@@ -45,7 +54,7 @@
                         </tfoot>
                         <tbody>
                         @forelse ($products as $product)
-                            <tr>
+                            <tr data-href="view_product/{{ $product->id}}">
                                 <td><strong>{{$product->detsis_code }}</strong></td>
                                 <td>{{$product->product_code }}</td>
                                 <td>{{$product->product_name }}</td>
@@ -54,12 +63,12 @@
                                 <td>{{$product->last_supplier }}</td>
                                 <td style="width:15%" >
                                     <div class="d-flex justify-content-evenly">
-                                        <a href="/edit_product/{{ $product->id }}" class="btn btn-warning flex-fill">
+                                        <a href="/edit_product/{{ $product->id }}" class="btn btn-sm btn-warning flex-fill">
                                             <i class="far fa-edit"></i>Edit</a>
                                             <form action="/products/{{ $product->id }}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                                <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                                                <button class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i></button>
                                             </form>
                                     </div>
                                 </td>

@@ -9,5 +9,14 @@ class Price extends Model
 {
     protected $guarded = [];
 
+    protected $dates = [
+        'price_date',        
+    ];
+
+    public function supplier() {
+        return $this->belongsTo(Supplier::class);
+    }
+
+
     public $timestamps = false;
 }

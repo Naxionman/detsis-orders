@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Supplier;
+use App\Models\Product;
+use App\Models\Price;
 
 class ProductController extends Controller
 {
     // Show all records of products table
     public function index() {
-        $suppliers = \App\Models\Supplier::all();
-        $products = \App\Models\Product::all();
+        $suppliers = Supplier::all();
+        $products = Product::all();
         return view('products.products', compact('products','suppliers'));
     }
 
     public function add_product() {
-        $suppliers = \App\Models\Supplier::all();
-        $products = \App\Models\Product::all();
+        $suppliers = Supplier::all();
+        $products = Product::all();
         
         return view ('products.add_product', compact('suppliers','products'));
     }
@@ -32,18 +34,26 @@ class ProductController extends Controller
             
         ]);
 
-        \App\Models\Product::create($data);
+        Product::create($data);
         
         return redirect()->back()->with('message', 'Επιτυχής αποθήκευση προϊόντος!');
     }
 
     public function show($productId) {
-        $product = \App\Models\Product::findOrFail($productId);
+        $product = Product::findOrFail($productId);
         
         return view('products.edit_product', compact('product'));
     }
 
-    public function update(\App\Models\Product $product) {
+    public function showDetails($productId) {
+        $product = Product::findOrFail($productId);
+
+        $prices = Price::where('product_id','=',$productId)->get();
+        
+        return view('products.view_product', compact('product','prices'));
+    }
+
+    public function update(Product $product) {
         $data = request()->validate([
             'detsis_code' => 'required',
             'product_code' => 'required',
@@ -67,7 +77,7 @@ class ProductController extends Controller
         return redirect('products')->with('message', 'Επιτυχής επεξεργασία προϊόντος!');
     }
 
-    public function destroy(\App\Models\Product $product) {
+    public function destroy(Product $product) {
         $product->delete();
 
         return redirect('products')->with('message', 'Επιτυχής διαγραφή προϊόντος!');

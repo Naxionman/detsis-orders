@@ -29,6 +29,7 @@ $('tr[data-href]').on("click", function() {
 });
 
 jQuery(function() {
+    
     $('[data-toggle="tooltip"]').tooltip();
     $.fn.select2.defaults.set( "theme", "bootstrap" );
     $('#product0').select2();
@@ -348,3 +349,6 @@ jQuery(function(){
         })
     }
 });
+
+
+//DOKIMI

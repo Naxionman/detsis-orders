@@ -75,5 +75,11 @@ class RefuelingsTableSeeder extends Seeder
             'amount' => '58.01',
         ]);
 
+        Refueling::create([
+            'refuel_date' => '05-01-2022',
+            'vehicle_id' => '1',
+            'amount' => '50.00',
+        ]);
+
     }
 }

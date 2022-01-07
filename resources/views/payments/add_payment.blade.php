@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <div class="card shadow-lg border-0 rounded-3 mt-3 " style="background-color: #FFD700">
+    <div class="card shadow-sm border-0 rounded-3 mt-3 " style="background-color: #FFD700">
         <div class="card-header"><h3 class="text-center font-weight-light my-2 ">Νέα πληρωμή</h3></div>
             <div class="card-body bg-light">
                 <form action="add_payment" id="addPayment" method="POST">
