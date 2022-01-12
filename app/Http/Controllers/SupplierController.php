@@ -6,7 +6,6 @@ use App\Models\Invoice;
 use App\Models\Supplier;
 use App\Models\Payment;
 use App\Models\Order;
-use Illuminate\Http\Request;
 
 class SupplierController extends Controller {
     
@@ -37,10 +36,14 @@ class SupplierController extends Controller {
             'address' => 'nullable',
             'zipcode' => 'nullable|digits:5',
             'city' => 'nullable',
-            'description' => 'nullable'
+            'description' => 'nullable',
+            'iban1' => 'nullable',
+            'iban2' => 'nullable',
+            'iban3' => 'nullable',
+            'iban4' => 'nullable',
         ]);
 
-        \App\Models\Supplier::create($data);
+        Supplier::create($data);
         
         return redirect()->back()->with('message', 'Επιτυχής αποθήκευση Προμηθευτή!');
     }
@@ -48,6 +51,7 @@ class SupplierController extends Controller {
     public function show($supplierId) {
         $supplier = \App\Models\Supplier::findOrFail($supplierId);
         //dd($supplier);
+
         return view('suppliers.edit_supplier', compact('supplier'));
     }
 
@@ -63,11 +67,11 @@ class SupplierController extends Controller {
         //The balance = invoice charges - payments + initial balance 
         $new_balance = $sum_charged - $paid + $supplier->balance;
         //dd($supplier->balance);
+
         return view ('suppliers.view_supplier', compact('supplier','invoice_count', 'sum_charged','paid','new_balance'));
     }
 
-    public function update(\App\Models\Supplier $supplier) {
-       
+    public function update(Supplier $supplier) {
         $data = request()->validate([
             'company_name' => 'required|min:4',
             'salesman' => 'nullable',
@@ -79,7 +83,10 @@ class SupplierController extends Controller {
             'address' => 'nullable',
             'zipcode' => 'nullable|digits:5',
             'city' => 'nullable',
-            'iban'=>'nullable',
+            'iban1'=>'nullable',
+            'iban2'=>'nullable',
+            'iban3'=>'nullable',
+            'iban4'=>'nullable',
             'description' => 'nullable'
         ]);
 
@@ -88,7 +95,7 @@ class SupplierController extends Controller {
         return redirect('suppliers')->with('message', 'Επιτυχής επεξεργασία Προμηθευτή!');
     }
 
-    public function destroy(\App\Models\Supplier $supplier) {
+    public function destroy(Supplier $supplier) {
         $supplier->delete();
 
         return redirect('/suppliers')->with('message', 'Επιτυχής διαγραφή Προμηθευτή!');

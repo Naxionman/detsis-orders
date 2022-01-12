@@ -72,6 +72,25 @@
                                 <div class="col-4"><label>Υπόλοιπο :</label></div>
                                 <div class="col-8"> <strong>{{$new_balance ?: '0'}}</strong> €</div>
                             </div>
+                            <br>
+                            <br>
+                            <br>
+                            <div class="row">
+                                <div class="col-4"><label>Πειραιώς :</label></div>
+                                <div class="col-8"> <strong>{{ $supplier->iban1 ?: '-' }}</strong></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4"><label>Εθνική :</label></div>
+                                <div class="col-8"> <strong>{{ $supplier->iban2 ?: '-'}}</strong></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4"><label>Alpha :</label></div>
+                                <div class="col-8"> <strong>{{ $supplier->iban3 ?: '-' }}</strong></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4"><label>Eurobank :</label></div>
+                                <div class="col-8"> <strong>{{ $supplier->iban4 ?: '-' }}</strong></div>
+                            </div>
                         </div>
                        
                     </div>

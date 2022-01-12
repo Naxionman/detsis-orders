@@ -108,7 +108,8 @@
                                     <label for="inputMaritalStatus" class="align-middle">Οικογενειακή κατάσταση</label>
                                 </div>
                                 <div class="col-sm-6">
-                                    <select class="form-control" value = "{{ $employee->marital_status }}" autocomplete="nope" type="text" id="inputMaritalStatus" name="marital_status" >
+                                    <select class="form-control" value = "" autocomplete="nope" type="text" id="inputMaritalStatus" name="marital_status" >
+                                        <option value="{{ $employee->marital_status }}" selected>{{ $employee->marital_status }}</option>
                                         <option value="Άγαμος">Άγαμος</option>
                                         <option value="Έγγαμος">Έγγαμος</option>
                                         <option value="Χήρος">Χήρος</option>

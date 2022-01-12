@@ -3,83 +3,41 @@
 namespace App\Http\Controllers;
 
 use App\Models\Leave;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
-class LeaveController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+class LeaveController extends Controller {
+    
+    public function index() {
+        $leaves = Leave::all();
+        $employees = Employee::all(); 
+
+        return view('employees.leaves.leaves', compact('leaves'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function addLeave($leaveId) {
+        $vehicle = Leave::findOrFail($leaveId);
+        
+        return view ('employees.leaves.add_leave', compact('leave'));
+    }
+    
+    public function store() {
+        $data = request()->validate([
+            'employee_id' => 'required',
+            '' => 'required',
+            '' => 'required',
+            '' => 'required'
+        ]);
+        
+        //dd($data);
+        Leave::create($data);
+        
+        return redirect('employees.leaves.leaves')->with('message', 'Επιτυχής προσθήκη άδειας!');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function destroy(Leave $leave) {
+        $leave->delete();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Leave  $leave
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Leave $leave)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Leave  $leave
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Leave $leave)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Leave  $leave
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Leave $leave)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Leave  $leave
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Leave $leave)
-    {
-        //
+        return redirect('leaves')->with('message', 'Επιτυχής διαγραφή άδειας!');
     }
 }

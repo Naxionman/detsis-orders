@@ -15,12 +15,12 @@ use Illuminate\Http\Request;
 class InvoiceController extends Controller {
     
     public function index() {
-        $invoices = \App\Models\Invoice::all();
+        $invoices = Invoice::all();
 
         return view('invoices.invoices', compact('invoices'));
     }
     
-    public function add_invoice($orderId) {
+    public function addInvoice($orderId) {
         $suppliers = Supplier::all();
         $shippers = Shipper::all();
         $products = Product::all();
@@ -32,7 +32,7 @@ class InvoiceController extends Controller {
         return view ('invoices.add_invoice', compact('suppliers','products','shipments','shippers', 'orders','order', 'details'));
     }
 
-    public function add_special_invoice() {
+    public function addSpecialInvoice() {
         $suppliers = Supplier::all();
         $shippers = Shipper::all();
         $products = Product::all();
@@ -43,11 +43,11 @@ class InvoiceController extends Controller {
 
     public function storeSpecial(Request $request) {
         //dd($request);
-        
         $invoice_type = "";
         //Special Invoices are the ones that do not come from the orders. The difference is that orderDetails do not exist
         $count = $request->input('count');
         $details = collect();
+
         for ($i=1; $i < $count+1; $i++) { 
             //Taking advantage of the loop to determine the type of the invoice, that is whether it is for the factory or the showroom
             if($request->input('product'.$i) == 1) {
@@ -172,7 +172,6 @@ class InvoiceController extends Controller {
         //(Step 1)   The order through which we create a new invoice
         $order = Order::findOrFail($request->input('order_id'));
         
-        
         //(Step 2) There maybe more than one invoices with the same shipment. In this case we don't create a shipment as there is already one.
         if($request->input('shared_shipment') != 'null') {
             $shared_shipment_id = $request->input('shared_shipment');
@@ -254,7 +253,6 @@ class InvoiceController extends Controller {
         $invoice->orders()->attach($more_orders);
 
         //What happens if the added orders are not completed?
-        
 
         return redirect('/orders')->with('message', 'Επιτυχής αποθήκευση Τιμολογίου!');
     }

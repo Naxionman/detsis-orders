@@ -233,6 +233,65 @@ jQuery(function() {
     });
 
 
+    if(top.location.pathname === '/add_product'){
+        var productCodes = JSON.parse(window.count);
+        
+        console.log(productCodes);        
+        var category;
+        var subCategory;
+        var lastProduct;
+
+        $('#inputDetsisCode').on('input keyup keydown', function () {
+            var userInput = $('#inputDetsisCode').val();
+            console.log(userInput); 
+            //We need to see the categories even if the user has typed more than 5 characters. So we get the first 4 characters only!
+            userInput = userInput.substring(0,4);           
+                switch (userInput) {
+                    case '0101':
+                        category = 'Εξαρτήματα επίπλων';
+                        subCategory = 'Μεντεσέδες';
+                        enterLastProduct();
+                        break;
+
+                    case '0102':
+                        category = 'Εξαρτήματα επίππλων';
+                        subCategory = 'Τακάκια';
+                        break;
+                    case '0201':
+                        category = 'Χημικά';
+                        subCategory = 'Σιλικόνες';
+                        enterLastProduct();
+                        break;
+                    case '0202':
+                        category = 'Εξαρτήματα επίππλων';
+                        subCategory = 'Κόλλες';
+                        enterLastProduct();
+                        break;           
+                    default:
+                        category = 'Δεν υπάρχει τέτοια κατηγορία';
+                        subCategory = 'Δεν υπάρχει τέτοια κατηγορία';
+                        enterLastProduct();
+                        break;
+                }
+                $('#category').text(category);
+                $('#subCategory').text(subCategory);
+                
+                function enterLastProduct(){
+                    productCodes.forEach(code => {
+                        console.log('code = ' + code);
+                        if(userInput.substring(0,4) == code.substring(0,4)){
+                            lastProduct = code;
+                            console.log('last product = '+lastProduct);
+                        }
+                        
+                    });
+                    $('#lastProduct').text(lastProduct);
+                }
+                
+        });
+
+        
+    }
 });
 
 function updateFields(count){

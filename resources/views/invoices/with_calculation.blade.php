@@ -100,7 +100,7 @@
                     <td style="width: 10%" class="p-0 order-font">{{ $detail->product->detsis_code }}</td>
                     <td style="width: 10%" class="p-0 order-font">{{ $detail->product->product_code }}</td>
                     <td style="width: 5%" class="p-0 order-font">
-                        <input type="number" class="form-control p-0 pe-2 text-end order-font"  value="{{ $detail->quantity }}" id="quantity{{$count}}"disabled>
+                        <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font"  value="{{ $detail->quantity }}" id="quantity{{$count}}"disabled>
                     </td>
                     <td class="p-0">
                         <input type="text" class="form-control p-0 pe-2 text-end order-font" id="measurementUnit{{$count}}" value="{{ $detail->measurement_unit == null ?: 'ΤΕΜ'}}" disabled>

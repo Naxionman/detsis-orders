@@ -12,7 +12,7 @@
                         <form action="add_product" id="addProduct" method="POST">
                             <div class="row mt-3 justify-content-center">
                                 <div class="col-sm-4"><label for="inputDetsisCode">Κωδικός μας (DCode)</label></div>
-                                <div class="col-sm-4"><input class="form-control" autocomplete="nope" type="text" id="inputDetsisCode" name="detsis_code" placeholder="Κωδικός εργοστασίου μας"  required="required" autofocus></div>
+                                <div class="col-sm-4"><input class="form-control" autocomplete="off" type="text" id="inputDetsisCode" name="detsis_code" placeholder="Κωδικός εργοστασίου μας"  required="required" autofocus></div>
                             </div>
                             <div class="row mt-3 justify-content-center">
                                 <div class="col-sm-4"><label for="inputSupplierCode">Κωδικός προμηθευτή</label></div>
@@ -45,14 +45,46 @@
                     </div>
                     <div class="col-4 justify-content-center">
                         <div class="row">
-                            Εικόνα προϊόντος
+                            Κατηγορία προϊόντος:
                         </div>
                         <div class="row">
-                            <img class="shadow-lg p-0" src="images/products/no_image.png" style="border-radius: 30px; 
-                                                                                    width:256px;
-                                                                                    height:256px;">
+                            <label for="category">Κατηγορία :</label>
+                            <strong><div id="category"></div></strong>
+                        </div>
+                        <div class="row">
+                            <label for="subCategory">Υποκατηγορία :</label>
+                            <strong><div id="subCategory"></div></strong>
+                        </div>
+                        <div class="row">
+                            <label for="lastProduct">Τελευταίο προϊόν :</label>
+                            <strong><div id="lastProduct"></div></strong>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="row">
+                            <button type="button" class="btn btn-success shadow-sm" data-bs-toggle="modal" data-bs-target="#categories">Δες τις κατηγορίες</button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="categories" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="titleLong">Κατηγορίες Προϊόντων</h5>
+                                    
+                                    </div>
+                                    <div class="modal-body">
+                                        @include('products.categories')
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Κλείσιμο</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    
                 </div>
                 
                 </div>
@@ -62,6 +94,15 @@
             </div>
         </div>
 
+
+
+
+
+
+
+
+        <!-- Passing the $codes array to the js file -->
+        <script> window.count = '<?php echo json_encode($codes) ?>'; </script>
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

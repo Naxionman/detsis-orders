@@ -12,6 +12,7 @@ use App\Models\Client;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller {
+    
     // Show all records of orders table
     public function index() {
         $orders =  Order::all();
@@ -19,7 +20,7 @@ class OrderController extends Controller {
         return view('orders.orders', compact('orders'));
     }
 
-    public function add_order() {
+    public function addOrder() {
         $suppliers = Supplier::all();
         $products = Product::all();
         $clients = Client::all();

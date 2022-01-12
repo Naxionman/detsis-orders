@@ -19,7 +19,7 @@ class CreateOrderDetailsTable extends Migration
             $table->unsignedBigInteger('order_id')->nullable();   //We need to be able to create an invoice without having to place an order
             $table->unsignedBigInteger('invoice_id')->nullable(); 
             $table->boolean('pending')->default(1);
-            $table->integer('quantity');
+            $table->float('quantity');
             $table->string('measurement_unit')->default('ΤΕΜ');
             $table->integer('items_per_package')->default('1');
             $table->float('net_value',8,4)->nullable();

@@ -152,7 +152,7 @@
                                 <td style="width: 5%" class="p-0 order-font" id="aa1">1</td>
                                 
                                 <td style="width: 5%" class="p-0 order-font">
-                                    <input type="number" class="form-control p-0 pe-2 text-end order-font" name="quantity1" id="quantity1" required="required">
+                                    <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="quantity1" id="quantity1" required="required">
                                 </td>
                                 <td style="width: 5%" class="p-0 order-font">
                                     <input type="text" class="form-control p-0 pe-2 text-end order-font" name="measurement_unit1" id="measurementUnit1" value="ΤΕΜ">

@@ -161,17 +161,17 @@
                                 <td style="width: 3%" class="p-0 order-font">{{ $count }}</td>
                                 <td style="width: 6%" class="p-0 text-start order-font">{{ $detail->product->detsis_code }}</td>
                                 <td style="width: 10%" class="p-0 text-start ps-2 order-font">{{ $detail->product->product_code }}</td>
-                                <td style="width: 3%" class="p-0 text-end pe-3 order-font">{{ $detail->quantity }}</td>
+                                <td style="width: 3%" class="p-0 text-end pe-1 order-font">{{ number_format ($detail->quantity, 2, ",", ".") }}</td>
                                 <td style="width: 3%" class="p-0 text-start order-font">{{ $detail->measurement_unit == null ?: 'ΤΕΜ' }}</td>
                                 <td style="width: 5%" class="p-0 text-start order-font">{{ $detail->items_per_package == null ?: '1'}}</td>
                                 <td style="width: 30%" class="p-0 text-start ps-2 order-font" >{{ $detail->product->product_name }}</td>
-                                <td style="width: 5%" class="p-0 pe-3 text-end">{{ number_format($detail->net_value, 4, ",", ".") }}</td>
-                                <td style="width: 5%" class="p-0 pe-3 text-end">{{ number_format ($detail->net_value * $detail->quantity , 2, ",", ".")}}</td>
-                                <td style="width: 5%" class="p-0 pe-3 text-end">{{ number_format ($detail->product_discount, 2, ",", ".") }}</td>
-                                <td style="width: 5%" class="p-0 pe-3 text-end">{{ number_format (($detail->net_value * $detail->quantity) - ($detail->net_value * $detail->quantity)* $detail->product_discount/100, 2, ",", ".") }}</td>
-                                <td style="width: 5%" class="p-0 pe-3 text-end">{{ number_format ($detail->tax_rate , 2, ",", ".")}}</td>
-                                <td style="width: 5%" class="p-0 pe-3 text-end">{{ number_format ((($detail->net_value * $detail->quantity) - ($detail->net_value * $detail->quantity)* $detail->product_discount/100) * $detail->tax_rate/100 , 2, ",", ".")}}</td>
-                                <td style="width: 10%" class="p-0 pe-3 text-end">{{ number_format ($detail->price, 2, ",", ".") }}</td>
+                                <td style="width: 5%" class="p-0 pe-2 text-end">{{ number_format($detail->net_value, 4, ",", ".") }}</td>
+                                <td style="width: 5%" class="p-0 pe-2 text-end">{{ number_format ($detail->net_value * $detail->quantity , 2, ",", ".")}}</td>
+                                <td style="width: 5%" class="p-0 pe-2 text-end">{{ number_format ($detail->product_discount, 2, ",", ".") }}</td>
+                                <td style="width: 5%" class="p-0 pe-2 text-end">{{ number_format (($detail->net_value * $detail->quantity) - ($detail->net_value * $detail->quantity)* $detail->product_discount/100, 2, ",", ".") }}</td>
+                                <td style="width: 5%" class="p-0 pe-2 text-end">{{ number_format ($detail->tax_rate , 2, ",", ".")}}</td>
+                                <td style="width: 5%" class="p-0 pe-2 text-end">{{ number_format ((($detail->net_value * $detail->quantity) - ($detail->net_value * $detail->quantity)* $detail->product_discount/100) * $detail->tax_rate/100 , 2, ",", ".")}}</td>
+                                <td style="width: 10%" class="p-0 pe-2 text-end">{{ number_format ($detail->price, 2, ",", ".") }}</td>
                             </tr>
                         @endforeach
                     </tbody>

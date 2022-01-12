@@ -17,7 +17,7 @@ class Product extends Model
         return $this->belongsToMany(Price::class);
     }
 
-    public function supplier(){
+    public function last_supplier(){
         return $this->belongsTo(Supplier::class);
     }
 }

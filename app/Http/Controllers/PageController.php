@@ -5,12 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Shipment;
 use App\Models\Order;
 use App\Models\Shipper;
-use Illuminate\Http\Request;
 
 class PageController extends Controller {
     
     public function index() {
-
         //orders stats
         $pending_orders = Order::where('pending','=',1)->count();
         
@@ -28,7 +26,6 @@ class PageController extends Controller {
                 $extra_sum += $shipment->extra_price;
             }
         }
-
         
         $shippers = Shipper::all();
         $ship_stats = array();
@@ -41,11 +38,8 @@ class PageController extends Controller {
             }
         }
 
-
         //dd($ship_stats);
         
         return view('welcome', compact('monthly_sum','extra_sum', 'pending_orders','monthly_orders','ship_stats')); 
     }
-
-    
 }

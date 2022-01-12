@@ -9,8 +9,8 @@ use App\Models\CarService;
 use App\Models\Insurance;
 use App\Models\Refueling;
 
-class VehicleController extends Controller
-{
+class VehicleController extends Controller {
+
     // Show all records of vehicles table
     public function index() {
         $vehicles = Vehicle::all();
@@ -18,14 +18,14 @@ class VehicleController extends Controller
         return view('vehicles.vehicles', compact('vehicles'));
     }
 
-    public function add_vehicle() {
+    public function addVehicle() {
+
         return view ('vehicles.add_vehicle');
     }
     
     public function store() {
         $data = request()->validate([
             'name' => 'required|unique:vehicles|min:4'
-            
         ]);
 
         Vehicle::create($data);
@@ -62,7 +62,6 @@ class VehicleController extends Controller
         } else{
             $days = $last_service->diff($today, $last_service);
         }
-        
 
         $car_refuelings = Refueling::where('vehicle_id','=',$vehicleId)->orderBy('id', 'ASC')->get();
         
@@ -82,7 +81,6 @@ class VehicleController extends Controller
         $vehicle->update($data);
         
         return redirect('vehicles')->with('message', 'Επιτυχής επεξεργασία βασικών στοιχείων οχήματος!');
-        
     }
 
     public function destroy(Vehicle $vehicle) {

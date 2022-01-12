@@ -5,38 +5,39 @@ namespace App\Http\Controllers;
 use App\Models\Dispatch;
 use App\Models\Employee;
 use App\Models\Vehicle;
+use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class DispatchController extends Controller
-{
+class DispatchController extends Controller {
+    
     // Show all records of dispatches table
     public function index() {
-        $dispatches = \App\Models\Dispatch::all();
+        $dispatches = Dispatch::all();
+    
         return view('dispatches.dispatches', compact('dispatches'));
     }
 
     public function log() {
         //Filtering out employees that are not going to be dispatched
-        
-        $employees = \App\Models\Employee::where('speciality', '!=', 'Υπάλληλος')
+        $employees = Employee::where('speciality', '!=', 'Υπάλληλος')
                                             ->where('date_left','=',null)
                                             ->where('surname','!=', 'Ψαρράς')
                                             ->get();
-        $vehicles = \App\Models\Vehicle::all();
+        $vehicles = Vehicle::all();
 
         return view('dispatches.dispatch_log', compact('vehicles','employees'));
     }
 
-    public function add_dispatch() {
-        $vehicles = \App\Models\Vehicle::all();
-        //$employees = \App\Models\Employee::all();
-        $employees = \App\Models\Employee::where('speciality', '!=', 'Υπάλληλος')
-        ->where('date_left','=',null)
-        ->where('surname','!=', 'Ψαρράς')
-        ->get();
+    public function addDispatch() {
+        $vehicles = Vehicle::all();
+        //$employees = Employee::all();
+        $employees = Employee::where('speciality', '!=', 'Υπάλληλος')
+                                ->where('date_left','=',null)
+                                ->where('surname','!=', 'Ψαρράς')
+                                ->get();
 
-        $clients = \App\Models\Client::all();
+        $clients = Client::all();
 
         return view ('dispatches.add_dispatch', compact('vehicles','employees','clients'))->with('message', 'Επιτυχής προσθήκη κίνησης!');
     }
@@ -63,12 +64,12 @@ class DispatchController extends Controller
         return redirect()->back()->with('message', 'Επιτυχής αποθήκευση κίνησης!');
     }
 
-    public function show($dispatchId)
-    {
-        $dispatch = \App\Models\Dispatch::findOrFail($dispatchId);
-        $vehicles = \App\Models\Vehicle::all();
+    public function show($dispatchId) {
+        $dispatch = Dispatch::findOrFail($dispatchId);
+        $vehicles = Vehicle::all();
+
         //Filter out those who aren't going to the dispatches
-        $employees = \App\Models\Employee::where('speciality', '!=', 'Υπάλληλος')
+        $employees = Employee::where('speciality', '!=', 'Υπάλληλος')
                                             ->where('date_left','=',null)
                                             ->where('surname','!=', 'Ψαρράς')
                                             ->get();
@@ -77,13 +78,12 @@ class DispatchController extends Controller
                     ->where('dispatch_id','=',$dispatchId)
                     ->get();
         
-        $clients = \App\Models\Client::all();
+        $clients = Client::all();
         //dd($dispatch);
         return view('dispatches.edit_dispatch', compact('dispatch','vehicles','employees','dispatch_employees','clients'));
     }
 
-    public function update(\App\Models\Dispatch $dispatch, Request $request) {
-        
+    public function update(Dispatch $dispatch, Request $request) {
         $data = request()->validate([
             'dispatch_date' => 'required',
             'vehicle_id'    => 'required',
@@ -107,7 +107,7 @@ class DispatchController extends Controller
         return redirect('dispatches')->with('message', 'Επιτυχής επεξεργασία κίνησης!');
     }
 
-    public function destroy(\App\Models\Dispatch $dispatch) {
+    public function destroy(Dispatch $dispatch) {
         $dispatch->delete();
 
         return redirect('dispatches')->with('message', 'Επιτυχής διαγραφή κίνησης!');

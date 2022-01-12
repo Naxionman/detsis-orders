@@ -36,7 +36,7 @@ class ProductsTableSeeder extends Seeder
         ]);
 
         Product::create([
-            'detsis_code' => '0202-01',
+            'detsis_code' => '0201-01',
             'product_code'=> '4-1132',
             'product_name'=> 'MS ARASEAL 225 ΛΕΥΚΟ 290ML',
             'notes' => 'Σιλικόνη λευκή εξωτερικού χώρου',
@@ -44,7 +44,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         
         Product::create([
-            'detsis_code' => '0202-02',
+            'detsis_code' => '0201-02',
             'product_code'=> '4-1130',
             'product_name'=> 'MS ARASEAL 225 ΛΕΥΚΟ 600ML',
             'notes' => 'Σιλικόνη λευκή εξωτερικού χώρου ΣΑΛΑΜΙ',
@@ -52,7 +52,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         
         Product::create([
-            'detsis_code' => '0202-03',
+            'detsis_code' => '0201-03',
             'product_code'=> '4-1157',
             'product_name'=> 'MS ARA SMP35 ΛΕΥΚΟ 600ML',
             'notes' => ' ΣΑΛΑΜΙ',
@@ -60,7 +60,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         
         Product::create([
-            'detsis_code' => '0202-04',
+            'detsis_code' => '0202-01',
             'product_code'=> '4-1144',
             'product_name'=> 'MS COSMOFIX-CRYSTAL HD-150.160 290ML',
             'notes' => 'Υβριδική κόλλα',
@@ -84,7 +84,7 @@ class ProductsTableSeeder extends Seeder
         ]);
 
         Product::create([
-            'detsis_code' => '0201-01',
+            'detsis_code' => '0201-04',
             'product_code'=> '2-0213',
             'product_name'=> 'ΣΙΛΙΚ. DURASIL W15 PLUS ΔΙΑΦ. 310ML',
             'notes' => 'Σιλικόνη διάφανη',
@@ -92,7 +92,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         
         Product::create([
-            'detsis_code' => '0201-02',
+            'detsis_code' => '0201-05',
             'product_code'=> '2-0236',
             'product_name'=> 'ΣΙΛΙΚ. DURASIL W15 PLUS ΚΑΦΕ 310ML',
             'notes' => 'Σιλικόνη λευκή',
@@ -132,7 +132,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         
         Product::create([
-            'detsis_code' => '0201-03',
+            'detsis_code' => '0201-06',
             'product_code'=> '2-0279',
             'product_name'=> 'ARACRYLAN 200 310ML ΛΕΥΚΟ',
             'notes' => 'Σιλικόνη λευκή',
@@ -140,7 +140,7 @@ class ProductsTableSeeder extends Seeder
         ]);
 
         Product::create([
-            'detsis_code' => '0201-04',
+            'detsis_code' => '0201-07',
             'product_code'=> '2-0196',
             'product_name'=> 'ΣΙΛΙΚ.DURASIL 811 SANDGRAU 310ML',
             'notes' => 'Σιλικόνη λευκή',
@@ -172,7 +172,7 @@ class ProductsTableSeeder extends Seeder
         ]);
 
         Product::create([
-            'detsis_code' => '0201-05',
+            'detsis_code' => '0201-08',
             'product_code'=> '2-0097',
             'product_name'=> 'ΣΙΛΙΚ.811-DURASIL310ML',
             'notes' => 'Σιλικόνη μαύρη',
@@ -225,6 +225,22 @@ class ProductsTableSeeder extends Seeder
             'product_name'=> 'ΕΞΤΡΑ ΚΛΕΙΔΙ ΓΙΑ ΚΥΛΙΝΔΡΟ',
             'notes' => '1 επιπλέον κλειδί',
             'image_url' => 'extra κλειδί.jpg'
+        ]);
+
+        Product::create([
+            'detsis_code' => '0302-01',
+            'product_code'=> '3-1122',
+            'product_name'=> 'ΒΙΔΑ ΣΤ. 1036 7.5Χ152',
+            'notes' => 'Τσιμεντόβιδα χωρίς κεφάλι 7,5 Χ 152',
+            'image_url' => 'ΤΣΙΜΕΝΤΟΒΙΔΑ ΧΩΡΙΣ ΚΕΦΑΛΙ.jpg'
+        ]);
+        
+        Product::create([
+            'detsis_code' => '0302-02',
+            'product_code'=> '3-1120',
+            'product_name'=> 'ΒΙΔΑ ΣΤ. 1036 7.5Χ112',
+            'notes' => 'Τσιμεντόβιδα χωρίς κεφάλι 7,5 Χ 112',
+            'image_url' => 'ΤΣΙΜΕΝΤΟΒΙΔΑ ΧΩΡΙΣ ΚΕΦΑΛΙ.jpg'
         ]);
         
     }

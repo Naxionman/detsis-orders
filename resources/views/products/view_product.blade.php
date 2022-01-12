@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-1">
                     @if ($product->id - 1 != 0)
-                        <a class="btn" href="/view_product/{{$product->id - 1}}"><i class="fas fa-chevron-circle-left"></i></a>    
+                        <a style="color: #394f62" class="btn" href="/view_product/{{$product->id - 1}}"><i class="fas fa-chevron-circle-left fa-2x"></i></a>    
                     @endif
                 </div>
                 <div class="col-10">
@@ -17,7 +17,9 @@
                         <a href="/products" class="btn btn-info shadow-sm"> Επιστροφή στον πίνακα προϊόντων</a></h3>
                 </div>
                 <div class="col-1">
-                    <a class="btn" href="/view_product/{{$product->id + 1}}"><i class="fas fa-chevron-circle-right"></i></a>
+                    @if ($product->id != $last_product->id)
+                        <a style="color: #394f62" class="btn" href="/view_product/{{$product->id + 1}}"><i class="fas fa-chevron-circle-right fa-2x"></i></a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -29,7 +31,8 @@
                             <div class="card-body bg-light">
                                 <div class="row">
                                     <div class="col-5">
-                                        <div class="row"><div class="text-end">Ονομασία :</div></div>
+                                        <div class="row"><div class="text-end">Ονομασία Προμηθευτή:</div></div>
+                                        <div class="row"><div class="text-end">Σημειώσεις μας:</div></div>
                                         <div class="row"><div class="text-end">DCode :</div></div>
                                         <div class="row"><div class="text-end">Τελευταίος Προμηθευτής :</div></div>
                                         <div class="row"><div class="text-end">Κωδικός Προμηθευτή :</div></div>
@@ -38,12 +41,13 @@
                                     </div>
                                     <div class="col-7">
                                         <div class="row"><div class="text-start">{{ $product->product_name }}</div></div>
+                                        <div class="row"><div class="text-start">{{ $product->notes ?: '-' }}</div></div>
                                         <div class="row"><div class="text-start">{{ $product->detsis_code }}</div></div>
                                         <div class="row"><div class="text-start">
                                             @if ($product->last_supplier == null)
                                                 {{ 'Δεν έχει καταγραφεί κάποια αγορά'}}
                                             @else
-                                                {{ $product->last_supplier->company_name }}
+                                                {{ $product->last_supplier }}
                                             @endif
                                                     
                                             
@@ -61,9 +65,9 @@
 
                     <div class="col-4">
                         @if($product->image_url == null)
-                            <img class="shadow-lg p-0" src="/images/products/no_image.png" style="border-radius: 30px; width: 256px; height: 256px;">
+                            <img class="shadow-sm p-0" src="/images/products/no_image.png" style="border-radius: 30px; width: 256px; height: 256px;">
                         @else
-                            <img class="shadow-lg p-0" src="/images/products/{{ $product->image_url }}" style="border-radius: 30px; width: 256px; height: 256px;">
+                            <img class="shadow-sm p-0" src="/images/products/{{ $product->image_url }}" style="border-radius: 30px; width: 256px; height: 256px;">
                         @endif
                     </div>
                 </div>
@@ -94,7 +98,7 @@
                                     <td>{{ number_format($price->history_price, 4 ,",",".") }} €</td>
                                     <td>{{ $price->history_discount }} %</td>
                                     <td>{{ $price->history_tax_rate }} %</td>
-                                    <td>{{ $price->history_price - ($price->history_price * $price->history_discount/100)   }}</td>
+                                    <td>{{ number_format($price->history_price - ($price->history_price * $price->history_discount/100), 4 ,",",".") }}</td>
                                     <td>{{ $price->supplier->company_name }}</td>
                                 </tr>
                             @endforeach
@@ -135,12 +139,13 @@
                                         {
                                             label: 'Αξία μετά έκπτωσης ανά μονάδα',
                                             data: perUnits,
-                                            backgroundColor:  '#3498db'
+                                            backgroundColor:  '#03ABFF'
                                         }, 
                                         {
                                             label: 'Καθαρή αξία',
                                             data: netValues,
-                                            backgroundColor:  '#e67e22'
+                                            backgroundColor:  '#FFFB03'
+                                        
                                         }
 
                                     ]

@@ -53,6 +53,30 @@
                             minlength="9" maxlength="9" data-error-message="Ο ΑΦΜ πρέπει να έχει 9 αριθμούς!"></div>
                     </div>
                     <div class="row mt-3 justify-content-center">
+                        <div class="col-sm-2"><label for="inputIBAN1">ΙΒΑΝ Πειραιώς</label></div>
+                        <div class="col-sm-4"><input class="form-control" value="{{ $supplier->iban1 }}" autocomplete="nope" type="text" id="inputIBAN1" name="iban1" 
+                            placeholder="Πειραιώς ΙΒΑΝ" 
+                            minlength="27" maxlength="27" data-error-message="Το ΙΒΑΝ πρέπει να έχει 27 αριθμούς!"></div>
+                    </div>
+                    <div class="row mt-3 justify-content-center">
+                        <div class="col-sm-2"><label for="inputIBAN2">ΙΒΑΝ Εθνικής</label></div>
+                        <div class="col-sm-4"><input class="form-control" value="{{ $supplier->iban2 }}" autocomplete="nope" type="text" id="inputIBAN2" name="iban2" 
+                            placeholder="Εθνική ΙΒΑΝ" 
+                            minlength="27" maxlength="27" data-error-message="Το ΙΒΑΝ πρέπει να έχει 27 αριθμούς!"></div>
+                    </div>
+                    <div class="row mt-3 justify-content-center">
+                        <div class="col-sm-2"><label for="inputIBAN2">ΙΒΑΝ Alpha</label></div>
+                        <div class="col-sm-4"><input class="form-control" value="{{ $supplier->iban3 }}" autocomplete="nope" type="text" id="inputIBAN3" name="iban3" 
+                            placeholder="Alpha ΙΒΑΝ" 
+                            minlength="27" maxlength="27" data-error-message="Το ΙΒΑΝ πρέπει να έχει 27 αριθμούς!"></div>
+                    </div>
+                    <div class="row mt-3 justify-content-center">
+                        <div class="col-sm-2"><label for="inputIBAN2">ΙΒΑΝ Eurobank</label></div>
+                        <div class="col-sm-4"><input class="form-control" value="{{ $supplier->iban4 }}" autocomplete="nope" type="text" id="inputIBAN4" name="iban4" 
+                            placeholder="Eurobank ΙΒΑΝ" 
+                            minlength="27" maxlength="27" data-error-message="Το ΙΒΑΝ πρέπει να έχει 27 αριθμούς!"></div>
+                    </div>
+                    <div class="row mt-3 justify-content-center">
                         <div class="col-sm-10">
                             <label for="inputDescription">Περιγραφή ή άλλες παρατηρήσεις</label>
                             <input class="form-control" value="{{ $supplier->description }}" autocomplete="nope" type="text" id="inputDescription" name="description" placeholder="Σημειώσεις">
