@@ -18,8 +18,11 @@ class Employee extends Model
         'date_left',
     ];
 
-    public function dispatches(){
+    public function dispatches() {
         return $this->belongsToMany(Dispatch::class);
     }
-   
+
+    public function leaves() {
+        return $this->belongsToMany(Leave::class);
+    }
 }

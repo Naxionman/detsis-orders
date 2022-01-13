@@ -281,16 +281,63 @@ jQuery(function() {
                         console.log('code = ' + code);
                         if(userInput.substring(0,4) == code.substring(0,4)){
                             lastProduct = code;
-                            console.log('last product = '+lastProduct);
+                            console.log('last product = '+ lastProduct);
                         }
-                        
                     });
                     $('#lastProduct').text(lastProduct);
                 }
                 
         });
+    }
 
-        
+    if(top.location.pathname === '/add_leave'){
+        $.ajax({
+            url: '/add_leave/'+ 1,
+            type: 'GET',
+            dataType: 'JSON',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (days) {
+                $('#daysEntitled').text(days);
+            },
+            error:function() {
+                alert("Προσοχή. Έχει γίνει κάποια μαλακία. Καλέστε τον Νικόλα!");
+            }         
+        });
+
+        $('#inputEmployee').on('change', function() {
+            var id = $('#inputEmployee').val();
+            console.log('Selected Employee ID is :' + id);
+                        
+            $.ajax({
+                url: '/add_leave/'+ id,
+                type: 'GET',
+                dataType: 'JSON',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                //data : $.param({'id' : id, }),
+                success: function (days) {
+                    $('#daysEntitled').text(days);
+                },
+                error:function() {
+                    alert("Τι στο πούτσο έγινε πάλι;;; Καλέστε τον Νικόλα να το φτιάξει!");
+                }         
+            });
+        });
+
+        $('#inputStartDate, #inputEndDate').on('click change', function() {
+            var startDate = $('#inputStartDate').val();
+            var endDate = $('#inputEndDate').val();
+            var diff = new Date(Date.parse(endDate) - Date.parse(startDate));
+            var daysAsking = diff/1000/60/60/24 + 1;
+            if(daysAsking > 0){
+                $('#daysAsking').text(daysAsking);
+                $('#daysTaken').val(daysAsking);
+            }
+        });
+
     }
 });
 

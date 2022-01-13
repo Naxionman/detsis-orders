@@ -19,14 +19,14 @@
                             <i class="fas fa-table me-1"></i>
                             Πίνακας Eργαζομένων
                         </div>
-                        <div class="col-8">Συγκενρωτικοί πίνακες : 
+                        <div class="col-8">Συγκεντρωτικοί πίνακες : 
                             <a class="btn btn-dark" href="/leaves">Άδειες</a>
                             <a class="btn btn-dark" href="/salaries">Μισθοδοσία</a>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <table id="EmployeesTable" class="cell-border display compact">
+                    <table id="employeesTable" class="cell-border display compact">
                         <thead>
                             <tr>
                                 <th>Επώνυμο</th>
@@ -84,7 +84,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.11/sorting/date-eu.js"></script>
 
     <script type = "text/javascript">
-        $(document).ready( function () {$('#EmployeesTable').DataTable({
+        $(document).ready( function () {$('#employeesTable').DataTable({
             columnDefs: [{ 
                 type: 'date-eu', targets: [3,4] }]}  
             );});

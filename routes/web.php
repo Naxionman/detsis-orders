@@ -52,7 +52,7 @@ Route::get('/payments', [PaymentController::class, 'index']);
 Route::get('/leaves', [LeaveController::class, 'index']);
 
 Route::get('/add_supplier', [SupplierController::class, 'addSupplier']);
-Route::get('/add_client', [ClientController::class, 'addSlient']);
+Route::get('/add_client', [ClientController::class, 'addClient']);
 Route::get('/add_employee', [EmployeeController::class, 'addEmployee']);
 Route::get('/add_shipper', [ShipperController::class, 'addShipper']);
 Route::get('/add_vehicle', [VehicleController::class, 'addVehicle']);
@@ -86,6 +86,8 @@ Route::post('/add_kteo/{vehicleId}', [KteoController::class, 'store']);
 Route::post('/add_car_service/{vehicleId}', [CarServiceController::class, 'store']);
 Route::post('/add_payment', [PaymentController::class, 'store']);
 Route::post('/add_leave', [LeaveController::class, 'store']);
+//Special route for ajax fetching
+Route::get('/add_leave/{employeeId}', [LeaveController::class, 'getEmployeeLeaveDays']);
 
 //Show actions (for editing records)
 Route::get('/edit_supplier/{supplierId}',[SupplierController::class, 'show']);

@@ -143,14 +143,16 @@
                                 </div>
                             </div>
 
+                        @if ($employee->contract_type == 'Ορισμένου χρόνου')
                             <div class="row mt-1"> <!-- inner second row -->
                                 <div class="col-sm-5">
                                     <label for="inputContractExpiring" class="align-middle">Ημερομηνία λήξης</label>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input class="form-control" value = "{{ $employee->contract_expiring == null ?: $employee->contract_expiring->format('Y-m-d') }}" type="date" id="inputContractExpiring" name="contract_expiring">
+                                    <input class="form-control" value = "{{ $employee->contract_expiring == null ?: $employee->contract_expiring->format('Y-m-d') }}" type="date" id="inputContractExpiring" name="contract_expiring">                                        
                                 </div>
                             </div>
+                        @endif
 
                             <div class="row mt-1"> <!-- inner third row -->
                                 <div class="col-sm-5">
@@ -160,22 +162,25 @@
                                     <input class="form-control" value = "{{ $employee->date_joined == null ?: $employee->date_joined->format('Y-m-d') }}" type="date" id="inputDateJoined" name="date_joined" required="required">
                                 </div>
                             </div>
-
+                        
+                        @if ($employee->date_left != null)
                             <div class="row mt-1"> <!-- inner fourth row -->
                                 <div class="col-sm-5">
                                     <label for="inputDateLeft" class="align-middle">Ημερομηνία Αποχώρησης</label>
                                 </div>
                                 <div class="col-sm-6">
                                     <input class="form-control" value = "{{ $employee->date_left == null ?: $employee->date_left->format('Y-m-d')  }}" type="date" id="inputDateLeft" name="date_left" >
-                                </div>
-                            </div>
+                                    </div>    
+                            </div>    
+                        @endif
                               
                             <div class="row mt-1"> <!-- inner fifth row -->
                                 <div class="col-sm-5">
                                     <label for="inputSpeciality" class="align-middle">Ειδικότητα</label>
                                 </div>
                                 <div class="col-sm-6">
-                                    <select class="form-control" value = "{{ $employee->speciality }}" type="text" id="inputSpeciality" name="speciality" >
+                                    <select class="form-control"  type="text" id="inputSpeciality" name="speciality" >
+                                        <option value = "{{ $employee->speciality }}" selected>{{ $employee->speciality }}</option>
                                         <option value="Εργατοτεχνίτης">Εργατοτεχνίτης</option>
                                         <option value="Υπάλληλος">Υπάλληλος</option>
                                     </select>    
