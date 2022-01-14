@@ -48,13 +48,23 @@ class LeaveController extends Controller {
     }
 
     public function getEmployeeLeaveDays($employeeId) {
-
+        //Remaining days of the employee
         $days_entitled = Employee::where('id', $employeeId)->value('leave_days_entitled');
         $days_taken = Employee::where('id', $employeeId)->value('leave_days_taken');
 
         $days_remaining = $days_entitled - $days_taken;
+        //Working days of the employee. If he works on 6-based schedule then Saturdays are counted towards his leave
+        if(Employee::where('id', $employeeId)->value('working_days') == 5){
+            $saturdaysDontCount = true;
+        } else {
+            $saturdaysDontCount = false;
+        }
         
-        return $days_remaining;
+        $employeeData = array();
+
+        array_push($employeeData, $saturdaysDontCount,$days_remaining );
+
+        return $employeeData;
         
     }
 }

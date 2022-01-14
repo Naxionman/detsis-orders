@@ -87,7 +87,6 @@ class OrderController extends Controller {
         return view('orders.view_order', compact('order','order_details'));
     }
 
-
     public function update(Order $order) {
         $data = request()->validate([
             'order_date' => 'required',
@@ -102,9 +101,27 @@ class OrderController extends Controller {
         ]);
 
         $order->update($data);
-        
-        $orders = Order::all();
 
+        $details = OrderDetails::find($order->id)->get();
+        $i = 1;
+        $product_id = request()->input('product'.$i);
+        
+        foreach ($details as $detail) {
+            $detail->product_id = $product_id;
+            $i++;
+            $detail->save();
+            if($product_id == 1){
+                $order->order_type = "Εμπόριο";
+                $order->save();
+            } elseif($product_id == 2){
+                $order->order_type = "Εργοστάσιο (Μ)";
+                $order->save();
+            } else {
+                $order->order_type = "Εργοστάσιο";
+                $order->save();
+            }
+        }
+        
         return redirect('/orders')->with('message', 'Επιτυχής επεξεργασία παραγγελίας!');
     }
 

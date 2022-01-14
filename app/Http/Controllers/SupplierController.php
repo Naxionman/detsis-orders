@@ -20,7 +20,7 @@ class SupplierController extends Controller {
         return view('suppliers.suppliers', compact('suppliers', 'orders','payments', 'invoices'));
     }
 
-    public function add_supplier() {
+    public function addSupplier() {
         return view ('suppliers.add_supplier');
     }
     

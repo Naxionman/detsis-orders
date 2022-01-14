@@ -19,24 +19,32 @@
                         </div>
                     </div>
                     <div class="row mt-3 justify-content-center">
-                        <div class="col-sm-2"><label for="inputStartDate">Πρώτη μέρα άδειας</label></div>
-                        <div class="col-sm-4"><input class="form-control" type="date" id="inputStartDate" name="start_date" required="required"></div>
+                        <div class="col-2"><label for="inputStartDate">Πρώτη μέρα άδειας</label></div>
+                        <div class="col-4"><input class="form-control" type="date" id="inputStartDate" name="start_date" required="required"></div>
                     </div>
                     <div class="row mt-3 justify-content-center">
-                        <div class="col-sm-2"><label for="inputEndDate">Τελευταία μέρα άδειας</label></div>
-                        <div class="col-sm-4"><input class="form-control" type="date" id="inputEndDate" name="last_date" required="required"></div>
+                        <div class="col-2"><label for="inputEndDate">Τελευταία μέρα άδειας</label></div>
+                        <div class="col-4"><input class="form-control" type="date" id="inputEndDate" name="last_date" required="required"></div>
                     </div>
                     <br>
-                    <br>
-                    <br>
+                    
                     <div class="row mt-3 justify-content-center">
-                        <div class="col-sm-4"><label>Ημέρες που δικαιούται :</label></div>
-                        <div class="col-sm-2"><strong id="daysEntitled"></strong></div>
+                        <div class="col-4"><label>Ημέρες που δικαιούται :</label></div>
+                        <div class="col-2"><strong id="daysEntitled"></strong></div>
                     </div>
                     <div class="row mt-3 justify-content-center">
-                        <div class="col-sm-4"><label>Ημέρες που ζητά :</label></div>
-                        <div class="col-sm-2"><strong id="daysAsking"></strong></div>
+                        <div class="col-4"><label>Ημέρες που ζητά :</label></div>
+                        <div class="col-2"><strong id="daysAsking"></strong></div>
                         <input name="days_taken" type="hidden" id="daysTaken">
+                    </div>
+                    <div class="row mt-3 justify-content-center">
+                        <div class="col-2"><label id="explanation">Αναλυτικά :</label></div>
+                        <div class="col-4">
+                            <p id="explanationText1"></p>
+                            <p id="explanationText2"></p>
+                            <p id="explanationText3"></p>
+                            <p id="explanationText4"></p>
+                        </div>
                     </div>
                     @csrf
                 </form>

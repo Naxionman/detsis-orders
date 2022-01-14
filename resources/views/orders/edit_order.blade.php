@@ -56,7 +56,7 @@
                                 @endphp
                                 @foreach ($details as $detail)
                                 <tr id="trToPlace">
-                                    <td style="width:5%"> {{  $i++ }}</td>
+                                    <td style="width:5%"> {{  $i }}</td>
                                     <td style="width:5%"><input class="form-control" type="number" name="quantity{{ $i }}" value="1" required="required"></td>
                                     <td>
                                         <select class="form-control js-example-basic-single" name="product{{ $i }}" id="product{{ $i }}">
@@ -71,8 +71,11 @@
                                         <button type="button" id="removeProduct" onclick="removeInputField({{ $i }})" class="btn btn-danger btn-sm m-1"> - </button></td><input type="hidden" name="count" value="{{ $i}}">
                                     </td>
                                 </tr>
+                                @php
+                                    $i++;
+                                @endphp
                                 @endforeach
-                                <input type="hidden" name="pending" value="1">
+                                
                             </tbody>
                         </table>
                         <div class="col-sm-4">
@@ -80,8 +83,9 @@
                     </div>
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputNotes">Σημειώσεις</label></div>
-                        <div class="col-sm-4"><textarea rows="4" class="form-control" autocomplete="nope" type="text" id="inputNotes" name="notes" value="{{ $order->notes }}" placeholder="{{ $order->notes }}" ></textarea></div>
+                        <div class="col-sm-4"><textarea rows="4" class="form-control" autocomplete="nope" type="text" id="inputNotes" name="notes" value="{{ $order->notes }}">{{ $order->notes }}</textarea></div>
                     </div>
+                    <input type="hidden" name="pending" value="1">
                     @csrf
                 </form>
             </div>
