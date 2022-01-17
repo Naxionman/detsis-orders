@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Shipment extends Model
@@ -17,6 +16,9 @@ class Shipment extends Model
 
     public function shipper() {
         return $this->belongsTo(Shipper::class);
+    }
+    public function supplier() {
+        return $this->belongsTo(Supplier::class);
     }
 
     public function extraShipper() {

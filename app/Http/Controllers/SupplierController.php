@@ -45,7 +45,7 @@ class SupplierController extends Controller {
 
         Supplier::create($data);
         
-        return redirect()->back()->with('message', 'Επιτυχής αποθήκευση Προμηθευτή!');
+        return redirect('/')->with('message', 'Επιτυχής αποθήκευση Προμηθευτή!');
     }
 
     public function show($supplierId) {

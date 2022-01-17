@@ -46,7 +46,10 @@
                                 <td>{{ $client->name }}</td>
                                 <td>{{ $client->mobile }}</td>
                                 <td>{{ $client->phone2 }}</td>
-                                <td>{{ $client->email }}</td>
+                                <td>{{ $client->email }} 
+                                    <a href="https://compose.mail.yahoo.com/?to="><i class="fab fa-yahoo"></i></a>
+                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ $client->email }}"><i class="fab fa-google"></i></a>
+                                </td>
                                 <td style="width:15%" >
                                     <div class="d-flex justify-content-evenly">
                                         <a href="/edit_client/{{ $client->id }}" class="btn btn-warning flex-fill">

@@ -83,6 +83,7 @@ class InvoiceController extends Controller {
             // (Step 2b) Creating a shipment
             $shipment = Shipment::create([
                 'shipping_date' => $request->input('arrival_date'),
+                'supplier_id' => $request->input('supplier_id'),
                 'shipper_id' => $request->input('shipper_id'),
                 'shipment_price' => $request->input('shipment_price'),
                 'extra_shipper_id' => $request->input('extra_shipper_id'),
@@ -181,6 +182,7 @@ class InvoiceController extends Controller {
             // (Step 2b) Creating a shipment
             $shipment = Shipment::create([
                 'shipping_date' => $request->input('arrival_date'),
+                'supplier_id' => $request->input('supplier_id'),
                 'shipper_id' => $request->input('shipper_id'),
                 'shipment_price' => $request->input('shipment_price'),
                 'extra_shipper_id' => $request->input('extra_shipper_id'),

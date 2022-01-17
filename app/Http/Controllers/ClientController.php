@@ -29,8 +29,8 @@ class ClientController extends Controller {
         ]);
 
         Client::create($data);
-
-        return redirect()->back()->with('message', 'Επιτυχής αποθήκευση Πελάτη!');
+        
+        return redirect('/')->with('message', 'Επιτυχής αποθήκευση Πελάτη!');
     }
 
     public function show($clientId) {

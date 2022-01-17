@@ -27,9 +27,9 @@
         </div>
         <!-- Shipments stats -->
         <div class="col-md-3 col-xl-3">
-            <div class="card2 bg-c-pink order-card2">
+            <div class="card2 bg-c-pink order-card2 " >
                 <div class="card2-block">
-                    <h6 class="m-b-20">Τιμολόγια μεταφορικών</h6>
+                    <h6 class="m-b-20" >Τιμολόγια μεταφορικών</h6>
                     <hr class = "row mt-0">
                     <div class="row">
                         <h2>
@@ -43,6 +43,7 @@
                                 <span class="col-4 text-end">{{ $extra_sum }} €</span>
                     </div>
                 </div>
+                <a href="/shipments" class="stretched-link"></a>
             </div>
         </div>
         <!--  stats -->
