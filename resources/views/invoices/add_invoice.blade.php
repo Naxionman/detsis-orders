@@ -7,70 +7,75 @@
     <div class="card bg-danger bg-opacity-75 shadow-lg border-0 rounded-3 mt-3 ">
         <div class="card-header"><h3 class="text-center font-weight-light my-2 ">Νέο Τιμολόγιο</h3></div>
             <div class="card-body bg-light">
-                <form action="/add_invoice" id="addInvoice" method="post">
+                <form action="/add_invoice" id="addInvoice" method="post" novalidate>
                     <!-- General details of order -->
                     <div class="row m-2">
                         <div class="col-6 me-2 border rounded-3 shadow-sm">
-                            <br>
-                            <div class="row">
-                                <div class="col-4 text-end justify-content-center">
-                                    <label for="inputOrder" class="align-middle">Αφορά παραγγελία/ες</label>
+                            <ul class="nav nav-tabs" id="supplierInvoiceTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                  <button class="nav-link active" id="home-tab1" data-bs-toggle="tab" data-bs-target="#home1" type="button" role="tab" aria-controls="home1" aria-selected="true">Νέο Τιμολόγιο προμηθευτή</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                  <button class="nav-link" id="shared-tab1" data-bs-toggle="tab" data-bs-target="#shared1" type="button" role="tab" aria-controls="shared1" aria-selected="false">Καταχώρηση σε ήδη υπάρχον</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content p-2" id="myTabContent1">
+                                <div class="tab-pane fade show active" id="home1" role="tabpanel" aria-labelledby="home-tab">
+                                    <div class="row">
+                                        <div class="col-4 text-end justify-content-center">
+                                                <label for="inputShipper" class="align-middle">Προμηθευτής</label>
+                                            </div>
+                                            <div class="col-8">
+                                                <input type="hidden" name="order_id" value="{{ $order->id }}">
+                                                <input class="form-control" value="{{ $order->supplier->company_name }}" id="orderSupplier" type="text" readonly">
+                                                <input type="hidden" name="supplier_id" value="{{ $order->supplier->id }}">
+                                            </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 text-end justify-content-center">
+                                            <label for="orderDate" class="align-middle"><strong>Ημερομηνία παραγγελίας</strong></label>
+                                        </div>
+                                        <div class="col-6">
+                                            <input class="form-control" value="{{ $order->order_date->format('Y-m-d') }}" type="date" id="orderDate" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 text-end justify-content-center">
+                                            <label for="inputArrivalDate" class="align-middle"><strong>Ημερομηνία άφιξης</strong></label>
+                                        </div>
+                                        <div class="col-6">
+                                            <input class="form-control" value="{{date('Y-m-d')}}"name="arrival_date" type="date" id="inputArrivalDate" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 text-end justify-content-center">
+                                            <label for="inputInvoiceDate" class="align-middle"><strong>Ημερομηνία τιμολόγησης</strong></label>
+                                        </div>
+                                        <div class="col-6">
+                                            <input class="form-control" value="{{date('Y-m-d')}}"name="invoice_date" type="date" id="inputInvoiceDate" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 text-end justify-content-center">
+                                            <label for="inputInvoiceNumber">Αριθμός Τιμολογίου Προμηθευτή</label>
+                                        </div>
+                                        <div class="col-6">
+                                            <input class="form-control" name="supplier_invoice_number" type="text" id="inputInvoiceNumber" required="required">
+                                        </div>
+                                    </div>
+                                   
                                 </div>
-                                <div class="col-2 text-end justify-content-center">
-                                    <input type="hidden" name="order_id" value="{{ $order->id }}">
-                                    <input class="form-control" value="{{ $order->id }}" name="arrival_date" type="text" readonly>
-                                </div>
-                                <div class="col-2 text-end justify-content-center">
-                                    <label for="addOrders" class="align-middle">Προσθήκη</label>
-                                </div>
-                                <div class="col-4">
-                                    <select class="form-control js-example-basic-multiple" name="more_orders[]" multiple="multiple" id="addOrders">
-                                        @foreach ($orders as $orderToAdd)
-                                            @if($orderToAdd != $order) <!-- We exclude the one we were sent here through! -->
-                                                <option value="{{ $orderToAdd->id }}">{{ $orderToAdd->id}}-{{ $orderToAdd->client->surname ?? "" }} από {{ $orderToAdd->supplier->company_name }}</option>
-                                            @endif
+                                <div class="tab-pane fade" id="shared1" role="tabpanel" aria-labelledby="shared-tab">
+                                    <br>
+                                    <h6>Επιλέξτε το τιμολόγιο προμηθευτή στο οποίο εμπεριέχεται η παραγγελία</h6>
+                                    <select class="form-control js-example-basic-single" name="shared_supplier_invoice" id="sharedSupplierInvoice">
+                                        <option value="null" selected></option>
+                                        @foreach ($invoices as $invoice)
+                                            <option value="{{ $invoice->id }}">{{ $invoice->supplier_invoice_number }} - {{ $invoice->invoice_total }}</option>
                                         @endforeach
                                     </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6 text-end justify-content-center">
-                                    <label class="align-middle" for="orderSupplier">Προμηθευτής</label>
-                                </div>
-                                <div class="col-6">
-                                    <input class="form-control" value="{{ $order->supplier->company_name }}" name="" id="orderSupplier" type="text" readonly">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6 text-end justify-content-center">
-                                    <label for="orderDate" class="align-middle"><strong>Ημερομηνία παραγγελίας</strong></label>
-                                </div>
-                                <div class="col-6">
-                                    <input class="form-control" value="{{ $order->order_date->format('Y-m-d') }}" type="date" id="orderDate" readonly>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6 text-end justify-content-center">
-                                    <label for="inputArrivalDate" class="align-middle"><strong>Ημερομηνία άφιξης</strong></label>
-                                </div>
-                                <div class="col-6">
-                                    <input class="form-control" value="{{date('Y-m-d')}}"name="arrival_date" type="date" id="inputArrivalDate" required="required">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6 text-end justify-content-center">
-                                    <label for="inputInvoiceDate" class="align-middle"><strong>Ημερομηνία τιμολόγησης</strong></label>
-                                </div>
-                                <div class="col-6">
-                                    <input class="form-control" value="{{date('Y-m-d')}}"name="invoice_date" type="date" id="inputInvoiceDate" required="required">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6 text-end justify-content-center">
-                                    <label for="inputInvoiceNumber">Αριθμός Τιμολογίου Προμηθευτή</label>
-                                </div>
-                                <div class="col-6">
-                                    <input class="form-control" name="supplier_invoice_number" type="text" id="inputInvoiceNumber" required="required">
+                                    <br>
+                                    <br>
                                 </div>
                             </div>
                         </div>
@@ -142,9 +147,13 @@
                                     <select class="form-control js-example-basic-single" name="shared_shipment" id="shared_shipment">
                                         <option value="null" selected></option>
                                         @foreach ($shipments as $shipment)
-                                            <option value="{{ $shipment->id }}">{{ $shipment->invoice_number }} - {{ $shipment->shipper->name }}</option>
+                                            @if ($shipment->shipper_id != 1)
+                                                <option value="{{ $shipment->id }}">{{ $shipment->shipment_invoice_number }} - {{ $shipment->shipper->name }}</option>    
+                                            @endif
                                         @endforeach
                                     </select>
+                                    <input type="hidden" name="shipment_invoice_number" value="{{ $shipment->shipment_invoice_number }}">
+                                    <input type="hidden" name="shipment_price" value="{{ $shipment->shipment_price }}">
                                     <br>
                                     <br>
                                 </div>

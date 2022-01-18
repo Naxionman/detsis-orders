@@ -45,14 +45,14 @@
                         </tfoot>
                         <tbody>
                         @forelse ($shipments as $shipment)
-                            @if ($shipment->shipper->id != 1)
-                            <tr>
+                            @if ($shipment->shipper->id > 1)
+                            <tr data-href="view_shipment/{{ $shipment->id}}">
                                 <th>{{ $shipment->shipping_date->format('d-m-Y') }}</th>
                                 <th>{{ $shipment->shipper->name }}</th>
                                 <th>{{ $shipment->supplier->company_name }}</th>
                                 <th>{{ $shipment->shipment_invoice_number }}</th>
-                                <th>@if ($shipment->extra_price > 0)
-                                    {{ $shipment->extraShipper->shipper->name }}
+                                <th>@if ($shipment->extra_shipper_id != null)
+                                    {{ $shipment->extraShipper->name }}
                                 @endif
                                 </th>
                                 <th class="text-end pe-2">{{ number_format ($shipment->extra_price, 2, ",", ".") }}</th>

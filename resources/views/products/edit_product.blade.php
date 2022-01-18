@@ -7,9 +7,9 @@
     <div class="card bg-info bg-opacity-50 shadow-lg border-0 rounded-3 mt-3 ">
         <div class="card-header"><h3 class="text-center font-weight-light my-2 "><i class="fas fa-box-open"></i>Επεξεργασία στοιχείων προϊόντος</h3></div>
             <div class="card-body bg-light">
-                <div class="row">
-                    <div class="col-8">
-                        <form action="/edit_product/{{ $product->id }}" id="editProduct" method="POST">
+                <form action="/edit_product/{{ $product->id }}" id="editProduct" method="POST">
+                    <div class="row">
+                        <div class="col-8">
                             @method('PATCH')
                             <div class="row mt-3 justify-content-center">
                                 <div class="col-sm-4"><label for="inputDetsisCode">Κωδικός μας (DCode)</label></div>
@@ -35,35 +35,35 @@
                             </div>
                             <div class="row mt-3 justify-content-center">
                                 <div class="col-sm-2"><label class="form-label" for="inputUrl">Url εικόνας</label></div>
-                                <div class="col-sm-7"><input class="form-control" type="file" id="inputUrl" name="image_url"></div>
+                                <div class="col-sm-7"><input class="form-control" value="{{ $product->image_url }}" type="file" id="inputUrl" name="image_url"></div>
                                 <div class="col-sm-1">
                                     <i data-toggle="tooltip" data-placement="top" title="Οι εικόνες πρέπει να είναι διαστάσεων 256x256 και να βρίσκονται στον φάκελο PRODUCTS. 
                                     Μόλις καταχωρηθεί επιτυχώς μία εικόνα αντιγράφεται αυτόματα στον εσωτερικό φάκελο της εφαρμογής " class="far fa-question-circle align-middle" style="color:#8fade0;"></i>
                                 </div>
-                               
                             </div>
-                            @csrf
-                        </form>
-                    </div>
-                    <div class="col-4 justify-content-center">
-                        <div class="row">
-                            Εικόνα προϊόντος
                         </div>
-                        <div class="row">
-                            @if($product->image_url == null)
-                                <img class="shadow-lg p-0" src="/images/products/no_image.png" style="border-radius: 30px; width: 256px; height: 256px;">
-                            @else
-                                <img class="shadow-lg p-0" src="/images/products/{{ $product->image_url }}" style="border-radius: 30px; width: 256px; height: 256px;">
-                            @endif
+                        <div class="col-4 justify-content-center">
+                            <div class="row">
+                                Εικόνα προϊόντος
+                            </div>
+
+                            <div class="row">
+                                @if($product->image_url == null)
+                                    <img class="shadow-lg p-0" src="/images/products/no_image.png" style="border-radius: 30px; width: 256px; height: 256px;">
+                                @else
+                                    <img class="shadow-lg p-0" src="/images/products/{{ $product->image_url }}" style="border-radius: 30px; width: 256px; height: 256px;">
+                                @endif
+                            </div>
                         </div>
+                        <div class="form-group">
+                            <label for="inputNotes">Σημειώσεις</label>
+                            <textarea class="form-control" name="notes" type="text" id="inputNotes" rows="3">{{ $product->notes }}</textarea>
+                          </div>
+                        </div>
+                        
+                        @csrf
                     </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="inputNotes">Σημειώσεις</label>
-                    <textarea class="form-control" name="notes" id="inputNotes" rows="3">{{ $product->notes }}</textarea>
-                  </div>
-                </div>
+                </form>
             <div class="card-footer text-center py-2">
                 <button class="btn btn-danger shadow-sm" type="submit" form="editProduct">  Αποθήκευση  </button>
                 <a href="/products" class="btn btn-info shadow-sm">  Ακύρωση - Επιστροφή </a>

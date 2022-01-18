@@ -105,6 +105,7 @@ Route::get('/view_order/{orderId}',[OrderController::class, 'showDetails']);
 Route::get('/view_supplier/{SupplierId}',[SupplierController::class, 'showDetails']);
 Route::get('/view_invoice/{invoiceId}',[InvoiceController::class, 'showDetails']);
 Route::get('/view_vehicle/{vehicleId}',[VehicleController::class, 'showDetails']);
+Route::get('/view_shipment/{shipmentId}',[ShipmentController::class, 'showDetails']);
 Route::get('/edit_payment/{paymentId}',[PaymentController::class, 'show']);
 Route::get('/edit_leave/{leaveId}',[LeaveController::class, 'show']);
 

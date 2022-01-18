@@ -11,7 +11,11 @@ class Shipment extends Model
     protected $dates = ['shipping_date'];
 
     public function invoices(){
-        return $this->hasMany(Invoice::class);
+        return $this->belongsToMany(Invoice::class);
+    }
+
+    public function orders() {
+        return $this->belongsToMany(Order::class);
     }
 
     public function shipper() {

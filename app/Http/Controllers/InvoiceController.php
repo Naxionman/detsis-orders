@@ -28,8 +28,9 @@ class InvoiceController extends Controller {
         $orders = Order::where('pending','=',1)->get();
         $order = Order::findOrFail($orderId);
         $details = OrderDetails::where('order_id', $orderId)->get();
-
-        return view ('invoices.add_invoice', compact('suppliers','products','shipments','shippers', 'orders','order', 'details'));
+        
+        $invoices = Invoice::where('supplier_id', $order->supplier_id)->get();
+        return view ('invoices.add_invoice', compact('suppliers','products','shipments','shippers', 'orders','order','invoices', 'details'));
     }
 
     public function addSpecialInvoice() {
@@ -93,6 +94,7 @@ class InvoiceController extends Controller {
         }
 
         //We create the instance of the model and add to the database
+        
         $invoice = Invoice::create([
             'invoice_type' => $invoice_type,
             'shipment_id' => $shipment->id,
@@ -105,7 +107,7 @@ class InvoiceController extends Controller {
             'invoice_total' => $request->input('invoice_total'),
             'notes' => $request->input('notes')
         ]);
-
+        
         $i = 1;        
         foreach($details as $detail){
             //Updating each detail with the id of the invoice
@@ -214,15 +216,35 @@ class InvoiceController extends Controller {
         $order->update($data_for_orders);
         
         //(step 4) We finally create and store the invoice
-        $invoice = Invoice::create([
-            'invoice_type' => $order->order_type,
-            'shipment_id' => $shipment->id,
-            'supplier_id' => $order->supplier->id,
-            'invoice_date' => $request->input('invoice_date'),
-            'supplier_invoice_number' => $request->input('supplier_invoice_number'),
-            'invoice_total' => $request->input('invoice_total'),
-            'notes' => $request->input('notes')
-        ]);
+        if($request->input('shared_supplier_invoice') == null){
+            if($request->input('shared_shipment') != 'null'){
+                $invoice = Invoice::create([
+                    'invoice_type' => $order->order_type,
+                    'shipment_id' => $request->input('shared_shipment'),
+                    'supplier_id' => $order->supplier->id,
+                    'invoice_date' => $request->input('invoice_date'),
+                    'supplier_invoice_number' => $request->input('supplier_invoice_number'),
+                    'invoice_total' => $request->input('invoice_total'),
+                    'notes' => $request->input('notes')
+                ]);
+            }else{
+                $invoice = Invoice::create([
+                    'invoice_type' => $order->order_type,
+                    'shipment_id' => $shipment->id,
+                    'supplier_id' => $order->supplier->id,
+                    'invoice_date' => $request->input('invoice_date'),
+                    'supplier_invoice_number' => $request->input('supplier_invoice_number'),
+                    'invoice_total' => $request->input('invoice_total'),
+                    'notes' => $request->input('notes')
+                ]);
+            }
+        } else {
+            $shared_supplier_invoice_id = $request->input('shared_supplier_invoice');
+            $shared_supplier_invoice = Invoice::findOrFail($shared_supplier_invoice_id);
+            $invoice = $shared_supplier_invoice;
+            $invoice->notes .= ' -------------  ΣΗΜΕΙΩΣΕΙΣ ΕΠΙΠΛΕΟΝ ΠΑΡΑΓΓΕΛΙΑΣ -----------------';
+            $invoice->notes .= $request->input('notes');
+        }
         
         //  OrderDetails. The most tricky part!
         //(Step 5) Linking order details with the new invoice

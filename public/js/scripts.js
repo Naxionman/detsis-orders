@@ -254,8 +254,14 @@ jQuery(function() {
                         break;
 
                     case '0102':
-                        category = 'Εξαρτήματα επίππλων';
+                        category = 'Εξαρτήματα επίπλων';
                         subCategory = 'Τακάκια';
+                        enterLastProduct();
+                        break;
+                    case '0103':
+                        category = 'Εξαρτήματα επίπλων';
+                        subCategory = 'Μηχανισμοί συρταριών';
+                        enterLastProduct();
                         break;
                     case '0201':
                         category = 'Χημικά';
@@ -524,8 +530,6 @@ function leaveDetails(){
             var part2 = '';
             var part3 = '';
             var part4 = '';
-
-
 
             if(isFiveDays){
                 workingSechedule = 'πενθήμερη';

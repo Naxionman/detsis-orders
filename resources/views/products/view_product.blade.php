@@ -27,39 +27,45 @@
                 <div class="row">
                     <div class="col-8">
                         <div class="card bg-info bg-opacity-10 shadow-sm border-2 rounded-3 m-2">
-                            <div class="card-header"><h5>Στοιχεία προϊόντος</h5></div>
-                            <div class="card-body bg-light">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="row"><div class="text-end">Ονομασία Προμηθευτή:</div></div>
-                                        <div class="row"><div class="text-end">Σημειώσεις μας:</div></div>
-                                        <div class="row"><div class="text-end">DCode :</div></div>
-                                        <div class="row"><div class="text-end">Τελευταίος Προμηθευτής :</div></div>
-                                        <div class="row"><div class="text-end">Κωδικός Προμηθευτή :</div></div>
-                                        <div class="row"><div class="text-end">Ποσότητα αποθήκης :</div></div>
-                                        <div class="row"><div class="text-end">Όριο ποσότητας :</div></div>
+                                <div class="card-header"><h5>Στοιχεία προϊόντος</h5></div>
+                                <div class="card-body bg-light">
+                                    <div class="row">
+                                        <div class="col-5"><div class="text-end">Ονομασία Προμηθευτή:</div></div>
+                                        <div class="col-7"><div class="text-start">{{ $product->product_name }}</div></div>   
                                     </div>
-                                    <div class="col-7">
-                                        <div class="row"><div class="text-start">{{ $product->product_name }}</div></div>
-                                        <div class="row"><div class="text-start">{{ $product->notes ?: '-' }}</div></div>
-                                        <div class="row"><div class="text-start">{{ $product->detsis_code }}</div></div>
-                                        <div class="row"><div class="text-start">
-                                            @if ($product->last_supplier == null)
-                                                {{ 'Δεν έχει καταγραφεί κάποια αγορά'}}
-                                            @else
-                                                {{ $product->last_supplier }}
-                                            @endif
-                                                    
-                                            
-                                            
-                                        </div></div>
-                                        <div class="row"><div class="text-start">{{ $product->product_code }}</div></div>
-                                        <div class="row"><div class="text-start">{{ $product->stock_level}}</div></div>
-                                        <div class="row"><div class="text-start">{{ $product->min_level }}</div></div>
-                                        
+                                    <div class="row">
+                                        <div class="col-5"><div class="text-end">Σημειώσεις μας:</div></div>
+                                        <div class="col-7"><div class="text-start">{{ $product->notes ?: '-' }}</div></div>   
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-5"><div class="text-end">DCode :</div></div>
+                                        <div class="col-7"><div class="text-start">{{ $product->detsis_code }}</div></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-5"><div class="text-end">Τελευταίος Προμηθευτής :</div></div>
+                                        <div class="col-7">
+                                            <div class="text-start">
+                                                @if ($product->last_supplier == null)
+                                                    {{ 'Δεν έχει καταγραφεί κάποια αγορά'}}
+                                                @else
+                                                    {{ $product->last_supplier }}
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-5"><div class="text-end">Κωδικός Προμηθευτή :</div></div>
+                                        <div class="col-7"><div class="text-start">{{ $product->product_code }}</div></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-5"><div class="text-end">Ποσότητα αποθήκης :</div></div>
+                                        <div class="col-7"><div class="text-start">{{ $product->stock_level}}</div></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-5"><div class="text-end">Όριο ποσότητας :</div></div>
+                                        <div class="col-7"><div class="text-start">{{ $product->min_level }}</div></div>
                                     </div>
                                 </div>
-                            </div>
                         </div>
                     </div>
 
@@ -163,10 +169,8 @@
                 </div>
             </div>
             <div class="card-footer text-center py-2">
-                
-            </div>
         </div>
-
+    </div>
 </div>
 <script>
 	$(document).ready(function() {

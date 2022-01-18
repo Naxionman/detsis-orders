@@ -23,7 +23,13 @@
                             </div>
                             <div class="row">
                                 <div class="col-4"><label>E-mail</label></div>
-                                <div class="col-8"><a style="color: rgb(131, 173, 52)" href="https://compose.mail.yahoo.com/?to={{ $supplier->email }}" target="_blank">{{ $supplier->email }}</a></div>
+                                <div class="col-8">
+                                    {{ $supplier->email}} . Aποστολή:
+                                    Yahoo - 
+                                    <a style="color: rgb(0, 61, 202)" href="https://compose.mail.yahoo.com/?to={{ $supplier->email }}" target="_blank"><i class="fab fa-yahoo"></i></a>
+                                    , Gmail - 
+                                    <a style="color: rgb(245, 18, 75)" href="https://mail.google.com/mail/?view=cm&fs=1&to={{ $supplier->email }}"target="_blank"><i class="fab fa-google"></i></a>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-4"><label>Τηλέφωνο 1</label></div>

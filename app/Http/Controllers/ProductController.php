@@ -33,11 +33,18 @@ class ProductController extends Controller {
             'stock_level' => 'nullable',
             'min_level' => 'nullable',
             'image_url' => 'nullable',
-            'notes' => 'nullable'
+            'notes' => 'nullable' 
         ]);
 
         Product::create($data);
-        
+
+        //Copying the image to the suitable folder
+        if(request()->input('image_url') != null){
+            $source = 'C:\Users\Detsis Factory Nick\Desktop\Εικόνες\Για το πρόγραμμά μας\P R O D U C T S\\'.request()->input('image_url');
+            $target = 'images/products/'.request()->input('image_url');
+            copy($source, $target);
+        }
+                
         return redirect()->back()->with('message', 'Επιτυχής αποθήκευση προϊόντος!');
     }
 

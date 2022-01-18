@@ -30,43 +30,43 @@
                     
                 </div>
                 <div class="card-body">
-                    <table id="myTable" class="cell-border display compact">
+                    <table id="paymentsTable" class="cell-border display compact">
                         <thead>
                             <tr>
+                                <th>Ημερομηνία</th>
                                 <th>Προμηθευτής</th>
                                 <th>Τράπεζα</th>
                                 <th>Δικαιούχος</th>
                                 <th>Ποσόν</th>
-                                <th>Ημερομηνία</th>
                                 <th>Στοιχεία Ελέγχου</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
+                                <th>Ημερομηνία</th>
                                 <th>Προμηθευτής</th>
                                 <th>Τράπεζα</th>
                                 <th>Δικαιούχος</th>
                                 <th>Ποσόν</th>
-                                <th>Ημερομηνία</th>
                                 <th>Στοιχεία Ελέγχου</th>
                             </tr>
                         </tfoot>
                         <tbody>
                         @forelse ($payments as $payment)
                             <tr data-href="view_payment/{{ $payment->id}}">
+                                <td>{{$payment->payment_date->format('d-m-Y') }}</td>
                                 <td>{{ $payment->supplier->company_name }}</td>
                                 <td>{{$payment->bank }}</td>
                                 <td>{{$payment->holder }}</td>
-                                <td>{{$payment->amount }}</td>
-                                <td>{{$payment->payment_date }}</td>
+                                <td class="text-end pe-3">{{number_format($payment->amount, 2, ",",".") }} €</td>
                                 <td style="width:15%" >
                                     <div class="d-flex justify-content-evenly">
-                                        <a href="/edit_payment/{{ $payment->id }}" class="btn btn-warning ">
+                                        <a href="/edit_payment/{{ $payment->id }}" class="btn btn-sm btn-warning ">
                                             <i class="far fa-edit"></i>Edit</a>
                                             <form action="/payments/{{ $payment->id }}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                                <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                                                <button class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i></button>
                                             </form>
                                     </div>
                                 </td>
@@ -82,5 +82,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"type="text/javascript"></script>
     <script type="text/javascript" src="https:////cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.11/sorting/date-eu.js"></script>
-    <script type = "text/javascript">$(document).ready( function () {$('#myTable').DataTable();});</script>
+    <script type = "text/javascript">$(document).ready( function () {$('#paymentsTable').DataTable({
+        columnDefs: [{ 
+            type: 'date-eu', targets: [4] }]}  
+        );});</script>
 @endsection
