@@ -89,7 +89,7 @@
                             @foreach ($car_refuelings as $refill)
                                 <tr>
                                     <td>{{ $refill->refuel_date->format('d-m-Y') }}</td>
-                                    <td>{{ $refill->amount }} €</td>
+                                    <td>{{ number_format($refill->amount,2,",",".") }} €</td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -115,7 +115,7 @@
                                     <td>{{ $service->service_date }}</td>
                                     <td>{{ $service->garage }}</td>
                                     <td>{{ $service->description }}</td>
-                                    <td>{{ $service->amount }}</td>
+                                    <td>{{ number_format($service->amount,2,",",".") }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -130,6 +130,17 @@
 
 </div>
 
-<script type = "text/javascript">$(document).ready( function () {$('#refuelsTable').DataTable();});</script>
-<script type = "text/javascript">$(document).ready( function () {$('#servicesTable').DataTable();});</script>
+<script type = "text/javascript">
+    $(document).ready( function () {$('#refuelsTable').DataTable({
+        columnDefs: [{ 
+            type: 'date-eu', targets: [0] }]}  
+    );});
+</script>
+<script type = "text/javascript">
+    $(document).ready( function () {
+        $('#servicesTable').DataTable({
+            columnDefs: [{ 
+                type: 'date-eu', targets: [0] }]}  
+    );});
+</script>
 @endsection

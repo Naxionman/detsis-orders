@@ -14,8 +14,20 @@
                                 <div class="col-8"><strong>{{ $shipment->supplier->company_name }}</strong></div>
                             </div>
                             <div class="row">
+                                <div class="col-4"><label>Ημερομηνία παραλαβής</label></div>
+                                <div class="col-8">{{ $shipment->shipping_date->format('d-m-Y') }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4"><label>Αριθμός παραστατικού</label></div>
+                                <div class="col-8">ΤΠΥ-Α-{{ $shipment->shipment_invoice_number }}</div>
+                            </div>
+                            <div class="row">
                                 <div class="col-4"><label>Συννημένα Τιμολόγια Αποστολέα</label></div>
-                                <div class="col-8"><strong>{{ $supplier_invoices }}</strong></div>
+                                <div class="col-8"><strong>{{ $supplier_invoices_count }} (
+                                    @foreach ($supplier_invoices as $invoice)
+                                        <a href="/view_invoice/{{ $invoice->id }}">{{ $invoice->supplier_invoice_number	}}</a>
+                                    @endforeach
+                                 )</strong></div>
                             </div>
                         </div>
                         
@@ -24,7 +36,7 @@
                     
             </div>
             <div class="card-footer text-center py-2">
-               <a href="/suppliers" class="btn btn-info shadow-sm"> Επιστροφή </a>
+               <a href="/shipments" class="btn btn-info shadow-sm"> Επιστροφή </a>
             </div>
         </div>
 </div>

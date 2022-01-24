@@ -26,7 +26,7 @@
                 </div>
                 
                 <div class="card-body">
-                    <table id="myTable" class="cell-border display compact">
+                    <table id="dispatchesTable" class="cell-border display compact">
                         <thead>
                             <tr>
                                 <th>Ημερομηνία</th>
@@ -81,5 +81,5 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"type="text/javascript"></script>
     <script type="text/javascript" src="https:////cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.11/sorting/date-eu.js"></script>
-    <script type = "text/javascript">$(document).ready( function () {$('#myTable').DataTable();});</script>
+    <script type = "text/javascript">$(document).ready( function () {$('#dispatchesTable').DataTable();});</script>
 @endsection

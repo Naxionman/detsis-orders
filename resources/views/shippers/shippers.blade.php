@@ -43,18 +43,41 @@
                         @forelse ($shippers as $shipper)
                             <tr>
                                 <td><strong>{{$shipper->name }}</strong></td>
-                                <td>{{$shipper->phone }}</td>
-                                <td>Δεν έχει υλοποιηθεί ακόμα</td>
-                                <td>Δεν έχει υλοποιηθεί ακόμα</td>
-                                <td>0</td>
+                                <td>{{ $shipper->phone }}</td>
+                                <td>{{ $shipments->where('shipper_id',$shipper->id)->count() }}</td>
+                                <td>
+                                    @php
+                                        $month_shipments = 0;
+                                        $shipper_shipments = $shipments->where('shipper_id',$shipper->id)->all();
+                                        foreach ($shipper_shipments as $shipper_shipment) {
+                                            if($shipper_shipment->shipping_date->month == Date('m')){
+                                                $month_shipments += 1;
+                                            }
+                                        }
+                                    @endphp
+                                    {{ $month_shipments }}</td>
+                                <td>
+                                    @php
+                                        $shipper_total = 0;
+                                        foreach ($shipments as $shipment) {
+                                            if($shipment->shipper_id == $shipper->id){
+                                                $shipper_total += $shipment->shipment_price;
+                                            }
+                                            if ($shipment->extra_shipper_id == $shipper->id){
+                                                $shipper_total += $shipment->extra_price;
+                                            }
+                                        }
+                                    @endphp
+                                    <strong>{{ number_format($shipper_total,2,",",".") }} €</strong>
+                                </td>
                                 <td style="width:15%" >
                                     <div class="d-flex justify-content-evenly">
-                                        <a href="/edit_shipper/{{ $shipper->id }}" class="btn btn-warning flex-fill">
+                                        <a href="/edit_shipper/{{ $shipper->id }}" class="btn btn-sm btn-warning flex-fill">
                                             <i class="far fa-edit"></i>Edit</a>
                                             <form action="/shippers/{{ $shipper->id }}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                                <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                                                <button class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i></button>
                                             </form>
                                     </div>
                                 </td>

@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row mt-3">
         <!-- Orders stats -->
-        <div class="col-md-3 col-xl-3">
+        <div class="col-md-3 col-xl-3 position-relative">
             <div class="card2 bg-c-blue order-card2">
                 <div class="card2-block">
                     <h6 class="m-b-20">Αναμενόμενες παραγγελίες</h6>
@@ -23,13 +23,14 @@
                                 <span class="col-4 text-end">{{ $monthly_orders }}</span>
                     </div>
                 </div>
+                <a href="/orders" class="stretched-link"></a>
             </div>
         </div>
         <!-- Shipments stats -->
-        <div class="col-md-3 col-xl-3">
+        <div class="col-md-3 col-xl-3 position-relative"><!-- This position-relative is to prevent the stretched-link attribute to apply to all the cards -->
             <div class="card2 bg-c-pink order-card2 " >
                 <div class="card2-block">
-                    <h6 class="m-b-20" >Τιμολόγια μεταφορικών</h6>
+                    <h6 class="m-b-20" >Φορτωτικές Διόνυσου</h6>
                     <hr class = "row mt-0">
                     <div class="row">
                         <h2>
@@ -39,7 +40,7 @@
                     </div>
                     
                     <div class="row">
-                            <div class = "col-8">Επιπλέον μεταφορικές</div>
+                            <div class = "col-8">Άλλες μεταφορικές</div>
                                 <span class="col-4 text-end">{{ $extra_sum }} €</span>
                     </div>
                 </div>
@@ -47,25 +48,26 @@
             </div>
         </div>
         <!--  stats -->
-        <div class="col-md-3 col-xl-3">
+        <div class="col-md-3 col-xl-3 position-relative">
             <div class="card2 bg-c-green order-card2">
                 <div class="card2-block">
-                    <h6 class="m-b-20">Άλλη μία κάρτα</h6>
+                    <h6 class="m-b-20">Πάγια έξοδα</h6>
                     <hr class = "row mt-0">
                     <div class="row">
                         <h2>
-                            <i class="fas fa-car f-left"></i>
-                            <span class="f-right">436 €  <!-- Code for monthly orders  --></span>
+                            <i class="fas fa-file-invoice f-left"></i>
+                            <span class="f-right">{{ number_format($total_yearly_expences, 2, ".",",") }} €  <!-- Code for total expences this year  --></span>
                         </h2>
                     </div>
                     
                     <div class="row">
-                            <div class = "col-8">Dionysos Cargo</div>
-                                <span class="col-4 text-end">                        
-                                    398 €     <!-- Code for pending orders  -->
+                            <div class = "col-7">Προηγούμενο έτος</div>
+                                <span class="col-5 text-end">                        
+                                    {{ number_format($total_last_year_expences, 2, ".", ",") }} €     <!-- Code for pending orders  -->
                                 </span>
                     </div>
                 </div>
+                <a href="/expences" class="stretched-link"></a>
             </div>
         </div>
         <!--  stats -->
@@ -77,14 +79,14 @@
                     <div class="row">
                         <h2>
                             <i class="fas fa-car f-left"></i>
-                            <span class="f-right">5.038 €  <!-- Code for monthly orders  --></span>
+                            <span class="f-right">0 €  <!-- Code for monthly orders  --></span>
                         </h2>
                     </div>
                     
                     <div class="row">
                             <div class = "col-8">Επιπλέον</div>
                                 <span class="col-4 text-end">                        
-                                    398 €     <!-- Code for pending orders  -->
+                                    0 €     <!-- Code for pending orders  -->
                                 </span>
                     </div>
                 </div>
@@ -123,7 +125,7 @@
             datasets: [{
                 label: ['# παραδόσεις'],
                 data: Object.values(shipStats),
-                backgroundColor:[ 'rgb(255, 99, 132)','rgb(54, 162, 235)','rgb(255, 205, 86)']
+                backgroundColor:[ 'rgb(0,122,55)','rgb(54, 162, 235)','rgb(255, 205, 86)']
             }]
         },
         options: {

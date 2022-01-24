@@ -60,7 +60,45 @@
                             <tr data-href="view_vehicle/{{ $vehicle->id}}">
                                 <td><strong>{{$vehicle->name }}</strong></td>
                                 <td>{{ $vehicle->plate }}</td>
-                                <td></td>
+                                <td>
+                                    @if( strtotime($expiry_dates[$vehicle->id -1]))
+                                        {{ $expiry_dates[$vehicle->id -1]->format('d-m-Y') }} δηλαδή 
+                                        @if ($expires_in[$vehicle->id -1]->y == 1)
+                                            σε {{ $expires_in[$vehicle->id -1]->y }} χρόνο,    
+                                        @else 
+                                            @if($expires_in[$vehicle->id -1]->y > 1)
+                                                σε {{ $expires_in[$vehicle->id -1]->y }} χρόνια,
+                                            @endif
+                                        @endif
+
+                                        @if($expires_in[$vehicle->id -1]->y == 0)
+                                            σε
+                                        @endif
+
+                                        @if ($expires_in[$vehicle->id -1]->m == 1)
+                                            {{ $expires_in[$vehicle->id -1]->m }} μήνα και    
+                                        @else
+                                            @if ($expires_in[$vehicle->id -1]->m > 1)
+                                                {{ $expires_in[$vehicle->id -1]->m }} μήνες και    
+                                            @endif
+                                        @endif
+
+                                        @if($expires_in[$vehicle->id -1]->y == 0 && $expires_in[$vehicle->id -1]->m == 0)
+                                            σε
+                                        @endif
+
+                                        @if ($expires_in[$vehicle->id -1]->d == 1)
+                                            {{ $expires_in[$vehicle->id -1]->d }} μέρα    
+                                        @else
+                                            @if ($expires_in[$vehicle->id -1]->d > 1)
+                                                {{ $expires_in[$vehicle->id -1]->d }} μέρες    
+                                            @endif
+                                        @endif
+                                         
+                                    @else
+                                        {{ $expiry_dates[$vehicle->id -1] }} 
+                                    @endif
+                                </td>
                                 <td>service</td>
                                 <td>kteo</td>
                                 <td style="width:15%" >

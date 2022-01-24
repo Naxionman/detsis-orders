@@ -23,7 +23,7 @@
                                                 {{ '-' }}
                                                 @break
                                             @else
-                                                {{ $invoice->orders->first()->id}}                                                    
+                                                <a href="/view_order/{{ $detail->order_id }}">{{ $detail->order_id }} ({{ $detail->order->client->name }} {{ $detail->order->client->surname }}) </a>                                                    
                                             @endif
                                         @endforeach
                                     </label>

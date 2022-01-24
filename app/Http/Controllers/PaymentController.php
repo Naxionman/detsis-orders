@@ -32,4 +32,25 @@ class PaymentController extends Controller {
         
         return redirect()->back()->with('message', 'Επιτυχής αποθήκευση πληρωμής!');
     }
+
+    public function show($paymentId) {
+        $payment = Payment::findOrFail($paymentId);
+        $suppliers = Supplier::all();
+       
+        return view('payments.edit_payment', compact('payment', 'suppliers'));
+    }
+
+    public function update(Payment $payment) {
+        $data = request()->validate([
+            'payment_date' => 'required',
+            'supplier' => 'required',
+            'bank' => 'required',
+            'holder' => 'nullable',
+            'amount' => 'required',
+        ]);
+
+        $payment->update($data);
+        
+        return redirect('payments')->with('message', 'Επιτυχής επεξεργασία πληρωμής!');
+    }
 }

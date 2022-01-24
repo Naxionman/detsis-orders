@@ -32,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
          * delete/add space before slash to comment out
          */
         //Birthdays
+        $total_notifications = 0;
         $birthdays = array();
         $employees = Employee::all();
         foreach ($employees as $employee) {
@@ -41,12 +42,17 @@ class AppServiceProvider extends ServiceProvider
                 array_push($birthdays, $employee);
             }
         }
-
-        //dd($birthdays);
-        $shortages = Product::where('stock_level' ,'<=', 'min_level')->get();
+        $total_notifications += count($birthdays);
+        //We exclude whatever is set to 0 as minimum level
+        $shortages = Product::where('stock_level' ,'<=', 'min_level')
+                            ->where('min_level','>',0)->get();
+                            
+        $total_notifications += count($shortages);
+                     
 
         View::share('shortages', $shortages);
         View::share('birthdays', $birthdays);
+        View::share('total_notifications', $total_notifications);
         //        */
     }
     

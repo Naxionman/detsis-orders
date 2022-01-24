@@ -16,7 +16,7 @@
                     Πίνακας ανεφοδιασμών
             </div>
             <div class="card-body">
-                <table id="refuelTable" class="cell-border display compact">
+                <table id="refuelingsTable" class="cell-border display compact">
                     <thead>
                         <tr >
                             <th>Ημερομηνία</th>
@@ -38,15 +38,15 @@
                         <tr>
                             <td>{{ $refuel->refuel_date->format('d-m-Y') }}</td>
                             <td>{{ $refuel->vehicle->name }}</td>
-                            <td>{{ $refuel->amount }} €</td>
+                            <td class="text-end pe-4">{{ number_format($refuel->amount,2,",",".") }} €</td>
                             <td style="width:15%" >
                                 <div class="d-flex justify-content-evenly">
-                                    <a href="/edit_vehicle/{{ $refuel->id }}" class="btn btn-warning flex-fill">
+                                    <a href="/edit_vehicle/{{ $refuel->id }}" class="btn btn-sm btn-warning flex-fill">
                                         <i class="far fa-edit"></i>Edit</a>
                                         <form action="/refuelings/{{ $refuel->id }}" method="POST">
                                         @method('DELETE')
                                         @csrf
-                                            <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                                            <button class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i></button>
                                         </form>
                                 </div>
                             </td>
@@ -59,5 +59,9 @@
             </div>
         </div>
 </div>
-<script type = "text/javascript">$(document).ready( function () {$('#refuelTable').DataTable();});</script>
+<script type = "text/javascript">
+    $(document).ready( function () {$('#refuelingsTable').DataTable({
+        columnDefs: [{ 
+            type: 'date-eu', targets: [0] }]}  
+    );});</script>
 @endsection

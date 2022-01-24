@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table id="myTable" class="cell-border display compact">
+                    <table id="invoicesTable" class="cell-border display compact">
                         <thead>
                             <tr>
                                 <th>id</th>
@@ -61,10 +61,10 @@
                                 <td>{{ $invoice->supplier->company_name }}</td>
                                 <td>
                                     @foreach ($invoice->orders as $order )
-                                        {{ $order->id }},
+                                       <a href="/view_order/{{ $order->id }}"> {{ $order->id }}</a>
                                     @endforeach
                                 </td>
-                                <td>{{ $invoice->invoice_total }} €</td>
+                                <td class="text-end pe-2">{{ number_format($invoice->invoice_total,2,",",".") }} €</td>
                                 <td>{{ $invoice->invoice_type }}</td>
                                 <td style="width:15%" >
                                     <div class="d-flex justify-content-evenly">
@@ -89,6 +89,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"type="text/javascript"></script>
     <script type="text/javascript" src="https:////cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.11/sorting/date-eu.js"></script>
-    <script type = "text/javascript">$(document).ready( function () {$('#myTable').DataTable();});</script>
+    <script type = "text/javascript">$(document).ready( function () {$('#invoicesTable').DataTable({
+        order: [[1,'desc']],
+        columnDefs: [{ 
+                    type: 'date-eu', targets: [1] }]}  
+        );});</script>
     
 @endsection

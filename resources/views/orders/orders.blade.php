@@ -2,7 +2,6 @@
 
 @section('title', 'Παραγγελίες')
 
-
 @section('content')
     <div class="container-fluid px-4">
         <h1 class="mt-4">Παραγγελίες</h1>
@@ -32,7 +31,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table id="myTable" class="cell-border display compact">
+                    <table id="ordersTable" class="cell-border display compact">
                         <thead>
                             <tr>
                                 <th>α/α</th>
@@ -47,18 +46,17 @@
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>α/α</th>
-                                <th>Ημερομηνία</th>
-                                <th>Καθυστέρηση</th>
-                                <th>Πελάτης</th>
-                                <th>Προμηθευτής</th>
-                                <th>Αφορά</th>
-                                <th>Άφιξη</th>
-                                <th>Στοιχεία Ελέγχου</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th>Σύνολο παραγγελιών :</th>
+                                <th>{{ $orders_count}}</th>
+                                <th>Σύνολο Ανοικτών : </th>
+                                <th>{{ $orders_pending }}</th>
+                                <th></th>
                             </tr>
                         </tfoot>
                         <tbody>
-
                             
                         @forelse ($orders as $order)
                             <tr data-href="view_order/{{ $order->id}}">
@@ -70,7 +68,12 @@
                                         $end_date = date("Y-m-d");
                                         // The following subtraction is for seconds, so we need to divide this the diffrence by 86.400 (24/60/60)
                                         $difference = (strtotime($end_date)- strtotime($start_date))/86400;
-                                        echo $difference;
+                                        if($order->pending == 1){
+                                            echo $difference;
+                                        } else {
+                                            echo '-';
+                                        }
+                                        
                                     @endphp 
                                 </td>
                                 <td>
@@ -112,6 +115,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"type="text/javascript"></script>
     <script type="text/javascript" src="https:////cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.11/sorting/date-eu.js"></script>
-    <script type = "text/javascript">$(document).ready( function () {$('#myTable').DataTable();});</script>
-    
+    <script type = "text/javascript">
+        $(document).ready( function () {$('#ordersTable').DataTable({
+            order: [[1,'desc'],[0,'desc']],
+            columnDefs: [{ 
+                type: 'date-eu', targets: [1,6], 
+                
+                }]} 
+        );});
+    </script>    
 @endsection

@@ -7,7 +7,6 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Shipper;
 use App\Models\Supplier;
-use App\Models\Price;
 use App\Models\Client;
 use Illuminate\Http\Request;
 
@@ -16,8 +15,10 @@ class OrderController extends Controller {
     // Show all records of orders table
     public function index() {
         $orders =  Order::all();
+        $orders_count = $orders->count();
+        $orders_pending = Order::where('pending', 1)->count();
 
-        return view('orders.orders', compact('orders'));
+        return view('orders.orders', compact('orders', 'orders_count','orders_pending'));
     }
 
     public function addOrder() {
@@ -102,7 +103,7 @@ class OrderController extends Controller {
 
         $order->update($data);
 
-        $details = OrderDetails::find($order->id)->get();
+        $details = OrderDetails::where('order_id',$order->id)->get();
         $i = 1;
         $product_id = request()->input('product'.$i);
         
@@ -125,7 +126,7 @@ class OrderController extends Controller {
         return redirect('/orders')->with('message', 'Επιτυχής επεξεργασία παραγγελίας!');
     }
 
-    public function destroy(\App\Models\Order $order) {
+    public function destroy(Order $order) {
         $order->delete();
 
         return redirect('/orders')->with('message', 'Επιτυχής διαγραφή παραγγελίας!');

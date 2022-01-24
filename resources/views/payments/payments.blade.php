@@ -33,11 +33,11 @@
                     <table id="paymentsTable" class="cell-border display compact">
                         <thead>
                             <tr>
-                                <th>Ημερομηνία</th>
-                                <th>Προμηθευτής</th>
-                                <th>Τράπεζα</th>
-                                <th>Δικαιούχος</th>
-                                <th>Ποσόν</th>
+                                <th style="width: 5%">Ημερομηνία</th>
+                                <th style="width: 35%">Προμηθευτής</th>
+                                <th style="width: 15%">Τράπεζα</th>
+                                <th style="width: 35%">Δικαιούχος</th>
+                                <th style="width: 10%">Ποσόν</th>
                                 <th>Στοιχεία Ελέγχου</th>
                             </tr>
                         </thead>

@@ -33,30 +33,30 @@
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Ημερομηνία</th>
-                                <th>Μεταφορική</th>
-                                <th>Προμηθευτής</th>
-                                <th>Αριθμός</th>
-                                <th>2η μεταφορική</th>
-                                <th>Ποσό 2ης</th>
-                                <th>Ποσό</th>
-                                <th>Στοιχεία Ελέγχου</th>
+                                <th></th>
+                                <th></th>
+                                <th>Σύνολο μήνα ΔΙΟΝΥΣΟΥ :</th>
+                                <th>{{ number_format ($current_month_sum, 2, ",", ".") }}</th>
+                                <th></th>
+                                <th>Σύνολο προηγούμενου :</th>
+                                <th>{{ number_format ($last_month_sum, 2, ",", ".") }}</th>
+                                <th></th>
                             </tr>
                         </tfoot>
                         <tbody>
                         @forelse ($shipments as $shipment)
                             @if ($shipment->shipper->id > 1)
                             <tr data-href="view_shipment/{{ $shipment->id}}">
-                                <th>{{ $shipment->shipping_date->format('d-m-Y') }}</th>
-                                <th>{{ $shipment->shipper->name }}</th>
-                                <th>{{ $shipment->supplier->company_name }}</th>
-                                <th>{{ $shipment->shipment_invoice_number }}</th>
-                                <th>@if ($shipment->extra_shipper_id != null)
+                                <td>{{ $shipment->shipping_date->format('d-m-Y') }}</td>
+                                <td>{{ $shipment->shipper->name }}</td>
+                                <td>{{ $shipment->supplier->company_name }}</td>
+                                <td>{{ $shipment->shipment_invoice_number }}</td>
+                                <td>@if ($shipment->extra_shipper_id != null)
                                     {{ $shipment->extraShipper->name }}
                                 @endif
-                                </th>
-                                <th class="text-end pe-2">{{ number_format ($shipment->extra_price, 2, ",", ".") }}</th>
-                                <th class="text-end pe-2">{{ number_format ($shipment->shipment_price, 2, ",", ".") }}</th>
+                                </td>
+                                <td class="text-end pe-2">{{ number_format ($shipment->extra_price, 2, ",", ".") }}</td>
+                                <td class="text-end pe-2">{{ number_format ($shipment->shipment_price, 2, ",", ".") }}</td>
                                 <td style="width:15%" >
                                     <div class="d-flex justify-content-evenly">
                                         <a href="/edit_shipment/{{ $shipment->id }}" class="btn btn-sm btn-warning flex-fill">
@@ -87,5 +87,4 @@
                 type: 'date-eu', targets: [0] }]}  
             );});
     </script>
-    
 @endsection

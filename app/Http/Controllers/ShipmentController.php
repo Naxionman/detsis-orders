@@ -15,7 +15,27 @@ class ShipmentController extends Controller {
     public function index() {
         $shipments = Shipment::all();
 
-        return view('shipments.shipments', compact('shipments'));
+        $dionysos_shipments = Shipment::where('shipper_id',2)->get();
+        $last_month_sum = 0;
+        $current_month_sum = 0;
+        $current_month = date('m');
+        if($current_month = 1){
+            $last_month = 12;
+        }else{
+            $last_month = $current_month - 1;
+        }
+
+        //Calculating sums of current and previous month for DIONYSOS (id : 2)
+        foreach($dionysos_shipments as $dionysos_shipment){
+            if($dionysos_shipment->shipping_date->month == $current_month) {
+                $current_month_sum += $dionysos_shipment->shipment_price;
+            }
+            
+            if($dionysos_shipment->shipping_date->month == $last_month) {
+                $last_month_sum += $dionysos_shipment->shipment_price;
+            }
+        }
+        return view('shipments.shipments', compact('shipments','current_month_sum','last_month_sum'));
     }
 
     public function addShipment() {
@@ -45,12 +65,19 @@ class ShipmentController extends Controller {
 
         $shipment = Shipment::findOrFail($shipmentId);
 
+        $supplier_invoices_count = Invoice::where('shipment_id',$shipmentId)->count();
         $supplier_invoices = Invoice::where('shipment_id',$shipmentId)->get();
 
         
         
         //$orders = OrderDetails::where('shipment_id',$shipmentId)->get();
 
-        return view('shipments.view_shipment', compact('supplier_invoices','orders'));
+        return view('shipments.view_shipment', compact('supplier_invoices','supplier_invoices_count','shipment'));
+    }
+
+    public function destroy(Shipment $shipment){
+        $shipment->delete();
+
+        return redirect('shipments')->with('message', 'Επιτυχής διαγραφή Τιμολογίου Μεταφορικής!');
     }
 }

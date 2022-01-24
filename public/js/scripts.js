@@ -5,7 +5,7 @@
     */
     // 
 // Scripts
-// 
+
 
 window.addEventListener('DOMContentLoaded', event => {
 
@@ -24,9 +24,11 @@ window.addEventListener('DOMContentLoaded', event => {
     }
 });
 
+//For using table rows as link
 $('tr[data-href]').on("click", function() {
     document.location = $(this).data('href');
 });
+
 
 jQuery(function() {
     
@@ -260,7 +262,7 @@ jQuery(function() {
                         break;
                     case '0103':
                         category = 'Εξαρτήματα επίπλων';
-                        subCategory = 'Μηχανισμοί συρταριών';
+                        subCategory = 'Μηχανισμοί';
                         enterLastProduct();
                         break;
                     case '0201':
@@ -585,30 +587,40 @@ jQuery(function(){
     }
 
     if (top.location.pathname === '/orders') {
+        
         //Get the table
-        var table = $('#myTable').DataTable();
+        var table = $('#ordersTable').DataTable();
         //Get the toggles
         var showroom = $('#switchShowroom');
         var factory = $('#switchFactory');
         var pending = $('#switchPending');
 
+        var string1 = 'Εμπόριο';
+        var string2 = 'Εργοστάσιο';
+        var string3 = 'Άφιξη';
+
         showroom.on('change', function(){
             if(showroom.is(':checked')){
-                table.search('Εμπόριο').draw();
+                table.search(string1).draw();
             } else {
                 table.search('').draw();
             }    
+
+            if(showroom.is(':checked') && pending.is(':checked')){
+                table.search(string1 + ' '+ string3).draw();
+            }
         })
         factory.on('change', function(){
+            console.log('changed factory');
             if(factory.is(':checked')){
-                table.search('Εργοστάσιο').draw();
+                table.search(string2).draw();
             } else {
                 table.search('').draw();
             }    
         })
         pending.on('change', function(){
             if(pending.is(':checked')){
-                table.search('Άφιξη').draw();
+                table.search(string3).draw();
             } else {
                 table.search('').draw();
             }    
@@ -618,3 +630,13 @@ jQuery(function(){
 
 
 //DOKIMI
+
+function searcher(theSwitch, theString) {
+    theSwitch.on('change', function(){
+        if(theSwitch.is(':checked')){
+            table.search(theString).draw();
+        }else {
+            table.search('').draw();
+        }
+    })
+}

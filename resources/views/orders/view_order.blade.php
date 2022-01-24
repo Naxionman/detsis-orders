@@ -8,8 +8,8 @@
         <div class="card-header"><h3 class="text-center font-weight-light my-2 "><strong>Λεπτομέρειες παραγγελίας</strong> 
             @if($order->arrival_date !=null)
                 - Συσχετισμένο τιμολόγιο :
-                @foreach ($order->invoices as $invoice)
-                    <a href="/view_invoice/{{ $invoice->id }}"> {{ $invoice->id }}</a>
+                @foreach ($order_details as $detail)
+                    <a href="/view_invoice/{{ $detail->invoice_id }}"> {{ $detail->invoice_id }}</a>
                 @endforeach
             @endif
             </h3></div>
@@ -17,7 +17,7 @@
                 <!-- General details of order -->
                 <div class="row">
                     <h6>Αριθμός παραγγελίας : {{ $order->id }}</h6>
-                    <h6>Προμηθευτής : <strong>{{ $order->supplier->company_name }}</strong></h6>
+                    <h6>Προμηθευτής : <a href="/view_supplier/{{ $order->supplier->id }}"><strong>{{ $order->supplier->company_name }}</strong></a></h6>
                     <h6>Ημερομηνία παραγγελίας : {{ $order->order_date->format('d-m-Y') }}</h6>
                     <h6>Ημερομηνία άφιξης : 
                         @php

@@ -8,15 +8,40 @@ use App\Models\Kteo;
 use App\Models\CarService;
 use App\Models\Insurance;
 use App\Models\Refueling;
+use DateTime;
 
 class VehicleController extends Controller {
 
     // Show all records of vehicles table
     public function index() {
         $vehicles = Vehicle::all();
+        $insurances = Insurance::all();
+
+        //Showcasing different approaches
+        $expiry_dates = collect();
+        $expires_in = array();
+        $today = new DateTime('21-1-2022');
         
-        return view('vehicles.vehicles', compact('vehicles'));
-    }
+        foreach ($vehicles as $vehicle) {
+            $vehicle_insurance = Insurance::where('vehicle_id','=',$vehicle->id)
+                            ->latest()
+                            ->first();
+            if($vehicle_insurance == null){
+                $expiry_dates->push('Δεν έχει καταγραφεί κάποια ασφάλιση');
+                $expires_in[$vehicle->id -1] = null ;
+            } else{
+                $expiry_dates->push($vehicle_insurance->expiry_date);
+
+                $due = new DateTime($vehicle_insurance->expiry_date);
+                $interval = $due->diff( $today);
+                
+                $expires_in[$vehicle->id -1] = $interval ;
+            }                         
+        }
+        //dd($expires_in);
+        //dd($expiry_dates);
+        
+        return view('vehicles.vehicles', compact('vehicles','expiry_dates','expires_in'));    }
 
     public function addVehicle() {
 

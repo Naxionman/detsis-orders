@@ -3,10 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
-use Illuminate\Http\Request;
-use Brian2694\Toastr\Facades\Toastr;
-
-
 
 class EmployeeController extends Controller {
     

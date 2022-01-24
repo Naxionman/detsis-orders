@@ -9,6 +9,8 @@
             <div class="card-body bg-light">
                 <form action="/add_invoice" id="addInvoice" method="post" novalidate>
                     <!-- General details of order -->
+                    <input type="hidden" name="order_id" value="{{ $order->id }}">
+                    <input type="hidden" name="supplier_id" value="{{ $order->supplier->id }}">
                     <div class="row m-2">
                         <div class="col-6 me-2 border rounded-3 shadow-sm">
                             <ul class="nav nav-tabs" id="supplierInvoiceTab" role="tablist">
@@ -26,9 +28,8 @@
                                                 <label for="inputShipper" class="align-middle">Προμηθευτής</label>
                                             </div>
                                             <div class="col-8">
-                                                <input type="hidden" name="order_id" value="{{ $order->id }}">
                                                 <input class="form-control" value="{{ $order->supplier->company_name }}" id="orderSupplier" type="text" readonly">
-                                                <input type="hidden" name="supplier_id" value="{{ $order->supplier->id }}">
+                                                
                                             </div>
                                     </div>
                                     <div class="row">
@@ -145,7 +146,7 @@
                                     <br>
                                     <h6>Επιλέξτε το τιμολόγιο μεταφορικής με το οποίο ήρθε</h6>
                                     <select class="form-control js-example-basic-single" name="shared_shipment" id="shared_shipment">
-                                        <option value="null" selected></option>
+                                        <option value='null' selected></option>
                                         @foreach ($shipments as $shipment)
                                             @if ($shipment->shipper_id != 1)
                                                 <option value="{{ $shipment->id }}">{{ $shipment->shipment_invoice_number }} - {{ $shipment->shipper->name }}</option>    

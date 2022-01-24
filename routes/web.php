@@ -18,6 +18,7 @@ use App\Http\Controllers\KteoController;
 use App\Http\Controllers\CarServiceController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\LeaveController;
+use App\Http\Controllers\ExpenceController;
 
 
 /*
@@ -50,6 +51,7 @@ Route::get('/kteos', [KteoController::class, 'index']);
 Route::get('/car_services', [CarServiceController::class, 'index']);
 Route::get('/payments', [PaymentController::class, 'index']);
 Route::get('/leaves', [LeaveController::class, 'index']);
+Route::get('/expences', [ExpenceController::class, 'index']);
 
 Route::get('/add_supplier', [SupplierController::class, 'addSupplier']);
 Route::get('/add_client', [ClientController::class, 'addClient']);
@@ -68,6 +70,7 @@ Route::get('/add_special_invoice', [InvoiceController::class, 'addSpecialInvoice
 Route::get('/add_invoice/{orderId}', [InvoiceController::class, 'addInvoice']);
 Route::get('/add_payment', [PaymentController::class, 'addPayment']);
 Route::get('/add_leave', [LeaveController::class, 'addLeave']);
+Route::get('/add_expence', [ExpenceController::class, 'addExpence']);
 
 Route::post('/add_supplier', [SupplierController::class, 'store']);
 Route::post('/add_client', [ClientController::class, 'store']);
@@ -86,6 +89,7 @@ Route::post('/add_kteo/{vehicleId}', [KteoController::class, 'store']);
 Route::post('/add_car_service/{vehicleId}', [CarServiceController::class, 'store']);
 Route::post('/add_payment', [PaymentController::class, 'store']);
 Route::post('/add_leave', [LeaveController::class, 'store']);
+Route::post('/add_expence', [ExpenceController::class, 'store']);
 //Special route for ajax fetching
 Route::get('/add_leave/{employeeId}', [LeaveController::class, 'getEmployeeLeaveDays']);
 
@@ -108,6 +112,7 @@ Route::get('/view_vehicle/{vehicleId}',[VehicleController::class, 'showDetails']
 Route::get('/view_shipment/{shipmentId}',[ShipmentController::class, 'showDetails']);
 Route::get('/edit_payment/{paymentId}',[PaymentController::class, 'show']);
 Route::get('/edit_leave/{leaveId}',[LeaveController::class, 'show']);
+Route::get('/edit_expence/{expenceId}',[ExpenceController::class, 'show']);
 
 //Patch/put actions
 Route::patch('/edit_supplier/{supplier}',[SupplierController::class, 'update']);
@@ -123,6 +128,7 @@ Route::patch('/edit_product/{product}',[ProductController::class, 'update']);
 Route::patch('/edit_insurance/{insurance}',[InsuranceController::class, 'update']);
 Route::patch('/edit_payment/{payment}',[PaymentController::class, 'update']);
 Route::patch('/edit_leave/{leave}',[LeaveController::class, 'update']);
+Route::patch('/edit_expence/{expence}',[ExpenceController::class, 'update']);
 
 //Delete actions
 Route::delete('/suppliers/{supplier}',[SupplierController::class, 'destroy']);
@@ -141,3 +147,4 @@ Route::delete('/car_services/{car_service}',[CarServiceController::class, 'destr
 Route::delete('/invoices/{invoice}',[InvoiceController::class, 'destroy']);
 Route::delete('/payments/{payment}',[PaymentController::class, 'destroy']);
 Route::delete('/leaves/{leave}',[LeaveController::class, 'destroy']);
+Route::delete('/expences/{expence}',[ExpenceController::class, 'destroy']);

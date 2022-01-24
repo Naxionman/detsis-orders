@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shipper;
-
+use App\Models\Shipment;
 class ShipperController extends Controller {
 
     // Show all records of shippers table
     public function index() {
         $shippers = Shipper::all();
+        $shipments = Shipment::all();
 
-        return view('shippers.shippers', compact('shippers'));
+        return view('shippers.shippers', compact('shippers', 'shipments'));
     }
 
     public function addShipper() {
@@ -38,7 +39,7 @@ class ShipperController extends Controller {
         return view('shippers.edit_shipper', compact('shipper'));
     }
 
-    public function update(\App\Models\Shipper $shipper) {
+    public function update(Shipper $shipper) {
         $data = request()->validate([
             'name' => 'required|min:4',
             'email' => 'nullable',
@@ -51,7 +52,7 @@ class ShipperController extends Controller {
         return redirect('shippers')->with('message', 'Επιτυχής επεξεργασία Μεταφορικής!');
     }
 
-    public function destroy(\App\Models\Shipper $shipper) {
+    public function destroy(Shipper $shipper) {
         $shipper->delete();
 
         return redirect('shippers')->with('message', 'Επιτυχής διαγραφή Μεταφορικής!');

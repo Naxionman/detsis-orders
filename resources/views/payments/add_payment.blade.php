@@ -11,26 +11,26 @@
                     <div class="row mt-3 justify-content-center">
                         <div class="col-2">
                             <button class="btn btn-sm" type="button">
-                                <img id="bank1icon" class="shadow-sm" src="images\bank1.jpg" style="border-radius: 10px; width: 100px; height: 50px;"></div>
+                                <img id="bank1icon" class="shadow-sm" src="\images\bank1.jpg" style="border-radius: 10px; width: 100px; height: 50px;"></div>
                             </button>
                             
                         <div class="col-2">
                             <button class="btn btn-sm" type="button">
-                                <img id="bank2icon" class="shadow-sm" src="images\bank2.jpg" style="border-radius: 10px; width: 100px; height: 50px;"></div>
+                                <img id="bank2icon" class="shadow-sm" src="\images\bank2.jpg" style="border-radius: 10px; width: 100px; height: 50px;"></div>
                             </button>
                         <div class="col-2">
                             <button class="btn btn-sm" type="button">
-                                <img id="bank3icon" class="shadow-sm" src="images\bank3.jpg" style="border-radius: 10px; width: 100px; height: 50px;"></div>
+                                <img id="bank3icon" class="shadow-sm" src="\images\bank3.jpg" style="border-radius: 10px; width: 100px; height: 50px;"></div>
                             </button>
                         <div class="col-2">
                             <button class="btn btn-sm" type="button">
-                                <img id="bank4icon" class="shadow-sm" src="images\bank4.jpg" style="border-radius: 10px; width: 100px; height: 50px;"></div>
+                                <img id="bank4icon" class="shadow-sm" src="\images\bank4.jpg" style="border-radius: 10px; width: 100px; height: 50px;"></div>
                             </button>
                     </div>
 
 
                     <div class="row mt-3 justify-content-center">
-                        <div class="col-2"><label for="inputDate">Ημερομηνία κατάθεσης</label></div>
+                        <div class="col-2"><label for="inputDate">Ημερομηνία πληρωμής</label></div>
                         <div class="col-4"><input class="form-control" type="date" value="{{ date('Y-m-d') }}" id="inputDate" name="payment_date"></div>
                     </div>
                     
