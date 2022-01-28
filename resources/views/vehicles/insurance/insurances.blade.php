@@ -49,7 +49,7 @@
                                 <div class="d-flex justify-content-evenly">
                                     <a href="/edit_insurance/{{ $insurance->id }}" class="btn btn-sm btn-warning flex-fill">
                                         <i class="far fa-edit"></i>Edit</a>
-                                        <form action="/insurances/{{ $insurance->id }}" method="POST">
+                                        <form action="/insurances/{{ $insurance->id }}" id="deleteForm" method="POST">
                                         @method('DELETE')
                                         @csrf
                                             <button class="btn btn-sm btn-danger show_confirm"><i class="far fa-trash-alt"></i></button>

@@ -59,7 +59,8 @@
                         <tbody>
                             
                         @forelse ($orders as $order)
-                            <tr data-href="view_order/{{ $order->id}}">
+                            <!-- <tr data-href="view_order/{{ $order->id}}"> -->
+                            <tr>
                                 <td>{{ $order->id }}</td>
                                 <td>{{ $order->order_date->format('d-m-Y') }}</td>
                                 <td>
@@ -96,10 +97,10 @@
                                     <div class="d-flex justify-content-evenly">
                                         <a href="/edit_order/{{ $order->id }}" class="btn btn-sm btn-warning">
                                             <i class="far fa-edit"></i>Edit</a>
-                                            <form action="/orders/{{ $order->id }}" method="POST">
+                                            <form action="/orders/{{ $order->id }}" id="deleteForm" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                                <button class="btn btn-sm btn-danger show_confirm"><i class="far fa-trash-alt"></i></button>
+                                                <button type="button" class="btn btn-sm btn-danger show_confirm"><i class="far fa-trash-alt"></i></button>
                                             </form>
                                     </div>
                                 </td>

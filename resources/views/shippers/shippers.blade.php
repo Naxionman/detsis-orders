@@ -74,7 +74,7 @@
                                     <div class="d-flex justify-content-evenly">
                                         <a href="/edit_shipper/{{ $shipper->id }}" class="btn btn-sm btn-warning flex-fill">
                                             <i class="far fa-edit"></i>Edit</a>
-                                            <form action="/shippers/{{ $shipper->id }}" method="POST">
+                                            <form action="/shippers/{{ $shipper->id }}" id="deleteForm" method="POST">
                                             @method('DELETE')
                                             @csrf
                                                 <button class="btn btn-sm btn-danger show_confirm"><i class="far fa-trash-alt"></i></button>

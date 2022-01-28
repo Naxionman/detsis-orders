@@ -41,8 +41,7 @@
                         </tfoot>
                         <tbody>
                         @forelse ($clients as $client)
-                            <!-- <tr data-href="view_client/{{ $client->id}}">         -->
-                            <tr>
+                            <tr data-href="view_client/{{ $client->id}}">     
                                 <td><strong>{{$client->surname }}</strong></td>
                                 <td>{{ $client->name }}</td>
                                 <td>{{ $client->mobile }}</td>
@@ -53,12 +52,12 @@
                                 </td>
                                 <td style="width:15%" >
                                     <div class="d-flex justify-content-evenly">
-                                        <a href="/edit_client/{{ $client->id }}" class="btn btn-warning flex-fill">
+                                        <a href="/edit_client/{{ $client->id }}" class="btn btn-sm btn-warning flex-fill">
                                             <i class="far fa-edit"></i>Edit</a>
                                             <form action="/clients/{{ $client->id }}" id="deleteForm" method="POST">
-                                            @method('DELETE')
-                                            @csrf
-                                                <button type="button" class="btn btn-danger show_confirm"><i class="far fa-trash-alt"></i></button>
+                                                @method('DELETE')
+                                                @csrf
+                                                <button style="" type="button" class="btn btn-danger show_confirm"><i class="far fa-trash-alt"></i></button>
                                             </form>
                                     </div>
                                 </td>

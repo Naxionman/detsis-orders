@@ -63,7 +63,7 @@
                                     <div class="d-flex justify-content-evenly">
                                         <a href="/edit_payment/{{ $payment->id }}" class="btn btn-sm btn-warning ">
                                             <i class="far fa-edit"></i>Edit</a>
-                                            <form action="/payments/{{ $payment->id }}" method="POST">
+                                            <form action="/payments/{{ $payment->id }}" id="deleteForm" method="POST">
                                             @method('DELETE')
                                             @csrf
                                                 <button class="btn btn-sm btn-danger show_confirm"><i class="far fa-trash-alt"></i></button>

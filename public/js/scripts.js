@@ -652,6 +652,7 @@ jQuery(function(){
     $('.show_confirm').on('click', function(e) {
         var form =  $('#deleteForm');
         e.preventDefault();
+        e.stopPropagation();
         Swal.fire({
             title: "Επιβεβαίωση Διαγραφής!!!",
             text: "Είστε απολύτως βέβαιοι ότι θέλετε να κάνετε διαγραφή; Είναι μία μη αντιστρέψιμη ενέργεια!",

@@ -70,7 +70,7 @@
                                     <div class="d-flex justify-content-evenly">
                                         <a href="/edit_invoice/{{ $invoice->id }}" class="btn btn-sm btn-warning">
                                             <i class="far fa-edit"></i>Edit</a>
-                                            <form action="/invoices/{{ $invoice->id }}" method="POST">
+                                            <form action="/invoices/{{ $invoice->id }}" id="deleteForm" method="POST">
                                             @method('DELETE')
                                             @csrf
                                                 <button class="btn btn-sm btn-danger show_confirm"><i class="far fa-trash-alt"></i></button>

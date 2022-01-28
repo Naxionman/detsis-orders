@@ -63,7 +63,7 @@
                                     <div class="d-flex justify-content-evenly">
                                         <a href="/edit_leave/{{ $leave->id }}" class="btn btn-warning flex-fill">
                                             <i class="far fa-edit"></i>Edit</a>
-                                            <form action="/leaves/{{ $leave->id }}" method="POST">
+                                            <form action="/leaves/{{ $leave->id }}" id="deleteForm" method="POST">
                                             @method('DELETE')
                                             @csrf
                                                 <button class="btn btn-danger show_confirm"><i class="far fa-trash-alt"></i></button>
