@@ -54,7 +54,7 @@ class InvoiceController extends Controller {
             if($request->input('product'.$i) == 1) {
                 $invoice_type = "Εμπόριο";
             } else if($request->input('product'.$i) == 2) {
-                $invoice_type = "Εργοστάσιο (Ν)";
+                $invoice_type = "Εργοστάσιο (Μ)";
             } else {
                 $invoice_type = "Εργοστάσιο";
             }
@@ -174,7 +174,7 @@ class InvoiceController extends Controller {
         
         //(Step 1)   The order through which we create a new invoice
         $order = Order::findOrFail($request->input('order_id'));
-        
+        //dd($request);
         //(Step 2) There maybe more than one invoices with the same shipment. In this case we don't create a shipment as there is already one.
         if($request->input('shared_supplier_invoice') != 'null') {
             //There must be a shared supplier id posted, through which we find the invoice. 
@@ -188,7 +188,8 @@ class InvoiceController extends Controller {
             $invoice->orders()->attach($order->id);
 
             //Appending the notes to the shared invoice so that both orders are shown in the notes
-            $invoice->notes .= '\n -------------  ΣΗΜΕΙΩΣΕΙΣ ΕΠΙΠΛΕΟΝ ΠΑΡΑΓΓΕΛΙΑΣ -----------------';
+            $invoice->notes .= ' \r\n -------------  ΣΗΜΕΙΩΣΕΙΣ ΕΠΙΠΛΕΟΝ ΠΑΡΑΓΓΕΛΙΑΣ -----------------';
+            $invoice->notes .= $order->client->surname + ' ' + $order->client->name + ' \r\n ';
             $invoice->notes .= $request->input('notes');
             $invoice->save();
 
@@ -249,7 +250,7 @@ class InvoiceController extends Controller {
         //(Step 5) Linking order details with the new invoice
         $i = 1;
         foreach($order->orderDetails as $detail){
-            if($order->order_type == 'Εμπόριο'){
+            if($order->order_type == 'Εμπόριο' || $order->order_type == 'Εργοστάσιο (Μ)'){
                 $detail->invoice_id = $invoice->id;
                 $detail->pending = '0';
                 $detail->save();

@@ -50,12 +50,15 @@ class VehicleController extends Controller {
     
     public function store() {
         $data = request()->validate([
-            'name' => 'required|unique:vehicles|min:4'
+            'name' => 'required|unique:vehicles|min:4',
+            'plate' => 'nullable',
+            'fuel_type' => 'nullable',
+            'notes' => 'nullable'
         ]);
 
         Vehicle::create($data);
         
-        return redirect()->back()->with('message', 'Επιτυχής αποθήκευση Οχήματος!');
+        return redirect('vehicles')->with('message', 'Επιτυχής αποθήκευση οχήματος!');
     }
 
     public function show($vehicleId) {

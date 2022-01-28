@@ -18,7 +18,7 @@
                         Πίνακας πελατών
                 </div>
                 <div class="card-body">
-                    <table id="myTable" class="cell-border display compact">
+                    <table id="clientsTable" class="cell-border display compact">
                         <thead>
                             <tr >
                                 <th>Επώνυμο</th>
@@ -41,7 +41,8 @@
                         </tfoot>
                         <tbody>
                         @forelse ($clients as $client)
-                            <tr data-href="view_client/{{ $client->id}}">
+                            <!-- <tr data-href="view_client/{{ $client->id}}">         -->
+                            <tr>
                                 <td><strong>{{$client->surname }}</strong></td>
                                 <td>{{ $client->name }}</td>
                                 <td>{{ $client->mobile }}</td>
@@ -54,10 +55,10 @@
                                     <div class="d-flex justify-content-evenly">
                                         <a href="/edit_client/{{ $client->id }}" class="btn btn-warning flex-fill">
                                             <i class="far fa-edit"></i>Edit</a>
-                                            <form action="/client/{{ $client->id }}" method="POST">
+                                            <form action="/clients/{{ $client->id }}" id="deleteForm" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                                <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                                                <button type="button" class="btn btn-danger show_confirm"><i class="far fa-trash-alt"></i></button>
                                             </form>
                                     </div>
                                 </td>
@@ -73,6 +74,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"type="text/javascript"></script>
     <script type="text/javascript" src="https:////cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.11/sorting/date-eu.js"></script>
-    <script type = "text/javascript">$(document).ready( function () {$('#myTable').DataTable();});</script>
+    <script type = "text/javascript">$(document).ready( function () {$('#clientsTable').DataTable();});</script>
     
+    <script>
+        
+    </script>
 @endsection

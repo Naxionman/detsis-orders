@@ -28,6 +28,7 @@ class PageController extends Controller {
             }
         }
         
+        //Shippers stats for chart
         $shippers = Shipper::all();
         $ship_stats = array();
         foreach ($shippers as $shipper) {
@@ -38,6 +39,34 @@ class PageController extends Controller {
             if($count != 0){
                 $ship_stats[$shipper->name] = $count;
             }
+        }
+
+        //Orders stats for chart
+        $order_stats_current_year = array();
+        $order_stats_previous_year = array();
+        $orders = Order::all();
+        
+        //initializing the arrays        
+        for ($i=1; $i < 13 ; $i++) { 
+            $order_stats_current_year[$i] = 0;
+            $order_stats_previous_year[$i] = 0;
+        }
+
+        //For each month of the current year we get the number of orders
+        for ($i=1; $i < 13; $i++) { 
+            $order_per_month_count = 0;
+            
+            foreach ($orders as $order){
+                if($order->order_date->year == Date('Y') && $order->order_date->month == $i ){
+                    $order_per_month_count += 1;
+                    $order_stats_current_year[$i] = $order_per_month_count;
+                }
+                if($order->order_date->year == Date('Y')-1 && $order->order_date->month == $i ){
+                    $order_per_month_count +=1;
+                    $order_stats_previous_year[$i] = $order_per_month_count;
+                }
+            }
+            
         }
 
         //Expences calculations
@@ -55,6 +84,6 @@ class PageController extends Controller {
         }
 
         
-        return view('welcome', compact('monthly_sum','extra_sum', 'pending_orders','monthly_orders','ship_stats','total_yearly_expences','total_last_year_expences')); 
+        return view('welcome', compact('monthly_sum','extra_sum', 'pending_orders','monthly_orders','ship_stats','order_stats_current_year','order_stats_previous_year','total_yearly_expences','total_last_year_expences')); 
     }
 }

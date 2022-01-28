@@ -148,13 +148,13 @@
                                     <select class="form-control js-example-basic-single" name="shared_shipment" id="shared_shipment">
                                         <option value='null' selected></option>
                                         @foreach ($shipments as $shipment)
-                                            @if ($shipment->shipper_id != 1)
+                                            @if ($shipment->shipper_id != 1 && $order->supplier->id == $shipment->supplier_id)
                                                 <option value="{{ $shipment->id }}">{{ $shipment->shipment_invoice_number }} - {{ $shipment->shipper->name }}</option>    
                                             @endif
                                         @endforeach
                                     </select>
-                                    <input type="hidden" name="shipment_invoice_number" value="{{ $shipment->shipment_invoice_number }}">
-                                    <input type="hidden" name="shipment_price" value="{{ $shipment->shipment_price }}">
+                                    
+                                    
                                     <br>
                                     <br>
                                 </div>

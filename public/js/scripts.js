@@ -39,6 +39,27 @@ jQuery(function() {
     
     if (top.location.pathname.match(/^\/add_invoice\//) || top.location.pathname.match('/add_special_invoice') ) {
         
+
+        $('#sharedSupplierInvoice').on('change',function () {
+            console.log("Shared invoice change!");
+            if($('#sharedSupplierInvoice').val() != 'null'){
+                console.log("Not null !!!!");
+                $('#inputShipper').prop( "disabled", true );
+                $('#inputShipmentNumber').prop( "disabled", true );
+                $('#inputShipmentPrice').prop( "disabled", true );
+                $('#inputExtraShipper').prop( "disabled", true );
+                $('#inputExtraPrice').prop( "disabled", true );
+                $('#inputInvoiceTotal').prop( "disabled", true );
+            } else {
+                $('#inputShipper').prop( "disabled", false );
+                $('#inputShipmentNumber').prop( "disabled", false );
+                $('#inputShipmentPrice').prop( "disabled", false );
+                $('#inputExtraShipper').prop( "disabled", false );
+                $('#inputExtraPrice').prop( "disabled", false );
+                $('#inputInvoiceTotal').prop( "disabled", false );
+            }
+        });
+
         //determining the count of details and updating it when addProduct is pressed
         var count = $('#count').val();
         
@@ -626,6 +647,29 @@ jQuery(function(){
             }    
         })
     }
+
+    //CONFIRMATION of deletion
+    $('.show_confirm').on('click', function(e) {
+        var form =  $('#deleteForm');
+        e.preventDefault();
+        Swal.fire({
+            title: "Επιβεβαίωση Διαγραφής!!!",
+            text: "Είστε απολύτως βέβαιοι ότι θέλετε να κάνετε διαγραφή; Είναι μία μη αντιστρέψιμη ενέργεια!",
+            icon: "warning",
+            showCancelButton: true,
+              confirmButtonColor: '#ff0f15',
+              cancelButtonColor: '#ed032d9e9e9e',
+              confirmButtonText: 'Ναι! ΔΙΑΓΡΑΦΗ!'
+        })
+        .then((willDelete) => {
+          if (willDelete.isConfirmed) {
+            form.trigger('submit');
+          }
+        });
+    });
+
+
+
 });
 
 
