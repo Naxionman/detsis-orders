@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row mt-3">
         <!-- Orders stats -->
-        <div class="col-md-3 col-xl-3 position-relative">
+        <div class="col-3 position-relative">
             <div class="card2 bg-c-blue order-card2">
                 <div class="card2-block">
                     <h6 class="m-b-20">Αναμενόμενες παραγγελίες</h6>
@@ -27,43 +27,43 @@
             </div>
         </div>
         <!-- Shipments stats -->
-        <div class="col-md-3 col-xl-3 position-relative"><!-- This position-relative is to prevent the stretched-link attribute to apply to all the cards -->
-            <div class="card2 bg-c-pink order-card2 " >
+        <div class="col-3 position-relative"><!-- This position-relative is to prevent the stretched-link attribute to apply to all the cards -->
+            <div class="card2 bg-c-green order-card2 " >
                 <div class="card2-block">
-                    <h6 class="m-b-20" >Φορτωτικές Διόνυσου</h6>
+                    <h6 class="m-b-20" >Διόνυσος ({{ $month_name }})</h6>
                     <hr class = "row mt-0">
                     <div class="row">
                         <h2>
                             <i class="fas fa-truck f-left"></i>
-                            <span class="f-right">{{ $monthly_sum }} €</span>
+                            <span class="f-right">{{ number_format($month_sum, 2, ",",".") }} €</span>
                         </h2>
                     </div>
                     
                     <div class="row">
-                            <div class = "col-8">Άλλες μεταφορικές</div>
-                                <span class="col-4 text-end">{{ $extra_sum }} €</span>
+                            <div class = "col-7">{{ $last_month_name }}</div>
+                                <span class="col-5 text-end">{{ number_format($last_month_sum, 2, ",",".") }} €</span>
                     </div>
                 </div>
                 <a href="/shipments" class="stretched-link"></a>
             </div>
         </div>
         <!--  stats -->
-        <div class="col-md-3 col-xl-3 position-relative">
-            <div class="card2 bg-c-green order-card2">
+        <div class="col-3 position-relative">
+            <div class="card2 bg-c-red order-card2">
                 <div class="card2-block">
                     <h6 class="m-b-20">Πάγια έξοδα τρέχοντος έτους</h6>
                     <hr class = "row mt-0">
                     <div class="row">
                         <h2>
                             <i class="fas fa-file-invoice f-left"></i>
-                            <span class="f-right">{{ number_format($total_yearly_expences, 2, ".",",") }} €  <!-- Code for total expences this year  --></span>
+                            <span class="f-right">{{ number_format($total_yearly_expences, 2, ",",".") }} €  <!-- Code for total expences this year  --></span>
                         </h2>
                     </div>
                     
                     <div class="row">
                             <div class = "col-7">Προηγούμενο έτος</div>
                                 <span class="col-5 text-end">                        
-                                    {{ number_format($total_last_year_expences, 2, ".", ",") }} €     <!-- Code for pending orders  -->
+                                    {{ number_format($total_last_year_expences, 2, ",", ".") }} €     <!-- Code for pending orders  -->
                                 </span>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
             </div>
         </div>
         <!--  stats -->
-        <div class="col-md-3 col-xl-3">
+        <div class="col-3">
             <div class="card2 bg-c-yellow order-card2">
                 <div class="card2-block">
                     <h6 class="m-b-20">Τελευταία κάρτα</h6>
@@ -114,6 +114,12 @@
     
 
     </div> <!-- end of main row -->
+
+    <div class="row mt-2">
+        <div class="col">
+            Επόμενη σειρά - Στατιστικά που αφορούν τις παραγγελίες
+        </div>
+    </div>
 
 </div>
 
@@ -160,22 +166,32 @@
                 label: ['#Παραγγελίες '+ new Date().getFullYear()],
                 data: Object.values(orderStatsCurrentYear),
                 backgroundColor: [
-                                'rgba(0, 222, 255, 0.6)',
-                                'rgba(255, 159, 64, 0.6)',
-                                'rgba(255, 205, 86, 0.6)',
-                                'rgba(75, 192, 192, 0.6)',
-                                'rgba(54, 162, 235, 0.6)',
-                                'rgba(153, 102, 255, 0.6)',
-                                'rgba(201, 203, 207, 0.6)'
+                                'rgb(63, 81, 181, 0.7)',
+                                'rgb(66, 165, 245, 0.7)',
+                                'rgb(38, 198, 218, 0.7)',
+                                'rgb(102, 187, 106, 0.7)',
+                                'rgb(212, 225, 87, 0.7)',
+                                'rgb(255, 202, 40, 0.7)',
+                                'rgb(255, 112, 67, 0.7)',
+                                'rgb(255, 213, 79, 0.7)',
+                                'rgb(174, 213, 129, 0.7)',
+                                'rgb(77, 208, 225, 0.7)',
+                                'rgb(121, 134, 203, 0.7)',
+                                'rgb(126, 87, 194, 0.7)',                        
                                 ],
                 borderColor: [
-                                'rgb(0, 222, 255)',
-                                'rgb(255, 159, 64)',
-                                'rgb(255, 205, 86)',
-                                'rgb(75, 192, 192)',
-                                'rgb(54, 162, 235)',
-                                'rgb(153, 102, 255)',
-                                'rgb(201, 203, 207)'
+                                'rgb(63, 81, 181)',
+                                'rgb(66, 165, 245)',
+                                'rgb(38, 198, 218)',
+                                'rgb(102, 187, 106)',
+                                'rgb(212, 225, 87)',
+                                'rgb(255, 202, 40)',
+                                'rgb(255, 112, 67)',
+                                'rgb(255, 213, 79)',
+                                'rgb(174, 213, 129)',
+                                'rgb(77, 208, 225)',
+                                'rgb(121, 134, 203)',
+                                'rgb(126, 87, 194)', 
                                 ],
                 borderWidth: 1
             },
@@ -183,22 +199,32 @@
                 label: ['#Παραγγελίες '+ (new Date().getFullYear() - 1)],
                 data: Object.values(orderStatsPreviousYear),
                 backgroundColor: [
-                                'rgba(255, 30, 30, 0.6)',
-                                'rgba(255, 159, 64, 0.6)',
-                                'rgba(255, 205, 86, 0.6)',
-                                'rgba(75, 192, 192, 0.6)',
-                                'rgba(54, 162, 235, 0.6)',
-                                'rgba(153, 102, 255, 0.6)',
-                                'rgba(201, 203, 207, 0.6)'
+                                'rgb(63, 81, 181, 0.1)',
+                                'rgb(66, 165, 245, 0.1)',
+                                'rgb(38, 198, 218, 0.1)',
+                                'rgb(102, 187, 106, 0.1)',
+                                'rgb(212, 225, 87, 0.1)',
+                                'rgb(255, 202, 40, 0.1)',
+                                'rgb(255, 112, 67, 0.1)',
+                                'rgb(255, 213, 79, 0.1)',
+                                'rgb(174, 213, 129, 0.1)',
+                                'rgb(77, 208, 225, 0.1)',
+                                'rgb(121, 134, 203, 0.1)',
+                                'rgb(126, 87, 194, 0.1)', 
                                 ],
                 borderColor: [
-                                'rgb(255, 30, 30)',
-                                'rgb(255, 159, 64)',
-                                'rgb(255, 205, 86)',
-                                'rgb(75, 192, 192)',
-                                'rgb(54, 162, 235)',
-                                'rgb(153, 102, 255)',
-                                'rgb(201, 203, 207)'
+                                'rgb(63, 81, 181)',
+                                'rgb(66, 165, 245)',
+                                'rgb(38, 198, 218)',
+                                'rgb(102, 187, 106)',
+                                'rgb(212, 225, 87)',
+                                'rgb(255, 202, 40)',
+                                'rgb(255, 112, 67)',
+                                'rgb(255, 213, 79)',
+                                'rgb(174, 213, 129)',
+                                'rgb(77, 208, 225)',
+                                'rgb(121, 134, 203)',
+                                'rgb(126, 87, 194)', 
                                 ],
                 borderWidth: 1    
             }

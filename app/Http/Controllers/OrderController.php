@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Shipper;
 use App\Models\Supplier;
 use App\Models\Client;
+use App\Models\OrderFile;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller {
@@ -84,8 +85,12 @@ class OrderController extends Controller {
         $order = Order::findOrFail($orderId);
 
         $order_details = OrderDetails::where('order_id', $orderId)->get();
+        $order_files = OrderFile::where('order_id', $orderId)->get();
+        $notes = $order->notes;
+
+        $rows = substr_count( $notes, "\n" );
         
-        return view('orders.view_order', compact('order','order_details'));
+        return view('orders.view_order', compact('rows','order','order_details', 'order_files'));
     }
 
     public function update(Order $order) {

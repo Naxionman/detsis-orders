@@ -6,17 +6,31 @@
 <div class="container">
     <div class="card bg-success bg-opacity-25 shadow-lg border-0 rounded-3 mt-3 ">
         <div class="card-header"><h3 class="text-center font-weight-light my-2 "><strong>Λεπτομέρειες παραγγελίας</strong> 
+            
             @if($order->arrival_date !=null)
                 - Συσχετισμένο τιμολόγιο :
                 @foreach ($order_details as $detail)
                     <a href="/view_invoice/{{ $detail->invoice_id }}"> {{ $detail->invoice_id }}</a>
                 @endforeach
+            @else
+                @if ($order->pending == 1)
+                        <a class="btn btn-primary shadow-sm btn-sm ms-2" href="/add_invoice/{{$order->id}}">Άφιξη</a>
+                        <a href="/edit_order/{{ $order->id }}" class="btn btn-sm btn-warning ms-2 shadow-sm">
+                            <i class="far fa-edit"></i>Επεξεργασία</a>
+                @endif
             @endif
-            </h3></div>
+                <a type="button" form="deleteForm" class="btn btn-danger btn-sm show_confirm ms-5"><i class="far fa-trash-alt"></i></a>
+            </h3>
+            <form action="/orders/{{ $order->id }}" id="deleteForm" method="POST">
+                @method('DELETE')
+                @csrf
+            </form>
+        </div>
             <div class="card-body bg-light">
                 <!-- General details of order -->
                 <div class="row">
                     <h6>Αριθμός παραγγελίας : {{ $order->id }}</h6>
+                    <h6>Πελάτης : {{ $order->client->surname }} {{ $order->client->name }}</h6>
                     <h6>Προμηθευτής : <a href="/view_supplier/{{ $order->supplier->id }}"><strong>{{ $order->supplier->company_name }}</strong></a></h6>
                     <h6>Ημερομηνία παραγγελίας : {{ $order->order_date->format('d-m-Y') }}</h6>
                     <h6>Ημερομηνία άφιξης : 
@@ -29,6 +43,9 @@
                         @endphp
                     </h6>    
                 </div>
+
+                <!-- For the orders of showcase or factory-non-stock there is no need to show the details because they are always the same -->
+                @if ($order->order_type == 'Εργοστάσιο')
                 <!-- List of ordered goods -->
                 <div class="row">
                     <table class="table table-bordered table-striped">
@@ -73,18 +90,67 @@
                         @endforeach
                         </tbody>
                     </table>
+                </div>    
+                @endif
+                
+
+                <!-- ===== ORDER FILES ===== --> 
+                <div class="row m-2 border border-box rounded-3">
+                    <div class="row">
+                        <div class="col-4">
+                            Επισυναπτόμενα αρχεία
+                        </div>
+                        <div class="col-8">
+                            <form action="/upload.php" method="post" id="uploadForm" enctype="multipart/form-data">
+                                <label class="order-file-upload shadow-sm btn-info">
+                                    <input type="file" name="filename" id="inputOrderFile"/><i class="fa fa-paperclip"></i> Προσθήκη αρχείου
+                                    <input type="hidden" name="order_id" value="{{ $order->id }}">
+                                </label>
+                                <button>upload</button>
+                                @csrf
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Progress bar -->
+                        <div class="progress">
+                            <div class="progress-bar"></div>
+                        </div>
+                        <!-- Display upload status -->
+                        <div id="uploadStatus"></div>
+                    </div>
+
+                    @forelse ($order_files as $file)
+                        <div class="row">
+                            <div class="col-5">{{$file->filename}}</div>
+                        </div>
+                    @empty
+                        No files attached
+                    @endforelse
                 </div>
+
                 <div class="row m-2  border border-box rounded-3">
-                    <div class="wrapper m-2">Σημειώσεις :
-                        <textarea rows="4" class="form-control" autocomplete="nope" type="text" >{{ $order->notes }}</textarea>
+                    <div class="wrapper m-2">Σημειώσεις : 
+                        <button class="btn btn-sm btn-outline-primary mb-2 toPrinter"><i class="fa fa-print"></i>Εκτύπωση σημειώσεων</button>
+                        <textarea rows="{{ $rows + 1}}" class="form-control" autocomplete="nope" type="text" id="itemToPrint">{{ $order->notes }}</textarea>
                     </div>
                 </div>
             </div>
             <div class="card-footer text-center py-2">
                  
-                <a href="/orders" class="btn btn-primary">  Ακύρωση - Επιστροφή </a>
+                <a href="javascript:history.back()" class="btn btn-primary">  Ακύρωση - Επιστροφή </a>
             </div>
         </div>
+<script>
+    //PRINTING
+    $(".toPrinter").on('click', function () {
+        $("#itemToPrint").printThis({
+            importCSS: true,
+            header: "<p>Πελάτης :<strong>{{ $order->client->surname }} {{ $order->client->name }}</strong></p><p> Αριθμός Παραγγελίας :<strong> {{$order->id }}</strong>, Ημερομηνία παραγγελίας :<strong>{{ $order->order_date->format('d-m-Y') }}</strong></p>"
+        });
+    });
+
+</script>
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -103,4 +169,6 @@
         </div>
     @endif
 </div>
+
+
 @endsection

@@ -70,7 +70,7 @@
             </div>
             <div class="card-footer text-center py-2">
                 <button class="btn btn-danger shadow-sm" type="submit" form="editExpence">  Αποθήκευση Αλλαγών </button>
-                <a href="/expences" class="btn btn-info shadow-sm">  Ακύρωση - Επιστροφή </a>
+                <a href="javascript:history.back()" class="btn btn-info shadow-sm">  Ακύρωση - Επιστροφή </a>
             </div>
         </div>
 

@@ -28,12 +28,17 @@
                             <label class="form-check-label" for="switchPending">Μόνο Ανοικτές</label>
                             <input class="form-check-input" type="checkbox" id="switchPending">
                         </div>
+                        <div class="form-check form-switch col">
+                            <label class="form-check-label" for="switchClosed">Μόνο Κλειστές</label>
+                            <input class="form-check-input" type="checkbox" id="switchClosed">
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <table id="ordersTable" class="cell-border display compact">
                         <thead>
                             <tr>
+                                <th>pending</th>
                                 <th>α/α</th>
                                 <th>Ημερομηνία</th>
                                 <th>Καθυστέρηση</th>
@@ -46,6 +51,7 @@
                         </thead>
                         <tfoot>
                             <tr>
+                                <th>pending</th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -59,8 +65,12 @@
                         <tbody>
                             
                         @forelse ($orders as $order)
-                            <!-- <tr data-href="view_order/{{ $order->id}}"> -->
-                            <tr>
+                            <tr data-href="view_order/{{ $order->id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $order->notes }}">
+                                <td>
+                                    @if($order->pending == 0)
+                                        Κλειστή
+                                    @endif
+                                </td>
                                 <td>{{ $order->id }}</td>
                                 <td>{{ $order->order_date->format('d-m-Y') }}</td>
                                 <td>
@@ -100,7 +110,7 @@
                                             <form action="/orders/{{ $order->id }}" id="deleteForm" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                                <button type="button" class="btn btn-sm btn-danger show_confirm"><i class="far fa-trash-alt"></i></button>
+                                            <a type="button" class="btn btn-sm btn-danger show_confirm"><i class="far fa-trash-alt"></i></a>
                                             </form>
                                     </div>
                                 </td>
@@ -121,8 +131,13 @@
             order: [[1,'desc'],[0,'desc']],
             columnDefs: [{ 
                 type: 'date-eu', targets: [1,6], 
-                
-                }]} 
+                }],
+            columnDefs: [{
+                targets: 0,
+                searchable: true,
+                visible: false
+                }]
+            } 
         );});
     </script>    
 @endsection

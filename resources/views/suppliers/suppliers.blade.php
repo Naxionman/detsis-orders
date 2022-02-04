@@ -30,7 +30,7 @@
                     
                 </div>
                 <div class="card-body">
-                    <table id="myTable" class="cell-border display compact">
+                    <table id="suppliersTable" class="cell-border display compact">
                         <thead>
                             <tr>
                                 <th>Notes</th>
@@ -95,5 +95,15 @@
                 </div>
             </div>
     </div>
-    
+<script>
+    $(document).ready( function () {
+        $('#suppliersTable').DataTable({
+            columnDefs: [{
+                targets: 0,
+                searchable: true,
+                visible: false
+            }]
+          });
+    });
+</script>
 @endsection

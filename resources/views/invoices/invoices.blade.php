@@ -60,8 +60,15 @@
                                 <td>{{ $invoice->invoice_date->format('d-m-Y') }}</td>
                                 <td>{{ $invoice->supplier->company_name }}</td>
                                 <td>
-                                    @foreach ($invoice->orders as $order )
-                                       <a href="/view_order/{{ $order->id }}"> {{ $order->id }}</a>
+                                    @foreach ($details as $detail)
+                                        @if($invoice->id == $detail->invoice_id)
+                                            @if ($detail->order_id == null)
+                                                {{ '-' }}
+                                                @break
+                                            @else
+                                                <a href="/view_order/{{ $detail->order_id }}">{{ $detail->order_id }}</a>                                                    
+                                            @endif
+                                        @endif
                                     @endforeach
                                 </td>
                                 <td class="text-end pe-2">{{ number_format($invoice->invoice_total,2,",",".") }} €</td>
@@ -73,7 +80,7 @@
                                             <form action="/invoices/{{ $invoice->id }}" id="deleteForm" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                                <button class="btn btn-sm btn-danger show_confirm"><i class="far fa-trash-alt"></i></button>
+                                                <a type="button" class="btn btn-danger show_confirm"><i class="far fa-trash-alt"></i></a>
                                             </form>
                                     </div>
                                 </td>

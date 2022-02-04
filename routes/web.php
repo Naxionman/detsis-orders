@@ -19,7 +19,7 @@ use App\Http\Controllers\CarServiceController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\ExpenceController;
-
+use App\Http\Controllers\OrderFileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,6 +92,7 @@ Route::post('/add_leave', [LeaveController::class, 'store']);
 Route::post('/add_expence', [ExpenceController::class, 'store']);
 //Special route for ajax fetching
 Route::get('/add_leave/{employeeId}', [LeaveController::class, 'getEmployeeLeaveDays']);
+Route::post('upload.php',[OrderFileController::class, 'addFile']);
 
 //Show actions (for editing records)
 Route::get('/edit_supplier/{supplierId}',[SupplierController::class, 'show']);
@@ -110,6 +111,7 @@ Route::get('/view_supplier/{SupplierId}',[SupplierController::class, 'showDetail
 Route::get('/view_invoice/{invoiceId}',[InvoiceController::class, 'showDetails']);
 Route::get('/view_vehicle/{vehicleId}',[VehicleController::class, 'showDetails']);
 Route::get('/view_shipment/{shipmentId}',[ShipmentController::class, 'showDetails']);
+Route::get('/view_shipper/{shipperId}/{year}',[ShipperController::class, 'showDetails']);
 Route::get('/edit_payment/{paymentId}',[PaymentController::class, 'show']);
 Route::get('/edit_leave/{leaveId}',[LeaveController::class, 'show']);
 Route::get('/edit_expence/{expenceId}',[ExpenceController::class, 'show']);

@@ -30,9 +30,15 @@ $('tr[data-href]').on("click", function() {
 });
 
 
+
 jQuery(function() {
     
-    $('[data-toggle="tooltip"]').tooltip();
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+
+    //$('[data-bs-toggle="tooltip"]').tooltip();
     $.fn.select2.defaults.set( "theme", "bootstrap" );
     $('#product0').select2();
     $('.js-example-basic-single').select2();
@@ -580,14 +586,6 @@ function leaveDetails(){
 jQuery(function(){
     //Fucntion used to hide description column from suppliers table, but make it still searchable (for the tags)
     if(top.location.pathname === '/suppliers'){
-        var table = $('#myTable').DataTable({
-            columnDefs: [{
-              targets: 0,
-              searchable: true,
-                visible: false
-            }]
-          });
-        
         var showroom = $('#switchShowroom');
         var factory = $('#switchFactory');
 
@@ -615,10 +613,12 @@ jQuery(function(){
         var showroom = $('#switchShowroom');
         var factory = $('#switchFactory');
         var pending = $('#switchPending');
+        var closed = $('#switchClosed');
 
         var string1 = 'Εμπόριο';
         var string2 = 'Εργοστάσιο';
         var string3 = 'Άφιξη';
+        var string4 = 'Κλειστή';
 
         showroom.on('change', function(){
             if(showroom.is(':checked')){
@@ -646,6 +646,14 @@ jQuery(function(){
                 table.search('').draw();
             }    
         })
+        closed.on('change', function(){
+            if(closed.is(':checked')){
+                table.search(string4).draw();
+            } else {
+                table.search('').draw();
+            }    
+        })
+
     }
 
     //CONFIRMATION of deletion
@@ -669,10 +677,74 @@ jQuery(function(){
         });
     });
 
+    // ORDER FILES UPLOADING 
+    // File upload via Ajax
+    $("#uploadForm").on('submit', function(e){
+        e.preventDefault();
+        $.ajax({
+            xhr: function() {
+                var xhr = new window.XMLHttpRequest();
+                xhr.upload.addEventListener("progress", function(evt) {
+                    if (evt.lengthComputable) {
+                        var percentComplete = ((evt.loaded / evt.total) * 100);
+                        $(".progress-bar").width(percentComplete + '%');
+                        $(".progress-bar").html(percentComplete+'%');
+                    }
+                }, false);
+                return xhr;
+            },
+            type: 'POST',
+            url: '../upload.php',
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData:false,
+            beforeSend: function(){
+                $(".progress-bar").width('0%');
+                $('#uploadStatus').html("<div class='spinner-border text-warning' role='status'><span class='visually-hidden'>Παρακαλώ περιμένετε...</span></div>");
+            },
+            error:function(){
+                $('#uploadStatus').html('<p style="color:#EA4335;">Αποτυχία! Δοκιμάστε ξανά.</p>');
+            },
+            success: function(resp){
+                if(resp == 'ok'){
+                    console.log("entered success");
+                    $('#uploadForm')[0].reset();
+                    $('#uploadStatus').html('<p style="color:#28A74B;">Το αρχείο φορτώθηκε επιτυχώς!</p>');
+                }else if(resp == 'err'){
+                    $('#uploadStatus').html('<p style="color:#EA4335;">Επιλέξτε έγκυρο τύπο αρχείου.</p>');
+                }
+            }
+        });
+    });
+	
+    // File type validation
+    $("#inputOrderFile").on('change',function(){
+        var allowedTypes = ['application/pdf', 
+                            'application/msword', 
+                            'application/vnd.ms-office', 
+                            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                            'application/vnd.oasis.opendocument.text' ,
+                            'image/jpeg',
+                            'image/png',
+                            'image/jpg',
+                            'image/gif',
+                            'application/x-zip-compressed',
+                            ''
+                        ];
 
+        var file = this.files[0];
+        var fileType = file.type;
+        console.log("Filetype is:"+fileType);
+        console.log("File is: " + file);
+        if(!allowedTypes.includes(fileType)){
+            alert('Σφάλμα. Αποδεκτοί τύποι αρχείων : (PDF/DOC/DOCX/JPEG/JPG/PNG/GIF).');
+            $("#fileInput").val('');
+            return false;
+        }
+    });
 
 });
-
 
 //DOKIMI
 

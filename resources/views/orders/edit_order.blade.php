@@ -26,18 +26,29 @@
                         </div>
                     </div>
                     <div class="row mt-3 justify-content-center">
-                        <div class="col-sm-2"><label for="inputClient">Πελάτης (προαιρετικό)</label></div>
-                            <div class="col-sm-4">
-                                <select class="js-example-basic-single form-control" id="inputClient" name="client_id">
-                                    <option value="{{ $order->client_id }}">{{ $order->client->surname }} {{ $order->client->name }}</option>
-                                    <option value="1">Δεν αφορά πελάτη</option>
+                        <div class="col-2"><label for="inputClient">Πελάτης (προαιρετικό)</label></div>
+                        <div class="col-4">
+                            <select class="js-example-basic-single form-control" id="inputClient" name="client_id">
+                                <option value="{{ $order->client_id }}">{{ $order->client->surname }} {{ $order->client->name }}</option>
+                                <option value="1">Δεν αφορά πελάτη</option>
                                     @foreach ($clients as $client)
                                         <option   type="text" value="{{ $client->id }}">{{ $client->surname }} {{ $client->name }}</option>
                                     @endforeach
-                                </select>
-                            </div>
+                            </select>
                         </div>
-
+                    </div>
+                    <div class="row mt-3 justify-content-center">
+                        <div class="col-2"><label for="inputPending">Έχει έρθει;</label></div>
+                        <div class="col-4">
+                            <input type="hidden" name="pending" value="1">
+                            @if ($order->pending == 1)
+                                <div class="form-check form-switch"><input class="form-check-input" type="checkbox" value="1" name="pending" id="inputPending" unchecked></div>
+                                
+                            @else
+                                <div class="form-check form-switch"><input class="form-check-input" type="checkbox" value="0" name="pending" id="inputPending" checked></div>
+                            @endif
+                        </div>
+                    </div>
 
                     <div class="row mt-3 justify-content-center">
                         <h2>Προϊόντα παραγγελίας</h2>
@@ -75,7 +86,6 @@
                                     $i++;
                                 @endphp
                                 @endforeach
-                                
                             </tbody>
                         </table>
                         <div class="col-sm-4">
@@ -85,13 +95,13 @@
                         <div class="col-sm-2"><label for="inputNotes">Σημειώσεις</label></div>
                         <div class="col-sm-4"><textarea rows="4" class="form-control" autocomplete="nope" type="text" id="inputNotes" name="notes" value="{{ $order->notes }}">{{ $order->notes }}</textarea></div>
                     </div>
-                    <input type="hidden" name="pending" value="1">
+                    
                     @csrf
                 </form>
             </div>
             <div class="card-footer text-center py-2">
                 <button class="btn btn-danger shadow-sm" type="submit" form="editOrder">  Αποθήκευση  </button>
-                <a href="/orders" class="btn btn-info shadow-sm">  Ακύρωση - Επιστροφή </a>
+                <a href="javascript:history.back()" class="btn btn-info shadow-sm">  Ακύρωση - Επιστροφή </a>
             </div>
         </div>
         

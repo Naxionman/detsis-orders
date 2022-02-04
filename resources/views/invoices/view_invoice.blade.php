@@ -216,7 +216,7 @@
         </div><!-- card body-->
         
         <div class="card-footer text-center py-2">
-            <a href="/invoices" class="btn btn-info shadow-sm">  Ακύρωση - Επιστροφή </a>
+            <a href="javascript:history.back()" class="btn btn-info shadow-sm">  Ακύρωση - Επιστροφή </a>
         </div>
     </div><!-- card -->
 </div>

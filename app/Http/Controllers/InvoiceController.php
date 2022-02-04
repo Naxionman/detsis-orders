@@ -16,8 +16,9 @@ class InvoiceController extends Controller {
     
     public function index() {
         $invoices = Invoice::all();
+        $details = OrderDetails::all();
 
-        return view('invoices.invoices', compact('invoices'));
+        return view('invoices.invoices', compact('invoices','details'));
     }
     
     public function addInvoice($orderId) {
@@ -79,6 +80,7 @@ class InvoiceController extends Controller {
         if($request->input('shared_shipment') != 'null') {
             $shared_shipment_id = $request->input('shared_shipment');
             $shared_shipment = Shipment::find($shared_shipment_id);
+            $shipment = $shared_shipment;
             $shared_shipment->invoices()->attach($shared_shipment_id);
         } else {
             // (Step 2b) Creating a shipment
@@ -188,9 +190,9 @@ class InvoiceController extends Controller {
             $invoice->orders()->attach($order->id);
 
             //Appending the notes to the shared invoice so that both orders are shown in the notes
-            $invoice->notes .= ' \r\n -------------  ΣΗΜΕΙΩΣΕΙΣ ΕΠΙΠΛΕΟΝ ΠΑΡΑΓΓΕΛΙΑΣ -----------------';
-            $invoice->notes .= $order->client->surname + ' ' + $order->client->name + ' \r\n ';
-            $invoice->notes .= $request->input('notes');
+            $invoice->notes .= "\r\n" .'-------------  ΣΗΜΕΙΩΣΕΙΣ ΕΠΙΠΛΕΟΝ ΠΑΡΑΓΓΕΛΙΑΣ -----------------';
+            $invoice->notes .= "\r\n" .$order->client->surname .' ' .$order->client->name;
+            $invoice->notes .= "\r\n" .$request->input('notes');
             $invoice->save();
 
         } else if($request->input('shared_shipment') != 'null'){
@@ -213,18 +215,20 @@ class InvoiceController extends Controller {
         //(Step 3) Order update
             //If the invoice is for the factory then pending should be calculated through the order details. 
             // When all of the products in the order details are not pending, order is not pending too.
-        
+        $order_pending = 1;
         if($request->input('pending')== null){
+            
             for($i = 1; $i < $count + 1; $i++){
                 if($request->input('arrived'.$i) == "0"){
                     $order_pending = "1";
                     break; //Even if there is only one pending product, the order should be considered pending.
                 }
             }
+           
         } else {
             $order_pending = $request->input('pending');
         }
-
+        
         $data_for_orders = [
             'arrival_date' => $request->input('arrival_date'),
             'notes' => $request->input('notes'),

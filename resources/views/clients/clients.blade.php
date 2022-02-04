@@ -57,7 +57,7 @@
                                             <form action="/clients/{{ $client->id }}" id="deleteForm" method="POST">
                                                 @method('DELETE')
                                                 @csrf
-                                                <button style="" type="button" class="btn btn-danger show_confirm"><i class="far fa-trash-alt"></i></button>
+                                                <button type="button" class="btn btn-danger show_confirm"><i class="far fa-trash-alt"></i></button>
                                             </form>
                                     </div>
                                 </td>

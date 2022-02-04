@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-10">
                     <h3 class="text-center font-weight-light my-2 ">{{$product->product_name}}
-                        <a href="/products" class="btn btn-info shadow-sm"> Επιστροφή στον πίνακα προϊόντων</a></h3>
+                        <a href="javascript:history.back()" class="btn btn-info shadow-sm"> Επιστροφή στον πίνακα προϊόντων</a></h3>
                 </div>
                 <div class="col-1">
                     @if ($product->id != $last_product->id)

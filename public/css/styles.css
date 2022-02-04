@@ -5889,11 +5889,11 @@ textarea.form-control-lg {
   left: 0 /* rtl:ignore */;
   z-index: 1070;
   display: block;
-  max-width: 276px;
+  max-width: 100%;
   font-family: var(--bs-font-sans-serif);
   font-style: normal;
-  font-weight: 400;
-  line-height: 1.5;
+  font-weight: 800;
+  line-height: 2;
   text-align: left;
   text-align: start;
   text-decoration: none;
@@ -5903,7 +5903,7 @@ textarea.form-control-lg {
   word-break: normal;
   word-spacing: normal;
   white-space: normal;
-  line-break: auto;
+  line-break: strict;
   font-size: 0.875rem;
   word-wrap: break-word;
   background-color: #fff;
@@ -11727,19 +11727,19 @@ body {
 }
 
 .bg-c-blue {
-  background: linear-gradient(45deg,#4099ff,#73b4ff);
+  background: linear-gradient(45deg,#5648d7,#b487ef);
 }
 
 .bg-c-green {
-  background: linear-gradient(45deg,#2ed8b6,#59e0c5);
+  background: linear-gradient(45deg,#2d6436,#009145);
 }
 
 .bg-c-yellow {
-  background: linear-gradient(45deg,#FFB64D,#ffcb80);
+  background: linear-gradient(45deg,#FFB64D,#e9f08e);
 }
 
-.bg-c-pink {
-  background: linear-gradient(45deg,#FF5370,#ff869a);
+.bg-c-red {
+  background: linear-gradient(45deg,#FF5370,#ff8d42);
 }
 
 
@@ -11769,3 +11769,16 @@ body {
   float: right;
 }
 
+
+/* Custom file upload button */
+.order-file-upload {
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+input[type="file"] {
+  display: none;
+}

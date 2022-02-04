@@ -18,7 +18,7 @@
                         Πίνακας Μεταφορικών
                 </div>
                 <div class="card-body">
-                    <table id="myTable" class="cell-border display compact">
+                    <table id="shippersTable" class="cell-border display compact">
                         <thead>
                             <tr>
                                 <th>Ονομασία</th>
@@ -41,7 +41,7 @@
                         </tfoot>
                         <tbody>
                         @forelse ($shippers as $shipper)
-                            <tr>
+                            <tr data-href="view_shipper/{{ $shipper->id}}/{{ Date("Y")}}">
                                 <td><strong>{{$shipper->name }}</strong></td>
                                 <td>{{ $shipper->phone }}</td>
                                 <td>{{ $shipments->where('shipper_id',$shipper->id)->count() }}</td>
@@ -93,6 +93,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"type="text/javascript"></script>
     <script type="text/javascript" src="https:////cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.11/sorting/date-eu.js"></script>
-    <script type = "text/javascript">$(document).ready( function () {$('#myTable').DataTable();});</script>
+    <script type = "text/javascript">$(document).ready( function () {$('#shippersTable').DataTable();});</script>
     
 @endsection

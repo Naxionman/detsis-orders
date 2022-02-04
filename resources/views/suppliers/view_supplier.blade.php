@@ -103,7 +103,7 @@
                     
             </div>
             <div class="card-footer text-center py-2">
-               <a href="/suppliers" class="btn btn-info shadow-sm"> Επιστροφή </a>
+               <a href="javascript:history.back()" class="btn btn-info shadow-sm"> Επιστροφή </a>
             </div>
         </div>
 </div>
