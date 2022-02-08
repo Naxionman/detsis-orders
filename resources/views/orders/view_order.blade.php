@@ -144,7 +144,10 @@
 <script>
     //PRINTING
     $(".toPrinter").on('click', function () {
+        
+        
         $("#itemToPrint").printThis({
+            removeScripts: true, 
             importCSS: true,
             header: "<p>Πελάτης :<strong>{{ $order->client->surname }} {{ $order->client->name }}</strong></p><p> Αριθμός Παραγγελίας :<strong> {{$order->id }}</strong>, Ημερομηνία παραγγελίας :<strong>{{ $order->order_date->format('d-m-Y') }}</strong></p>"
         });

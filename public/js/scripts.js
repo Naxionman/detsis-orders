@@ -32,6 +32,7 @@ $('tr[data-href]').on("click", function() {
 
 
 jQuery(function() {
+    $.fn.select2.defaults.set( "theme", "bootstrap" );
     
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
@@ -39,7 +40,6 @@ jQuery(function() {
     })
 
     //$('[data-bs-toggle="tooltip"]').tooltip();
-    $.fn.select2.defaults.set( "theme", "bootstrap" );
     $('#product0').select2();
     $('.js-example-basic-single').select2();
     
@@ -605,6 +605,7 @@ jQuery(function(){
         })
     }
 
+    // SWITCHES to filter orders. Fully operational as of 8/2/2022
     if (top.location.pathname === '/orders') {
         
         //Get the table
@@ -615,45 +616,47 @@ jQuery(function(){
         var pending = $('#switchPending');
         var closed = $('#switchClosed');
 
-        var string1 = 'Εμπόριο';
-        var string2 = 'Εργοστάσιο';
-        var string3 = 'Άφιξη';
-        var string4 = 'Κλειστή';
+        var totalString = '';
+        var string1 = ' Εμπόριο ';
+        var string2 = ' Εργοστάσιο ';
+        var string3 = ' Άφιξη ';
+        var string4 = ' Κλειστή ';
 
-        showroom.on('change', function(){
+        $('#switchShowroom, #switchPending, #switchClosed, #switchFactory').on('change', function(){
             if(showroom.is(':checked')){
-                table.search(string1).draw();
+                factory.prop( "disabled", true );
+                if(!totalString.includes(string1)) totalString = totalString.concat(string1);
             } else {
-                table.search('').draw();
-            }    
-
-            if(showroom.is(':checked') && pending.is(':checked')){
-                table.search(string1 + ' '+ string3).draw();
+                factory.prop( "disabled", false );
+                totalString = totalString.replace(string1,"");
             }
-        })
-        factory.on('change', function(){
-            console.log('changed factory');
-            if(factory.is(':checked')){
-                table.search(string2).draw();
-            } else {
-                table.search('').draw();
-            }    
-        })
-        pending.on('change', function(){
+            
             if(pending.is(':checked')){
-                table.search(string3).draw();
-            } else {
-                table.search('').draw();
-            }    
-        })
-        closed.on('change', function(){
-            if(closed.is(':checked')){
-                table.search(string4).draw();
-            } else {
-                table.search('').draw();
-            }    
-        })
+                closed.prop("disabled", true);
+                if(!totalString.includes(string3)) totalString = totalString.concat(string3);
+            }else {
+                closed.prop("disabled", false);
+                totalString = totalString.replace(string3,"");
+            }
 
+            if(factory.is(':checked')){
+                showroom.prop( "disabled", true );
+                if(!totalString.includes(string2)) totalString = totalString.concat(string2);
+            } else {
+                showroom.prop( "disabled", false );
+                totalString = totalString.replace(string2,"");
+            }
+
+            if(closed.is(':checked')){
+                pending.prop("disabled", true);
+                if(!totalString.includes(string4)) totalString = totalString.concat(string4);
+                console.log(totalString);
+            }else {
+                pending.prop("disabled", false);
+                totalString = totalString.replace(string4,"");
+            }
+            table.search(totalString).draw();
+        })
     }
 
     //CONFIRMATION of deletion

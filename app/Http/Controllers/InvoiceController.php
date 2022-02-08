@@ -215,12 +215,11 @@ class InvoiceController extends Controller {
         //(Step 3) Order update
             //If the invoice is for the factory then pending should be calculated through the order details. 
             // When all of the products in the order details are not pending, order is not pending too.
-        $order_pending = 1;
+        $order_pending = 0;
         if($request->input('pending')== null){
-            
             for($i = 1; $i < $count + 1; $i++){
                 if($request->input('arrived'.$i) == "0"){
-                    $order_pending = "1";
+                    $order_pending = 1;
                     break; //Even if there is only one pending product, the order should be considered pending.
                 }
             }
