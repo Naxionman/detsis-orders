@@ -39,6 +39,7 @@
                         <thead>
                             <tr>
                                 <th>pending</th>
+                                <th>notes</th>
                                 <th>α/α</th>
                                 <th>Ημερομηνία</th>
                                 <th>Καθυστέρηση</th>
@@ -52,6 +53,7 @@
                         <tfoot>
                             <tr>
                                 <th>pending</th>
+                                <th>notes</th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -65,12 +67,13 @@
                         <tbody>
                             
                         @forelse ($orders as $order)
-                            <tr data-href="view_order/{{ $order->id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $order->notes }}">
+                            <tr data-href="view_order/{{ $order->id}}" data-bs-toggle="tooltip-inner" data-bs-placement="top" title="{{ $order->notes }}">
                                 <td>
                                     @if($order->pending == 0)
                                         Κλειστή
                                     @endif
                                 </td>
+                                <td>{{ $order->notes }}</td>
                                 <td>{{ $order->id }}</td>
                                 <td>{{ $order->order_date->format('d-m-Y') }}</td>
                                 <td>
@@ -128,15 +131,11 @@
     <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.11/sorting/date-eu.js"></script>
     <script type = "text/javascript">
         $(document).ready( function () {$('#ordersTable').DataTable({
-            order: [[1,'desc'],[0,'desc']],
-            columnDefs: [{ 
-                type: 'date-eu', targets: [1,6], 
-                }],
-            columnDefs: [{
-                targets: 0,
-                searchable: true,
-                visible: false
-                }]
+                order: [[3,'desc'],[2,'desc']],
+                columnDefs: [
+                    {targets: [0,1],searchable: true,visible: false },
+                    {targets: [3,8],type: 'date-eu'}
+                ],
             } 
         );});
     </script>    

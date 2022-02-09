@@ -13,6 +13,33 @@ class EmployeeController extends Controller {
         return view('employees.employees', compact('employees'));
     }
 
+    public function salaries() {
+        $employees = Employee::all();
+
+        $gross = array();
+        //μικτές αποδοχές
+        foreach($employees as $employee){
+            if($employee->working_days == 6){
+                $insurance_days = 26;
+            } else {
+                $insurance_days = 25;
+            }
+            if($employee->speciality == "Εργατοτεχνίτης"){
+                $gross_earnings = $employee->salary * $insurance_days;
+            } else {
+                $gross_earnings = $employee->salary;
+            }
+            // Without any extras
+            $gross[$employee->id] = $gross_earnings;
+
+            //Extra: 
+
+        }
+        
+
+        return view('employees.salaries.salaries', compact('employees','gross'));
+    }
+
     public function addEmployee() {
         return view ('employees.add_employee');
     }

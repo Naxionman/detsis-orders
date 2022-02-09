@@ -20,6 +20,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\ExpenceController;
 use App\Http\Controllers\OrderFileController;
+use App\Http\Controllers\SettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,7 +53,9 @@ Route::get('/car_services', [CarServiceController::class, 'index']);
 Route::get('/payments', [PaymentController::class, 'index']);
 Route::get('/leaves', [LeaveController::class, 'index']);
 Route::get('/expences', [ExpenceController::class, 'index']);
-
+Route::get('/salaries', [EmployeeController::class, 'salaries']);
+Route::get('/settings',[SettingsController::class, 'index']);
+    
 Route::get('/add_supplier', [SupplierController::class, 'addSupplier']);
 Route::get('/add_client', [ClientController::class, 'addClient']);
 Route::get('/add_employee', [EmployeeController::class, 'addEmployee']);

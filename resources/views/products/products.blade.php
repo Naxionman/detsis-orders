@@ -2,7 +2,6 @@
 
 @section('title', 'Προϊόντα')
 
-
 @section('content')
     <div class="container-fluid px-4">
         <h1 class="mt-4">Προϊόντα</h1>
@@ -29,11 +28,12 @@
                     
                 </div>
                 <div class="card-body">
-                    <table id="myTable" class="cell-border display compact">
+                    <table id="productsTable" class="cell-border display compact">
                         <thead>
                             <tr>
                                 <th>DCode</th>
                                 <th>SupCode</th>
+                                <th>Εικόνα</th>
                                 <th>Ονομασία προϊόντος</th>
                                 <th><strong>Ποσότητα</strong> </th>
                                 <th>Όριο</th>
@@ -45,6 +45,7 @@
                             <tr>
                                 <th>DCode</th>
                                 <th>SupCode</th>
+                                <th>Εικόνα</th>
                                 <th>Ονομασία προϊόντος</th>
                                 <th><strong>Ποσότητα</strong> </th>
                                 <th>Όριο</th>
@@ -57,6 +58,13 @@
                             <tr data-href="view_product/{{ $product->id}}">
                                 <td><strong>{{$product->detsis_code }}</strong></td>
                                 <td>{{$product->product_code }}</td>
+                                <td>
+                                    @if ($product->image_url != null)
+                                    <img src="images/products/{{ $product->image_url }}" width="50px" height="50px" >
+                                    @else
+                                    <img src="images/products/no_image.png" width="50px" height="50px" >
+                                    @endif
+                                </td>
                                 <td>{{$product->product_name }}</td>
                                 <td>{{$product->stock_level }}</td>
                                 <td>{{$product->min_level }}</td>
@@ -84,6 +92,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"type="text/javascript"></script>
     <script type="text/javascript" src="https:////cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.11/sorting/date-eu.js"></script>
-    <script type = "text/javascript">$(document).ready( function () {$('#myTable').DataTable();});</script>
+    <script type = "text/javascript">$(document).ready( function () {$('#productsTable').DataTable();});</script>
     
 @endsection

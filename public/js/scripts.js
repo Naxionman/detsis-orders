@@ -292,6 +292,11 @@ jQuery(function() {
                         subCategory = 'Μηχανισμοί';
                         enterLastProduct();
                         break;
+                    case '0104':
+                        category = 'Εξαρτήματα επίπλων';
+                        subCategory = 'Προφίλ-μπάζες';
+                        enterLastProduct();
+                        break;
                     case '0201':
                         category = 'Χημικά';
                         subCategory = 'Σιλικόνες';
