@@ -42,6 +42,7 @@ jQuery(function() {
     //$('[data-bs-toggle="tooltip"]').tooltip();
     $('#product0').select2();
     $('.js-example-basic-single').select2();
+    $('.js-example-basic-multiple').select2();
     
     if (top.location.pathname.match(/^\/add_invoice\//) || top.location.pathname.match('/add_special_invoice') ) {
         

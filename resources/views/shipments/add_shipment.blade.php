@@ -41,7 +41,7 @@
                         <div class="col-4"><input class="form-control" name="shipment_price" type="number" step="0.01" id="inputShipmentPrice" autocomplete="off"></div>
                     </div>
                     <div class="row mt-3 justify-content-center">
-                        <div class="col-2"><label for="inputExtraShiper">Μεταφορική</label></div>
+                        <div class="col-2"><label for="inputExtraShiper">Επιπλέον Μεταφορική</label></div>
                         <div class="col-4">
                             <select class="form-control" id="inputExtraShiper" name="extra_shipper_id">
                                 <option value="none" selected disabled hidden>Δεν υπήρξε ενδιάμεση μεταφορική</option>
@@ -55,12 +55,11 @@
                         <div class="col-2"><label for="inputExtraPrice">Χρέωση 2ης</label></div>
                         <div class="col-4"><input class="form-control" name="extra_price" type="number" step="0.01" id="inputExtraPrice" autocomplete="off"></div>
                     </div>
-
                     @csrf
                 </form>
             </div>
             <div class="card-footer text-center py-2">
-                <button class="btn btn-danger shadow-sm" type="submit" form="addShipper">  Αποθήκευση  </button>
+                <button class="btn btn-danger shadow-sm" type="submit" form="addShipment">  Αποθήκευση  </button>
                 <a href="/shipments" class="btn btn-info shadow-sm">  Ακύρωση - Επιστροφή </a>
             </div>
         </div>

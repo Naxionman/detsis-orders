@@ -83,6 +83,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.11/sorting/date-eu.js"></script>
     <script type = "text/javascript">
         $(document).ready( function () {$('#shipmentsTable').DataTable({
+            order: [[0,'desc'],[3,'desc']],
             columnDefs: [{ 
                 type: 'date-eu', targets: [0] }]}  
             );});

@@ -34,6 +34,7 @@
                                 <th>id</th>
                                 <th>Ημερομηνία</th>
                                 <th>Προμηθευτής</th>
+                                <th>Αριθμός</th>
                                 <th>Παραγγελίες</th>
                                 <th>Πληρωτέο</th>
                                 <th>Αφορά</th>
@@ -45,6 +46,7 @@
                                 <th>id</th>
                                 <th>Ημερομηνία</th>
                                 <th>Προμηθευτής</th>
+                                <th>Αριθμός</th>
                                 <th>Παραγγελίες</th>
                                 <th>Πληρωτέο</th>
                                 <th>Αφορά</th>
@@ -59,6 +61,7 @@
                                 <td>{{ $invoice->id }}</td>
                                 <td>{{ $invoice->invoice_date->format('d-m-Y') }}</td>
                                 <td>{{ $invoice->supplier->company_name }}</td>
+                                <td>{{ $invoice->supplier_invoice_number }}</td>
                                 <td>
                                     @foreach ($details as $detail)
                                         @if($invoice->id == $detail->invoice_id)

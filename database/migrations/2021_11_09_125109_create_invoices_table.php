@@ -15,8 +15,7 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            
-            $table->unsignedBigInteger('shipment_id');
+            $table->unsignedBigInteger('shipment_id')->nullable();
             $table->unsignedBigInteger('supplier_id');
             $table->string('invoice_type');
             $table->date('invoice_date');
@@ -26,8 +25,6 @@ class CreateInvoicesTable extends Migration
             $table->float('order_discount')->default('0.00');
             $table->float('invoice_total');
             $table->text('notes')->nullable();
-            
-            //$table->foreign('shipment_id')->references('id')->on('shipments')->onDelete('cascade');
             $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
             $table->timestamps();
         });

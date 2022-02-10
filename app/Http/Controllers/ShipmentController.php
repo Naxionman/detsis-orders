@@ -61,6 +61,16 @@ class ShipmentController extends Controller {
         return redirect()->back()->with('message', 'Επιτυχής αποθήκευση Τιμολογίου Μεταφορικής!');
     }
 
+    public function show($shipmentId) {
+        $shipment = Shipment::findOrFail($shipmentId);
+        $suppliers = Supplier::all();
+        $shippers = Shipper::all();
+        $invoices = Invoice::all();        
+        $supplier_invoices = Invoice::where('shipment_id',$shipmentId)->get();
+
+        return view('shipments.edit_shipment', compact('shipment','suppliers','supplier_invoices','shippers','invoices'));
+    }
+
     public function showDetails($shipmentId){
 
         $shipment = Shipment::findOrFail($shipmentId);
@@ -68,11 +78,36 @@ class ShipmentController extends Controller {
         $supplier_invoices_count = Invoice::where('shipment_id',$shipmentId)->count();
         $supplier_invoices = Invoice::where('shipment_id',$shipmentId)->get();
 
-        
-        
-        //$orders = OrderDetails::where('shipment_id',$shipmentId)->get();
-
         return view('shipments.view_shipment', compact('supplier_invoices','supplier_invoices_count','shipment'));
+    }
+
+    public function update(Shipment $shipment){
+        
+        $data = request()->validate([
+            'shipper_id' => 'required',
+            'shipment_invoice_number' => 'nullable',
+            'shipping_date' => 'required',
+            'supplier_id' => 'required',
+            'shipment_price' => 'nullable',
+            'extra_shipper_id' => 'nullable',
+            'extra_price' => 'nullable',
+        ]);
+
+        $shipment->update($data);
+
+        //Relating invoice(s) to this shipment
+        $boundInvoices = $_POST['invoices']; //We get the array from the post request
+        //We iterate through the array
+        //dd($boundInvoices);
+        foreach($boundInvoices as $id){
+            //dd($id);
+            $invoice = Invoice::findorFail($id);
+            //dd($invoice);
+            $invoice->shipment_id = $shipment->id;
+            $invoice->save();
+        }
+
+        return redirect('shipments')->with('message', 'Επιτυχής επεξεργασία φορτωτικής');
     }
 
     public function destroy(Shipment $shipment){

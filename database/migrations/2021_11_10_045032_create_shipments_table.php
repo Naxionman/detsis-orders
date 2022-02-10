@@ -27,24 +27,7 @@ class CreateShipmentsTable extends Migration
             $table->foreign('extra_shipper_id')->references('id')->on('shippers')->onDelete('cascade');
             $table->timestamps();
         });
-
-        /*
-            This method is used to just add the foreign key to the invoices table, because 
-            shipments table had not been created when invoices table was created.
-                - invoices table is created
-                    invoices  [requires foreign of order_shipment]
-                - shipments table is created 
-                    shipments [requires foreign of invoices]
-
-            Thus, foreign keys cannot be inserted when creating the first table. 
-
-        */
-
-        Schema::table('invoices', function(Blueprint $table) {
-            $table->foreign('shipment_id')->references('id')->on('shipments')->onDelete('cascade');
-        });
-
-
+       
     }
 
     /**
