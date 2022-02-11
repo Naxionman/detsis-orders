@@ -77,38 +77,58 @@ class InvoiceController extends Controller {
         }
 
         //shipment
-        if($request->input('shared_shipment') != 'null') {
-            $shared_shipment_id = $request->input('shared_shipment');
-            $shared_shipment = Shipment::find($shared_shipment_id);
-            $shipment = $shared_shipment;
-            $shared_shipment->invoices()->attach($shared_shipment_id);
+        if($request->input('shipper_id')==null){
+
         } else {
-            // (Step 2b) Creating a shipment
-            $shipment = Shipment::create([
-                'shipping_date' => $request->input('arrival_date'),
-                'supplier_id' => $request->input('supplier_id'),
-                'shipper_id' => $request->input('shipper_id'),
-                'shipment_price' => $request->input('shipment_price'),
-                'extra_shipper_id' => $request->input('extra_shipper_id'),
-                'shipment_invoice_number' => $request->input('shipment_invoice_number'),
-                'extra_price' => $request->input('extra_price'),
-            ]);
+            if($request->input('shared_shipment') != 'null') {
+                $shared_shipment_id = $request->input('shared_shipment');
+                $shared_shipment = Shipment::find($shared_shipment_id);
+                $shipment = $shared_shipment;
+                $shared_shipment->invoices()->attach($shared_shipment_id);
+            } else {
+                // (Step 2b) Creating a shipment
+                $shipment = Shipment::create([
+                    'shipping_date' => $request->input('arrival_date'),
+                    'supplier_id' => $request->input('supplier_id'),
+                    'shipper_id' => $request->input('shipper_id'),
+                    'shipment_price' => $request->input('shipment_price'),
+                    'extra_shipper_id' => $request->input('extra_shipper_id'),
+                    'shipment_invoice_number' => $request->input('shipment_invoice_number'),
+                    'extra_price' => $request->input('extra_price'),
+                ]);
+            }
         }
+        
 
         //We create the instance of the model and add to the database
+        if($request->input("shipper_id")==null){
+            $invoice = Invoice::create([
+                'invoice_type' => $invoice_type,
+                'shipment_id' => null,
+                'supplier_id' => $request->input('supplier_id'),
+                'invoice_date' => $request->input('invoice_date'),
+                'supplier_invoice_number' => $request->input('supplier_invoice_number'),
+                'order_discount' => $request->input('order_discount'),
+                'invoice_tax_rate' => $request->input('invoice_tax_rate'),
+                'extra_charges' => $request->input('extra_charges'),
+                'invoice_total' => $request->input('invoice_total'),
+                'notes' => $request->input('notes')
+            ]);
+        }else{
+            $invoice = Invoice::create([
+                'invoice_type' => $invoice_type,
+                'shipment_id' => $shipment->id,
+                'supplier_id' => $request->input('supplier_id'),
+                'invoice_date' => $request->input('invoice_date'),
+                'supplier_invoice_number' => $request->input('supplier_invoice_number'),
+                'order_discount' => $request->input('order_discount'),
+                'invoice_tax_rate' => $request->input('invoice_tax_rate'),
+                'extra_charges' => $request->input('extra_charges'),
+                'invoice_total' => $request->input('invoice_total'),
+                'notes' => $request->input('notes')
+            ]);
+        }
         
-        $invoice = Invoice::create([
-            'invoice_type' => $invoice_type,
-            'shipment_id' => $shipment->id,
-            'supplier_id' => $request->input('supplier_id'),
-            'invoice_date' => $request->input('invoice_date'),
-            'supplier_invoice_number' => $request->input('supplier_invoice_number'),
-            'order_discount' => $request->input('order_discount'),
-            'invoice_tax_rate' => $request->input('invoice_tax_rate'),
-            'extra_charges' => $request->input('extra_charges'),
-            'invoice_total' => $request->input('invoice_total'),
-            'notes' => $request->input('notes')
-        ]);
         
         $i = 1;        
         foreach($details as $detail){
@@ -295,6 +315,21 @@ class InvoiceController extends Controller {
                
         return view ('invoices.view_invoice', compact('invoice','details'));
     }
+
+    //Surely it must the busiest funtion of all the application!!!!
+    public function show($invoiceId){
+        
+        $invoice = Invoice::findOrFail($invoiceId);
+        $orders = Order::all();
+        $shippers = Shipper::all();
+        $suppliers = Supplier::all();
+        $products = Product::all();
+        $shipments = Shipment::all();
+        $details = OrderDetails::where('invoice_id',$invoiceId)->get();
+
+        return view('invoices.edit_invoice', compact('invoice','orders','shippers','shipments','suppliers','products','details'));
+    }
+
 
     public function destroy(Invoice $invoice) {
         $invoice->delete();

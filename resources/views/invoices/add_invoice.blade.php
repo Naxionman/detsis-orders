@@ -98,6 +98,7 @@
                                             </div>
                                             <div class="col-8">
                                                 <select class="form-control" id="inputShipper" name="shipper_id">
+                                                    <option value="" selected>Δεν θα καταχωρηθεί προσωρινά</option>
                                                     @foreach ($shippers as $shipper)
                                                         <option type="text" value="{{ $shipper->id }}">{{ $shipper->name }}</option>
                                                     @endforeach

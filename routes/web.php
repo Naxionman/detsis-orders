@@ -105,6 +105,7 @@ Route::get('/edit_shipper/{shipperId}',[ShipperController::class, 'show']);
 Route::get('/edit_vehicle/{vehicleId}',[VehicleController::class, 'show']);
 Route::get('/edit_dispatch/{dispatchId}',[DispatchController::class, 'show']);
 Route::get('/edit_order/{orderId}',[OrderController::class, 'show']);
+Route::get('/edit_invoice/{invoiceId}',[InvoiceController::class, 'show']);
 Route::get('/edit_showroom_order/{orderId}',[OrderController::class, 'show']);
 Route::get('/edit_shipment/{shipmentId}',[ShipmentController::class, 'show']);
 Route::get('/edit_product/{productId}',[ProductController::class, 'show']);

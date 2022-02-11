@@ -50,7 +50,10 @@
                                     <label class="align-middle">Ημερομηνία άφιξης</label>
                                 </div>
                                 <div class="col-6">
-                                    <label class="align-middle">{{ $invoice->shipment->shipping_date->format('d-m-Y') }}</label>
+                                    <label class="align-middle">
+                                        @if ($invoice->shipment_id != null)
+                                            {{ $invoice->shipment->shipping_date->format('d-m-Y') }}</label>    
+                                        @endif
                                 </div>
                             </div>
                             <div class="row">
@@ -58,7 +61,7 @@
                                     <label class="align-middle">Ημερομηνία τιμολόγησης</label>
                                 </div>
                                 <div class="col-6">
-                                    <label class="align-middle">{{ $invoice->invoice_date->format('d-m-Y') }}</label>
+                                    <label class="align-middle">{{ $invoice->invoice_date->format('d-m-Y') ?: '-' }}</label>
                                 </div>
                             </div>
                             <div class="row">
@@ -82,7 +85,11 @@
                                     <label class="align-middle">Μεταφορική</label>
                                 </div>
                                 <div class="col-5">
-                                    <label class="align-middle">{{ $invoice->shipment->shipper->name }}</label>
+                                    <label class="align-middle">
+                                        @if($invoice->shipment_id !=null)
+                                            {{ $invoice->shipment->shipper->name }}
+                                        @endif
+                                    </label>
                                 </div>
                             </div>
                             <div class="row">
@@ -90,7 +97,11 @@
                                     <label class="align-middle">Αριθμός Τιμολογίου</label>
                                 </div>
                                 <div class="col-5">
-                                    <label class="align-middle">{{ $invoice->shipment->shipment_invoice_number ?: '-' }}</label>
+                                    <label class="align-middle">
+                                        @if($invoice->shipment_id !=null)
+                                            {{ $invoice->shipment->shipment_invoice_number ?: '-' }}
+                                        @endif
+                                    </label>
                                 </div>
                             </div>
                             <div class="row">
@@ -98,7 +109,11 @@
                                     <label class="align-middle">Συνολική χρεώση</label>
                                 </div>
                                 <div class="col-5">
-                                    <label class="align-middle">{{ $invoice->shipment->shipment_price ?: '0' }} €</label>
+                                    <label class="align-middle">
+                                        @if($invoice->shipment_id !=null)
+                                            {{ $invoice->shipment->shipment_price ?: '0' }} €
+                                        @endif
+                                    </label>
                                 </div>
                             </div>
                             <div class="row">
@@ -107,10 +122,12 @@
                                 </div>
                                 <div class="col-5">
                                     <label class="align-middle">
-                                        @if ($invoice->shipment->extra_shipper_id == null)
-                                            {{'-'}}
-                                        @else
-                                            {{ $invoice->shipment->extraShipper->name }}    
+                                        @if($invoice->shipment_id !=null)
+                                            @if ($invoice->shipment->extra_shipper_id == null)
+                                                {{'-'}}
+                                            @else
+                                                {{ $invoice->shipment->extraShipper->name }}    
+                                            @endif
                                         @endif
                                     </label>
                                 </div>
@@ -120,7 +137,9 @@
                                     <label class="align-middle">Xρεώση 2ης μεταφορικής</label>
                                 </div>
                                 <div class="col-5">
-                                    <label class="align-middle">{{ $invoice->shipment->extra_price ?: '-'}} €</label>
+                                    @if($invoice->shipment_id !=null)
+                                        <label class="align-middle">{{ $invoice->shipment->extra_price ?: '-'}} €</label>
+                                    @endif
                                 </div>
                             </div>
                             <br>
