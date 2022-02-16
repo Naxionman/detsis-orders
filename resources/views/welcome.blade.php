@@ -95,7 +95,6 @@
     </div> <!-- 4-card row ending -->
 
     <!-- -------    C H A R T S     -------    -->
-
     <div class="row mt-2 ">
         <div class="col">
             <div class="border border-1 rounded-3 text-center">
@@ -111,20 +110,66 @@
                 <canvas id="ordersChart" width="600" height="300">σσσσσ</canvas>
             </div>
         </div>
-    
-
     </div> <!-- end of main row -->
 
     <div class="row mt-2">
         <div class="col">
-            Επόμενη σειρά - Στατιστικά που αφορούν τις παραγγελίες
+            <div class="border border-1 rounded-3 text-center">
+            <h2>Έξοδα 2022</h2>
+                <div class="row">
+                    <table id="balanceTable" class="cell-border display compact">
+                        <thead>
+                            <th>Τύπος εξόδου</th>
+                            <th>Ποσόν</th>
+                        </thead>
+                        
+                        <tbody>
+                            <tr>
+                                <td>Τιμολόγια Προμηθευτών</td>
+                                <td class="text-end pe-4">{{ number_format($total_yearly_invoices,2 ,",",".") }}€</td>
+                            </tr>
+                            <tr>
+                                <td>Φορτωτικές</td>
+                                <td class="text-end pe-4">{{ number_format($total_yearly_shipments,2 ,",",".") }} € </td>
+                            </tr>
+                            <tr>
+                                <td>Πάγια έξοδα : </td> 
+                                <td class="text-end pe-4">{{ number_format($total_yearly_expences,2 ,",",".") }} € </td>    
+                            </tr>
+                            <tr>
+                                <td>Οχήματα</td>
+                                <td class="text-end pe-4">{{ number_format($total_yearly_vehicles,2 ,",",".") }}€</td>
+                            </tr>
+                            <tr>
+                                <td>Μισθοδοσίες</td>
+                                <td class="text-end pe-4">€</td>
+                            </tr>
+                            <tr>
+                                <th>Σύνολο</th>
+                                @php
+                                    $total = $total_yearly_shipments + $total_yearly_expences + $total_yearly_invoices + $total_yearly_vehicles
+                                @endphp
+                                <th class="text-end pe-4">{{ number_format($total,2 ,",",".") }} €</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+
         </div>
     </div>
 
 </div>
 
 <script>
-
+    $(document).ready( function () {$('#balanceTable').DataTable({
+            dom: 'rtip',
+            ordering: false,
+            paging: false
+        });});
     // Script for Pie Chart: Shippers
 
     var shipStats = {!! json_encode($ship_stats, JSON_HEX_TAG) !!};
@@ -138,7 +183,18 @@
             datasets: [{
                 label: ['# παραδόσεις'],
                 data: Object.values(shipStats),
-                backgroundColor:[ 'rgb(0,122,55)','rgb(54, 162, 235)','rgb(255, 205, 86)', 'rgb(255,0,58)', 'rgb(73, 0 , 255)','rgb(0, 255, 255)']
+                backgroundColor:[ 'rgb(  0, 122,  55)',
+                                  'rgb( 54, 162, 235)',
+                                  'rgb(255, 205,  86)', 
+                                  'rgb(255,   0,  58)', 
+                                  'rgb( 73,   0, 255)',
+                                  'rgb(  0, 255, 255)',
+                                  'rgb(255, 99, 111)',
+                                  'rgb(112,  232,  154)',
+                                  'rgb(88,  199,  127)',
+                                  'rgb(202,  101,  255)',
+                                  'rgb(242,  181,  89)',
+                                  ]
             }]
         },
         options: {

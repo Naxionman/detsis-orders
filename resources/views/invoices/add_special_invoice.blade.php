@@ -50,7 +50,7 @@
                             </div>
                         </div>
                     </div>
-
+                    <!-- Φορτωτική (Shipment) -->
                     <div class="col border rounded-3 shadow-sm">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">

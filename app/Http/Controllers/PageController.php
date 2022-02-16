@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CarService;
 use App\Models\Shipment;
 use App\Models\Order;
 use App\Models\Shipper;
 use App\Models\Expence;
+use App\Models\Insurance;
+use App\Models\Invoice;
+use App\Models\Kteo;
+use App\Models\Refueling;
 
 class PageController extends Controller {
     
@@ -153,7 +158,50 @@ class PageController extends Controller {
             }
             
         }
+
+        //All shipments of the year
+        $total_yearly_shipments = 0;
+        $all_shipments = Shipment::whereYear("shipping_date",'=',date("Y"))->get();
+        //dd($all_shipments);
+        foreach($all_shipments as $s){
+            $total_yearly_shipments += $s->shipment_price;
+            $total_yearly_shipments += $s->extra_price;
+        }
+
+        //All invoices
+        $total_yearly_invoices = 0;
+        $all_invoices = Invoice::whereYear("invoice_date","=",date("Y"))->get();
+        //dd($all_invoices);
+        foreach($all_invoices as $inv){
+            $total_yearly_invoices += $inv->invoice_total;
+            
+        }
+
+        //All vehicles expences
+        $total_yearly_vehicles = 0;
+        $all_kteos = Kteo::whereYear("kteo_date","=",date("Y"))->get();
+        $all_insurances = Insurance::whereYear("insurance_date","=",date("Y"))->get();
+        $all_refuelings = Refueling::whereYear("refuel_date","=",date("Y"))->get();
+        $all_services = CarService::whereYear("service_date","=",date("Y"))->get();
+        $all_vehicles = collect();
+        $all_vehicles->merge($all_refuelings);
+        //dd($all_vehicles);
+        foreach($all_refuelings as $veh){
+            $total_yearly_vehicles += $veh->amount;
+        }
+
+        foreach($all_insurances as $veh){
+            $total_yearly_vehicles += $veh->amount;
+        }
         
+        foreach($all_kteos as $veh){
+            $total_yearly_vehicles += $veh->amount;
+        }
+
+        foreach($all_services as $veh){
+            $total_yearly_vehicles += $veh->amount;
+        }
+
         return view('welcome', compact(
                                 'last_month_name',
                                 'month_name',
@@ -165,7 +213,10 @@ class PageController extends Controller {
                                 'order_stats_current_year',
                                 'order_stats_previous_year',
                                 'total_yearly_expences',
-                                'total_last_year_expences'
+                                'total_last_year_expences',
+                                'total_yearly_shipments',
+                                'total_yearly_invoices',
+                                'total_yearly_vehicles'
                             )); 
     }
 }

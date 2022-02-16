@@ -85,17 +85,18 @@ class OrderController extends Controller {
         $order = Order::findOrFail($orderId);
 
         $order_details = OrderDetails::where('order_id', $orderId)->get();
-        $order_files = OrderFile::where('order_id', $orderId)->get();
+        //$order_files = OrderFile::where('order_id', $orderId)->get();
         $notes = $order->notes;
 
         $rows = substr_count( $notes, "\n" );
         
-        return view('orders.view_order', compact('rows','order','order_details', 'order_files'));
+        return view('orders.view_order', compact('rows','order','order_details'));
     }
 
     public function update(Order $order) {
         $data = request()->validate([
             'order_date' => 'required',
+            'client_id' => 'required',
             'supplier_id' => 'required',
             'shipper_id' => 'nullable',
             'order_discount' => 'nullable',
@@ -135,5 +136,13 @@ class OrderController extends Controller {
         $order->delete();
 
         return redirect('/orders')->with('message', 'Επιτυχής διαγραφή παραγγελίας!');
+    }
+
+    //Ajax call
+    public function getOrder($id) {
+        $order = Order::findOrFail($id);
+        $date = $order->order_date;
+
+        return $date;
     }
 }

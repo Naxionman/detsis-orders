@@ -330,6 +330,53 @@ class InvoiceController extends Controller {
         return view('invoices.edit_invoice', compact('invoice','orders','shippers','shipments','suppliers','products','details'));
     }
 
+    public function update(Request $request, Invoice $invoice){
+        
+        dd(request()->all());
+        /*  *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *
+         *                              UPDATING an INVOICE
+         *  Updating an invoice must be the most populated form in the project. That's because it involves orders, 
+         *  calculations, changes of products, changes of dates, changes of shipments and other...
+         * 
+         */
+
+        //Update the basic info
+        $invoice->supplier_id = $request->input('supplier_id');
+        $invoice->invoice_date = $request->input('invoice_date');
+        $invoice->supplier_invoice_number = $request('supplier_invoice_number');
+        $invoice->save();
+
+        //If there was no shipment associated we may input it here (or via the shipping menu)
+        if($invoice->shipment_id == null && $request->input('shipper_id') != null){
+            $shippingData = request()->validate([
+                'shipping_date' => 'required',
+                'shipper_id' => 'required',
+                'supplier_id' => 'required',
+                'extra_shipper_id'=> 'nullable',
+                'shipment_invoice_number' => 'required',
+                'shipment_price' => 'required',
+                'extra_price' => 'nullable',
+            ]);
+    
+            Shipment::create($shippingData);
+        } else {
+            //in case there is already a shipment we just update the shipment
+            $shippingData = request()->validate([
+                'shipping_date' => 'required',
+                'shipper_id' => 'required',
+                'supplier_id' => 'required',
+                'extra_shipper_id'=> 'nullable',
+                'shipment_invoice_number' => 'required',
+                'shipment_price' => 'required',
+                'extra_price' => 'nullable',
+            ]);
+
+            $shipment = Shipment::findOrFail($invoice->shipment_id);
+
+            $shipment->update($shippingData);
+        }
+
+    }
 
     public function destroy(Invoice $invoice) {
         $invoice->delete();

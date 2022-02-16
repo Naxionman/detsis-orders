@@ -282,7 +282,6 @@ jQuery(function() {
                         subCategory = 'Μεντεσέδες';
                         enterLastProduct();
                         break;
-
                     case '0102':
                         category = 'Εξαρτήματα επίπλων';
                         subCategory = 'Τακάκια';
@@ -298,14 +297,49 @@ jQuery(function() {
                         subCategory = 'Προφίλ-μπάζες';
                         enterLastProduct();
                         break;
+                    case '0105':
+                        category = 'Εξαρτήματα επίπλων';
+                        subCategory = 'Ράφια';
+                        enterLastProduct();
+                        break;
+                    case '0106':
+                        category = 'Εξαρτήματα επίπλων';
+                        subCategory = 'Εξαρτήματα πορτών';
+                        enterLastProduct();
+                        break;
+                    case '0109':
+                        category = 'Εξαρτήματα επίπλων';
+                        subCategory = 'Διάφορα';
+                        enterLastProduct();
+                        break;
                     case '0201':
                         category = 'Χημικά';
                         subCategory = 'Σιλικόνες';
                         enterLastProduct();
                         break;
                     case '0202':
-                        category = 'Εξαρτήματα επίππλων';
+                        category = 'Χημικά';
                         subCategory = 'Κόλλες';
+                        enterLastProduct();
+                        break;           
+                    case '0203':
+                        category = 'Χημικά';
+                        subCategory = 'Καθαριστικά';
+                        enterLastProduct();
+                        break;           
+                    case '0204':
+                        category = 'Χημικά';
+                        subCategory = 'Αφροί';
+                        enterLastProduct();
+                        break;           
+                    case '0205':
+                        category = 'Χημικά';
+                        subCategory = 'Εξαρτήματα χημικών';
+                        enterLastProduct();
+                        break;           
+                    case '0206':
+                        category = 'Χημικά';
+                        subCategory = 'Λιπαντικά';
                         enterLastProduct();
                         break;           
                     default:
@@ -752,6 +786,84 @@ jQuery(function(){
             return false;
         }
     });
+
+    // Code for Invoice editing
+    if(top.location.pathname.match(/^\/edit_invoice\//)){
+        // First we show only the number of the order for the sake of readability
+        var orderDates = new Array();
+        $('#boundOrders').on('change', function () {
+
+            if($('.select2-selection__choice').length == 0){
+                $('#inputOrderDate').val(null);
+                $('#inputOrderDate').prop("type", "text");
+                $('#inputOrderDate').prop("placeholder", "Δεν έχει οριστεί παραγγελία");
+                
+            } else {
+                var calls = 0;
+            var earliest = new Date();
+
+            $('.select2-selection__choice').each( function () {
+                var str = this.innerHTML;
+                str = str.split(':')[0];
+                this.innerHTML = str;
+                var id = this.innerText;
+                id = id.replace('×','');
+                console.log(id);
+                
+                $.ajax({
+                    url: '/order/'+id,
+                    type: 'GET',
+                    dataType: 'JSON',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (date) {
+                        console.log(date);
+                        orderDates.push(date);
+                        
+                    },
+                    complete: function () {
+                        calls ++;
+                        console.log('Calls :'+ calls);
+                        if( $('.select2-selection__choice').length == calls){
+                            
+                            //After collecting all the dates of the orders we find the earliest...
+                            
+                            for (let i = 0; i < orderDates.length; i++) {
+                                earliest = new Date(orderDates[0]);
+                                console.log('Earliest date is     :' + earliest);
+                                
+                                var tmpDate = new Date(orderDates[i]);
+                                if(tmpDate.getTime() < earliest.getTime()){
+                                    earliest = tmpDate;
+                                }
+                                console.log('Earliest date now is :' + earliest);
+                                $('#inputOrderDate').prop("type","date");
+                                formatted = earliest.toISOString().substring(0,10);
+                                $('#inputOrderDate').val(formatted);
+
+                            }
+                        }
+                    },
+                    error:function() {
+                        alert("Σφάλμα στην επικοινωνία με τη βάση δεδομένων");
+                    }         
+                }); //Ajax call end
+            }) //each end
+
+            
+            console.log('Earliest date is     :' + earliest);
+            
+            }
+
+            
+        }); //on change end
+    
+        //We need to restrict the shipments to the specific supplier. 
+        $('#inputSupplier').on('change', function(){
+            
+        });
+    }
 
 });
 

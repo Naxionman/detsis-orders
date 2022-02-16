@@ -32,7 +32,7 @@
                                 <option value="{{ $order->client_id }}">{{ $order->client->surname }} {{ $order->client->name }}</option>
                                 <option value="1">Δεν αφορά πελάτη</option>
                                     @foreach ($clients as $client)
-                                        <option   type="text" value="{{ $client->id }}">{{ $client->surname }} {{ $client->name }}</option>
+                                        <option type="text" value="{{ $client->id }}">{{ $client->surname }} {{ $client->name }}</option>
                                     @endforeach
                             </select>
                         </div>

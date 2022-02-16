@@ -102,11 +102,7 @@
                         </div>
                         <div class="col-8">
                             <form action="/upload.php" method="post" id="uploadForm" enctype="multipart/form-data">
-                                <label class="order-file-upload shadow-sm btn-info">
-                                    <input type="file" name="filename" id="inputOrderFile"/><i class="fa fa-paperclip"></i> Προσθήκη αρχείου
-                                    <input type="hidden" name="order_id" value="{{ $order->id }}">
-                                </label>
-                                <button>upload</button>
+                                 
                                 @csrf
                             </form>
                         </div>
@@ -119,14 +115,7 @@
                         <!-- Display upload status -->
                         <div id="uploadStatus"></div>
                     </div>
-
-                    @forelse ($order_files as $file)
-                        <div class="row">
-                            <div class="col-5">{{$file->filename}}</div>
-                        </div>
-                    @empty
-                        No files attached
-                    @endforelse
+                    <!-- Order_files forelse here...-->
                 </div>
 
                 <div class="row m-2  border border-box rounded-3">
