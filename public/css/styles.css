@@ -645,7 +645,7 @@ progress {
 
 @media (min-width: 576px) {
   .container-sm, .container {
-    max-width: 540px;
+    max-width: 90%;
   }
 }
 @media (min-width: 768px) {
@@ -11782,4 +11782,10 @@ body {
 
 input[type="file"] {
   display: none;
+}
+
+.select2-results__option {
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-stretch: ultra-condensed;
+  
 }

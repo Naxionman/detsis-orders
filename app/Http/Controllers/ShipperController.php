@@ -103,4 +103,10 @@ class ShipperController extends Controller {
 
         return redirect('shippers')->with('message', 'Επιτυχής διαγραφή Μεταφορικής!');
     }
+
+    public function getNames(){
+        $names = Shipper::pluck('name')->toArray();
+
+        return $names;
+    }
 }

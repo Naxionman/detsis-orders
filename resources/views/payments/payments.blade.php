@@ -83,7 +83,9 @@
     <script type="text/javascript" src="https:////cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.11/sorting/date-eu.js"></script>
     <script type = "text/javascript">$(document).ready( function () {$('#paymentsTable').DataTable({
+        order: [0,'desc'],
         columnDefs: [{ 
-            type: 'date-eu', targets: [4] }]}  
+            type: 'date-eu', targets: [0] 
+        }]}  
         );});</script>
 @endsection

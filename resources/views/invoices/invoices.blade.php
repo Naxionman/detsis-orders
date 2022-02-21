@@ -63,16 +63,22 @@
                                 <td>{{ $invoice->supplier->company_name }}</td>
                                 <td>{{ $invoice->supplier_invoice_number }}</td>
                                 <td>
-                                    @foreach ($details as $detail)
-                                        @if($invoice->id == $detail->invoice_id)
-                                            @if ($detail->order_id == null)
+                                    @for ($i = 0; $i < count($details); $i++)
+                                        @if($invoice->id == $details[$i]->invoice_id)
+                                            @if ($details[$i]->order_id == null)
                                                 {{ '-' }}
                                                 @break
                                             @else
-                                                <a href="/view_order/{{ $detail->order_id }}">{{ $detail->order_id }}</a>                                                    
+                                                @if ($i-1 < 0) <!-- Checking index bounds -->
+                                                    <a href="/view_order/{{ $details[$i]->order_id }}">{{ $details[$i]->order_id }}</a>
+                                                @else
+                                                    @if($details[$i]->order_id != $details[ $i-1]->order_id)
+                                                        <a href="/view_order/{{ $details[$i]->order_id }}">{{ $details[$i]->order_id }}</a>
+                                                    @endif
+                                                @endif                                                   
                                             @endif
                                         @endif
-                                    @endforeach
+                                    @endfor
                                 </td>
                                 <td class="text-end pe-2">{{ number_format($invoice->invoice_total,2,",",".") }} €</td>
                                 <td>{{ $invoice->invoice_type }}</td>

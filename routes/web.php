@@ -93,9 +93,11 @@ Route::post('/add_car_service/{vehicleId}', [CarServiceController::class, 'store
 Route::post('/add_payment', [PaymentController::class, 'store']);
 Route::post('/add_leave', [LeaveController::class, 'store']);
 Route::post('/add_expence', [ExpenceController::class, 'store']);
-//Special route for ajax fetching
+//Special routes for ajax fetching
 Route::get('/add_leave/{employeeId}', [LeaveController::class, 'getEmployeeLeaveDays']);
 Route::get('/order/{id}', [OrderController::class, 'getOrder']);
+Route::get('/shipment/{id}', [ShipmentController::class, 'getShipments']);
+Route::get('/shipper', [ShipperController::class, 'getNames']);
 Route::post('upload.php',[OrderFileController::class, 'addFile']);
 
 //Show actions (for editing records)

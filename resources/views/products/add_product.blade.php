@@ -3,7 +3,7 @@
 @section('title', 'Προσθήκη προϊόντος')
 
 @section('content')
-<div class="container">
+<div class="container-fluid px-4">
     <div class="card bg-info bg-opacity-25 shadow-sm border-0 rounded-3 mt-3 ">
         <div class="card-header"><h3 class="text-center font-weight-light my-2 "><i class="fas fa-box-open"></i>    Νέο προϊόν</h3></div>
             <div class="card-body bg-light">
@@ -11,30 +11,30 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="row mt-3 justify-content-center">
-                                <div class="col-sm-4"><label for="inputDetsisCode">Κωδικός μας (DCode)</label></div>
-                                <div class="col-sm-4"><input class="form-control" autocomplete="off" type="text" id="inputDetsisCode" name="detsis_code" placeholder="Κωδικός εργοστασίου μας"  required="required" autofocus></div>
+                                <div class="col-3"><label for="inputDetsisCode">Κωδικός μας (DCode)</label></div>
+                                <div class="col-9"><input class="form-control" autocomplete="off" type="text" id="inputDetsisCode" name="detsis_code" placeholder="Κωδικός εργοστασίου μας"  required="required" autofocus></div>
                             </div>
                             <div class="row mt-3 justify-content-center">
-                                <div class="col-sm-4"><label for="inputSupplierCode">Κωδικός προμηθευτή</label></div>
-                                <div class="col-sm-4"><input class="form-control" autocomplete="nope" type="text" id="inputSupplierCode" name="product_code" placeholder="Κωδικός από τον προμηθευτή"></div>
-                            </div>
-                            
-                            <div class="row mt-3 justify-content-center">
-                                <div class="col-sm-4"><label for="inputProductName">Ονομασία προϊόντος</label></div>
-                                <div class="col-sm-4"><input class="form-control" autocomplete="nope" type="text" id="inputProductName" name="product_name" placeholder="Ονομασία"></div>
+                                <div class="col-3"><label for="inputSupplierCode">Κωδικός προμηθευτή</label></div>
+                                <div class="col-9"><input class="form-control" autocomplete="nope" type="text" id="inputSupplierCode" name="product_code" placeholder="Κωδικός από τον προμηθευτή"></div>
                             </div>
                             
                             <div class="row mt-3 justify-content-center">
-                                <div class="col-sm-4"><label for="inputStockLevel">Ποσότητα Αποθήκης</label></div>
-                                <div class="col-sm-4"><input class="form-control" autocomplete="nope" type="number" id="inputStockLevel" name="stock_level" placeholder="Stock"></div>
+                                <div class="col-3"><label for="inputProductName">Ονομασία προϊόντος</label></div>
+                                <div class="col-9"><input class="form-control" autocomplete="nope" type="text" id="inputProductName" name="product_name" placeholder="Ονομασία"></div>
+                            </div>
+                            
+                            <div class="row mt-3 justify-content-center">
+                                <div class="col-3"><label for="inputStockLevel">Ποσότητα Αποθήκης</label></div>
+                                <div class="col-9"><input class="form-control" autocomplete="nope" type="number" id="inputStockLevel" name="stock_level" placeholder="Stock"></div>
                             </div>
                             <div class="row mt-3 justify-content-center">
-                                <div class="col-sm-4"><label for="inputMinLevel">Όριο ποσότητας</label></div>
-                                <div class="col-sm-4"><input class="form-control" autocomplete="nope" type="number" id="inputMinLevel" name="min_level" placeholder="Ελάχιστη ποσότητα"></div>
+                                <div class="col-3"><label for="inputMinLevel">Όριο ποσότητας</label></div>
+                                <div class="col-9"><input class="form-control" autocomplete="nope" type="number" id="inputMinLevel" name="min_level" placeholder="Ελάχιστη ποσότητα"></div>
                             </div>
                             <div class="row mt-3 justify-content-center">
-                                <div class="col-sm-2"><label class="form-label" for="inputUrl">Url εικόνας</label></div>
-                                <div class="col-sm-8"><input class="form-control" type="file" id="inputUrl" name="image_url"></div>
+                                <div class="col-3"><label class="form-label" for="inputUrl">Url εικόνας</label></div>
+                                <div class="col-9"><input class="form-control" type="file" id="inputUrl" name="image_url"></div>
                             </div>
                             <div class="form-group">
                                 <label for="inputNotes">Σημειώσεις</label>

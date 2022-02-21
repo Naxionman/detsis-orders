@@ -115,4 +115,10 @@ class ShipmentController extends Controller {
 
         return redirect('shipments')->with('message', 'Επιτυχής διαγραφή Τιμολογίου Μεταφορικής!');
     }
+
+    public function getShipments($id) {
+        $shipments = Shipment::where("supplier_id", $id)->get();
+        //dd($shipments);
+        return $shipments;
+    }
 }

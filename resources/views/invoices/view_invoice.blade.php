@@ -80,69 +80,81 @@
                     <div class="card bg-danger bg-opacity-75 border-0 rounded-3 shadow-sm">
                         <div class="card-header text-light font-weight-light">Τιμολόγιο Μεταφορικής</div>
                         <div class="card-body bg-light">
-                            <div class="row">
-                                <div class="col-5 text-end justify-content-center">
-                                    <label class="align-middle">Μεταφορική</label>
+                            @if ($invoice->shipment_id != null)
+                                <div class="row">
+                                    <div class="col-5 text-end justify-content-center">
+                                        <label class="align-middle">Μεταφορική</label>
+                                    </div>
+                                    <div class="col-5">
+                                        <label class="align-middle">
+                                            @if($invoice->shipment_id !=null)
+                                                {{ $invoice->shipment->shipper->name }}
+                                            @endif
+                                        </label>
+                                    </div>
                                 </div>
-                                <div class="col-5">
-                                    <label class="align-middle">
+                                <div class="row">
+                                    <div class="col-5 text-end justify-content-center">
+                                        <label class="align-middle">Αριθμός Τιμολογίου</label>
+                                    </div>
+                                    <div class="col-5">
+                                        <label class="align-middle">
+                                            @if($invoice->shipment_id !=null)
+                                                {{ $invoice->shipment->shipment_invoice_number ?: '-' }}
+                                            @endif
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5 text-end justify-content-center">
+                                        <label class="align-middle">Συνολική χρεώση</label>
+                                    </div>
+                                    <div class="col-5">
+                                        <label class="align-middle">
+                                            @if($invoice->shipment_id !=null)
+                                                {{ $invoice->shipment->shipment_price ?: '0' }} €
+                                            @endif
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5 text-end justify-content-center">
+                                        <label class="align-middle">Επιπλέον μεταφορική</label>
+                                    </div>
+                                    <div class="col-5">
+                                        <label class="align-middle">
+                                            @if($invoice->shipment_id !=null)
+                                                @if ($invoice->shipment->extra_shipper_id == null)
+                                                    {{'-'}}
+                                                @else
+                                                    {{ $invoice->shipment->extraShipper->name }}    
+                                                @endif
+                                            @endif
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5 text-end justify-content-center">
+                                        <label class="align-middle">Xρεώση 2ης μεταφορικής</label>
+                                    </div>
+                                    <div class="col-5">
                                         @if($invoice->shipment_id !=null)
-                                            {{ $invoice->shipment->shipper->name }}
-                                        @endif
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-5 text-end justify-content-center">
-                                    <label class="align-middle">Αριθμός Τιμολογίου</label>
-                                </div>
-                                <div class="col-5">
-                                    <label class="align-middle">
-                                        @if($invoice->shipment_id !=null)
-                                            {{ $invoice->shipment->shipment_invoice_number ?: '-' }}
-                                        @endif
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-5 text-end justify-content-center">
-                                    <label class="align-middle">Συνολική χρεώση</label>
-                                </div>
-                                <div class="col-5">
-                                    <label class="align-middle">
-                                        @if($invoice->shipment_id !=null)
-                                            {{ $invoice->shipment->shipment_price ?: '0' }} €
-                                        @endif
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-5 text-end justify-content-center">
-                                    <label class="align-middle">Επιπλέον μεταφορική</label>
-                                </div>
-                                <div class="col-5">
-                                    <label class="align-middle">
-                                        @if($invoice->shipment_id !=null)
-                                            @if ($invoice->shipment->extra_shipper_id == null)
-                                                {{'-'}}
+                                            @if ($invoice->shipment->extra_price != null)
+                                                <label class="align-middle">{{ $invoice->shipment->extra_price }} €</label>
                                             @else
-                                                {{ $invoice->shipment->extraShipper->name }}    
+                                            <label class="align-middle"> - </label>
                                             @endif
                                         @endif
-                                    </label>
+                                    </div>
+                                </div>    
+                            @else
+                                <div class="row text-center">
+                                    <span>Δεν έχει συσχετισθεί φορτωτική</span>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-5 text-end justify-content-center">
-                                    <label class="align-middle">Xρεώση 2ης μεταφορικής</label>
-                                </div>
-                                <div class="col-5">
-                                    @if($invoice->shipment_id !=null)
-                                        <label class="align-middle">{{ $invoice->shipment->extra_price ?: '-'}} €</label>
-                                    @endif
-                                </div>
-                            </div>
-                            <br>
+                                
+                            @endif
+                            
+                            
                         </div>
                     </div>
                 </div>

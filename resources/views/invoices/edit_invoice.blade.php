@@ -46,7 +46,7 @@
                                  <label class="align-middle">Προμηθευτής</label>
                               </div>
                               <div class="col-7">
-                                 <select class="form-control js-example-basic-single" name="supplier_id">
+                                 <select class="form-control js-example-basic-single" name="supplier_id" id="inputSupplier">
                                     <option value="{{ $invoice->supplier_id }}" selected>{{ $invoice->supplier->company_name }}</option>
                                     @foreach ($suppliers as $supplier)
                                        <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
@@ -62,6 +62,8 @@
                               <div class="col-7">
                                  @if( $invoice->orderDetails->first->order_id != null)
                                     <input class="form-control" type="date" value="{{ $invoice->orderDetails->first()->order->order_date->format("Y-m-d")}}" name="order_date" id="inputOrderDate">
+                                 @else
+                                    <input class="form-control" type="text" id="inputOrderDate" placeholder="Δεν έχει συσχετισθεί παραγγελία" disabled>
                                  @endif
                               </div>
                            </div>
@@ -120,7 +122,11 @@
                                     </div>
                                     <div class="col-7">
                                        <select class="form-control" id="inputShipper" name="shipper_id">
-                                          <option value="" selected>Δεν θα καταχωρηθεί προσωρινά</option>
+                                          @if ($invoice->shipment_id == null)
+                                             <option value="" selected>Δεν θα καταχωρηθεί προσωρινά</option>   
+                                          @else
+                                             <option value="{{ $invoice->shipment_id }}" selected>{{ $invoice->shipment->shipper->name }}</option>
+                                          @endif
                                           @foreach ($shippers as $shipper)
                                              <option type="text" value="{{ $shipper->id }}">{{ $shipper->name }}</option>
                                           @endforeach
@@ -132,15 +138,23 @@
                                        <label for="inputShipmentNumber" class="align-middle">Αριθμός Τιμολογίου</label>
                                     </div>
                                     <div class="col-7">
-                                       <input class="form-control" name="shipment_invoice_number" type="text" id="inputShipmentNumber" autocomplete="off">
+                                       @if ($invoice->shipment_id != null)
+                                          <input class="form-control" name="shipment_invoice_number" value="{{ $invoice->shipment->shipment_invoice_number }}"type="text" id="inputShipmentNumber" autocomplete="off">   
+                                       @else
+                                          <input class="form-control" name="shipment_invoice_number" type="text" id="inputShipmentNumber" autocomplete="off">   
+                                       @endif
                                     </div>
                                  </div>
                                  <div class="row">
                                     <div class="col-5 text-end justify-content-center">
-                                       <label for="inputShipmentPrice" class="align-middle">Συνολική χρεώση</label>
+                                       <label for="inputShipmentPrice" class="align-middle">Συνολική χρεώση (€)</label>
                                     </div>
                                     <div class="col-7">
-                                       <input class="form-control" name="shipment_price" type="number" step="0.01" id="inputShipmentPrice" autocomplete="off">
+                                       @if ($invoice->shipment_id != null)
+                                          <input class="form-control" value="{{ $invoice->shipment->shipment_price }}" name="shipment_price" type="number" step="0.01" id="inputShipmentPrice" autocomplete="off">
+                                       @else
+                                          <input class="form-control" name="shipment_price" type="number" step="0.01" id="inputShipmentPrice" autocomplete="off">
+                                       @endif
                                     </div>
                                  </div>
                                  <div class="row">
@@ -149,7 +163,12 @@
                                     </div>
                                     <div class="col-7">
                                        <select class="form-control" id="inputExtraShipper" name="extra_shipper_id" >
-                                          <option value="none" selected disabled hidden>Δεν υπήρξε ενδιάμεση μεταφορική</option>
+                                          @if ($invoice->shipment_id != null && $invoice->shipment->extra_shipper_id != null)
+                                             <option value="{{ $invoice->shipment->extra_shipper_id }}" selected>{{ $invoice->shipment->extraShipper->name }}</option>
+                                          @else
+                                             <option value="none" selected disabled hidden>Δεν υπήρξε ενδιάμεση μεταφορική</option>   
+                                          @endif
+                                          
                                           @foreach ($shippers as $shipper)
                                              <option type="text" value="{{ $shipper->id }}">{{ $shipper->name }} </option>
                                           @endforeach
@@ -158,24 +177,28 @@
                                  </div>
                                  <div class="row">
                                     <div class="col-5 text-end justify-content-center">
-                                       <label for="inputExtraPrice" class="align-middle">Xρεώση 2ης μεταφορικής</label>
+                                       <label for="inputExtraPrice" class="align-middle">Xρεώση 2ης μεταφορικής (€)</label>
                                     </div>
                                     <div class="col-7">
-                                       <input class="form-control" name="extra_price" type="number" step="0.01" id="inputExtraPrice" autocomplete="off">
+                                       @if ($invoice->shipment_id != null)
+                                          <input class="form-control" value="{{ $invoice->shipment->extra_price }}" name="extra_price" type="number" step="0.01" id="inputExtraPrice" autocomplete="off">   
+                                       @else
+                                          <input class="form-control" name="extra_price" type="number" step="0.01" id="inputExtraPrice" autocomplete="off">   
+                                       @endif
                                     </div>
                                  </div>
                               </div>
                               <div class="tab-pane fade" id="shared" role="tabpanel" aria-labelledby="shared-tab">
                                  <br>
-                                 <h6>Επιλέξτε το τιμολόγιο μεταφορικής με το οποίο ήρθε</h6>
-                                 <p><i class="fas fa-exclamation-triangle"></i> Ελέγξτε αν είναι ο σωστός προμηθευτής στην αριστερή καρτέλα</p>
-                                 <select class="form-control js-example-basic-single" name="shared_shipment" id="shared_shipment">
-                                    <option value="null" selected></option>
-                                    @foreach ($shipments as $shipment)
-                                       @if($shipment->supplier_id != null)
-                                       <option value="{{ $shipment->id }}">{{ $shipment->shipment_invoice_number }} - {{ $shipment->shipper->name }},[{{ $shipment->supplier->company_name }}]</option>
-                                       @endif   
-                                    @endforeach
+                                 <h6>Επιλέξτε το τιμολόγιο μεταφορικής με το οποίο ήρθε</h6><br>
+                                 <p><i class="fas fa-exclamation-triangle"></i> Ελέγξτε αν είναι ο σωστός προμηθευτής στην αριστερή καρτέλα</p><br>
+                                 <select class="form-control" name="shared_shipment" id="shared_shipment">
+                                    <option value="null" selected>Επιλέξτε φορτωτική</option>
+                                       @foreach ($shipments as $shipment)
+                                          @if($shipment->supplier_id != null && $shipment->supplier_id == $invoice->supplier_id)
+                                             <option value="{{ $shipment->id }}">{{ $shipment->shipment_invoice_number }} - {{ $shipment->shipper->name }},[{{ $shipment->supplier->company_name }}]</option>
+                                          @endif   
+                                       @endforeach
                                  </select>
                                  <br>
                                  <br>
@@ -191,61 +214,76 @@
                <table class="table table-bordered table-striped">
                   <thead>
                      <tr>
-                        <th style="width: 5%">α/α</th>
-                        <th>Ποσ.</th>
-                        <th>Μ/Μ</th>
-                        <th>Ανά συσκ.</th>
-                        <th>Περιγραφή προϊόντος</th>
-                        <th>Τιμή μονάδας</th>
-                        <th>Καθαρή αξία</th>
-                        <th>Έκπτωση (%)</th>
-                        <th>Αξία</th>
-                        <th>ΦΠΑ (%)</th>
-                        <th>ΦΠΑ (€)</th>
-                        <th>Τελική Τιμή</th>
+                        <th style="width: 5%" class="p-0 order-font">α/α</th>
+                        <th style="width: 5%" class="p-0 order-font">Ποσ.</th>
+                        <th style="width: 5%" class="p-0 order-font">Μ/Μ</th>
+                        <th style="width: 40%" class="p-0 order-font">Προϊόν</th>
+                        <th style="width: 6%" class="p-0 order-font">Τιμή μονάδας</th>
+                        <th style="width: 5%" class="p-0 order-font">Καθ. αξία</th>
+                        <th style="width: 5%" class="p-0 order-font">Έκπ %</th>
+                        <th style="width: 5%" class="p-0 order-font">Αξία</th>
+                        <th style="width: 5%" class="p-0 order-font">ΦΠΑ %</th>
+                        <th style="width: 5%" class="p-0 order-font">ΦΠΑ</th>
+                        <th style="width: 6%" class="p-0 order-font">Τελική Τιμή</th>
                      </tr>
                   </thead>
                   <tbody>
                      @php
-                        $count = 0;
+                        $count = 1;
                      @endphp
                      @foreach ($details as $detail)
-                        @php
-                           $count += 1;
-                        @endphp
-                           <tr>
-                              <td style="width: 3%" class="p-0 order-font">{{ $count }}</td>
-                              <td style="width: 3%" class="p-0 text-end pe-1 order-font">
-                                 <input class="form-control" type="number" step="0.01" value="{{ $detail->quantity.$count }}" name="quantity{{$count}}">   
-                              </td>
-                              <td style="width: 3%" class="p-0 text-end order-font">
-                                 <input class="form-control" type="text" value="{{ $detail->measurement_unit }}" name="measurement_unit{{$count}}">
-                              </td>
-                              <td style="width: 5%" class="p-0 text-end order-font">
-                                 <input class="form-control" type="text" value="{{ $detail->items_per_package }}" name="items_per_package{{$count}}"
-                              </td>
-                              <td style="width: 30%" class="p-0 text-start ps-0 order-font">
-                                 <select class="js-example-basic-single" name="product{{$count}}" id="product{{$count}}">
-                                    <option value="{{ $detail->product->id }}" selected>[{{ $detail->product->detsis_code }}],[{{$detail->product->supplier_code}}],{{$detail->product->product_name}}</option>
-                                    @foreach ($products as $product)
-                                       <option value="{{$product->id}}">[{{ $product->detsis_code}}],[{{$product->product_code}}],{{ $product->product_name }}</option>
-                                    @endforeach
-                                 </select>
-                              </td>
-                              <td style="width: 5%" class="p-0 pe-2 text-end">
-                                 {{ number_format($detail->net_value, 4, ',', '.') }}
-                              </td>
-                              <td style="width: 5%" class="p-0 pe-2 text-end">{{ number_format($detail->net_value * $detail->quantity, 2, ',', '.') }}</td>
-                              <td style="width: 5%" class="p-0 pe-2 text-end">{{ number_format($detail->product_discount, 2, ',', '.') }}</td>
-                              <td style="width: 5%" class="p-0 pe-2 text-end">{{ number_format($detail->net_value * $detail->quantity - ($detail->net_value * $detail->quantity * $detail->product_discount) / 100,2,',','.') }}</td>
-                              <td style="width: 5%" class="p-0 pe-2 text-end">{{ number_format($detail->tax_rate, 2, ',', '.') }}</td>
-                              <td style="width: 5%" class="p-0 pe-2 text-end">{{ number_format((($detail->net_value * $detail->quantity -($detail->net_value * $detail->quantity * $detail->product_discount) / 100) *$detail->tax_rate) /100,2,',','.') }}</td>
-                              <td style="width: 10%" class="p-0 pe-2 text-end">{{ number_format($detail->price, 2, ',', '.') }}</td>
-                           </tr>
+                        <tr id="productRow{{$count}}">
+                           <td class="p-0 order-font" id="aa{{$count}}">{{$count}}</td>
+                           <td class="p-0 order-font">
+                              <input value="{{$detail->quantity}}" class="form-control p-0 pe-2 text-end order-font" name="quantity{{$count}}" id="quantity{{$count}}" required="required" type="number" step="0.01">
+                           </td>   
+                           <td class="p-0 order-font">
+                              <input value="{{$detail->measurement_unit}}" type="text" class="form-control p-0 pe-2 text-end order-font" name="measurement_unit{{$count}}" id="measurementUnit{{$count}}">
+                           </td>
+                           <td>
+                              <select class="form-control js-example-basic-single" name="product{{$count}}" id="product{{$count}}">
+                                 <option value="{{$detail->product_id}}" selected>[{{ $detail->product->detsis_code}}],[{{$detail->product->product_code}}]-{{ $detail->product->product_name }}</option>
+                                 @foreach ($products as $product)
+                                    <option value="{{ $product->id }}">[{{ $product->detsis_code}}],[{{$product->product_code}}]-{{ $product->product_name }}</option>
+                                 @endforeach
+                              </select>
+                           </td>
+                           <td class="p-0">
+                              <input value="{{$detail->net_value }}" type="number" step="0.0001" class="form-control p-0 pe-2 text-end order-font" name="net_value{{$count}}" id="netValue{{$count}}" min="0" required="required">
+                           </td>
+                        
+                           <td class="p-0">
+                              <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="sum_net_value1" id="sumNetValue1" min="0" readonly="readonly">
+                           </td>
+                           <td class="p-0">
+                              <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="product_discount1" value="0.00"min="0" max="100" id="productDiscount1">
+                           </td>
+                           <td class="p-0">
+                              <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="value1" value="0.00" min="0" id="value1" readonly="readonly">
+                           </td>
+                           <td class="p-0">
+                              <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="tax_rate1" value="24.00" min="0" max="100" id="taxRate1">
+                           </td>
+                           <td class="p-0">
+                              <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="tax1" min="0" id="tax1" readonly="readonly">
+                           </td>
+                           <td class="p-0">
+                              <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="price1" min="0" id="price1" readonly="readonly">
+                           </td>
+                        </tr>
                      @endforeach
+                        
+                        
+                        
+                     
+                     <input type="hidden" name="count" id="count" value="1">
                   </tbody>
                </table>
+               <div>
+                  <button type="button" id="addProduct" class="btn btn-warning me-5 ms-5"> + Προσθήκη προϊόντος </button>
+               </div>
             </div> <!-- End of products row -->
+            
             <div class="row m-2"><!-- Row 3 -->
                   <div class="col-7 border rounded">
                      <div class="col-sm-2"><label for="inputNotes">Σημειώσεις</label></div>

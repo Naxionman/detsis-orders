@@ -138,7 +138,7 @@
         $("#itemToPrint").printThis({
             removeScripts: true, 
             importCSS: true,
-            header: "<p>Πελάτης :<strong>{{ $order->client->surname }} {{ $order->client->name }}</strong></p><p> Αριθμός Παραγγελίας :<strong> {{$order->id }}</strong>, Ημερομηνία παραγγελίας :<strong>{{ $order->order_date->format('d-m-Y') }}</strong></p>"
+            header: "<p>Πελάτης :<strong>{{ $order->client->surname }} {{ $order->client->name }}</strong></p><p>Προμηθευτής : <strong>{{ $order->supplier->company_name }}</strong></p><p> Αριθμός Παραγγελίας :<strong> {{$order->id }}</strong>, Ημερομηνία παραγγελίας :<strong>{{ $order->order_date->format('d-m-Y') }}</strong></p>"
         });
     });
 

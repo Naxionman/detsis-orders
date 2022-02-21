@@ -161,7 +161,7 @@
                                 <td>
                                     <select class="form-control js-example-basic-single" name="product1" id="product1">
                                         @foreach ($products as $product)
-                                            <option value="{{ $product->id }}">{{ $product->product_name }} ({{ $product->detsis_code}})</option>
+                                            <option value="{{ $product->id }}">[{{ $product->detsis_code}}],[{{$product->product_code}}]-{{ $product->product_name }}</option>
                                         @endforeach
                                     </select>
                                 </td>

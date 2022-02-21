@@ -2,8 +2,8 @@
     * Start Bootstrap - SB Admin v7.0.4 (https://startbootstrap.com/template/sb-admin)
     * Copyright 2013-2021 Start Bootstrap
     * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-sb-admin/blob/master/LICENSE)
-    */
-    // 
+*/
+
 // Scripts
 
 
@@ -307,6 +307,11 @@ jQuery(function() {
                         subCategory = 'Εξαρτήματα πορτών';
                         enterLastProduct();
                         break;
+                    case '0107':
+                        category = 'Εξαρτήματα επίπλων';
+                        subCategory = 'Πόδια';
+                        enterLastProduct();
+                        break;
                     case '0109':
                         category = 'Εξαρτήματα επίπλων';
                         subCategory = 'Διάφορα';
@@ -341,7 +346,42 @@ jQuery(function() {
                         category = 'Χημικά';
                         subCategory = 'Λιπαντικά';
                         enterLastProduct();
-                        break;           
+                        break;
+                    case '0301':
+                        categry = 'Βίδες';
+                        subCategory = 'Νοβοπανόβιδες';
+                        enterLastProduct();
+                        break;        
+                    case '0302':
+                        categry = 'Βίδες';
+                        subCategory = 'Τσιμεντόβιδες';
+                        enterLastProduct();
+                        break;        
+                    case '0303':
+                        categry = 'Βίδες';
+                        subCategory = 'Ευρώβιδες';
+                        enterLastProduct();
+                        break;        
+                    case '0304':
+                        categry = 'Βίδες';
+                        subCategory = 'Λαμαρινόβιδες';
+                        enterLastProduct();
+                        break;        
+                    case '0305':
+                        categry = 'Βίδες';
+                        subCategory = 'Ούπατ';
+                        enterLastProduct();
+                        break;        
+                    case '0306':
+                        categry = 'Βίδες';
+                        subCategory = 'Τάπες';
+                        enterLastProduct();
+                        break;        
+                    case '0309':
+                        categry = 'Βίδες';
+                        subCategory = 'Διάφορες';
+                        enterLastProduct();
+                        break;        
                     default:
                         category = 'Δεν υπάρχει τέτοια κατηγορία';
                         subCategory = 'Δεν υπάρχει τέτοια κατηγορία';
@@ -792,77 +832,119 @@ jQuery(function(){
         // First we show only the number of the order for the sake of readability
         var orderDates = new Array();
         $('#boundOrders').on('change', function () {
-
             if($('.select2-selection__choice').length == 0){
                 $('#inputOrderDate').val(null);
                 $('#inputOrderDate').prop("type", "text");
-                $('#inputOrderDate').prop("placeholder", "Δεν έχει οριστεί παραγγελία");
-                
+                $('#inputOrderDate').prop("placeholder", "Δεν έχει συσχετισθεί παραγγελία");
+                console.log("No orders selected");
             } else {
+                console.log("Length now is : "+ $('.select2-selection__choice').length);
                 var calls = 0;
-            var earliest = new Date();
-
-            $('.select2-selection__choice').each( function () {
-                var str = this.innerHTML;
-                str = str.split(':')[0];
-                this.innerHTML = str;
-                var id = this.innerText;
-                id = id.replace('×','');
-                console.log(id);
+                var earliest = new Date();
                 
-                $.ajax({
-                    url: '/order/'+id,
-                    type: 'GET',
-                    dataType: 'JSON',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function (date) {
-                        console.log(date);
-                        orderDates.push(date);
-                        
-                    },
-                    complete: function () {
-                        calls ++;
-                        console.log('Calls :'+ calls);
-                        if( $('.select2-selection__choice').length == calls){
+                $('.select2-selection__choice').each( function () {
+                    var str = this.innerHTML;
+                    str = str.split(':')[0];
+                    this.innerHTML = str;
+                    var id = this.innerText;
+                    id = id.replace('×','');
+                    //console.log(id);
+                    
+                    $.ajax({
+                        url: '/order/'+id,
+                        type: 'GET',
+                        dataType: 'JSON',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function (date) {
+                            console.log(date);
+                            orderDates.push(date);
                             
-                            //After collecting all the dates of the orders we find the earliest...
-                            
-                            for (let i = 0; i < orderDates.length; i++) {
-                                earliest = new Date(orderDates[0]);
-                                console.log('Earliest date is     :' + earliest);
+                        },
+                        complete: function () {
+                            calls ++;
+                            console.log('Calls :'+ calls);
+                            if( $('.select2-selection__choice').length == calls){
+                                //console.log("Yes...It is...");
+                                //After collecting all the dates of the orders we find the earliest...
                                 
-                                var tmpDate = new Date(orderDates[i]);
-                                if(tmpDate.getTime() < earliest.getTime()){
-                                    earliest = tmpDate;
+                                for (let i = 0; i < orderDates.length; i++) {
+                                    earliest = new Date(orderDates[0]);
+                                    //console.log('Earliest date is     :' + earliest);
+                                    
+                                    var tmpDate = new Date(orderDates[i]);
+                                    if(tmpDate.getTime() < earliest.getTime()){
+                                        earliest = tmpDate;
+                                    }
+                                    console.log('Earliest date now is :' + earliest);
+                                    $('#inputOrderDate').prop("type","date");
+                                    $('#inputOrderDate').prop("disabled",false);
+                                    formatted = earliest.toISOString().substring(0,10);
+                                    $('#inputOrderDate').val(formatted);
+                                    //console.log("wtf?");
                                 }
-                                console.log('Earliest date now is :' + earliest);
-                                $('#inputOrderDate').prop("type","date");
-                                formatted = earliest.toISOString().substring(0,10);
-                                $('#inputOrderDate').val(formatted);
-
                             }
-                        }
-                    },
-                    error:function() {
-                        alert("Σφάλμα στην επικοινωνία με τη βάση δεδομένων");
-                    }         
-                }); //Ajax call end
-            }) //each end
-
-            
-            console.log('Earliest date is     :' + earliest);
-            
+                        },
+                        error:function() {
+                            alert("Σφάλμα στην επικοινωνία με τη βάση δεδομένων");
+                        }         
+                    }); //Ajax call end
+                }) //each end
+                            
+                //console.log('Earliest date is     :' + earliest);            
             }
 
             
         }); //on change end
     
         //We need to restrict the shipments to the specific supplier. 
+        var filteredShipments = new Array();
         $('#inputSupplier').on('change', function(){
+            var id = $('#inputSupplier').val();            
+            console.log(id);
+            var filtered = new Array();
+            var shippers = new Array();
+            //Ajax call for getting an array of the shippers' names
+            $.ajax({
+                url: '/shipper',
+                type: 'GET',
+                dataType: 'JSON',
+                headers:{
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (names){
+                    shippers = names;
+                }
+            });
+
+            //Ajax call for the shipments related to the selected supplier
+            $.ajax({
+                url: '/shipment/'+ id,
+                type: 'GET',
+                dataType: 'JSON',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (shipments) {
+                    console.log(shipments);
+                    filtered = shipments;
+                },
+                complete: function () {
+                    //We have now got the filtered shipments...
+                    $('#shared_shipment').empty(); //Emptying
+                    $('#shared_shipment').prepend('<option selected>Επιλέξτε φορτωτική</option>'); //Emptying
+
+                    filtered.forEach(shipment => {
+                        $('#shared_shipment').prepend('<option value="'+ shipment["id"] +'">['+ shipment["shipment_invoice_number"]+ ']-' + shippers[shipment["shipper_id"]-1] +'</option>')
+                    });                    
+                },
+                error:function() {
+                    alert("Σφάλμα στην επικοινωνία με τη βάση δεδομένων");
+                }         
+            }); //Ajax call end
             
-        });
+        }); //inputSupplier on change end
     }
 
 });
