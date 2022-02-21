@@ -71,7 +71,7 @@
                                         //dd($paid);   
                                         $sum_charged = $invoices->where('supplier_id','=',$supplier->id)->sum('invoice_total');        
                                         //The balance = invoice charges - payments + initial balance 
-                                        $new_balance = $sum_charged - $paid + $supplier->balance;
+                                        $new_balance = round($sum_charged - $paid + $supplier->starting_balance,2);
                                     @endphp
                                         {{ $new_balance }}
                                     €</td>
