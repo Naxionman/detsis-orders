@@ -213,6 +213,7 @@ class InvoiceController extends Controller {
             $invoice->notes .= "\r\n" .'-------------  ΣΗΜΕΙΩΣΕΙΣ ΕΠΙΠΛΕΟΝ ΠΑΡΑΓΓΕΛΙΑΣ -----------------';
             $invoice->notes .= "\r\n" .$order->client->surname .' ' .$order->client->name;
             $invoice->notes .= "\r\n" .$request->input('notes');
+            $invoice->notes .= "\r\n";
             $invoice->save();
 
         } else if($request->input('shared_shipment') != 'null'){
@@ -264,6 +265,7 @@ class InvoiceController extends Controller {
                 'supplier_id' => $order->supplier->id,
                 'invoice_date' => $request->input('invoice_date'),
                 'supplier_invoice_number' => $request->input('supplier_invoice_number'),
+                'order_discount'=> $request->input('order_discount'),
                 'invoice_total' => $request->input('invoice_total'),
                 'notes' => $request->input('notes')
             ]);
@@ -281,6 +283,11 @@ class InvoiceController extends Controller {
             if($request->input('arrived'.$i) == 1){
                 $detail->invoice_id = $invoice->id; //link to the invoice
                 $detail->pending = '0'; //updating pending status
+                $detail->net_value = $request->input('net_value'.$i);
+                $detail->product_discount = $request->input('product_discount'.$i);
+                $detail->measurement_unit = $request->input('measurement_unit'.$i);
+                $detail->tax_rate = $request->input('tax_rate'.$i);
+                $detail->price = $request->input('price'.$i);
                 //creating price record for the specific product
                 Price::create([
                     'price_date' => $request->input('invoice_date'),
@@ -347,18 +354,21 @@ class InvoiceController extends Controller {
         $invoice->save();
 
         //If there was no shipment associated we may input it here (or via the shipping menu)
-        if($invoice->shipment_id == null && $request->input('shipper_id') != null){
-            $shippingData = request()->validate([
-                'shipping_date' => 'required',
-                'shipper_id' => 'required',
-                'supplier_id' => 'required',
-                'extra_shipper_id'=> 'nullable',
-                'shipment_invoice_number' => 'required',
-                'shipment_price' => 'required',
-                'extra_price' => 'nullable',
-            ]);
-    
-            Shipment::create($shippingData);
+        if($invoice->shipment_id == null) {
+            if($request->input('shipper_id') != null) {
+
+                $shippingData = request()->validate([
+                    'shipping_date' => 'required',
+                    'shipper_id' => 'required',
+                    'supplier_id' => 'required',
+                    'extra_shipper_id'=> 'nullable',
+                    'shipment_invoice_number' => 'required',
+                    'shipment_price' => 'required',
+                    'extra_price' => 'nullable',
+                ]);
+        
+                Shipment::create($shippingData);
+            }
         } else {
             //in case there is already a shipment we just update the shipment
             $shippingData = request()->validate([
@@ -375,6 +385,10 @@ class InvoiceController extends Controller {
 
             $shipment->update($shippingData);
         }
+
+        //Orders...
+        
+
 
     }
 

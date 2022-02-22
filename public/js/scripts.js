@@ -44,9 +44,7 @@ jQuery(function() {
     $('.js-example-basic-single').select2();
     $('.js-example-basic-multiple').select2();
     
-    if (top.location.pathname.match(/^\/add_invoice\//) || top.location.pathname.match('/add_special_invoice') ) {
-        
-
+    if (top.location.pathname.match(/^\/add_invoice\//) || top.location.pathname.match('/add_special_invoice') || top.location.pathname.match('/edit_invoice')) {
         $('#sharedSupplierInvoice').on('change',function () {
             console.log("Shared invoice change!");
             if($('#sharedSupplierInvoice').val() != 'null'){
@@ -74,7 +72,7 @@ jQuery(function() {
         updateFields(count);
         $('#addProduct').on('click', function () {
             count++;
-            console.log('new count is :' + count);
+            //console.log('new count is :' + count);
             calculate(count);
             updateFields(count);
         });
@@ -110,10 +108,14 @@ jQuery(function() {
         }
     }
 
-    if(top.location.pathname === '/add_special_invoice'){
+    if(top.location.pathname === '/add_special_invoice' || top.location.pathname.match('/edit_invoice')){
         var counter = Number($('#count').val());
+        calculate(counter);
+        updateFields(counter);
+        
+        
         $('#addProduct').on('click', function () {
-            
+            console.log("The counter is :"+counter);
             
             //select2 special requirment: You need to destroy the dropdown before cloning!
             $('#product'+counter).select2('destroy');
@@ -159,24 +161,24 @@ jQuery(function() {
             if (addedRow.get(0).id !== 'productRow') addedRow.remove();
         });
     }
-
+    
     function calculate(count){
         for (let i = 1; i < Number(count)+1; i++) {
             //Auto-calculation while typing in the fields that are available
-            console.log('(inside calculate) i is '+i);
+            updatePrice(i);
+            //console.log('(inside calculate) i is '+i);
             $('[id^=netValue]').on('input keyup keydown', () => {
-                
                 console.log("typing in netValue" + i);
                 updatePrice(i);
             });
 
             $('#quantity'+i).on('input keyup keydown','.input', () => {
-            console.log("typing in quantity" + i);
+            //console.log("typing in quantity" + i);
                 updatePrice(i);
             });
 
             $('#productDiscount'+i).on('input keyup keydown', () => {
-            console.log("typing in productDiscount" + i);
+            //console.log("typing in productDiscount" + i);
                 updatePrice(i);
             });
 
@@ -197,11 +199,11 @@ jQuery(function() {
             });
 
             //Beautifying numbers
-            $('#extraCharges, #orderDiscount,#inputShipmentPrice, #invoiceTaxRate,#inputExtraPrice, #taxRate'+i+',#productDiscount'+i).on('focusout',function (){
+            $('#extraCharges, #orderDiscount,#inputShipmentPrice, #invoiceTaxRate,#inputExtraPrice, #taxRate'+i+',#productDiscount'+i).each(function (){
                 this.value = Math.round(this.value*100)/100;
                 this.value = parseFloat(this.value).toFixed(2);
             });
-            $('#netValue'+i).on('focusout',function (){
+            $('#netValue'+i).each(function (){
                 this.value = Math.round(this.value*10000)/10000;
                 this.value = parseFloat(this.value).toFixed(4);
             });
@@ -227,8 +229,11 @@ jQuery(function() {
             tax = parseFloat(tax).toFixed(2);
 
             var price = value * $('#taxRate'+x).val()/100 + Number(value);
+            //console.log("price is: "+ price);
             price = Math.round(price*100)/100;
+            //console.log("price is: "+ price);
             price = parseFloat(price).toFixed(2);
+            //console.log("price is: "+ price);
 
             var shipmentPrice = $('#inputShipmentPrice').val();
             shipmentPrice = Math.round(shipmentPrice*100)/100;
@@ -266,14 +271,14 @@ jQuery(function() {
     if(top.location.pathname === '/add_product'){
         var productCodes = JSON.parse(window.count);
         
-        console.log(productCodes);        
+        //console.log(productCodes);        
         var category;
         var subCategory;
         var lastProduct;
 
         $('#inputDetsisCode').on('input keyup keydown', function () {
             var userInput = $('#inputDetsisCode').val();
-            console.log(userInput); 
+            //console.log(userInput); 
             //We need to see the categories even if the user has typed more than 5 characters. So we get the first 4 characters only!
             userInput = userInput.substring(0,4);           
                 switch (userInput) {
@@ -393,10 +398,10 @@ jQuery(function() {
                 
                 function enterLastProduct(){
                     productCodes.forEach(code => {
-                        console.log('code = ' + code);
+                        //console.log('code = ' + code);
                         if(userInput.substring(0,4) == code.substring(0,4)){
                             lastProduct = code;
-                            console.log('last product = '+ lastProduct);
+                            //console.log('last product = '+ lastProduct);
                         }
                     });
                     $('#lastProduct').text(lastProduct);
@@ -415,7 +420,7 @@ function daysInMonth (month, year) {
 }
 
 function updateFields(count){
-    console.log("count in updateFields = " + count);
+    //console.log("count in updateFields = " + count);
     var invoice_net_value = 0;
     var total_tax = 0;
     var invoice_total = 0;
@@ -453,7 +458,7 @@ function updateFields(count){
     var invoice_net_value_final = invoice_net_value - invoice_net_value * order_discount/100 + Number(extra_charges);
     invoice_net_value_final = Math.round(invoice_net_value_final*100)/100;
     invoice_net_value_final = parseFloat(invoice_net_value_final).toFixed(2);
-    console.log("invoice net value final" + invoice_net_value_final);
+    //console.log("invoice net value final" + invoice_net_value_final);
     total_tax = invoice_net_value_final * invoice_tax_rate/100;
     total_tax = Math.round(total_tax*100)/100;
     total_tax = parseFloat(total_tax).toFixed(2);

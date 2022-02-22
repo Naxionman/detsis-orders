@@ -233,50 +233,51 @@
                      @endphp
                      @foreach ($details as $detail)
                         <tr id="productRow{{$count}}">
+                           
                            <td class="p-0 order-font" id="aa{{$count}}">{{$count}}</td>
                            <td class="p-0 order-font">
-                              <input value="{{$detail->quantity}}" class="form-control p-0 pe-2 text-end order-font" name="quantity{{$count}}" id="quantity{{$count}}" required="required" type="number" step="0.01">
+                              <input value="{{ $detail->quantity }}" class="form-control p-0 pe-2 text-end order-font" name="quantity{{$count}}" id="quantity{{$count}}" required="required" type="number" step="0.01">
                            </td>   
                            <td class="p-0 order-font">
                               <input value="{{$detail->measurement_unit}}" type="text" class="form-control p-0 pe-2 text-end order-font" name="measurement_unit{{$count}}" id="measurementUnit{{$count}}">
                            </td>
                            <td>
                               <select class="form-control js-example-basic-single" name="product{{$count}}" id="product{{$count}}">
-                                 <option value="{{$detail->product_id}}" selected>[{{ $detail->product->detsis_code}}],[{{$detail->product->product_code}}]-{{ $detail->product->product_name }}</option>
+                                 <option value="{{ $detail->product_id }}" selected>[{{ $detail->product->detsis_code}}],[{{$detail->product->product_code}}]-{{ $detail->product->product_name }}</option>
                                  @foreach ($products as $product)
                                     <option value="{{ $product->id }}">[{{ $product->detsis_code}}],[{{$product->product_code}}]-{{ $product->product_name }}</option>
                                  @endforeach
                               </select>
                            </td>
                            <td class="p-0">
-                              <input value="{{$detail->net_value }}" type="number" step="0.0001" class="form-control p-0 pe-2 text-end order-font" name="net_value{{$count}}" id="netValue{{$count}}" min="0" required="required">
-                           </td>
-                        
-                           <td class="p-0">
-                              <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="sum_net_value1" id="sumNetValue1" min="0" readonly="readonly">
+                              <input value="{{ $detail->net_value }}" type="number" step="0.0001" class="form-control p-0 pe-2 text-end order-font" name="net_value{{$count}}" id="netValue{{$count}}" min="0" required="required">
                            </td>
                            <td class="p-0">
-                              <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="product_discount1" value="0.00"min="0" max="100" id="productDiscount1">
+                              <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" id="sumNetValue{{$count}}" min="0" readonly="readonly">
                            </td>
                            <td class="p-0">
-                              <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="value1" value="0.00" min="0" id="value1" readonly="readonly">
+                              <input value="{{ $detail->product_discount}}" type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="product_discount{{$count}}" value="0.00"min="0" max="100" id="productDiscount{{$count}}">
                            </td>
                            <td class="p-0">
-                              <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="tax_rate1" value="24.00" min="0" max="100" id="taxRate1">
+                              <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" value="0.00" min="0" id="value{{$count}}" readonly="readonly">
                            </td>
                            <td class="p-0">
-                              <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="tax1" min="0" id="tax1" readonly="readonly">
+                              <input value="{{ $detail->tax_rate }}" type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="tax_rate{{$count}}" value="24.00" min="0" max="100" id="taxRate{{$count}}">
                            </td>
                            <td class="p-0">
-                              <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="price1" min="0" id="price1" readonly="readonly">
+                              <input type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" id="tax{{$count}}" readonly="readonly">
                            </td>
+                           <td class="p-0">
+                              <input value="{{ $detail->price }}" type="number" step="0.01" class="form-control p-0 pe-2 text-end order-font" name="price{{$count}}" min="0" id="price{{$count}}" readonly="readonly">
+                           </td>
+                           
                         </tr>
+                        
+                        @php
+                           $count++;
+                        @endphp
                      @endforeach
-                        
-                        
-                        
-                     
-                     <input type="hidden" name="count" id="count" value="1">
+                     <input type="hidden" name="count" id="count" value="{{$count-1}}">
                   </tbody>
                </table>
                <div>
@@ -290,46 +291,33 @@
                      <div class="col-sm-12"><textarea rows="4" class="form-control" type="text" id="inputNotes" name="notes" value="{{ $invoice->notes }}">{{ $invoice->notes }}</textarea></div>
                   </div>
                   <div class="col-1"></div>
-                  <div class="col-3 border rounded-start">
+                  <div class="col-4 border rounded-3 p-2">
                      <div class="row">
-                        <div class="text-end">Συνολική καθαρή αξία :</div>
+                        <div class="col"><div class="text-end">Συνολική καθαρή αξία :</div></div>
+                        <div class="col"><input class="form-control text-end p-0 pe-2" value="{{ $invoice->invoice_total / (1 + $invoice->invoice_tax_rate / 100) - $invoice->extra_charges }}" id="invoiceNetValue"></div>
                      </div>
                      <div class="row">
-                        <div class="text-end">Έκπτωση παραγγελίας:</div>
+                        <div class="col"><div class="text-end">Έκπτωση παραγγελίας:</div></div>
+                        <div class="col"><input class="form-control text-end p-0 pe-2" value="{{ $invoice->order_discount }}" name="order_discount" min="0" id="orderDiscount"></div>                        
                      </div>
                      <div class="row">
-                        <div class="text-end">Επιβαρύνσεις (€):</div>
+                        <div class="col"><div class="text-end">Επιβαρύνσεις (€):</div></div>
+                        <div class="col"><input class="form-control text-end p-0 pe-2" value="{{ $invoice->extra_charges }}" name="extra_charges" min="0" id="extraCharges"></div>
                      </div>
                      <div class="row">
-                        <div class="text-end">ΦΠΑ (%) :</div>
+                        <div class="col"><div class="text-end">ΦΠΑ (%) :</div></div>
+                        <div class="col"><input class="form-control text-end p-0 pe-2" value="{{ $invoice->invoice_tax_rate }}" name="invoice_tax_rate" min="0" id="invoiceTaxRate"></div>
                      </div>
                      <div class="row">
-                        <div class="text-end">ΦΠΑ (€):</div>
+                        <div class="col"><div class="text-end">ΦΠΑ (€):</div></div>
+                        <div class="col"><input class="form-control text-end p-0 pe-2" value="{{ $invoice->invoice_total -$invoice->invoice_total / (1 + $invoice->invoice_tax_rate / 100) -$invoice->extra_charges }}" id="tax"></div>
                      </div>
                      <div class="row">
-                        <div class="text-end">Σύνολο :</div>
-                     </div>
-                  </div>
-                  <div class="col-1 border rounded-end">
-                     <div class="row">
-                        <div class="text-end">{{ number_format($invoice->invoice_total / (1 + $invoice->invoice_tax_rate / 100) - $invoice->extra_charges,2,',','.') }}</div>
-                     </div>
-                     <div class="row">
-                        <div class="text-end">{{ number_format($invoice->order_discount, 2, ',', '.') }}</div>
-                     </div>
-                     <div class="row">
-                        <div class="text-end">{{ number_format($invoice->extra_charges, 2, ',', '.') }}</div>
-                     </div>
-                     <div class="row">
-                        <div class="text-end">{{ number_format($invoice->invoice_tax_rate, 2, ',', '.') }}</div>
-                     </div>
-                     <div class="row">
-                        <div class="text-end">{{ number_format($invoice->invoice_total -$invoice->invoice_total / (1 + $invoice->invoice_tax_rate / 100) -$invoice->extra_charges,2,',','.') }}</div>
-                     </div>
-                     <div class="row">
-                        <div class="text-end">{{ number_format($invoice->invoice_total, 2, ',', '.') }}</div>
+                        <div class="col"><div class="text-end">Σύνολο :</div></div>
+                        <div class="col"><input class="form-control text-end p-0 pe-2" value="{{ $invoice->invoice_total }}" id="invoiceTotal" name="invoice_total"></div>
                      </div>
                   </div>
+                  
             </div><!-- end of row 3 -->
          </div>
          @csrf
