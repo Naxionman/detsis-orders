@@ -14,33 +14,7 @@
                   <div class="card bg-danger bg-opacity-75 border-0 rounded-3 shadow-sm">
                         <div class="card-header text-light font-weight-light">Στοιχεία παραστατικού</div>
                         <div class="card-body bg-light">
-                           <div class="row">
-                              <div class="col-5 text-end justify-content-center">
-                                 <label class="align-middle">Σύνδεση με παραγγελία/ες</label>
-                              </div>
-                              <div class="col-7">
-                                 <select class="form-control js-example-basic-multiple" multiple='multiple'name="orders[]" id="boundOrders">
-                                    @for ($i = 0; $i < count($details); $i++)
-                                       @if ($details[$i]->order_id == null)
-                                          {{ '-' }}
-                                          @break
-                                       @else
-                                          @if ($i-1 < 0) <!-- Checking index bounds -->
-                                             <option value="{{ $details[$i]->order_id }}" selected id="boundOrder{{$i}}">{{ $details[$i]->order_id }}</option>   
-                                          @else
-                                             @if ($details[$i]->order_id != $details[ $i-1]->order_id)
-                                                <option value="{{ $details[$i]->order_id }}" selected selected id="boundOrder{{$i}}">{{ $details[$i]->order_id }}</option>   
-                                             @endif
-                                          @endif
-                                       @endif 
-                                    @endfor   
-                                    @foreach ($orders as $order)
-                                       <option id="boundOrder" value="{{ $order->id }}">{{ $order->id }} : {{ $order->client->surname }} {{ $order->client->name }} από {{ $order->supplier->company_name }}</option>
-                                    @endforeach
-                                 </select>
-                              </div>
-                           </div>
-
+                           
                            <div class="row">
                               <div class="col-5 text-end justify-content-center">
                                  <label class="align-middle">Προμηθευτής</label>
@@ -215,6 +189,7 @@
                   <thead>
                      <tr>
                         <th style="width: 5%" class="p-0 order-font">α/α</th>
+                        <th style="width: 5%" class="p-0 order-font">Παραγγελία</th>
                         <th style="width: 5%" class="p-0 order-font">Ποσ.</th>
                         <th style="width: 5%" class="p-0 order-font">Μ/Μ</th>
                         <th style="width: 40%" class="p-0 order-font">Προϊόν</th>
@@ -233,8 +208,17 @@
                      @endphp
                      @foreach ($details as $detail)
                         <tr id="productRow{{$count}}">
-                           
+                           <input type="hidden" name="detail{{$count}}" value="{{ $detail->id }}">
                            <td class="p-0 order-font" id="aa{{$count}}">{{$count}}</td>
+                           <td>
+                              @include('invoices.edit_invoice_connect_order')
+                              @if ($detail->order_id == null)
+                                 <button type="button" class="btn btn-warning shadow-sm" data-bs-toggle="modal" data-bs-target="#orderConnect"><i class="fas fa-link"></i></button>
+                              @else
+                                 <button type="button" class="btn btn-success shadow-sm" data-bs-toggle="modal" data-bs-target="#orderConnect"><i class="fas fa-link"></i></button>
+                              @endif
+                              
+                           </td>
                            <td class="p-0 order-font">
                               <input value="{{ $detail->quantity }}" class="form-control p-0 pe-2 text-end order-font" name="quantity{{$count}}" id="quantity{{$count}}" required="required" type="number" step="0.01">
                            </td>   

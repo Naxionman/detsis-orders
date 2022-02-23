@@ -22,6 +22,7 @@ class CreatePricesTable extends Migration
             $table->float('history_tax_rate');
             $table->unsignedBigInteger('supplier_id');
             $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('invoice_id');
             $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });

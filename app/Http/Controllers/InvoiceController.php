@@ -144,15 +144,19 @@ class InvoiceController extends Controller {
             $detail->product->save();
 
             //We also create the history of prices records for each of the details
-            Price::create([
-                'price_date' => $invoice->invoice_date,
-                'history_quantity' => $request->input('quantity'.$i),
-                'history_price' => $request->input('net_value'.$i),
-                'history_discount' => $request->input('product_discount'.$i),
-                'history_tax_rate' => $request->input('tax_rate'.$i),
-                'supplier_id' => $request->input('supplier_id'),
-                'product_id' => $request->input('product'.$i)
-            ]);
+            if($detail->product->id > 2){
+                Price::create([
+                    'price_date' => $invoice->invoice_date,
+                    'history_quantity' => $request->input('quantity'.$i),
+                    'history_price' => $request->input('net_value'.$i),
+                    'history_discount' => $request->input('product_discount'.$i),
+                    'history_tax_rate' => $request->input('tax_rate'.$i),
+                    'supplier_id' => $request->input('supplier_id'),
+                    'product_id' => $request->input('product'.$i),
+                    'invoice_id' => $invoice->id
+                ]);
+            }
+            
             $i++;
         }
 
@@ -289,15 +293,19 @@ class InvoiceController extends Controller {
                 $detail->tax_rate = $request->input('tax_rate'.$i);
                 $detail->price = $request->input('price'.$i);
                 //creating price record for the specific product
-                Price::create([
-                    'price_date' => $request->input('invoice_date'),
-                    'history_quantity' => $request->input('quantity'.$i),
-                    'history_price' => $request->input('net_value'.$i),
-                    'history_discount' => $request->input('product_discount'.$i),
-                    'history_tax_rate' => $request->input('tax_rate'.$i),
-                    'supplier_id' => $request->input('supplier_id'),
-                    'product_id' => $detail->product_id
-                ]);
+                if($detail->product->id >2){
+                    Price::create([
+                        'price_date' => $request->input('invoice_date'),
+                        'history_quantity' => $request->input('quantity'.$i),
+                        'history_price' => $request->input('net_value'.$i),
+                        'history_discount' => $request->input('product_discount'.$i),
+                        'history_tax_rate' => $request->input('tax_rate'.$i),
+                        'supplier_id' => $request->input('supplier_id'),
+                        'product_id' => $detail->product_id,
+                        'invoice_id' => $invoice->id,
+                    ]);
+                }
+                
                 $detail->product->last_supplier = $request->input('supplier_id'); //Updating last supplier
                 $detail->product->stock_level = $detail->product->stock_level + $request->input('quantity'.$i);
                 $detail->save();
@@ -351,6 +359,11 @@ class InvoiceController extends Controller {
         $invoice->supplier_id = $request->input('supplier_id');
         $invoice->invoice_date = $request->input('invoice_date');
         $invoice->supplier_invoice_number = $request('supplier_invoice_number');
+        $invoice->order_discount = $request->input('order_discount');
+        $invoice->extra_charges = $request->input('extra_charges');
+        $invoice->invoice_tax_rate = $request->input('invoice_tax_rate');
+        $invoice->invoice_total = $request->input('invoice_total');
+        $invoice->notes = $request->input('notes');
         $invoice->save();
 
         //If there was no shipment associated we may input it here (or via the shipping menu)
@@ -386,8 +399,51 @@ class InvoiceController extends Controller {
             $shipment->update($shippingData);
         }
 
-        //Orders...
+        /* Resetting product quantities. Either they are changed or even if they are totally removed 
+         * we need to wipe out the past values so that we have correct quantities. */
         
+        foreach($invoice->orderDetails() as $old_detail){
+            $old_detail->product->stock_level = 0;
+        }
+
+        /* History prices : That's a bit tricky because we need to be sure that no data is left behind.
+         * If there is a product that is going to be edited or even removed, history prices must be 
+         * updated. Therefore it's safer to delete history prices and make new ones */
+        $historyOfInvoice = Price::where('invoice_id',$invoice->id)->get();
+        foreach($historyOfInvoice as $price){
+            $price->delete();
+        }
+
+        /* Along with most order_details values we update the quantities. */
+               
+        for ($i=1; $i < $request->input('count')+1 ; $i++) { 
+            $detail = OrderDetails::findOrFail($request->input('detail'.$i));   //Firstly we find actual record
+            $detail->net_value = $request->input('net_value'.$i);               
+            $detail->product_discount = $request->input('product_discount'.$i);
+            $detail->tax_rate = $request->input('tax_rate'.$i);
+            $detail->product_id = $request->input('product'.$i);
+            $detail->price = $request->input('price'.$i);
+            $detail->order_id = $request->input('order'.$i);
+            $detail->product->stock_level = $detail->product->stock_level + $request->input('quantity'.$i);   //Having already deducted the previous stock_level, we add the posted
+            //(re)creating price record for the specific product
+            if($detail->product->id > 2){
+                Price::create([
+                    'price_date' => $request->input('invoice_date'),
+                    'history_quantity' => $request->input('quantity'.$i),
+                    'history_price' => $request->input('net_value'.$i),
+                    'history_discount' => $request->input('product_discount'.$i),
+                    'history_tax_rate' => $request->input('tax_rate'.$i),
+                    'supplier_id' => $request->input('supplier_id'),
+                    'product_id' => $detail->product_id,
+                    'invoice_id' => $invoice->id,
+                ]);
+            }
+            
+            $detail->product->save();
+            $detail->save();
+            //note : Last supplier is not changed!
+        }
+
 
 
     }

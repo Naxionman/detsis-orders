@@ -43,6 +43,7 @@ jQuery(function() {
     $('#product0').select2();
     $('.js-example-basic-single').select2();
     $('.js-example-basic-multiple').select2();
+    $('#order1').select2({dropdownParent: $("#orderConnect")});
     
     if (top.location.pathname.match(/^\/add_invoice\//) || top.location.pathname.match('/add_special_invoice') || top.location.pathname.match('/edit_invoice')) {
         $('#sharedSupplierInvoice').on('change',function () {
@@ -204,6 +205,14 @@ jQuery(function() {
                 this.value = parseFloat(this.value).toFixed(2);
             });
             $('#netValue'+i).each(function (){
+                this.value = Math.round(this.value*10000)/10000;
+                this.value = parseFloat(this.value).toFixed(4);
+            });
+            $('#extraCharges, #orderDiscount,#inputShipmentPrice, #invoiceTaxRate,#inputExtraPrice, #taxRate'+i+',#productDiscount'+i).on("focusout",function (){
+                this.value = Math.round(this.value*100)/100;
+                this.value = parseFloat(this.value).toFixed(2);
+            });
+            $('#netValue'+i).on("focusout",function (){
                 this.value = Math.round(this.value*10000)/10000;
                 this.value = parseFloat(this.value).toFixed(4);
             });
