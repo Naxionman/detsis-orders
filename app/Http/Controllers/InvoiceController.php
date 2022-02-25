@@ -349,7 +349,7 @@ class InvoiceController extends Controller {
 
     public function update(Request $request, Invoice $invoice){
         
-        dd(request()->all());
+        //dd(request()->all());
         /*  *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *
          *                              UPDATING an INVOICE
          *  Updating an invoice must be the most populated form in the project. That's because it involves orders, 
@@ -360,7 +360,7 @@ class InvoiceController extends Controller {
         //Update the basic info
         $invoice->supplier_id = $request->input('supplier_id');
         $invoice->invoice_date = $request->input('invoice_date');
-        $invoice->supplier_invoice_number = $request('supplier_invoice_number');
+        $invoice->supplier_invoice_number = $request->input('supplier_invoice_number');
         $invoice->order_discount = $request->input('order_discount');
         $invoice->extra_charges = $request->input('extra_charges');
         $invoice->invoice_tax_rate = $request->input('invoice_tax_rate');
@@ -387,12 +387,12 @@ class InvoiceController extends Controller {
         } else {
             //in case there is already a shipment we just update the shipment
             $shippingData = request()->validate([
-                'shipping_date' => 'required',
                 'shipper_id' => 'required',
                 'supplier_id' => 'required',
-                'extra_shipper_id'=> 'nullable',
+                'shipping_date' => 'required',
                 'shipment_invoice_number' => 'required',
                 'shipment_price' => 'required',
+                'extra_shipper_id'=> 'nullable',
                 'extra_price' => 'nullable',
             ]);
 
@@ -425,7 +425,12 @@ class InvoiceController extends Controller {
             $detail->tax_rate = $request->input('tax_rate'.$i);
             $detail->product_id = $request->input('product'.$i);
             $detail->price = $request->input('price'.$i);
-            $detail->order_id = $request->input('order'.$i);
+            if($request->input('order'.$i) == 'null'){
+                $detail->order_id = null;
+            }else{
+                $detail->order_id = $request->input('order'.$i);
+            }
+           
             $detail->product->stock_level = $detail->product->stock_level + $request->input('quantity'.$i);   //Having already deducted the previous stock_level, we add the posted
             //(re)creating price record for the specific product
             if($detail->product->id > 2){
@@ -447,7 +452,7 @@ class InvoiceController extends Controller {
         }
 
 
-
+        return redirect('/invoices')->with('message', 'Επιτυχής επεξεργασία Τιμολογίου!');
     }
 
     public function destroy(Invoice $invoice) {

@@ -27,7 +27,7 @@ class CreateOrderDetailsTable extends Migration
             $table->float('tax_rate')->default('24.00');    //We need to have this stored in case of change
             $table->float('price')->nullable(); //final price after discount and tax
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('set null');
             $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
             $table->timestamps();
         });

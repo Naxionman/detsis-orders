@@ -25,9 +25,9 @@
                         @if ($detail->order_id != null)
                             <option value="{{ $detail->order_id }}" selected>[{{ $detail->order_id }}],{{$detail->order->client->surname}} {{ $detail->order->client->name }} από {{ $detail->order->supplier->company_name }}</option>
                         @else
-                            <option selected>Επιλέξτε μία παραγγελία για συσχέτιση</option>    
+                            <option value='null' selected>Επιλέξτε μία παραγγελία για συσχέτιση</option>    
                         @endif
-                        
+                        <option value='null' >Αποσυσχέτιση</option>
                         @foreach ($orders as $order)
                             <option value="{{$order->id}}">[{{$order->id}}], {{$order->client->surname}} {{$order->client->name}} από {{$order->supplier->company_name}}</option>
                         @endforeach
