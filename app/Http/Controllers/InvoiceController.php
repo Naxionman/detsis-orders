@@ -12,6 +12,8 @@ use App\Models\OrderDetails;
 use App\Models\Price;
 use Illuminate\Http\Request;
 
+use function Symfony\Component\String\b;
+
 class InvoiceController extends Controller {
     
     public function index() {
@@ -215,7 +217,7 @@ class InvoiceController extends Controller {
 
             //Appending the notes to the shared invoice so that both orders are shown in the notes
             $invoice->notes .= "\r\n" .'-------------  ΣΗΜΕΙΩΣΕΙΣ ΕΠΙΠΛΕΟΝ ΠΑΡΑΓΓΕΛΙΑΣ -----------------';
-            $invoice->notes .= "\r\n" .$order->client->surname .' ' .$order->client->name;
+            $invoice->notes .= "\r\n" .'Πελάτης: '.$order->client->surname .' ' .$order->client->name;
             $invoice->notes .= "\r\n" .$request->input('notes');
             $invoice->notes .= "\r\n";
             $invoice->save();
@@ -269,7 +271,7 @@ class InvoiceController extends Controller {
                 'supplier_id' => $order->supplier->id,
                 'invoice_date' => $request->input('invoice_date'),
                 'supplier_invoice_number' => $request->input('supplier_invoice_number'),
-                'order_discount'=> $request->input('order_discount'),
+                //'order_discount'=> $request->input('order_discount'),
                 'invoice_total' => $request->input('invoice_total'),
                 'notes' => $request->input('notes')
             ]);
