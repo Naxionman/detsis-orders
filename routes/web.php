@@ -21,6 +21,7 @@ use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\ExpenceController;
 use App\Http\Controllers\OrderFileController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\SalaryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,6 +75,7 @@ Route::get('/add_invoice/{orderId}', [InvoiceController::class, 'addInvoice']);
 Route::get('/add_payment', [PaymentController::class, 'addPayment']);
 Route::get('/add_leave', [LeaveController::class, 'addLeave']);
 Route::get('/add_expence', [ExpenceController::class, 'addExpence']);
+Route::get('/add_salary', [SalaryController::class, 'addSalary']);
 
 Route::post('/add_supplier', [SupplierController::class, 'store']);
 Route::post('/add_client', [ClientController::class, 'store']);
@@ -93,6 +95,7 @@ Route::post('/add_car_service/{vehicleId}', [CarServiceController::class, 'store
 Route::post('/add_payment', [PaymentController::class, 'store']);
 Route::post('/add_leave', [LeaveController::class, 'store']);
 Route::post('/add_expence', [ExpenceController::class, 'store']);
+Route::post('/add_salary', [SalaryController::class, 'store']);
 //Special routes for ajax fetching
 Route::get('/add_leave/{employeeId}', [LeaveController::class, 'getEmployeeLeaveDays']);
 Route::get('/order/{id}', [OrderController::class, 'getOrder']);

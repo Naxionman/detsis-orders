@@ -11,6 +11,9 @@
                 <li class="breadcrumb-item active">Μισθοδοσία</li>
             </ol>
             <div class="card mb-4">
+                <a href="/add_salary" class="btn btn-info" >Προσθήκη Μισθοδοσίας</a>    
+            </div>
+            <div class="card mb-4">
                 <div class="card-header">
                     <div class="row">
                         <div class="col-4"> 
