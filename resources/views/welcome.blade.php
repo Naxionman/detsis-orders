@@ -126,23 +126,23 @@
                         <tbody>
                             <tr>
                                 <td>Τιμολόγια Προμηθευτών</td>
-                                <td class="text-end pe-4">{{ number_format($total_yearly_invoices,2 ,",",".") }}€</td>
+                                <td class="text-end pe-4">{{ number_format($total_yearly_invoices,2 ,",",".") }} €</td>
                             </tr>
                             <tr>
                                 <td>Φορτωτικές</td>
                                 <td class="text-end pe-4">{{ number_format($total_yearly_shipments,2 ,",",".") }} € </td>
                             </tr>
                             <tr>
-                                <td>Πάγια έξοδα : </td> 
+                                <td>Πάγια έξοδα</td> 
                                 <td class="text-end pe-4">{{ number_format($total_yearly_expences,2 ,",",".") }} € </td>    
                             </tr>
                             <tr>
                                 <td>Οχήματα</td>
-                                <td class="text-end pe-4">{{ number_format($total_yearly_vehicles,2 ,",",".") }}€</td>
+                                <td class="text-end pe-4">{{ number_format($total_yearly_vehicles,2 ,",",".") }} €</td>
                             </tr>
                             <tr>
                                 <td>Μισθοδοσίες</td>
-                                <td class="text-end pe-4">€</td>
+                                <td class="text-end pe-4">{{ number_format($salaries,2,",",".") }} €</td>
                             </tr>
                             <tr>
                                 <th>Σύνολο</th>

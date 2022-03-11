@@ -63,7 +63,7 @@
                                     <label for="inputCitizenship" class="align-middle">Υπηκοότητα</label>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input class="form-control" value = "{{ $employee->citizenship }}" autocomplete="nope" type="text" value="Ελληνική" id="inputCitizenship" name="citizenship" required="required">
+                                    <input class="form-control" value ="{{ $employee->citizenship }}" type="text" id="inputCitizenship" name="citizenship" required="required">
                                 </div>
                             </div>
 
@@ -163,16 +163,33 @@
                                 </div>
                             </div>
                         
-                        @if ($employee->date_left != null)
+                        
                             <div class="row mt-1"> <!-- inner fourth row -->
                                 <div class="col-sm-5">
                                     <label for="inputDateLeft" class="align-middle">Ημερομηνία Αποχώρησης</label>
                                 </div>
                                 <div class="col-sm-6">
+                                @if ($employee->date_left != null)
                                     <input class="form-control" value = "{{ $employee->date_left == null ?: $employee->date_left->format('Y-m-d')  }}" type="date" id="inputDateLeft" name="date_left" >
+                                @else
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingOne">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                            Αποχώρηση ή απόλυση
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <input class="form-control" type="date" name="date_left">
+                                            </div>
+                                        </div>
+                                        </div>
                                     </div>    
+                                @endif
+                                </div>    
                             </div>    
-                        @endif
+                        
                               
                             <div class="row mt-1"> <!-- inner fifth row -->
                                 <div class="col-sm-5">
@@ -216,6 +233,8 @@
                                     <input class="form-control" value = "{{ $employee->leave_days_taken }}" autocomplete="nope" type="number" id="inputLeaveDaysTaken" name="leave_days_taken" >
                                 </div>
                             </div>
+
+                            
                             
                             <div class="text-info text-center"><strong><h6>ΣΤΟΙΧΕΙΑ ΕΠΙΚΟΙΝΩΝΙΑΣ</h6></strong></div>
                             <hr style="margin-top: 0;">

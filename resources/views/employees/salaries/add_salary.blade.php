@@ -8,8 +8,16 @@
         <div class="card-header"><h3 class="text-center font-weight-light my-2 ">Προσθήκη μισθοδοσίας</h3></div>
             <div class="card-body bg-light">
                 <form action="/add_salary" id="addSalary" method="POST">
+                    <div class="row justify-content-center mt-1">
+                        <div class="col-6">
+                            <label for="salaryDate">Ημερομηνία πληρωμής εργαζομένου</label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" type="date" step="0.01" name="salary_date" id="salaryDate">
+                        </div>
+                    </div>
                     <div class="row justify-content-center">
-                        <div class="col-3"><label for="selectedEmployee">Εργαζόμενος</label></div>
+                        <div class="col-6"><label for="selectedEmployee">Εργαζόμενος</label></div>
                         <div class="col-3">
                             <select class="form-control" name="employee_id" id="selectedEmployee">
                                 <option value="null" selected>Επιλέξτε εργαζόμενο</option>
@@ -19,9 +27,9 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row justify-content-center">
-                        <div class="col-3"><label>Μισθοδοσία μηνός / έτους :</label></div>
-                        <div class="col-3">
+                    <div class="row justify-content-center mt-1">
+                        <div class="col-6"><label>Μισθοδοσία μηνός / έτους :</label></div>
+                        <div class="col-2">
                             <select class="form-control" name="salary_month">
                                 <option value="Ιανουάριος">Ιανουάριος</option>
                                 <option value="Φεβρουάριος">Φεβρουάριος</option>
@@ -40,11 +48,11 @@
                             </select>
                         </div>
                         <div class="col-1">
-                            <input class="form-control" type="number" value="{{Date("Y")}}" step="1" min="2021" max="2050">
+                            <input class="form-control" name="salary_year" type="number" value="{{Date("Y")}}" step="1" min="2021" max="2050">
                         </div>
                     </div>
 
-                    <div class="row justify-content-center" id="includeDiv">
+                    <div id="includeDiv">
                         
                     </div>
                     

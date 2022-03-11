@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Salary;
 
 class EmployeeController extends Controller {
     
@@ -16,28 +17,11 @@ class EmployeeController extends Controller {
     public function salaries() {
         $employees = Employee::all();
 
-        $gross = array();
-        //μικτές αποδοχές
-        foreach($employees as $employee){
-            if($employee->working_days == 6){
-                $insurance_days = 26;
-            } else {
-                $insurance_days = 25;
-            }
-            if($employee->speciality == "Εργατοτεχνίτης"){
-                $gross_earnings = $employee->salary * $insurance_days;
-            } else {
-                $gross_earnings = $employee->salary;
-            }
-            // Without any extras
-            $gross[$employee->id] = $gross_earnings;
+        $salaries = Salary::all();
 
-            //Extra: 
-
-        }
+        $min_year = Salary::min('salary_year');
         
-
-        return view('employees.salaries.salaries', compact('employees','gross'));
+        return view('employees.salaries.salaries', compact('employees','salaries','min_year'));
     }
 
     public function addEmployee() {
@@ -53,13 +37,14 @@ class EmployeeController extends Controller {
             'date_of_birth' => 'nullable',
             'mobile' => 'nullable',
             'phone2' => 'nullable',
+            'email' => 'nullable',
             'date_joined' => 'nullable',
             'date_left' => 'nullable',
             'amka' => 'nullable',
             'ama' => 'nullable',
             'afm' => 'nullable|digits:9',
             'adt' => 'nullable',
-            'citinzenship' => 'nullable',
+            'citizenship' => 'nullable',
             'contract_type' => 'nullable',
             'contract_expiring' => 'nullable',
             'working_days' => 'nullable',
@@ -101,7 +86,7 @@ class EmployeeController extends Controller {
             'ama' => 'nullable',
             'afm' => 'nullable|digits:9',
             'adt' => 'nullable',
-            'citinzenship' => 'nullable',
+            'citizenship' => 'nullable',
             'contract_type' => 'nullable',
             'contract_expiring' => 'nullable',
             'working_days' => 'nullable',

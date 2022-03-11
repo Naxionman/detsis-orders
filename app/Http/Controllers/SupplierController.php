@@ -6,6 +6,7 @@ use App\Models\Invoice;
 use App\Models\Supplier;
 use App\Models\Payment;
 use App\Models\Order;
+use Illuminate\Database\Eloquent\Collection;
 
 class SupplierController extends Controller {
     
@@ -67,8 +68,14 @@ class SupplierController extends Controller {
         //The balance = invoice charges - payments + initial balance 
         $new_balance = round($sum_charged - $paid + $supplier->starting_balance , 2);
         
+        //For the transactionsTable (we select bank as well in order to distinguish payment from invoice)
+        $table_payments = Payment::select('payment_date AS date','amount','bank')->where('supplier_id','=',$supplierId)->get();
+        $table_invoices = Invoice::select('invoice_date AS date','invoice_total AS amount')->where('supplier_id','=',$supplierId)->get();
+        $table_stats = $table_invoices->concat($table_payments);
+        $table_stats = $table_stats->sortBy('date');
+        //dd($table_stats);
 
-        return view ('suppliers.view_supplier', compact('supplier','invoice_count', 'sum_charged','paid','new_balance'));
+        return view ('suppliers.view_supplier', compact('supplier','invoice_count', 'sum_charged','paid','new_balance','table_stats'));
     }
 
     public function update(Supplier $supplier) {

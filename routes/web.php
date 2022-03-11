@@ -34,6 +34,13 @@ use App\Http\Controllers\SalaryController;
 |
 */
 
+Route::get('/employees/salaries/craftsman', function() {
+    return view('employees.salaries.craftsman');
+});
+Route::get('/employees/salaries/office_worker', function() {
+    return view('employees.salaries.office_worker');
+});
+
 Route::get('/', [PageController::class, 'index']);
 
 Route::get('/clients', [ClientController::class, 'index']);
@@ -102,6 +109,7 @@ Route::get('/order/{id}', [OrderController::class, 'getOrder']);
 Route::get('/shipment/{id}', [ShipmentController::class, 'getShipments']);
 Route::get('/shipper', [ShipperController::class, 'getNames']);
 Route::post('upload.php',[OrderFileController::class, 'addFile']);
+Route::get('/add_salary/{id}',[SalaryController::class, 'getEmployee']);
 
 //Show actions (for editing records)
 Route::get('/edit_supplier/{supplierId}',[SupplierController::class, 'show']);

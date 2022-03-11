@@ -99,7 +99,7 @@
                                           @if ($invoice->shipment_id == null)
                                              <option value="" selected>Δεν θα καταχωρηθεί προσωρινά</option>   
                                           @else
-                                             <option value="{{ $invoice->shipment_id }}" selected>{{ $invoice->shipment->shipper->name }}</option>
+                                             <option value="{{ $invoice->shipment->shipper_id }}" selected>{{ $invoice->shipment->shipper->name }}</option>
                                           @endif
                                           @foreach ($shippers as $shipper)
                                              <option type="text" value="{{ $shipper->id }}">{{ $shipper->name }}</option>

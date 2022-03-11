@@ -44,8 +44,9 @@ class AppServiceProvider extends ServiceProvider
         }
         $total_notifications += count($birthdays);
         //We exclude whatever is set to 0 as minimum level
-        $shortages = Product::where('stock_level' ,'<=', 'min_level')
-                            ->where('min_level','>',0)->get();
+        $shortages = Product::where('min_level','>',0)
+                            ->where('stock_level','<','min_level')
+                            ->get();
                             
         $total_notifications += count($shortages);
                      

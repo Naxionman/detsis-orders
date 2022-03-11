@@ -961,6 +961,36 @@ jQuery(function(){
         }); //inputSupplier on change end
     }
 
+    //Code for add_salary
+    $('#selectedEmployee').on('change', function () {
+        var id = $('#selectedEmployee').val();
+        console.log("The selectedEmployee is : " + id); 
+        
+
+        $.ajax({
+            url: "/add_salary/"+id,
+            type: "GET",
+            dataType: "JSON",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (selectedEmployee) {
+                console.log("selected employee is :" +selectedEmployee['speciality'] );
+                if(selectedEmployee['speciality'] == "Υπάλληλος"){
+                   
+                    $('#includeDiv').load("/employees/salaries/office_worker");
+                   
+                } else {
+                    $('#includeDiv').load("/employees/salaries/craftsman");
+                }
+                
+            },
+            error:function() {
+                alert("Σφάλμα στην επικοινωνία με τη βάση δεδομένων");
+            }  
+        }); //end of ajax call
+    });
+
 });
 
 //DOKIMI

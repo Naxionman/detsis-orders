@@ -20,10 +20,14 @@ class CreateSalariesTable extends Migration
             $table->string('salary_month'); // (salary_month, salary_year)These are kept as string but are input through dropdown list
             $table->string('salary_year');
             $table->float('daily_wages')->nullable(); //Νόμιμο ημερομίσθιο
-            $table->float('3_year_benefit')->nullable(); //Επίδομα τριετίας
+            $table->float('total_wages')->nullable(); 
+            $table->float('basic_salary')->nullable(); //Νόμιμος μισθός
+            $table->float('total_salary')->nullable(); 
+            $table->float('three_year_benefit')->nullable(); //Επίδομα τριετίας
             $table->float('marriage_benefit')->nullable(); //Επίδομα γάμου
             $table->float('insurance_deduction_daily')->nullable(); //Ασφαλιστικές κρατήσεις εργαζόμενου νόμιμου ημερομισθίου
             $table->float('agreed_daily_wages_sum')->nullable(); //Σύνολο συμφωνηθέντος ημερομισθίου
+            $table->float('agreed_salary_sum')->nullable(); //Σύνολο συμφωνηθέντος μισθού
             $table->float('hourly_wage')->nullable(); // Ωρομίσθιο
             $table->float('gross_earnings'); //Κανονικές αποδοχές
             $table->float('insurance_deduction_monthly')->nullable(); //Ασφαλιστικές κρατήσεις εργαζομένου

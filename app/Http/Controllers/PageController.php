@@ -11,6 +11,7 @@ use App\Models\Insurance;
 use App\Models\Invoice;
 use App\Models\Kteo;
 use App\Models\Refueling;
+use App\Models\Salary;
 
 class PageController extends Controller {
     
@@ -202,6 +203,9 @@ class PageController extends Controller {
             $total_yearly_vehicles += $veh->amount;
         }
 
+        //Salaries - Μισθοδοσία
+        $salaries = Salary::whereYear('salary_date','=',date('Y'))->sum('net_salary');
+
         return view('welcome', compact(
                                 'last_month_name',
                                 'month_name',
@@ -216,7 +220,8 @@ class PageController extends Controller {
                                 'total_last_year_expences',
                                 'total_yearly_shipments',
                                 'total_yearly_invoices',
-                                'total_yearly_vehicles'
+                                'total_yearly_vehicles',
+                                'salaries'
                             )); 
     }
 }

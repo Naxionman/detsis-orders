@@ -35,10 +35,10 @@
                     <div class="row mt-3 justify-content-center">
                         <div class="col-2"><label for="inputSupplier">Προμηθευτής</label></div>
                         <div class="col-4">
-                            <select class="js-example-basic-single form-control" id="inputSupplier" name="supplier_id" required="required">
+                            <select class="js-example-basic-single form-control" id="inputSupplier" name="supplier_id">
                                 <option value="{{ $payment->supplier_id }}" selected>{{ $payment->supplier->company_name }}</option>
                                 @foreach ($suppliers as $supplier)
-                                    <option   type="text" value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
+                                    <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -69,7 +69,7 @@
                 </form>
             </div>
             <div class="card-footer text-center py-2">
-                <button class="btn btn-danger shadow-sm" type="submit" form="editExpence">  Αποθήκευση Αλλαγών </button>
+                <button class="btn btn-danger shadow-sm" type="submit" form="editPayment">  Αποθήκευση Αλλαγών </button>
                 <a href="javascript:history.back()" class="btn btn-info shadow-sm">  Ακύρωση - Επιστροφή </a>
             </div>
         </div>

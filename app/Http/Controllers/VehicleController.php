@@ -84,11 +84,13 @@ class VehicleController extends Controller {
                             ->where('vehicle_id','=',$vehicleId)
                             ->latest()
                             ->first();
-        $today = Date('Y-m-d');
+        $today = new DateTime('NOW');
         if($last_service == null){
             $days = 0;
         } else{
-            $days = $last_service->diff($today, $last_service);
+            //dd($last_service);
+            $days = date_diff($today, $last_service->service_date)->d;
+            
         }
 
         $car_refuelings = Refueling::where('vehicle_id','=',$vehicleId)->orderBy('id', 'ASC')->get();

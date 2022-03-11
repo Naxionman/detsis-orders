@@ -42,7 +42,7 @@
                         <tr>
                             <td>{{ $insurance->insurance_date->format('d-m-Y') }}</td>
                             <td>{{ $insurance->expiry_date->format('d-m-Y') }}</td>
-                            <td>{{ $insurance->vehicle->name }}</td>
+                            <td>{{ $insurance->vehicle->name }}-{{$insurance->vehicle->plate}}</td>
                             <td>{{ $insurance->insurance_company }}</td>
                             <td>{{ number_format($insurance->amount,2,",",".") }} €</td>
                             <td style="width:15%" >

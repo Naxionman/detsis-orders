@@ -43,7 +43,7 @@ class PaymentController extends Controller {
     public function update(Payment $payment) {
         $data = request()->validate([
             'payment_date' => 'required',
-            'supplier' => 'required',
+            'supplier_id' => 'required',
             'bank' => 'required',
             'holder' => 'nullable',
             'amount' => 'required',

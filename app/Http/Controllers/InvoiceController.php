@@ -371,7 +371,6 @@ class InvoiceController extends Controller {
         //If there was no shipment associated we may input it here (or via the shipping menu)
         if($invoice->shipment_id == null) {
             if($request->input('shipper_id') != null) {
-
                 $shippingData = request()->validate([
                     'shipping_date' => 'required',
                     'shipper_id' => 'required',

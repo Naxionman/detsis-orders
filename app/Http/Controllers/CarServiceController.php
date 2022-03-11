@@ -16,6 +16,7 @@ class CarServiceController extends Controller {
 
     public function addCarService($vehicleId) {
         $vehicle = Vehicle::findOrFail($vehicleId);
+
         return view ('vehicles.car_service.add_car_service', compact('vehicle'));
     }
     

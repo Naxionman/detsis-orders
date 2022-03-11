@@ -85,6 +85,7 @@
 
     <script type = "text/javascript">
         $(document).ready( function () {$('#employeesTable').DataTable({
+            paging: false,
             columnDefs: [{ 
                 type: 'date-eu', targets: [3,4] }]}  
             );});

@@ -19,8 +19,8 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('last_supplier')->nullable();
             $table->string('product_code')->nullable();
             $table->string('product_name')->nullable();
-            $table->string('stock_level')->nullable();
-            $table->string('min_level')->nullable();
+            $table->integer('stock_level')->nullable();
+            $table->integer('min_level')->nullable();
             $table->string('notes')->nullable();
             $table->string('image_url', 2083)->nullable();
             $table->foreign('last_supplier')->references('id')->on('suppliers')->onDelete('cascade');
