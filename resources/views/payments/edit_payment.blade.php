@@ -45,7 +45,7 @@
                     </div>
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputHolder">Δικαιούχος</label></div>
-                        <div class="col-sm-4"><input class="form-control" value="{{ $payment->holder }}" type="text" id="inputHolder" name="holder"></div>
+                        <div class="col-sm-4"><input class="form-control" value="{{ $payment->holder }}" type="text" id="inputHolder" name="holder" required="required"></div>
                     </div>    
                     <div class="row mt-3 justify-content-center">
                         <div class="col-2"><label for="inputBank">Τράπεζα</label></div>

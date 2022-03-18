@@ -24,13 +24,6 @@ window.addEventListener('DOMContentLoaded', event => {
     }
 });
 
-//For using table rows as link
-$('tr[data-href]').on("click", function() {
-    document.location = $(this).data('href');
-});
-
-
-
 jQuery(function() {
     $.fn.select2.defaults.set( "theme", "bootstrap" );
     
@@ -678,6 +671,8 @@ function leaveDetails(){
 }
 
 jQuery(function(){
+    
+
     //Fucntion used to hide description column from suppliers table, but make it still searchable (for the tags)
     if(top.location.pathname === '/suppliers'){
         var showroom = $('#switchShowroom');
@@ -753,26 +748,7 @@ jQuery(function(){
         })
     }
 
-    //CONFIRMATION of deletion
-    $('.show_confirm').on('click', function(e) {
-        var form =  $('#deleteForm');
-        e.preventDefault();
-        e.stopPropagation();
-        Swal.fire({
-            title: "Επιβεβαίωση Διαγραφής!!!",
-            text: "Είστε απολύτως βέβαιοι ότι θέλετε να κάνετε διαγραφή; Είναι μία μη αντιστρέψιμη ενέργεια!",
-            icon: "warning",
-            showCancelButton: true,
-              confirmButtonColor: '#ff0f15',
-              cancelButtonColor: '#ed032d9e9e9e',
-              confirmButtonText: 'Ναι! ΔΙΑΓΡΑΦΗ!'
-        })
-        .then((willDelete) => {
-          if (willDelete.isConfirmed) {
-            form.trigger('submit');
-          }
-        });
-    });
+    
 
     // ORDER FILES UPLOADING 
     // File upload via Ajax
@@ -991,6 +967,34 @@ jQuery(function(){
         }); //end of ajax call
     });
 
+});
+
+//CONFIRMATION of deletion
+$('.show_confirm').on('click', function(e) {
+    console.log("here");
+    var form =  $('#deleteForm');
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("here");
+    Swal.fire({
+        title: "Επιβεβαίωση Διαγραφής!!!",
+        text: "Είστε απολύτως βέβαιοι ότι θέλετε να κάνετε διαγραφή; Είναι μία μη αντιστρέψιμη ενέργεια!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: '#ff0f15',
+        cancelButtonColor: '#ed032d9e9e9e',
+        confirmButtonText: 'Ναι! ΔΙΑΓΡΑΦΗ!'
+    })
+    .then((willDelete) => {
+    if (willDelete.isConfirmed) {
+        form.trigger('submit');
+    }
+    });
+});
+
+//For using table rows as link
+$('tr[data-href]').on("click", function() {
+    document.location = $(this).data('href');
 });
 
 //DOKIMI

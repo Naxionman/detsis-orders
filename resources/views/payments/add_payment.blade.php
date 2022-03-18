@@ -47,7 +47,7 @@
                     </div>
                     <div class="row mt-3 justify-content-center">
                         <div class="col-2"><label for="inputHolder">Δικαιούχος</label></div>
-                        <div class="col-4"><input class="form-control" type="text" id="inputHolder" name="holder" placeholder="Δικαιούχος λογαριασμού"></div>
+                        <div class="col-4"><input class="form-control" type="text" id="inputHolder" name="holder" placeholder="Δικαιούχος λογαριασμού" required="required"></div>
                     </div>
                     <div class="row mt-3 justify-content-center">
                         <div class="col-2"><label for="inputBank">Τράπεζα</label></div>

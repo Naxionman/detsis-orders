@@ -72,10 +72,6 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Αρχική σελίδα
                             </a>
-                            <a class="nav-link" href="/dispatches">
-                                <div class="sb-nav-link-icon"><i class="fas fa-car"></i></div>
-                                Κινήσεις
-                            </a>
                             <a class="nav-link" href="/orders">
                                 <div class="sb-nav-link-icon"><i class="fas fa-money-check"></i></div>
                                 Παραγγελίες
@@ -83,6 +79,10 @@
                             <a class="nav-link" href="/invoices">
                                 <div class="sb-nav-link-icon"><i class="fas fa-file-invoice"></i></div>
                                 Τιμολόγια
+                            </a>
+                            <a class="nav-link" href="/suppliers">
+                                <div class="sb-nav-link-icon"><i class="fas fa-industry"></i></div>
+                                Προμηθευτές
                             </a>
                             <a class="nav-link collapsed" href="#"  data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-edit"></i></div>Διαχείριση
@@ -94,10 +94,14 @@
                                         <div class="sb-nav-link-icon"><i class="fas fa-box-open"></i></div>
                                         Προϊόντα
                                     </a>
-                                    <a class="nav-link" href="/suppliers">
-                                        <div class="sb-nav-link-icon"><i class="fas fa-industry"></i></div>
-                                        Προμηθευτές
+                                    <a class="nav-link" href="/shipments">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-car"></i></div>
+                                        Φορτωτικές
                                     </a>
+                                    <a class="nav-link" href="/dispatches">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-car"></i></div>
+                                        Κινήσεις
+                                    </a>                                    
                                     <a class="nav-link" href="/clients">
                                         <div class="sb-nav-link-icon"><i class="fas fa-user-friends"></i></div>
                                         Πελάτες

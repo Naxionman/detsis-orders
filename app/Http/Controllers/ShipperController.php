@@ -41,7 +41,9 @@ class ShipperController extends Controller {
 
     public function showDetails($shipperId, $selected_year) {
         $shipper = Shipper::findOrFail($shipperId);
-        $shipments = Shipment::where('shipper_id',$shipperId)->get();
+        $shipments = Shipment::where('shipper_id',$shipperId)
+                    ->orWhere('extra_shipper_id',$shipperId)
+                    ->get();
         
         $min_year = Shipment::min('shipping_date');
         $max_year = Shipment::max('shipping_date');

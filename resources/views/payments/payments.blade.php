@@ -66,7 +66,7 @@
                                             <form action="/payments/{{ $payment->id }}" id="deleteForm" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                                <button class="btn btn-sm btn-danger show_confirm"><i class="far fa-trash-alt"></i></button>
+                                                <button type="button" class="btn btn-sm btn-danger show_confirm"><i class="far fa-trash-alt"></i></button>
                                             </form>
                                     </div>
                                 </td>

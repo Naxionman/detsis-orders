@@ -53,4 +53,10 @@ class PaymentController extends Controller {
         
         return redirect('payments')->with('message', 'Επιτυχής επεξεργασία πληρωμής!');
     }
+
+    public function destroy(Payment $payment) {
+        $payment->delete();
+
+        return redirect('payments')->with('message', 'Επιτυχής διαγραφή πληρωμής!');
+    }
 }
