@@ -122,6 +122,7 @@
                 <thead>
                     <tr>
                         <th>Ημερομηνία</th>
+                        <th>Αριθμός</th>
                         <th>Χρέωση</th>
                         <th>Πίστωση</th>
                         <th>Υπόλοιπο</th>
@@ -130,6 +131,7 @@
                 <tfoot>
                     <tr>
                         <th>Ημερομηνία</th>
+                        <th>Αριθμός</th>
                         <th>Χρέωση</th>
                         <th>Πίστωση</th>
                         <th>Υπόλοιπο</th>
@@ -142,6 +144,7 @@
                 @forelse ($table_stats as $transaction)
                     <tr>
                         <td>{{ $transaction->date->format('d-m-Y') }}</td>
+                        <td>{{ $transaction->number }}</td>
                         <td>
                             @if($transaction->bank == null)
                                 {{ number_format($transaction->amount,2,",",".") }}    

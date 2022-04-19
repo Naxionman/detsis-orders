@@ -98,15 +98,21 @@
                 <div class="row m-2 border border-box rounded-3">
                     <div class="row">
                         <div class="col-4">
-                            Επισυναπτόμενα αρχεία
+                            <label for="file" class="form-label">Επισυναπτόμενα αρχεία</label>
                         </div>
                         <div class="col-8">
-                            <form action="/upload.php" method="post" id="uploadForm" enctype="multipart/form-data">
-                                 
+                            <form action="/upload" method="post" id="uploadForm" enctype="multipart/form-data">
+                                <input class="form-control" name="file" type="file" id="file">
+                                @error('file')
+                                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                @enderror
+                                <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                               
                                 @csrf
                             </form>
-                        </div>
+                        </div>    
                     </div>
+                
                     <div class="row">
                         <!-- Progress bar -->
                         <div class="progress">
@@ -121,7 +127,7 @@
                 <div class="row m-2  border border-box rounded-3">
                     <div class="wrapper m-2">Σημειώσεις : 
                         <button class="btn btn-sm btn-outline-primary mb-2 toPrinter"><i class="fa fa-print"></i>Εκτύπωση σημειώσεων</button>
-                        <textarea rows="{{ $rows + 1}}" class="form-control" autocomplete="nope" type="text" id="itemToPrint">{{ $order->notes }}</textarea>
+                        <textarea rows="{{ $rows + 5}}" class="form-control" autocomplete="nope" type="text" id="itemToPrint">{{ $order->notes }}</textarea>
                     </div>
                 </div>
             </div>

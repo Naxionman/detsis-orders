@@ -2219,7 +2219,7 @@ input::-webkit-inner-spin-button {
 
 
 .form-control[type=file], [type=file].dataTable-input {
-  overflow: hidden;
+  overflow: visible;
 }
 .form-control[type=file]:not(:disabled):not([readonly]), [type=file].dataTable-input:not(:disabled):not([readonly]) {
   cursor: pointer;
@@ -11780,9 +11780,7 @@ body {
   cursor: pointer;
 }
 
-input[type="file"] {
-  display: none;
-}
+
 
 .select2-results__option {
   font-family: 'Open Sans Condensed', sans-serif;

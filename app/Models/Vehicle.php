@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Vehicle extends Model
 {
     protected $guarded = [];
-    protected $dates = ['expriry_date'];
+    protected $dates = ['expriry_date, service_date'];
 
     public function insurances(){
         return $this->belongsToMany(Insurance::class);

@@ -752,6 +752,7 @@ jQuery(function(){
 
     // ORDER FILES UPLOADING 
     // File upload via Ajax
+    /*
     $("#uploadForm").on('submit', function(e){
         e.preventDefault();
         $.ajax({
@@ -767,7 +768,7 @@ jQuery(function(){
                 return xhr;
             },
             type: 'POST',
-            url: '../upload.php',
+            url: '../upload',
             data: new FormData(this),
             contentType: false,
             cache: false,
@@ -816,6 +817,8 @@ jQuery(function(){
             return false;
         }
     });
+
+*/
 
     // Code for Invoice editing
     if(top.location.pathname.match(/^\/edit_invoice\//)){

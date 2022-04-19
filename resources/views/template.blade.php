@@ -38,13 +38,37 @@
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <a class="btn btn-dark ms-5" style="background-color :rgb(34, 56, 56)" href="/payments">Πληρωμές <i class="fas fa-landmark"></i></a>
             
-            <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+            <!-- Navbar SiteMap-->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark ms-5">
+                <div class="container-fluid ">
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                    <ul class="navbar-nav">
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Γρήγορη Μετάβαση
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                          <li><a class="dropdown-item" href="/orders">Παραγγελίες</a></li>
+                          <li><a class="dropdown-item" href="suppliers">Προμηθευτές</a></li>
+                          <li><a class="dropdown-item" href="shippers">Μεταφορικές</a></li>
+                          <li><a class="dropdown-item" href="clients">Πελάτες</a></li>
+                          <li><a class="dropdown-item" href="expences">Πάγια έξοδα</a></li>
+                          <li><a class="dropdown-item" href="employees">Εργαζόμενοι</a></li>
+                          <li><a class="dropdown-item" href="vehicles">Οχήματα</a></li>
+                          <li class="dropdown-header">Συνχές ενέργειες</li>
+                          <li><a class="dropdown-item" href="add_client">Νέος Πελάτης</a></li>
+                          <li><a class="dropdown-item" href="add_supplier/">Νέος Προμηθευτής</a></li>
+                          <li><a class="dropdown-item" href="add_special_invoice">Νέο Τιμολόγιο</a></li>
+                          <li><a class="dropdown-item" href="view_shipper/2/2022">Καρτέλα Διονύσου</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-            </form>
+              </nav>
             <!-- Notification bell -->
             @include('notifications', compact('shortages'))
 

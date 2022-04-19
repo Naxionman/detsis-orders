@@ -52,7 +52,7 @@ class ClientController extends Controller {
 
         $client->update($data);
                 
-        return redirect('client')->with('message', 'Τα στοιχεία του πελάτη επεξεργάσθηκαν με επιτυχία!');
+        return redirect('clients')->with('message', 'Τα στοιχεία του πελάτη επεξεργάσθηκαν με επιτυχία!');
     }
     
     public function destroy(Client $client) {

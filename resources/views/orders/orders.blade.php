@@ -59,7 +59,7 @@
                                 <th></th>
                                 <th>Σύνολο παραγγελιών :</th>
                                 <th>{{ $orders_count}}</th>
-                                <th>Σύνολο Ανοικτών : </th>
+                                <th>Σύνολο Ανοικτών: </th>
                                 <th>{{ $orders_pending }}</th>
                                 <th></th>
                             </tr>
@@ -130,13 +130,17 @@
     <script type="text/javascript" src="https:////cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.11/sorting/date-eu.js"></script>
     <script type = "text/javascript">
-        $(document).ready( function () {$('#ordersTable').DataTable({
+    
+        $(document).ready( function () {
+            
+            $('#ordersTable').DataTable({
                 order: [[3,'desc'],[2,'desc']],
                 columnDefs: [
                     {targets: [0,1],searchable: true,visible: false },
                     {targets: [3,8],type: 'date-eu'}
-                ],
-            } 
-        );});
+                ],});
+            },
+            
+            );
     </script>    
 @endsection

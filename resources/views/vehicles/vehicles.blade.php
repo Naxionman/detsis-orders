@@ -99,7 +99,13 @@
                                         {{ $expiry_dates[$vehicle->id -1] }} 
                                     @endif
                                 </td>
-                                <td>service</td>
+                                <td>
+                                    @if ($last_services[$vehicle->id -1] != "No data!")
+                                        {{ $last_services[$vehicle->id -1]->format('d-m-Y') }}</td>    
+                                    @else
+                                        Μη διαθέσιμα δεδομένα
+                                    @endif
+                                    
                                 <td>kteo</td>
                                 <td style="width:15%" >
                                     <div class="d-flex justify-content-evenly">

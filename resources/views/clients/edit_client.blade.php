@@ -7,7 +7,7 @@
     <div class="card bg-success bg-opacity-25 shadow-lg border-0 rounded-3 mt-3 ">
         <div class="card-header"><h3 class="text-center font-weight-light my-2 ">Επεξεργασία στοιχείων πελάτη</h3></div>
             <div class="card-body bg-light">
-                <form action="edit_client" id="editClient" method="POST">
+                <form action="/edit_client/{{ $client->id }}" id="editClient" method="POST">
                     @method('PATCH')
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputSurname">Επώνυμο πελάτη</label></div>
@@ -15,23 +15,23 @@
                     </div>
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputName">Όνομα πελάτη</label></div>
-                        <div class="col-sm-4"><input class="form-control" value="{{ $client->name }} type="text" id="inputName" name="name"></div>
+                        <div class="col-sm-4"><input class="form-control" value="{{ $client->name }}" type="text" id="inputName" name="name"></div>
                     </div>
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputEmail">E-mail</label></div>
-                        <div class="col-sm-4"><input class="form-control" value="{{ $client->email }} type="email" id="inputEmail" name="email" data-error="Δεν έχετε βάλει έγκυρο e-mail!"></div>
+                        <div class="col-sm-4"><input class="form-control" value="{{ $client->email }}" type="email" id="inputEmail" name="email" data-error="Δεν έχετε βάλει έγκυρο e-mail!"></div>
                     </div>
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputMobile">Κινητό τηλέφωνο</label></div>
-                        <div class="col-sm-4"><input class="form-control" value="{{ $client->mobile }} type="tel" id="inputMobile" name="mobile"></div>
+                        <div class="col-sm-4"><input class="form-control" value="{{ $client->mobile }}" type="tel" id="inputMobile" name="mobile"></div>
                     </div>
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputPhone2">Τηλέφωνο 2</label></div>
-                        <div class="col-sm-4"><input class="form-control" value="{{ $client->phone2 }} type="tel" id="inputPhone2" name="phone2" ></div>
+                        <div class="col-sm-4"><input class="form-control" value="{{ $client->phone2 }}" type="tel" id="inputPhone2" name="phone2" ></div>
                     </div>
                     <div class="row mt-3 justify-content-center">
                         <div class="col-sm-2"><label for="inputAddress">Διεύθυνση</label></div>
-                        <div class="col-sm-4"><input class="form-control" value="{{ $client->address }} type="text" id="inputAddress" name="address"></div>
+                        <div class="col-sm-4"><input class="form-control" value="{{ $client->address }}" type="text" id="inputAddress" name="address"></div>
                     </div>
                     
                     <div class="row mt-3 justify-content-center">

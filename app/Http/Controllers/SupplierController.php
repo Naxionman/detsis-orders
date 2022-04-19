@@ -50,7 +50,7 @@ class SupplierController extends Controller {
     }
 
     public function show($supplierId) {
-        $supplier = \App\Models\Supplier::findOrFail($supplierId);
+        $supplier = Supplier::findOrFail($supplierId);
         //dd($supplier);
 
         return view('suppliers.edit_supplier', compact('supplier'));
@@ -70,7 +70,7 @@ class SupplierController extends Controller {
         
         //For the transactionsTable (we select bank as well in order to distinguish payment from invoice)
         $table_payments = Payment::select('payment_date AS date','amount','bank')->where('supplier_id','=',$supplierId)->get();
-        $table_invoices = Invoice::select('invoice_date AS date','invoice_total AS amount')->where('supplier_id','=',$supplierId)->get();
+        $table_invoices = Invoice::select('invoice_date AS date','supplier_invoice_number AS number','invoice_total AS amount')->where('supplier_id','=',$supplierId)->get();
         $table_stats = $table_invoices->concat($table_payments);
         $table_stats = $table_stats->sortBy('date');
         //dd($table_stats);

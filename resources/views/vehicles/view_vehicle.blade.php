@@ -112,7 +112,7 @@
                             <tbody>
                             @foreach ($car_services as $service)
                                 <tr>
-                                    <td>{{ $service->service_date }}</td>
+                                    <td>{{ $service->service_date->format("d-m-Y") }}</td>
                                     <td>{{ $service->garage }}</td>
                                     <td>{{ $service->description }}</td>
                                     <td>{{ number_format($service->amount,2,",",".") }}</td>

@@ -20,12 +20,24 @@ class VehicleController extends Controller {
         //Showcasing different approaches
         $expiry_dates = collect();
         $expires_in = array();
-        $today = new DateTime('21-1-2022');
+        $last_services = collect();
+        $today = new DateTime('NOW');
         
         foreach ($vehicles as $vehicle) {
             $vehicle_insurance = Insurance::where('vehicle_id','=',$vehicle->id)
                             ->latest()
                             ->first();
+
+            $last_service = CarService::select('service_date')
+                            ->where('vehicle_id','=',$vehicle->id)
+                            ->latest()
+                            ->first();
+            if($last_service == null) {
+                $last_services->push('No data!');
+            } else {
+                $last_services->push($last_service->service_date);
+            }
+            
             if($vehicle_insurance == null){
                 $expiry_dates->push('Δεν έχει καταγραφεί κάποια ασφάλιση');
                 $expires_in[$vehicle->id -1] = null ;
@@ -38,10 +50,11 @@ class VehicleController extends Controller {
                 $expires_in[$vehicle->id -1] = $interval ;
             }                         
         }
+        
         //dd($expires_in);
         //dd($expiry_dates);
         
-        return view('vehicles.vehicles', compact('vehicles','expiry_dates','expires_in'));    }
+        return view('vehicles.vehicles', compact('vehicles','expiry_dates','expires_in','last_services'));    }
 
     public function addVehicle() {
 
@@ -87,9 +100,11 @@ class VehicleController extends Controller {
         $today = new DateTime('NOW');
         if($last_service == null){
             $days = 0;
-        } else{
-            //dd($last_service);
-            $days = date_diff($today, $last_service->service_date)->d;
+        } else {
+            $d1 = date_diff($today, $last_service->service_date)->y * 365;
+            $d2 = date_diff($today, $last_service->service_date)->m * 30;
+            $d3 = date_diff($today, $last_service->service_date)->d;
+            $days = $d1 + $d2 + $d3;
             
         }
 

@@ -108,7 +108,8 @@ Route::get('/add_leave/{employeeId}', [LeaveController::class, 'getEmployeeLeave
 Route::get('/order/{id}', [OrderController::class, 'getOrder']);
 Route::get('/shipment/{id}', [ShipmentController::class, 'getShipments']);
 Route::get('/shipper', [ShipperController::class, 'getNames']);
-Route::post('upload.php',[OrderFileController::class, 'addFile']);
+Route::get('file-upload',[OrderFileController::class, 'index']);
+Route::post('upload',[OrderFileController::class, 'addFile']);
 Route::get('/add_salary/{id}',[SalaryController::class, 'getEmployee']);
 
 //Show actions (for editing records)
