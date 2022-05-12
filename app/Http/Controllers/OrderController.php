@@ -135,6 +135,11 @@ class OrderController extends Controller {
     }
 
     public function destroy(Order $order) {
+        //We need to clear the order_details first
+        $details = OrderDetails::where("order_id", $order->id)->get();
+        foreach($details as $detail){
+            $detail->delete();
+        }
         $order->delete();
 
         return redirect('/orders')->with('message', 'Επιτυχής διαγραφή παραγγελίας!');
