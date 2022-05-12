@@ -319,6 +319,12 @@ jQuery(function() {
                         subCategory = 'Πόδια';
                         enterLastProduct();
                         break;
+                        break;
+                    case '0108':
+                        category = 'Εξαρτήματα επίπλων';
+                        subCategory = 'Ταινίες PVC';
+                        enterLastProduct();
+                        break;
                     case '0109':
                         category = 'Εξαρτήματα επίπλων';
                         subCategory = 'Διάφορα';

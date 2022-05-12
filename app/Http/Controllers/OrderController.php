@@ -85,12 +85,14 @@ class OrderController extends Controller {
         $order = Order::findOrFail($orderId);
 
         $order_details = OrderDetails::where('order_id', $orderId)->get();
-        //$order_files = OrderFile::where('order_id', $orderId)->get();
+        $files = OrderFile::where('order_id', $orderId)->get();
         $notes = $order->notes;
+
+
 
         $rows = substr_count( $notes, "\n" );
         
-        return view('orders.view_order', compact('rows','order','order_details'));
+        return view('orders.view_order', compact('rows','order','order_details', 'files'));
     }
 
     public function update(Order $order) {

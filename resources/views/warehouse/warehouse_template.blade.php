@@ -31,13 +31,19 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>     
     
     <body class="sb-nav-fixed">
+        <style>
+            body {
+                background: url(images/warehouse_background.jpg) no-repeat center center fixed; 
+                background-size: cover;
+            }
+        </style>
+
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="/">DetsisOrders</a>
+            <a class="navbar-brand ps-3" href="/warehouse">DetsisWarehouse</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-            <!-- Payments button -->
-            <a class="btn btn-dark ms-5" style="background-color :rgb(34, 56, 56)" href="/payments">Πληρωμές <i class="fas fa-landmark"></i></a>
+            <a class="btn btn-dark ms-5" style="background-color :rgb(34, 56, 56)" href="/">DetsisOrders <i class="fas fa-chart-line"></i></a>
             
             <!-- Navbar SiteMap-->
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark ms-5">
@@ -45,36 +51,8 @@
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
-                  <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-                    <ul class="navbar-nav">
-                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Γρήγορη Μετάβαση
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                          <li><a class="dropdown-item" href="/orders">Παραγγελίες</a></li>
-                          <li><a class="dropdown-item" href="/suppliers">Προμηθευτές</a></li>
-                          <li><a class="dropdown-item" href="/shippers">Μεταφορικές</a></li>
-                          <li><a class="dropdown-item" href="/clients">Πελάτες</a></li>
-                          <li><a class="dropdown-item" href="/expences">Πάγια έξοδα</a></li>
-                          <li><a class="dropdown-item" href="/employees">Εργαζόμενοι</a></li>
-                          <li><a class="dropdown-item" href="/vehicles">Οχήματα</a></li>
-                          <li class="dropdown-header">Συνχές ενέργειες</li>
-                          <li><a class="dropdown-item" href="/add_client">Νέος Πελάτης</a></li>
-                          <li><a class="dropdown-item" href="/add_supplier">Νέος Προμηθευτής</a></li>
-                          <li><a class="dropdown-item" href="/add_special_invoice">Νέο Τιμολόγιο</a></li>
-                          <li><a class="dropdown-item" href="view_shipper/2/2022">Καρτέλα Διονύσου</a></li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </div>
                 </div>
               </nav>
-            
-            <!-- Warehouse button -->
-            <a class="btn btn-dark ms-5" style="background-color :rgb(34, 56, 56)" href="/warehouse">Αποθήκη <i class="fas fa-warehouse"></i></a>
-            <!-- Notification bell -->
-            @include('notifications', compact('shortages'))
 
             <!-- Navbar-->
             <ul class="navbar-nav ms-5 me-5">
@@ -100,13 +78,9 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Αρχική σελίδα
                             </a>
-                            <a class="nav-link" href="/orders">
-                                <div class="sb-nav-link-icon"><i class="fas fa-money-check"></i></div>
-                                Παραγγελίες
-                            </a>
-                            <a class="nav-link" href="/invoices">
-                                <div class="sb-nav-link-icon"><i class="fas fa-file-invoice"></i></div>
-                                Τιμολόγια
+                            <a class="nav-link" href="/products">
+                                <div class="sb-nav-link-icon"><i class="fas fa-box-open"></i></div>
+                                Προϊόντα
                             </a>
                             <a class="nav-link" href="/suppliers">
                                 <div class="sb-nav-link-icon"><i class="fas fa-industry"></i></div>
@@ -118,18 +92,12 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/products">
-                                        <div class="sb-nav-link-icon"><i class="fas fa-box-open"></i></div>
-                                        Προϊόντα
-                                    </a>
+                                    
                                     <a class="nav-link" href="/shipments">
                                         <div class="sb-nav-link-icon"><i class="fas fa-car"></i></div>
                                         Φορτωτικές
                                     </a>
-                                    <a class="nav-link" href="/dispatches">
-                                        <div class="sb-nav-link-icon"><i class="fas fa-car"></i></div>
-                                        Κινήσεις
-                                    </a>                                    
+                                    
                                     <a class="nav-link" href="/clients">
                                         <div class="sb-nav-link-icon"><i class="fas fa-user-friends"></i></div>
                                         Πελάτες
@@ -142,10 +110,7 @@
                                         <div class="sb-nav-link-icon"><i class="fas fa-shipping-fast"></i></div>
                                         Μεταφορικές
                                     </a>
-                                    <a class="nav-link" href="/vehicles">
-                                        <div class="sb-nav-link-icon"><i class="fas fa-car"></i></div>
-                                        Οχήματα
-                                    </a>
+                                    
                                 </nav>
                             </div>
                         </div>

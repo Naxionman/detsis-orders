@@ -10,6 +10,7 @@ use App\Models\Expence;
 use App\Models\Insurance;
 use App\Models\Invoice;
 use App\Models\Kteo;
+use App\Models\Product;
 use App\Models\Refueling;
 use App\Models\Salary;
 
@@ -223,5 +224,12 @@ class PageController extends Controller {
                                 'total_yearly_vehicles',
                                 'salaries'
                             )); 
+    }
+
+    public function warehouse() {
+
+        $products = Product::all();
+
+        return view ('warehouse.warehouse', compact('products'));
     }
 }

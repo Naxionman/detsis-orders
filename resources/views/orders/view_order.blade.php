@@ -100,18 +100,31 @@
                         <div class="col-4">
                             <label for="file" class="form-label">Επισυναπτόμενα αρχεία</label>
                         </div>
-                        <div class="col-8">
-                            <form action="/upload" method="post" id="uploadForm" enctype="multipart/form-data">
-                                <input class="form-control" name="file" type="file" id="file">
+                    </div>
+                    <div class="row">
+                        @foreach ($files as $file)
+                            <div class="row">
+                                <li>
+                                    
+                                   <a href="{{$file->path}}"><i class="far fa-file-word"></i> {{$file->name}}</a>
+                                </li>
+                            </div>
+                            
+                        @endforeach
+
+                    </div>
+                    <div class="row">
+                        <form action="/upload" method="post" id="uploadForm" enctype="multipart/form-data">
+                            <input class="form-control" name="file" type="file" id="file">
                                 @error('file')
                                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                                 @enderror
-                                <button type="submit" class="btn btn-primary" id="submit">Submit</button>
-                               
-                                @csrf
-                            </form>
-                        </div>    
-                    </div>
+                            <input type="hidden" name="order_id" value="{{ $order->id }}">
+                            <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                            @csrf
+                        </form>
+                    </div>    
+                    
                 
                     <div class="row">
                         <!-- Progress bar -->

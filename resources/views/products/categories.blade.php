@@ -6,6 +6,7 @@
 <div class="row">0105. Ράφια</div>
 <div class="row">0106. Εξαρτήματα πορτών</div>
 <div class="row">0107. Πόδια</div>
+<div class="row">0108. Ταινίες PVC</div>
 <div class="row">0109. Διάφορα</div>
 <div class="row"><strong>02. Χημικά</strong></div>
 <div class="row">0201. Σιλικόνες</div>

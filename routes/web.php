@@ -43,6 +43,8 @@ Route::get('/employees/salaries/office_worker', function() {
 
 Route::get('/', [PageController::class, 'index']);
 
+Route::get('/warehouse', [PageController::class, 'warehouse']);
+
 Route::get('/clients', [ClientController::class, 'index']);
 Route::get('/suppliers', [SupplierController::class, 'index']);
 Route::get('/employees', [EmployeeController::class, 'index']);

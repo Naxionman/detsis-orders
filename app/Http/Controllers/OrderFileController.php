@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\OrderFile;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,6 @@ class OrderFileController extends Controller {
         //???????????????
         return view('file-upload');
     }
-
 
     public function addFile(Request $request) {
         $data = $request->validate([
@@ -25,6 +25,12 @@ class OrderFileController extends Controller {
 
         $save->name = $name;
         $save->path = $path;
+
+        OrderFile::create([
+            'name' => $name,
+            'path' => $path,
+            'order_id' => $request->input('order_id') ,
+        ]);
 
         return redirect()->back()->with('status', 'File Has been uploaded successfully in laravel');
  
