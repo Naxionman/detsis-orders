@@ -278,6 +278,7 @@ jQuery(function() {
         var subCategory;
         var lastProduct;
 
+        //Categories
         $('#inputDetsisCode').on('input keyup keydown', function () {
             var userInput = $('#inputDetsisCode').val();
             //console.log(userInput); 
@@ -518,7 +519,7 @@ function leaveDetails(){
                 $('#daysEntitled').text(employeeData[1]);
             },
             error:function() {
-                alert("Τι στο πούτσο έγινε πάλι;;; Καλέστε τον Νικόλα να το φτιάξει!");
+                alert("Τι στο διάολο έγινε πάλι;;; Καλέστε τον Νικόλα να το φτιάξει!");
             }         
         });
     });
@@ -543,7 +544,7 @@ function leaveDetails(){
             26th of December
         */
 
-            //Easter Mondays until 2030...Well, yeah...
+            //Easter (Orthodox) Mondays until 2030...Well, yeah...
         var EasterMondays = [
             new Date('2022-04-25').getTime(),
             new Date('2023-04-17').getTime(),
@@ -977,7 +978,10 @@ jQuery(function(){
     });
 
 });
-
+$('.stop-propagation').on('click', function(e){
+    e.stopPropagation();
+    e.preventDefault();
+});
 //CONFIRMATION of deletion
 $('.show_confirm').on('click', function(e) {
     console.log("here");

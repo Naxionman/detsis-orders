@@ -54,6 +54,12 @@ class AppServiceProvider extends ServiceProvider
         View::share('shortages', $shortages);
         View::share('birthdays', $birthdays);
         View::share('total_notifications', $total_notifications);
+
+        //Ασφάλειες Οχημάτων
+        
+
+
+
         //        */
     }
     

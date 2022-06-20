@@ -48,7 +48,7 @@
                 @if ($order->order_type == 'Εργοστάσιο')
                 <!-- List of ordered goods -->
                 <div class="row">
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered table-striped" id="itemToPrint">
                         <thead>
                             <tr>
                                 <th>Ήρθε;</th>

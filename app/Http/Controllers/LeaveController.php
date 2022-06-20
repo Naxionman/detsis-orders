@@ -35,7 +35,7 @@ class LeaveController extends Controller {
 
         $days_taken = request()->input('days_taken');
 
-        $employee->leave_days_taken = $days_taken;
+        $employee->leave_days_taken += $days_taken;
         $employee->save();
         
         return redirect('leaves')->with('message', 'Επιτυχής προσθήκη άδειας!');

@@ -26,7 +26,7 @@
                                 <th>Κινητό</th>
                                 <th>Άλλο</th>
                                 <th>email</th>
-                                <th>Στοιχεία Ελέγχου</th>
+                                <th>Ε/Δ</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -36,7 +36,7 @@
                                 <th>Κινητό</th>
                                 <th>Άλλο</th>
                                 <th>email</th>
-                                <th>Στοιχεία Ελέγχου</th>
+                                <th>Ε/Δ</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -50,7 +50,34 @@
                                     <a href="https://compose.mail.yahoo.com/?to="><i class="fab fa-yahoo"></i></a>
                                     <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ $client->email }}"><i class="fab fa-google"></i></a>
                                 </td>
-                                <td style="width:15%" >
+                                <td style="width:5%" >
+                                    <!-- Experimental new style control elements -->
+                                    <div class="btn-group dropstart stop-propagation">
+                                        <button type="button" class="btn btn-light" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+                                            <!-- Dropdown menu links -->
+                                            <li><a class="dropdown-item" href="/edit_client/{{ $client->id }}">Επεξεργασία</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><form action="/clients/{{ $client->id }}" id="deleteForm" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button class="dropdown-item show_confirm">Διαγραφή</button>
+                                            </form></li>
+                                        
+                                        </ul>
+                                    <style>
+                                        .dropdown-toggle::after {
+                                            content: none;
+                                        }
+                                    </style>
+                                    </div>
+                                    
+                                    
+                                    
+                                    
+                                <!--
                                     <div class="d-flex justify-content-evenly">
                                         <a href="/edit_client/{{ $client->id }}" class="btn btn-sm btn-warning flex-fill">
                                             <i class="far fa-edit"></i>Edit</a>
@@ -60,6 +87,7 @@
                                                 <button type="button" class="btn btn-danger show_confirm"><i class="far fa-trash-alt"></i></button>
                                             </form>
                                     </div>
+                                -->
                                 </td>
                             </tr>
                         @empty
