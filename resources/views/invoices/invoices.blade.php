@@ -17,6 +17,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-4"><i class="fas fa-table me-1"></i>Τιμολόγια</div> 
+                        <div class="col-4"><a href="/invoices/full">Όλα τα τιμολόγια</a></div> 
                         <div class="form-check form-switch col">
                             <label class="form-check-label" for="switchShowroom">Μόνο Έκθεσης</label>
                             <input class="form-check-input" type="checkbox" id="switchShowroom">

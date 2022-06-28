@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Price;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 use function Symfony\Component\String\b;
@@ -17,12 +18,25 @@ use function Symfony\Component\String\b;
 class InvoiceController extends Controller {
     
     public function index() {
+        $year = date("Y");
+
+        $invoices = Invoice::whereYear('invoice_date','=',$year)->get();
+
+        $ids = Invoice::whereYear('invoice_date','=',$year)->select('id')->get();
+
+        $details = OrderDetails::whereIn('invoice_id', $ids)->get();
+        
+        return view('invoices.invoices', compact('invoices','details'));
+    }
+    
+    public function indexFull() {
         $invoices = Invoice::all();
         $details = OrderDetails::all();
 
         return view('invoices.invoices', compact('invoices','details'));
     }
-    
+
+
     public function addInvoice($orderId) {
         $suppliers = Supplier::all();
         $shippers = Shipper::all();

@@ -54,6 +54,7 @@ Route::get('/dispatches', [DispatchController::class, 'index']);
 Route::get('/dispatch_log', [DispatchController::class, 'log']);
 Route::get('/orders', [OrderController::class, 'index']);
 Route::get('/invoices', [InvoiceController::class, 'index']);
+Route::get('/invoices/full', [InvoiceController::class, 'indexFull']);
 Route::get('/shipments', [ShipmentController::class, 'index']);
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/refuelings', [RefuelingController::class, 'index']);
