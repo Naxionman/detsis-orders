@@ -18,6 +18,7 @@ use function Symfony\Component\String\b;
 class InvoiceController extends Controller {
     
     public function index() {
+        //We get only the current year's invoices for better performance (less invoices, less order_details)
         $year = date("Y");
 
         $invoices = Invoice::whereYear('invoice_date','=',$year)->get();
