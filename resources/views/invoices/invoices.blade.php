@@ -58,7 +58,7 @@
 
                             
                         @forelse ($invoices as $invoice)
-                            <tr data-href="view_invoice/{{ $invoice->id}}">
+                            <tr data-href="view_invoice/{{ $invoice->id}} data-bs-toggle="tooltip-inner" data-bs-placement="top" title="{{ $invoice->notes }}"">
                                 <td>{{ $invoice->id }}</td>
                                 <td>{{ $invoice->invoice_date->format('d-m-Y') }}</td>
                                 <td>{{ $invoice->supplier->company_name }}</td>
