@@ -172,3 +172,4 @@ Route::delete('/invoices/{invoice}',[InvoiceController::class, 'destroy']);
 Route::delete('/payments/{payment}',[PaymentController::class, 'destroy']);
 Route::delete('/leaves/{leave}',[LeaveController::class, 'destroy']);
 Route::delete('/expences/{expence}',[ExpenceController::class, 'destroy']);
+Route::delete('/files/{file}',[OrderFileController::class, 'destroy']);

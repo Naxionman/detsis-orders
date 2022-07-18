@@ -41,7 +41,7 @@
                         </tfoot>
                         <tbody>
                         @forelse ($clients as $client)
-                            <tr data-href="view_client/{{ $client->id}}">     
+                            <tr data-href="view_client/{{ $client->id }}">     
                                 <td><strong>{{$client->surname }}</strong></td>
                                 <td>{{ $client->name }}</td>
                                 <td>{{ $client->mobile }}</td>
@@ -60,7 +60,7 @@
                                             <!-- Dropdown menu links -->
                                             <li><a class="dropdown-item" href="/edit_client/{{ $client->id }}">Επεξεργασία</a></li>
                                             <li><hr class="dropdown-divider"></li>
-                                            <li><form action="/clients/{{ $client->id }}" id="deleteForm" method="POST">
+                                            <li><form action="/clients/{{ $client->id }}" id="deleteForm{{ $client->id }}" method="POST">
                                                 @method('DELETE')
                                                 @csrf
                                                 <button class="dropdown-item show_confirm">Διαγραφή</button>

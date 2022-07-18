@@ -984,13 +984,17 @@ $('.stop-propagation').on('click', function(e){
 });
 //CONFIRMATION of deletion
 $('.show_confirm').on('click', function(e) {
-    console.log("here");
-    var form =  $('#deleteForm');
     e.preventDefault();
     e.stopPropagation();
-    console.log("here");
+    console.log("$(this).parent().attr('id')");
+    console.log($(this).parent().attr("id"));
+    //We need to get the correct form in order not to delete wrong records! deleteForm+id
+    var form_id =  $(this).parent().attr("id");
+    var id = $(this).parent().attr("id").replace(/deleteForm/, '');
+    var form = document.getElementById(form_id);
+    
     Swal.fire({
-        title: "Επιβεβαίωση Διαγραφής!!!",
+        title: "Διαγραφή "+ id +"!!!",
         text: "Είστε απολύτως βέβαιοι ότι θέλετε να κάνετε διαγραφή; Είναι μία μη αντιστρέψιμη ενέργεια!",
         icon: "warning",
         showCancelButton: true,
@@ -1000,7 +1004,7 @@ $('.show_confirm').on('click', function(e) {
     })
     .then((willDelete) => {
     if (willDelete.isConfirmed) {
-        form.trigger('submit');
+        form.submit();
     }
     });
 });

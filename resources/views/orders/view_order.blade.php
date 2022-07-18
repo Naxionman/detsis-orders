@@ -98,34 +98,66 @@
                 <div class="row m-2 border border-box rounded-3">
                     <div class="row">
                         <div class="col-4">
-                            <label for="file" class="form-label">Επισυναπτόμενα αρχεία</label>
+                            <h6>Επισυναπτόμενα αρχεία</h6>
                         </div>
                     </div>
-                    <div class="row">
-                        @foreach ($files as $file)
-                            <div class="row">
-                                <li>
-                                    
-                                   <a href="{{$file->path}}"><i class="far fa-file-word"></i> {{$file->name}}</a>
-                                </li>
+                    <ul class="ps-5">
+                    @foreach ($files as $file)
+                    <li>
+                    <div class="row m-1">
+                            <div class="col-1">
+                                @php
+                                    $extension = pathinfo($file->name, PATHINFO_EXTENSION);
+                                @endphp
+                                    @switch($extension)
+                                        @case("pdf")
+                                            <i class="far fa-file-pdf"></i> 
+                                            @break
+                                        @case("doc")
+                                        @case("docx")
+                                        @case("odt")
+                                            <i class="far fa-file-word"></i> 
+                                            @break
+                                        @case("xls")
+                                        @case("xlsx")
+                                        @case("odf")
+                                            <i class="far fa-file-excel"></i> 
+                                            @break
+                                        @case("jpg")
+                                            <i class="far fa-file-image"></i> 
+                                            @break
+                                        @default
+                                    @endswitch
                             </div>
-                            
-                        @endforeach
-
-                    </div>
+                            <div class="col-7">
+                                <a href="{{ asset('../../storage/'.$file->path)}}" target="_blank"> {{$file->name}}</a>
+                            </div>
+                            <div class="col-3">
+                                <form action="/files/{{ $file->id }}" id="deleteForm{{ $file->id }}" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-danger show_confirm"><i class="fas fa-trash-alt"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                    @endforeach
+                    </ul>
+                    
                     <div class="row">
                         <form action="/upload" method="post" id="uploadForm" enctype="multipart/form-data">
                             <input class="form-control" name="file" type="file" id="file">
-                                @error('file')
-                                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                @enderror
+                            @error('file')
+                            <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                            @enderror
                             <input type="hidden" name="order_id" value="{{ $order->id }}">
-                            <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                            <button type="submit" class="btn btn-primary" id="submit">Υποβολή</button>
                             @csrf
                         </form>
                     </div>    
                     
-                
+                    <br>
+                    
                     <div class="row">
                         <!-- Progress bar -->
                         <div class="progress">
