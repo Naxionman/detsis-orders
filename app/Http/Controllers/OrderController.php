@@ -18,8 +18,10 @@ class OrderController extends Controller {
         $orders =  Order::all();
         $orders_count = $orders->count();
         $orders_pending = Order::where('pending', 1)->count();
+        $files = OrderFile::all();
 
-        return view('orders.orders', compact('orders', 'orders_count','orders_pending'));
+
+        return view('orders.orders', compact('orders', 'orders_count','orders_pending', 'files'));
     }
 
     public function addOrder() {
@@ -77,6 +79,7 @@ class OrderController extends Controller {
         $products = Product::all();
         $clients = Client::all();
         $details = OrderDetails::where('order_id', $orderId)->get();
+        
         
         return view('orders.edit_order', compact('order','details', 'shippers','suppliers','products','clients'));
     }

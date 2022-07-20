@@ -46,6 +46,7 @@
                                 <th>Πελάτης</th>
                                 <th>Προμηθευτής</th>
                                 <th>Αφορά</th>
+                                <th>Αρχεία</th>
                                 <th>Άφιξη</th>
                                 <th>Στοιχεία Ελέγχου</th>
                             </tr>
@@ -54,6 +55,7 @@
                             <tr>
                                 <th>pending</th>
                                 <th>notes</th>
+                                <th></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -99,6 +101,42 @@
                                 </td>
                                 <td>{{ $order->supplier->company_name }}</td>
                                 <td>{{ $order->order_type }}</td>
+                                <td>
+                                    <!-- ΕΔΩ Ο ΚΩΔΙΚΑΣ ΓΙΑ ΤΑ ΑΡΧΕΙΑ -->
+                                    @foreach ($files as $file )
+                                        @php
+                                            $extension = pathinfo($file->name, PATHINFO_EXTENSION);
+                                        @endphp
+
+                                        @if ($order->id == $file->order_id)
+
+                                        <a href="{{ asset('../../storage/'.$file->path)}}">
+                                        @switch($extension)
+                                            @case("pdf")
+                                                <i class="far fa-file-pdf"></i> 
+                                                @break
+                                            @case("doc")
+                                            @case("docx")
+                                            @case("odt")
+                                                <i class="far fa-file-word"></i> 
+                                                @break
+                                            @case("xls")
+                                            @case("xlsx")
+                                            @case("odf")
+                                            <i class="far fa-file-excel"></i> 
+                                            @break
+                                            @case("jpg")
+                                            @case("jpeg")
+                                            @case("png")
+                                            @case("gif")
+                                            <i class="far fa-file-image"></i> 
+                                            @break
+                                            @default
+                                        @endswitch
+                                        </a>
+                                        @endif
+                                    @endforeach
+                                </td>
                                 <td>
                                     @if ($order->pending == 1)
                                         <a class="btn btn-primary shadow-sm btn-sm" href="/add_invoice/{{$order->id}}">Άφιξη</a>

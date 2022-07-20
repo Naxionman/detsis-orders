@@ -124,6 +124,9 @@
                                             <i class="far fa-file-excel"></i> 
                                             @break
                                         @case("jpg")
+                                        @case("jpeg")
+                                        @case("png")
+                                        @case("gif")
                                             <i class="far fa-file-image"></i> 
                                             @break
                                         @default
