@@ -58,8 +58,8 @@
                                 <td class="text-end pe-2">{{ number_format ($shipment->extra_price, 2, ",", ".") }}</td>
                                 <td class="text-end pe-2">{{ number_format ($shipment->shipment_price, 2, ",", ".") }}</td>
                                 <td style="width:5%" >
-                                    <div class="btn-group dropstart stop-propagation">
-                                        <button type="button" class="btn btn-light" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                                    <div class="btn-group dropstart ">
+                                        <button type="button" class="btn btn-light stop-propagation" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v"></i>
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
