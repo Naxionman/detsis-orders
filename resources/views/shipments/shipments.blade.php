@@ -57,7 +57,26 @@
                                 </td>
                                 <td class="text-end pe-2">{{ number_format ($shipment->extra_price, 2, ",", ".") }}</td>
                                 <td class="text-end pe-2">{{ number_format ($shipment->shipment_price, 2, ",", ".") }}</td>
-                                <td style="width:15%" >
+                                <td style="width:5%" >
+                                    <div class="btn-group dropstart stop-propagation">
+                                        <button type="button" class="btn btn-light" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+                                            <!-- Dropdown menu links -->
+                                            <li><a class="dropdown-item" href="/edit_shipment/{{ $shipment->id }}">Επεξεργασία</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><form action="/shipments/{{ $shipment->id }}" id="deleteForm{{ $shipment->id }}" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button class="dropdown-item show_confirm">Διαγραφή</button>
+                                            </form></li>
+                                        
+                                        </ul>
+                                    </div>
+
+
+                                    <!-- OLD edit+delete
                                     <div class="d-flex justify-content-evenly">
                                         <a href="/edit_shipment/{{ $shipment->id }}" class="btn btn-sm btn-warning flex-fill">
                                             <i class="far fa-edit"></i>Edit</a>
@@ -67,6 +86,7 @@
                                                 <button class="btn btn-sm btn-danger show_confirm"><i class="far fa-trash-alt"></i></button>
                                             </form>
                                     </div>
+                                    -->
                                 </td>
                             </tr>
                             @endif
