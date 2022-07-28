@@ -75,7 +75,25 @@
                                     @endphp
                                         {{ $new_balance }}
                                     €</td>
-                                <td style="width:15%" >
+                                <td style="width:5%" >
+                                    <div class="btn-group dropstart ">
+                                        <button type="button" class="btn btn-light stop-propagation" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+                                            <!-- Dropdown menu links -->
+                                            <li><a class="dropdown-item" href="/edit_supplier/{{ $supplier->id }}">Επεξεργασία</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><form action="/suppliers/{{ $supplier->id }}" id="deleteForm{{ $supplier->id }}" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button class="dropdown-item show_confirm">Διαγραφή</button>
+                                            </form></li>
+                                        
+                                        </ul>
+                                    </div>
+
+                                    <!-- OLD edit+delete
                                     <div class="d-flex justify-content-evenly">
                                         <a href="/edit_supplier/{{ $supplier->id }}" class="btn btn-warning btn-sm">
                                             <i class="far fa-edit"></i>Edit</a>
@@ -85,6 +103,7 @@
                                                 <button class="btn btn-sm btn-danger show_confirm"><i class="far fa-trash-alt"></i></button>
                                             </form>
                                     </div>
+                                    -->
                                 </td>
                             </tr>
                         @empty
