@@ -89,9 +89,10 @@
                         <br>
                         <br>
                         <br>
-                        <div class="row">
-                            <div class="col-4"><label>Πειραιώς :</label></div>
-                            <div class="col-8"> <strong>{{ $supplier->iban1 ?: '-' }}</strong></div>
+                        <div class="row" id="row1">
+                            <div class="col-3"><label>Πειραιώς :</label></div>
+                            <div class="col-7"> <input class="form-control" type="text" id="iban1" value="{{ $supplier->iban1 ?: '-' }}"></div>
+                            <div class="col-1" id="1"><button class="btn btn-link" onclick="copyToClipboard()"><i class="far fa-clipboard"></i></button></div>
                         </div>
                         <div class="row">
                             <div class="col-4"><label>Εθνική :</label></div>
@@ -183,5 +184,24 @@
                 type: 'date-eu', targets: [0] }]
             });              
         });
+    </script>
+    <script>
+        function copyToClipboard() {
+            var bankId = $(this).parent().attr("id");
+            console.log(bankId);
+            console.log($(this).parent());
+
+            var copyText = document.getElementById("iban"+bankId);
+            
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+            /* Copy the text inside the text field */
+            navigator.clipboard.writeText(copyText.value);
+
+            /* Alert the copied text */
+            alert("Copied the text: " + copyText.value);
+        }
     </script>
 @endsection
