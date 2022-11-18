@@ -83,7 +83,7 @@
                                 </td>
                                 <td class="text-end pe-2">{{ number_format($invoice->invoice_total,2,",",".") }} €</td>
                                 <td>{{ $invoice->invoice_type }}</td>
-                                <td style="width:15%" >
+                                <td style="width:15%"  id="elements" >
                                     <div class="d-flex justify-content-evenly">
                                         <a href="/edit_invoice/{{ $invoice->id }}" class="btn btn-sm btn-warning flex-fill">
                                             <i class="far fa-edit"></i>Edit</a>
@@ -106,10 +106,34 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"type="text/javascript"></script>
     <script type="text/javascript" src="https:////cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.11/sorting/date-eu.js"></script>
-    <script type = "text/javascript">$(document).ready( function () {$('#invoicesTable').DataTable({
-        order: [[1,'desc']],
-        columnDefs: [{ 
-                    type: 'date-eu', targets: [1] }]}  
-        );});</script>
+    <script type = "text/javascript">
+    
+        $(document).ready( function () {$('#invoicesTable').DataTable({
+            
+            order: [[1,'desc']],
+            processing: true,
+            serverSide: true,
+            ajax: "{{route('getInvoices')}}",
+                columns: [
+                    { data: 'id' },
+                    { data: 'invoice_date' },
+                    { data: 'supplier' },
+                    { data: 'invoice_number'},
+                    { data: ''},
+                    { data: 'invoice_total',
+                      render: function ( data, type, row ) {
+                                return data + " €";
+                            }
+                    },
+                    { data: 'invoice_type'},
+                    { render: function ( data, type, row ) {
+                           return '<div class="btn-group dropstart stop-propagation"><button type="button" class="btn btn-light" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button><ul class="dropdown-menu" aria-labelledby="defaultDropdown"><li><a class="dropdown-item" href="/edit_invoice/{{ $invoice->id }}">Επεξεργασία</a></li><li><hr class="dropdown-divider"></li><li><form action="/invoice/{{ $invoice->id }}" id="deleteForm{{ $invoice->id }}" method="POST">@method('DELETE')@csrf<button class="dropdown-item show_confirm">Διαγραφή</button></form></li></ul></div>';
+                        }}
+                ],
+                columnDefs: [{ 
+                    type: 'date-eu', targets: [1] }]
+                           
+        });});
+    </script>
     
 @endsection

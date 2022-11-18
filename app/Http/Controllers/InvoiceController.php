@@ -19,6 +19,8 @@ class InvoiceController extends Controller {
     
     public function index() {
         //We get only the current year's invoices for better performance (less invoices, less order_details)
+        
+        /*  OLD SYSTEM - Getting only current year's invoices (still too slow when more than 500)
         $year = date("Y");
 
         $invoices = Invoice::whereYear('invoice_date','=',$year)->get();
@@ -28,8 +30,87 @@ class InvoiceController extends Controller {
         $details = OrderDetails::whereIn('invoice_id', $ids)->get();
         
         return view('invoices.invoices', compact('invoices','details'));
+        */
+
+        $invoices = Invoice::paginate(20);
+        $details = OrderDetails::all();
+        return view('invoices.invoices', compact('invoices','details'));
+
+        /* Preparing to make a big change in fetching and showing data. We need to implement pagination through the server-side
+         * for excellent performance. If we fetch all the invoices we have very long waiting times. Thus, we need to break the 
+         * data in chunks of tens.
+        */
     }
     
+    // This is an AJAX needed method
+    public function getInvoices(Request $request){
+        $draw = $request->get('draw');
+        $start = $request->get('start');
+        $rows_per_page = $request->get('length'); //How many records will be displayed per page
+
+        $column_index_array = $request->get('order'); //Not to be confused with orders made for the business.
+        $column_name_array = $request->get('columns');
+        $order_array = $request->get('order');
+
+        $search_array = $request->get('search');
+
+        $columnIndex = $column_index_array[0]['column']; // Column index
+        $columnName = $column_name_array[$columnIndex]['data']; // Column name
+        $columnSortOrder = $order_array[0]['dir']; // asc or desc
+        $searchValue = $search_array['value']; // Search value
+
+
+        $totalRecords = Invoice::select('count(*) as allcount')->count();
+        $totalRecordswithFilter = Invoice::select('count(*) as allcount')->where('id', 'like', '%' .$searchValue . '%')->count();
+
+        // Fetch records
+        $invoices = Invoice::orderBy($columnName,$columnSortOrder)
+            ->where('invoices.id', 'like', '%' .$searchValue . '%')
+            ->orWhere('invoices.invoice_total', 'like', '%' .$searchValue . '%')
+            ->orWhere('invoices.supplier_invoice_number', 'like', '%' .$searchValue . '%')
+            
+            ->orWhere('invoices.notes', 'like', '%' .$searchValue . '%')
+            ->select('invoices.*')
+            ->skip($start)
+            ->take($rows_per_page)
+            ->get();
+       
+        $data_arr = array();
+
+        foreach($invoices as $invoice){
+            $id = $invoice->id;
+            $invoice_date = $invoice->invoice_date->format('d-m-Y');
+            $supplier = $invoice->supplier->company_name;
+            $invoice_number = $invoice->supplier_invoice_number;
+            $invoice_total = number_format($invoice->invoice_total,2,",",".");
+            $invoice_type = $invoice->invoice_type;
+            $invoice_notes = $invoice->notes;
+
+            $data_arr[] = array(
+            "id" => $id,
+            "invoice_date" => $invoice_date,
+            "supplier" => $supplier,
+            "invoice_number" => $invoice_number,
+            ""=> null,
+            "invoice_total" => $invoice_total,
+            "invoice_type" => $invoice_type,
+            "invoice_notes" => $invoice_notes
+            
+            );
+        }
+        
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+         );
+    
+         echo json_encode($response);
+         exit;
+    }
+
+
     public function indexFull() {
         $invoices = Invoice::all();
         $details = OrderDetails::all();

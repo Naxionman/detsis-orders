@@ -40,11 +40,14 @@
                     <div class="row mt-3 justify-content-center">
                         <div class="col-2"><label for="inputOrderPending">Είναι ανοικτή;</label></div>
                         <div class="col-4">
-                            <input type="hidden" name="pending" value="0">
+                            
                             @if ($order->pending == 1)
-                                <div class="form-check form-switch"><input class="form-check-input" type="checkbox" value="0" name="pending" id="inputOrderPending" unchecked></div>
-                            @else
+                                <input hidden name="pending" value="1">
                                 <div class="form-check form-switch"><input class="form-check-input" type="checkbox" value="1" name="pending" id="inputOrderPending" checked></div>
+                                <input hidden name="arrival_date" value="{{ date("Y/m/d") }}">
+                            @else
+                                <input hidden name="pending" value="0">
+                                <div class="form-check form-switch"><input class="form-check-input" type="checkbox" value="0" name="pending" id="inputOrderPending" unchecked></div>
                             @endif
                         </div>
                     </div>

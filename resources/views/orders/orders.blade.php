@@ -193,6 +193,7 @@
             
             $('#ordersTable').DataTable({
                 order: [[3,'desc'],[2,'desc']],
+                processing: true,
                 columnDefs: [
                     {targets: [0,1],searchable: true,visible: false },
                     {targets: [3,8],type: 'date-eu'}

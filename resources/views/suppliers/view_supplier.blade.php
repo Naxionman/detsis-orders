@@ -89,23 +89,27 @@
                         <br>
                         <br>
                         <br>
-                        <div class="row" id="row1">
+                        <div class="row">
                             <div class="col-3"><label>Πειραιώς :</label></div>
                             <div class="col-7"> <input class="form-control" type="text" id="iban1" value="{{ $supplier->iban1 ?: '-' }}"></div>
-                            <div class="col-1" id="1"><button class="btn btn-link" onclick="copyToClipboard()"><i class="far fa-clipboard"></i></button></div>
+                            <div class="col-1" id="1"><button class="btn btn-link copy"><i class="far fa-clipboard"></i></button></div>
                         </div>
                         <div class="row">
-                            <div class="col-4"><label>Εθνική :</label></div>
-                            <div class="col-8"> <strong>{{ $supplier->iban2 ?: '-' }}</strong></div>
+                            <div class="col-3"><label>Εθνική :</label></div>
+                            <div class="col-7"> <input class="form-control" type="text" id="iban2" value="{{ $supplier->iban2 ?: '-' }}"></div>
+                            <div class="col-1" id="2"><button class="btn btn-link copy"><i class="far fa-clipboard"></i></button></div>
                         </div>
                         <div class="row">
-                            <div class="col-4"><label>Alpha :</label></div>
-                            <div class="col-8"> <strong>{{ $supplier->iban3 ?: '-' }}</strong></div>
+                            <div class="col-3"><label>Alpha :</label></div>
+                            <div class="col-7"> <input class="form-control" type="text" id="iban3" value="{{ $supplier->iban3 ?: '-' }}"></div>
+                            <div class="col-1" id="3"><button class="btn btn-link copy"><i class="far fa-clipboard"></i></button></div>
                         </div>
                         <div class="row">
-                            <div class="col-4"><label>Eurobank :</label></div>
-                            <div class="col-8"> <strong>{{ $supplier->iban4 ?: '-' }}</strong></div>
+                            <div class="col-3"><label>Eurobank :</label></div>
+                            <div class="col-7"> <input class="form-control" type="text" id="iban4" value="{{ $supplier->iban4 ?: '-' }}"></div>
+                            <div class="col-1" id="4"><button class="btn btn-link copy"><i class="far fa-clipboard"></i></button></div>
                         </div>
+                        
                     </div>
 
                 </div>
@@ -185,23 +189,5 @@
             });              
         });
     </script>
-    <script>
-        function copyToClipboard() {
-            var bankId = $(this).parent().attr("id");
-            console.log(bankId);
-            console.log($(this).parent());
-
-            var copyText = document.getElementById("iban"+bankId);
-            
-            /* Select the text field */
-            copyText.select();
-            copyText.setSelectionRange(0, 99999); /* For mobile devices */
-
-            /* Copy the text inside the text field */
-            navigator.clipboard.writeText(copyText.value);
-
-            /* Alert the copied text */
-            alert("Copied the text: " + copyText.value);
-        }
-    </script>
+    
 @endsection

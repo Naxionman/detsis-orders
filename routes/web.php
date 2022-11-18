@@ -114,6 +114,7 @@ Route::get('/shipper', [ShipperController::class, 'getNames']);
 Route::get('file-upload',[OrderFileController::class, 'index']);
 Route::post('upload',[OrderFileController::class, 'addFile']);
 Route::get('/add_salary/{id}',[SalaryController::class, 'getEmployee']);
+Route::get('/invoices/page', [InvoiceController::class, 'getInvoices'])->name('getInvoices');  //new
 
 //Show actions (for editing records)
 Route::get('/edit_supplier/{supplierId}',[SupplierController::class, 'show']);

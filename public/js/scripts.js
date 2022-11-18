@@ -1009,10 +1009,36 @@ $('.show_confirm').on('click', function(e) {
     });
 });
 
+//Copying IBANS to clipboard
+$('.copy').on('click', function(e) {
+    var bankId = $(this).parent().attr('id');
+    console.log(bankId);
+    
+    var copyText = document.getElementById("iban"+bankId);
+    
+    /* Select the text field */
+    copyText.select();
+    copyText.setSelectionRange(0, 50); /* For mobile devices */
+
+    /* Copy the text inside the text field */
+    navigator.clipboard.writeText(copyText.value);
+
+    /* Alert the copied text */
+    alert("Copied the text: " + copyText.value);
+});
+
+
 //For using table rows as link
 $('tr[data-href]').on("click", function() {
     document.location = $(this).data('href');
 });
+
+//For the edit_order form (pending)
+if (top.location.pathname.match(/^\/edit_order\//)){
+    
+}
+
+
 
 //DOKIMI
 
