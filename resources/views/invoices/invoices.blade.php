@@ -55,8 +55,6 @@
                             </tr>
                         </tfoot>
                         <tbody>
-
-                            
                         @forelse ($invoices as $invoice)
                             <tr data-href="view_invoice/{{ $invoice->id}} data-bs-toggle="tooltip-inner" data-bs-placement="top" title="{{ $invoice->notes }}"">
                                 <td>{{ $invoice->id }}</td>
@@ -98,7 +96,9 @@
                         @empty
                             No invoices added in the database.
                         @endforelse
+                    
                         </tbody>
+                    
                     </table>
                 </div>
             </div>
@@ -109,7 +109,6 @@
     <script type = "text/javascript">
     
         $(document).ready( function () {$('#invoicesTable').DataTable({
-            
             order: [[1,'desc']],
             processing: true,
             serverSide: true,
@@ -117,8 +116,8 @@
                 columns: [
                     { data: 'id' },
                     { data: 'invoice_date' },
-                    { data: 'supplier' },
-                    { data: 'invoice_number'},
+                    { data: 'company_name' },
+                    { data: 'supplier_invoice_number'},
                     { data: ''},
                     { data: 'invoice_total',
                       render: function ( data, type, row ) {
@@ -126,9 +125,11 @@
                             }
                     },
                     { data: 'invoice_type'},
-                    { render: function ( data, type, row ) {
-                           return '<div class="btn-group dropstart stop-propagation"><button type="button" class="btn btn-light" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button><ul class="dropdown-menu" aria-labelledby="defaultDropdown"><li><a class="dropdown-item" href="/edit_invoice/{{ $invoice->id }}">Επεξεργασία</a></li><li><hr class="dropdown-divider"></li><li><form action="/invoice/{{ $invoice->id }}" id="deleteForm{{ $invoice->id }}" method="POST">@method('DELETE')@csrf<button class="dropdown-item show_confirm">Διαγραφή</button></form></li></ul></div>';
-                        }}
+                    { data: null ,editField: "shit", render: function ( data, type, row ) {
+                            var shit = data.id;
+                            return '<div class="btn-group dropstart stop-propagation"><button type="button" class="btn btn-light" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button><ul class="dropdown-menu" aria-labelledby="defaultDropdown"><li><a class="dropdown-item" href="/view_invoice/'+shit+'">Άνοιγμα</a></li><li><a class="dropdown-item" href="/edit_invoice/'+shit+'">Επεξεργασία</a></li><li><hr class="dropdown-divider"></li><li><form action="/invoice/'+shit+'" id="deleteForm'+shit+'" method="POST">@method("DELETE")@csrf<button class="dropdown-item show_confirm">Διαγραφή</button></form></li></ul></div>';
+                        }
+                    }
                 ],
                 columnDefs: [{ 
                     type: 'date-eu', targets: [1] }]

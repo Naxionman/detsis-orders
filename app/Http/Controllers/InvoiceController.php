@@ -66,9 +66,9 @@ class InvoiceController extends Controller {
         // Fetch records
         $invoices = Invoice::orderBy($columnName,$columnSortOrder)
             ->where('invoices.id', 'like', '%' .$searchValue . '%')
-            ->orWhere('invoices.invoice_total', 'like', '%' .$searchValue . '%')
+            //->orWhere('invoices.supplier.company_name', 'like', '%' .$searchValue . '%')
             ->orWhere('invoices.supplier_invoice_number', 'like', '%' .$searchValue . '%')
-            
+            ->orWhere('invoices.invoice_total', 'like', '%' .$searchValue . '%')
             ->orWhere('invoices.notes', 'like', '%' .$searchValue . '%')
             ->select('invoices.*')
             ->skip($start)
@@ -89,12 +89,12 @@ class InvoiceController extends Controller {
             $data_arr[] = array(
             "id" => $id,
             "invoice_date" => $invoice_date,
-            "supplier" => $supplier,
-            "invoice_number" => $invoice_number,
+            "company_name" => $supplier,
+            "supplier_invoice_number" => $invoice_number,
             ""=> null,
             "invoice_total" => $invoice_total,
             "invoice_type" => $invoice_type,
-            "invoice_notes" => $invoice_notes
+            "notes" => $invoice_notes
             
             );
         }
