@@ -111,7 +111,7 @@ class OrderController extends Controller {
             'notes' => 'nullable',
             'arrival_date' => 'nullable'
         ]);
-        dd($data);
+        //dd($data);
         $order->update($data);
 
         $details = OrderDetails::where('order_id',$order->id)->get();

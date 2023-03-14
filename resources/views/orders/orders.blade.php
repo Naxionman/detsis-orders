@@ -141,12 +141,16 @@
                                     @if ($order->pending == 1)
                                         <a class="btn btn-primary shadow-sm btn-sm" href="/add_invoice/{{$order->id}}">Άφιξη</a>
                                     @else
-                                        {{ $order->arrival_date->format('d-m-Y'); }} 
+                                        @if ($order->arrival_date == null)
+                                            N/A
+                                        @else
+                                            {{ $order->arrival_date->format('d-m-Y'); }} 
+                                        @endif
                                     @endif
                                 </td>
                                 <td style="width:5%">
-                                    <div class="btn-group dropstart stop-propagation">
-                                        <button type="button" class="btn btn-light" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                                    <div class="btn-group dropstart">
+                                        <button type="button" class="btn btn-light stop-propagation" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v"></i>
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
@@ -156,8 +160,8 @@
                                             <li><form action="/orders/{{ $order->id }}" id="deleteForm{{ $order->id }}" method="POST">
                                                 @method('DELETE')
                                                 @csrf
-                                                <button class="dropdown-item show_confirm">Διαγραφή</button>
-                                            </form></li>
+                                                <button class="dropdown-item show_confirm">Διαγραφή</button></form>
+                                            </li>
                                         
                                         </ul>
                                     </div>
