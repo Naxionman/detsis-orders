@@ -45,8 +45,8 @@
 
                                 <div class="form-check"><input class="form-check-input" type="checkbox" value="1" name="pending" id="inputOrderPending" checked></div>
                             @else
-                                
-                                <div class="form-check"><input class="form-check-input" type="checkbox" value="0" name="pending" id="inputOrderPending" unchecked></div>
+                            
+                                <div class="form-check"><input class="form-check-input" type="checkbox" value="1" name="pending" id="inputOrderPending" unchecked></div>
                             @endif
                         </div>
                     </div>

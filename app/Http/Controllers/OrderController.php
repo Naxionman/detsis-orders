@@ -80,7 +80,6 @@ class OrderController extends Controller {
         $clients = Client::all();
         $details = OrderDetails::where('order_id', $orderId)->get();
         
-        
         return view('orders.edit_order', compact('order','details', 'shippers','suppliers','products','clients'));
     }
 
@@ -90,8 +89,6 @@ class OrderController extends Controller {
         $order_details = OrderDetails::where('order_id', $orderId)->get();
         $files = OrderFile::where('order_id', $orderId)->get();
         $notes = $order->notes;
-
-
 
         $rows = substr_count( $notes, "\n" );
         
