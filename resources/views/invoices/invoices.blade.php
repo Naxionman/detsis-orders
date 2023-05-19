@@ -85,7 +85,7 @@
                                     <div class="d-flex justify-content-evenly">
                                         <a href="/edit_invoice/{{ $invoice->id }}" class="btn btn-sm btn-warning flex-fill">
                                             <i class="far fa-edit"></i>Edit</a>
-                                            <form action="/invoices/{{ $invoice->id }}" id="deleteForm" method="POST">
+                                            <form action="/invoices/{{ $invoice->id }}" id="deleteForm" method="POST"> 
                                                 @method('DELETE')
                                                 @csrf
                                                 <button type="button" class="btn btn-danger show_confirm"><i class="far fa-trash-alt"></i></button>
@@ -127,7 +127,7 @@
                     { data: 'invoice_type'},
                     { data: null ,editField: "shit", render: function ( data, type, row ) {
                             var shit = data.id;
-                            return '<div class="btn-group dropstart stop-propagation"><button type="button" class="btn btn-light" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button><ul class="dropdown-menu" aria-labelledby="defaultDropdown"><li><a class="dropdown-item" href="/view_invoice/'+shit+'">Άνοιγμα</a></li><li><a class="dropdown-item" href="/edit_invoice/'+shit+'">Επεξεργασία</a></li><li><hr class="dropdown-divider"></li><li><form action="/invoice/'+shit+'" id="deleteForm'+shit+'" method="POST">@method("DELETE")@csrf<button class="dropdown-item show_confirm">Διαγραφή</button></form></li></ul></div>';
+                            return '<div class="btn-group dropstart stop-propagation"><button type="button" class="btn btn-light" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button><ul class="dropdown-menu" aria-labelledby="defaultDropdown"><li><a class="dropdown-item" href="/view_invoice/'+shit+'">Άνοιγμα</a></li><li><a class="dropdown-item" href="/edit_invoice/'+shit+'">Επεξεργασία</a></li><li><hr class="dropdown-divider"></li><li><form action="/invoices/'+shit+'" id="deleteForm'+shit+'" method="POST">@method("DELETE")@csrf<button class="dropdown-item show_confirm">Διαγραφή</button></form></li></ul></div>';
                         }
                     }
                 ],

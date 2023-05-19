@@ -123,12 +123,15 @@ class InvoiceController extends Controller {
         $suppliers = Supplier::all();
         $shippers = Shipper::all();
         $products = Product::all();
-        $shipments = Shipment::all();
+        $shipments = Shipment::orderBy('shipping_date','DESC')->get();
         $orders = Order::where('pending','=',1)->get();
         $order = Order::findOrFail($orderId);
         $details = OrderDetails::where('order_id', $orderId)->get();
         
-        $invoices = Invoice::where('supplier_id', $order->supplier_id)->get();
+        $invoices = Invoice::where('supplier_id', $order->supplier_id)
+                            ->orderBy('invoice_date','DESC')
+                            ->get();
+
         return view ('invoices.add_invoice', compact('suppliers','products','shipments','shippers', 'orders','order','invoices', 'details'));
     }
 

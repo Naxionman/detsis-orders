@@ -362,40 +362,60 @@ jQuery(function() {
                         enterLastProduct();
                         break;
                     case '0301':
-                        categry = 'Βίδες';
+                        category = 'Βίδες';
                         subCategory = 'Νοβοπανόβιδες';
                         enterLastProduct();
                         break;        
                     case '0302':
-                        categry = 'Βίδες';
+                        category = 'Βίδες';
                         subCategory = 'Τσιμεντόβιδες';
                         enterLastProduct();
                         break;        
                     case '0303':
-                        categry = 'Βίδες';
+                        category = 'Βίδες';
                         subCategory = 'Ευρώβιδες';
                         enterLastProduct();
                         break;        
                     case '0304':
-                        categry = 'Βίδες';
+                        category = 'Βίδες';
                         subCategory = 'Λαμαρινόβιδες';
                         enterLastProduct();
                         break;        
                     case '0305':
-                        categry = 'Βίδες';
+                        category = 'Βίδες';
                         subCategory = 'Ούπατ';
                         enterLastProduct();
                         break;        
                     case '0306':
-                        categry = 'Βίδες';
+                        category = 'Βίδες';
                         subCategory = 'Τάπες';
                         enterLastProduct();
                         break;        
                     case '0309':
-                        categry = 'Βίδες';
+                        category = 'Βίδες';
                         subCategory = 'Διάφορες';
                         enterLastProduct();
-                        break;        
+                        break;   
+                    case '0501':
+                        category = 'Ξυλεία';
+                        subCategory = 'Κόντρα πλακέ'
+                        enterLastProduct();
+                        break;
+                    case '0502':
+                        category = 'Ξυλεία';
+                        subCategory = 'Σανίδες'
+                        enterLastProduct();      
+                        break;
+                    case '0503':
+                        category = 'Ξυλεία';
+                        subCategory = 'Μελαμίνες'
+                        enterLastProduct();      
+                        break;
+                    case '0503':
+                        category = 'Ξυλεία';
+                        subCategory = 'MDF'
+                        enterLastProduct();      
+                        break;
                     default:
                         category = 'Δεν υπάρχει τέτοια κατηγορία';
                         subCategory = 'Δεν υπάρχει τέτοια κατηγορία';

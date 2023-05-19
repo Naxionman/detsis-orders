@@ -28,3 +28,8 @@
 <div class="row"><strong>04. Αναλώσιμα</strong></div>
 <div class="row">0401. Χαρτοταινίες</div>
 
+<div class="row"><strong>05. Ξυλεία</strong></div>
+<div class="row">0501. Κόντρα πλακέ</div>
+<div class="row">0502. Σανίδες</div>
+<div class="row">0503. Μελαμίνες</div>
+<div class="row">0504. MDF</div>

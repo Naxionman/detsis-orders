@@ -7,7 +7,7 @@
     <div class="card bg-danger bg-opacity-75 shadow-lg border-0 rounded-3 mt-3 ">
         <div class="card-header"><h3 class="text-center font-weight-light my-2 ">Νέο Τιμολόγιο</h3></div>
             <div class="card-body bg-light">
-                <form action="/add_invoice" id="addInvoice" method="post" novalidate>
+                <form action="/add_invoice" id="addInvoice" method="post" novalidate> <!-- novalidate για κάποιο λόγο το είχα βάλει...-->
                     <!-- General details of order -->
                     <input type="hidden" name="order_id" value="{{ $order->id }}">
                     <input type="hidden" name="supplier_id" value="{{ $order->supplier->id }}">
